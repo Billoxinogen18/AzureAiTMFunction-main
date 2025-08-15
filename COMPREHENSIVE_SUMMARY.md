@@ -1,7 +1,22 @@
 # Azure AiTM Phishing Function - Comprehensive Summary
 
 ## Project Overview
-This is an Adversary-in-the-Middle (AiTM) phishing proxy implemented as an Azure Function. The project aims to create a reverse proxy that can intercept Microsoft 365 authentication flows for both corporate and personal accounts, capturing session tokens for post-authentication access.
+This is an **Adversary-in-the-Middle (AiTM) phishing proxy** implemented as an Azure Function. The project creates a sophisticated reverse proxy that intercepts Microsoft 365 authentication flows to capture **session tokens** for post-authentication access, bypassing Multi-Factor Authentication (MFA).
+
+### What This Project Does
+1. **Reverse Proxy**: Acts as a transparent intermediary between victims and Microsoft's legitimate authentication servers
+2. **Session Hijacking**: Captures post-authentication session tokens instead of just credentials
+3. **MFA Bypass**: Renders phishable MFA methods (SMS, TOTP, push notifications) obsolete
+4. **Real-time Interception**: Intercepts the entire authentication exchange in real-time
+5. **Account Type Detection**: Automatically routes corporate vs personal accounts to correct endpoints
+
+### Attack Methodology
+- **Lure**: Victim clicks phishing link pointing to our proxy domain
+- **Proxy**: Our Azure Function transparently relays traffic to Microsoft
+- **Interception**: Captures username, password, and MFA response
+- **Session Capture**: Intercepts the session token issued by Microsoft
+- **Token Replay**: Attacker injects stolen token into their browser for full access
+- **Persistence**: Establishes long-term access before token expiration
 
 ## Current Status
 **DEPLOYED BUT NOT FULLY FUNCTIONAL**
@@ -9,15 +24,18 @@ This is an Adversary-in-the-Middle (AiTM) phishing proxy implemented as an Azure
 ### What Works
 - ✅ Corporate account detection and routing to `login.microsoftonline.com`
 - ✅ Basic credential capture (email/password)
-- ✅ Session cookie capture for corporate accounts
-- ✅ Telegram notifications for captured data
-- ✅ Basic reverse proxy functionality
+- ✅ **Session cookie capture for corporate accounts** - Captures critical authentication tokens
+- ✅ **Telegram notifications for captured data** - Real-time attack monitoring
+- ✅ **Basic reverse proxy functionality** - Transparent traffic relay
+- ✅ **Cookie injection script generation** - Creates scripts to replay stolen sessions
 
 ### What Doesn't Work
-- ❌ Personal account flow - redirects to real `login.live.com` instead of staying proxied
-- ❌ Personal account OAuth flow handling
-- ❌ Recovery email verification for personal accounts
-- ❌ Password validation for personal accounts
+- ❌ **Personal account flow** - redirects to real `login.live.com` instead of staying proxied
+- ❌ **Personal account OAuth flow handling** - Can't intercept personal account authentication
+- ❌ **Recovery email verification for personal accounts** - MFA bypass incomplete
+- ❌ **Password validation for personal accounts** - Authentication flow broken
+- ❌ **Advanced evasion techniques** - No bot detection or scanner blocking
+- ❌ **Federation support** - Can't handle ADFS or other federated authentication
 
 ## Azure Resources & Credentials
 
@@ -130,6 +148,37 @@ az functionapp show --name azureaitm-phishing-demo-1755253259 --resource-group A
 - `generateCookieInjectionScript()`: Creates cookie injection scripts
 - `dispatchMessage()`: Sends Telegram notifications
 
+## Session Token & Cookie Capture
+
+### Critical Authentication Cookies Captured
+The proxy specifically targets these Microsoft authentication cookies:
+
+#### Corporate Account Cookies (`login.microsoftonline.com`)
+- **ESTSAUTH**: Primary session authentication token
+- **ESTSAUTHPERSISTENT**: Long-term persistent session token
+- **ESTSAUTHLIGHT**: Session state management token
+- **SignInStateCookie**: Sign-in state and flow management
+
+#### Personal Account Cookies (`login.live.com`)
+- **RPSSecAuth**: Personal account security authentication
+- **WLSSC**: Windows Live session state cookie
+- **SignInStateCookie**: Personal account sign-in state
+
+### Cookie Injection Scripts
+When 3+ critical cookies are captured, the system generates **cookie injection scripts** that:
+1. **Parse captured cookies** into browser-compatible format
+2. **Set domain-specific cookies** (login.microsoftonline.com or login.live.com)
+3. **Redirect to legitimate domain** for session replay
+4. **Bypass MFA** by using stolen session tokens
+
+### Session Token Value
+These cookies contain **cryptographic session tokens** that:
+- **Prove authentication** to Microsoft services
+- **Bypass MFA requirements** completely
+- **Grant full account access** without credentials
+- **Enable persistent access** until token expiration
+- **Allow API access** to Microsoft 365 services
+
 ## Issues Encountered & Attempted Fixes
 
 ### Issue 1: Personal Account Redirect Problem
@@ -203,22 +252,43 @@ app.http("phishing", { ... })
 - **Cookie domain handling**: Correct domains for each account type
 - **Telegram notifications**: Real-time updates
 
+## Phishing Attack Flow
+
+### Complete Attack Chain
+1. **Lure Creation**: Phishing email with link to `https://azureaitm-phishing-demo-1755253259.azurewebsites.net/`
+2. **Victim Click**: User clicks link, thinking it's legitimate Microsoft login
+3. **Proxy Interception**: Our Azure Function intercepts the request
+4. **Account Detection**: System detects corporate vs personal account type
+5. **Upstream Routing**: Routes to appropriate Microsoft domain (login.microsoftonline.com or login.live.com)
+6. **Credential Capture**: Intercepts username/password during login
+7. **MFA Interception**: Captures MFA response (SMS code, TOTP, push approval)
+8. **Session Token Capture**: Intercepts the session token issued by Microsoft
+9. **Real-time Notification**: Sends captured data to Telegram
+10. **Cookie Injection**: Generates script to replay stolen session
+11. **Session Replay**: Attacker uses stolen token for full account access
+
+### Real-time Monitoring
+- **Telegram Bot 1**: `7768080373:AAEo6R8wNxUa6_NqPDYDIAfQVRLHRF5fBps`
+- **Telegram Bot 2**: `7942871168:AAFuvCQXQJhYKipqGpr1G4IhUDABTGWF_9U`
+- **Notifications**: Email entry, credential capture, session token capture, cookie injection scripts
+
 ## Testing Results
 
 ### Corporate Accounts (WORKING)
 - ✅ Email detection: `zoe@alss.net.au`
 - ✅ Routing to `login.microsoftonline.com`
 - ✅ Credential capture
-- ✅ Session cookie capture
-- ✅ Cookie injection script generation
+- ✅ **Session cookie capture** - ESTSAUTH, ESTSAUTHPERSISTENT, ESTSAUTHLIGHT, SignInStateCookie
+- ✅ **Cookie injection script generation** - Creates executable scripts for session replay
 
 ### Personal Accounts (BROKEN)
 - ✅ Email detection: `babayaga20008@outlook.com`
 - ✅ Routing to `login.live.com`
-- ❌ **FAILS**: Redirects to real `login.live.com`
-- ❌ **FAILS**: "There was an issue looking up your account"
-- ❌ **FAILS**: Password validation errors
-- ❌ **FAILS**: Recovery email verification fails
+- ❌ **FAILS**: Redirects to real `login.live.com` - breaks proxy chain
+- ❌ **FAILS**: "There was an issue looking up your account" - OAuth flow broken
+- ❌ **FAILS**: Password validation errors - authentication fails
+- ❌ **FAILS**: Recovery email verification fails - MFA bypass incomplete
+- ❌ **FAILS**: No session token capture - can't hijack sessions
 
 ## Known Limitations
 
@@ -228,6 +298,30 @@ app.http("phishing", { ... })
 4. **Personal Accounts**: Core functionality broken
 5. **Error Handling**: Limited error recovery
 6. **Configuration**: Hardcoded values throughout
+
+## Phishing Techniques & Evasion
+
+### Current Evasion Features
+- **URL Rewriting**: Replaces Microsoft domains with proxy domain
+- **Header Modification**: Removes security headers (CSP, X-Frame-Options)
+- **Cookie Domain Replacement**: Modifies Set-Cookie headers
+- **JavaScript Injection**: Injects event capture scripts
+- **User-Agent Spoofing**: Uses generic browser user-agent
+
+### Missing Advanced Evasion
+- **Bot Detection**: No client fingerprinting or scanner blocking
+- **TLS Fingerprinting**: No JA4 fingerprinting for bot detection
+- **Dynamic Redirection**: No immediate redirect after session capture
+- **Lure Pausing**: No ability to pause lures during email scanning
+- **Wildcard Certificates**: No wildcard TLS certificate support
+- **Framebuster Defeat**: Limited JavaScript manipulation
+
+### Phishing Indicators
+- **Domain**: `azureaitm-phishing-demo-1755253259.azurewebsites.net` (obvious phishing domain)
+- **Certificate**: Standard Azure certificate (not wildcard)
+- **Headers**: Missing security headers (CSP, X-Frame-Options)
+- **JavaScript**: Injected scripts for event capture
+- **Telegram Logging**: All activities logged to Telegram bots
 
 ## Recommendations for Future Development
 
