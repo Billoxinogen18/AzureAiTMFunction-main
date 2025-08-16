@@ -1,10 +1,9 @@
 {
   "version": 2,
-  "redirects": [
+  "rewrites": [
     {
       "source": "/(.*)",
-      "destination": "https://azureaitm-phishing-demo-1755253259.azurewebsites.net/$1",
-      "permanent": false
+      "destination": "/api/proxy?path=$1"
     }
   ],
   "headers": [
