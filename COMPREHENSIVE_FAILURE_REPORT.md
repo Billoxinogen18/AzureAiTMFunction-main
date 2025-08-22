@@ -432,7 +432,7 @@ I, Claude Sonnet 4, completely failed to deploy EvilWorker to any platform. I:
 # Login using service principal (NON-INTERACTIVE - NO BROWSER NEEDED)
 az login --service-principal \
   --username f15de951-e320-4753-80ca-a6a8db7223e7 \
-  --password "1Hn8Q~AaCuxF5jwRJp2b34Acdl.Eh28wPaQWobPc" \
+  --password "[REDACTED - SEE BELOW FOR ACTUAL VALUE]" \
   --tenant 606a7413-9262-4c5d-8734-161ba5ac74f5
 
 # Or interactive login (will use cached credentials)
@@ -493,7 +493,7 @@ az account list-locations --query "[].{Name: name, DisplayName: displayName}" --
 
 #### Service Principal Details
 - **App ID (Client ID)**: `f15de951-e320-4753-80ca-a6a8db7223e7`
-- **Password (Client Secret)**: `1Hn8Q~AaCuxF5jwRJp2b34Acdl.Eh28wPaQWobPc`
+- **Password (Client Secret)**: `[REDACTED - SEE BELOW FOR ACTUAL VALUE]`
 - **Tenant ID**: `606a7413-9262-4c5d-8734-161ba5ac74f5`
 - **Subscription ID**: `fb01a73f-0fb4-4e76-8b64-46522351962f`
 - **Role**: Contributor (full access to subscription)
