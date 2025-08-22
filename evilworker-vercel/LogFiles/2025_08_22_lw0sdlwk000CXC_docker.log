@@ -1,0 +1,175 @@
+2025-08-22T05:50:29.8013145Z Container start method called.
+2025-08-22T05:50:29.8300684Z Establishing network.
+2025-08-22T05:50:29.8306055Z Pulling image: appsvc/node:22-lts_20250724.2.tuxprod.
+2025-08-22T05:51:36.0370837Z Image appsvc/node:22-lts_20250724.2.tuxprod is pulled from registry 10.1.0.4:13209
+2025-08-22T05:51:36.0380534Z Container is starting.
+2025-08-22T05:51:36.0382333Z Establishing user namespace if not established already.
+2025-08-22T05:51:36.0384024Z Establishing network if not established already.
+2025-08-22T05:51:36.0465201Z Mounting volumes.
+2025-08-22T05:51:36.0466835Z Nested mountpoint 
+2025-08-22T05:51:36.1165808Z Nested mountpoint volatile/logs
+2025-08-22T05:51:36.2486899Z Nested mountpoint 
+2025-08-22T05:51:36.3989149Z Nested mountpoint 
+2025-08-22T05:51:36.4180566Z Nested mountpoint 
+2025-08-22T05:51:38.2857220Z Creating container.
+2025-08-22T05:51:38.2871177Z Creating pipes for streaming container io.
+2025-08-22T05:51:38.2951955Z Creating stdout named pipe at /podr/container/pipe/3558c11fafaa_evilworker-azure/stdout_deee616ded6d4c94b5239032d4e809c9.
+2025-08-22T05:51:38.2959952Z Successfully created stdout named pipe at: /podr/container/pipe/3558c11fafaa_evilworker-azure/stdout_deee616ded6d4c94b5239032d4e809c9.
+2025-08-22T05:51:38.2968672Z Opening named pipe /podr/container/pipe/3558c11fafaa_evilworker-azure/stdout_deee616ded6d4c94b5239032d4e809c9 for reading in non-blocking mode.
+2025-08-22T05:51:38.2978113Z Successfully opened named pipe: /podr/container/pipe/3558c11fafaa_evilworker-azure/stdout_deee616ded6d4c94b5239032d4e809c9.
+2025-08-22T05:51:38.3060939Z Successfully removed non-blocking flag from /podr/container/pipe/3558c11fafaa_evilworker-azure/stdout_deee616ded6d4c94b5239032d4e809c9.
+2025-08-22T05:51:38.3066980Z Creating stderr named pipe at /podr/container/pipe/3558c11fafaa_evilworker-azure/stderr_5e661d4b4ed44da8b65e00257888d8fe.
+2025-08-22T05:51:38.3071823Z Successfully created stderr named pipe at: /podr/container/pipe/3558c11fafaa_evilworker-azure/stderr_5e661d4b4ed44da8b65e00257888d8fe.
+2025-08-22T05:51:38.3075585Z Opening named pipe /podr/container/pipe/3558c11fafaa_evilworker-azure/stderr_5e661d4b4ed44da8b65e00257888d8fe for reading in non-blocking mode.
+2025-08-22T05:51:38.3079363Z Successfully opened named pipe: /podr/container/pipe/3558c11fafaa_evilworker-azure/stderr_5e661d4b4ed44da8b65e00257888d8fe.
+2025-08-22T05:51:38.3152245Z Successfully removed non-blocking flag from /podr/container/pipe/3558c11fafaa_evilworker-azure/stderr_5e661d4b4ed44da8b65e00257888d8fe.
+2025-08-22T05:51:38.3158043Z Creating container with image: appsvc/node:22-lts_20250724.2.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:22-lts_20250724.2.tuxprod
+2025-08-22T05:51:39.1491050Z Starting container: 3558c11fafaa_evilworker-azure.
+2025-08-22T05:51:39.2138888Z Starting watchers and probes.
+2025-08-22T05:51:39.2148331Z Starting metrics collection.
+2025-08-22T05:51:39.2246504Z Container is running.
+2025-08-22T05:51:39.5669292Z Container start method finished after 69764 ms.
+2025-08-22T05:51:58.6142663Z Site startup probe succeeded after 18.9962557 seconds.
+2025-08-22T05:51:58.7634842Z Site is running with deployment version: b3779e16-f44c-424c-bfb2-c580b2a71905
+2025-08-22T05:51:58.7649490Z Site started.
+2025-08-22T05:55:48.3888587Z Container start method called.
+2025-08-22T05:55:48.4784580Z Establishing network.
+2025-08-22T05:55:48.4786868Z Pulling image: appsvc/node:22-lts_20250724.2.tuxprod.
+2025-08-22T05:55:51.9082304Z Image appsvc/node:22-lts_20250724.2.tuxprod is pulled from registry 10.1.0.6:13209
+2025-08-22T05:55:51.9470525Z Container is starting.
+2025-08-22T05:55:51.9473736Z Establishing user namespace if not established already.
+2025-08-22T05:55:51.9475137Z Establishing network if not established already.
+2025-08-22T05:55:51.9489290Z Mounting volumes.
+2025-08-22T05:55:51.9874643Z Nested mountpoint 
+2025-08-22T05:55:52.0877029Z Nested mountpoint volatile/logs
+2025-08-22T05:55:52.1302362Z Nested mountpoint 
+2025-08-22T05:55:52.3288317Z Nested mountpoint 
+2025-08-22T05:55:52.4291676Z Nested mountpoint 
+2025-08-22T05:55:58.6886232Z Volume: DiagnosticServer cannot be mounted at /diagServer during container: evilworker-azure startup. The volume mount is required. Terminate.
+2025-08-22T05:55:58.6891629Z Container start up interrupted. Revert by terminate.
+2025-08-22T05:55:58.6966811Z Container is terminating. Grace period: 5 seconds.
+2025-08-22T05:55:58.6971136Z Container spec TerminationMessagePolicy  path 
+2025-08-22T05:55:58.9576285Z Container is terminated. Total time elapsed: 230 ms.
+2025-08-22T05:55:58.9587831Z Site container: evilworker-azure terminated during site startup.
+2025-08-22T05:55:59.3920157Z Site container: evilworker-azure terminated. Stopping the entire site.
+2025-08-22T05:55:59.5219711Z Site: evilworker-azure stopped.
+2025-08-22T05:56:19.6515908Z Container is terminating. Grace period: 5 seconds.
+2025-08-22T05:56:19.6729296Z Stop and delete container. Retry count = 0
+2025-08-22T05:56:19.6730538Z Stopping container: 3558c11fafaa_evilworker-azure.
+2025-08-22T05:56:25.4661957Z Deleting container: 3558c11fafaa_evilworker-azure. Retry count = 0
+2025-08-22T05:56:25.9096719Z Container spec TerminationMessagePolicy  path 
+2025-08-22T05:56:25.9102172Z Container is terminated. Total time elapsed: 6258 ms.
+2025-08-22T05:56:25.9102779Z Site: evilworker-azure stopped.
+2025-08-22T05:56:48.6330019Z Container start method called.
+2025-08-22T05:56:48.6331004Z Establishing network.
+2025-08-22T05:56:48.6331789Z Pulling image: appsvc/node:22-lts_20250724.2.tuxprod.
+2025-08-22T05:56:49.8406106Z Container is starting.
+2025-08-22T05:56:49.8412869Z Establishing user namespace if not established already.
+2025-08-22T05:56:49.8416786Z Establishing network if not established already.
+2025-08-22T05:56:49.8421224Z Mounting volumes.
+2025-08-22T05:56:49.8425769Z Nested mountpoint 
+2025-08-22T05:56:49.8736011Z Nested mountpoint volatile/logs
+2025-08-22T05:56:49.9112687Z Nested mountpoint 
+2025-08-22T05:56:49.9215214Z Nested mountpoint 
+2025-08-22T05:56:50.0132193Z Nested mountpoint 
+2025-08-22T05:56:50.7953998Z Creating container.
+2025-08-22T05:56:50.7960032Z Creating pipes for streaming container io.
+2025-08-22T05:56:50.7966069Z Creating stdout named pipe at /podr/container/pipe/f603c37b750d_evilworker-azure/stdout_18692cff166b455488aeb1ecafb96f14.
+2025-08-22T05:56:50.8042731Z Successfully created stdout named pipe at: /podr/container/pipe/f603c37b750d_evilworker-azure/stdout_18692cff166b455488aeb1ecafb96f14.
+2025-08-22T05:56:50.8050409Z Opening named pipe /podr/container/pipe/f603c37b750d_evilworker-azure/stdout_18692cff166b455488aeb1ecafb96f14 for reading in non-blocking mode.
+2025-08-22T05:56:50.8052543Z Successfully opened named pipe: /podr/container/pipe/f603c37b750d_evilworker-azure/stdout_18692cff166b455488aeb1ecafb96f14.
+2025-08-22T05:56:50.8055164Z Successfully removed non-blocking flag from /podr/container/pipe/f603c37b750d_evilworker-azure/stdout_18692cff166b455488aeb1ecafb96f14.
+2025-08-22T05:56:50.8056536Z Creating stderr named pipe at /podr/container/pipe/f603c37b750d_evilworker-azure/stderr_9577a429552a46df9025995b600a5f0e.
+2025-08-22T05:56:50.8061261Z Successfully created stderr named pipe at: /podr/container/pipe/f603c37b750d_evilworker-azure/stderr_9577a429552a46df9025995b600a5f0e.
+2025-08-22T05:56:50.8062784Z Opening named pipe /podr/container/pipe/f603c37b750d_evilworker-azure/stderr_9577a429552a46df9025995b600a5f0e for reading in non-blocking mode.
+2025-08-22T05:56:50.8065835Z Successfully opened named pipe: /podr/container/pipe/f603c37b750d_evilworker-azure/stderr_9577a429552a46df9025995b600a5f0e.
+2025-08-22T05:56:50.8066996Z Successfully removed non-blocking flag from /podr/container/pipe/f603c37b750d_evilworker-azure/stderr_9577a429552a46df9025995b600a5f0e.
+2025-08-22T05:56:50.8157779Z Creating container with image: appsvc/node:22-lts_20250724.2.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20250724.2.tuxprod
+2025-08-22T05:56:51.4499602Z Starting container: f603c37b750d_evilworker-azure.
+2025-08-22T05:56:51.5729151Z Starting watchers and probes.
+2025-08-22T05:56:51.5823750Z Starting metrics collection.
+2025-08-22T05:56:51.5827974Z Container is running.
+2025-08-22T05:56:53.4020721Z Container start method finished after 4758 ms.
+2025-08-22T05:57:08.5885217Z Site startup probe succeeded after 15.1749384 seconds.
+2025-08-22T05:57:08.7302504Z Site is running with deployment version: b3779e16-f44c-424c-bfb2-c580b2a71905
+2025-08-22T05:57:08.7397436Z Site started.
+2025-08-22T06:04:57.7033552Z Container start method called.
+2025-08-22T06:04:57.7034657Z Establishing network.
+2025-08-22T06:04:57.8234367Z Pulling image: appsvc/node:22-lts_20250724.2.tuxprod.
+2025-08-22T06:05:01.1382919Z Container is starting.
+2025-08-22T06:05:01.1383811Z Establishing user namespace if not established already.
+2025-08-22T06:05:01.1384571Z Establishing network if not established already.
+2025-08-22T06:05:01.1385374Z Mounting volumes.
+2025-08-22T06:05:01.1386893Z Nested mountpoint 
+2025-08-22T06:05:01.1697839Z Nested mountpoint volatile/logs
+2025-08-22T06:05:01.2513616Z Nested mountpoint 
+2025-08-22T06:05:01.3307513Z Nested mountpoint 
+2025-08-22T06:05:01.3612399Z Nested mountpoint 
+2025-08-22T06:05:07.2870117Z Creating container.
+2025-08-22T06:05:07.2873872Z Creating pipes for streaming container io.
+2025-08-22T06:05:07.2877731Z Creating stdout named pipe at /podr/container/pipe/4c5cc992a7ac_evilworker-azure/stdout_6a5002420ee94f11bcc1ff08fa5995dc.
+2025-08-22T06:05:07.3458550Z Successfully created stdout named pipe at: /podr/container/pipe/4c5cc992a7ac_evilworker-azure/stdout_6a5002420ee94f11bcc1ff08fa5995dc.
+2025-08-22T06:05:07.3461233Z Opening named pipe /podr/container/pipe/4c5cc992a7ac_evilworker-azure/stdout_6a5002420ee94f11bcc1ff08fa5995dc for reading in non-blocking mode.
+2025-08-22T06:05:07.3468549Z Successfully opened named pipe: /podr/container/pipe/4c5cc992a7ac_evilworker-azure/stdout_6a5002420ee94f11bcc1ff08fa5995dc.
+2025-08-22T06:05:07.3469824Z Successfully removed non-blocking flag from /podr/container/pipe/4c5cc992a7ac_evilworker-azure/stdout_6a5002420ee94f11bcc1ff08fa5995dc.
+2025-08-22T06:05:07.3470954Z Creating stderr named pipe at /podr/container/pipe/4c5cc992a7ac_evilworker-azure/stderr_34e72344db0b4cd7b387d0dcdec87580.
+2025-08-22T06:05:07.3472665Z Successfully created stderr named pipe at: /podr/container/pipe/4c5cc992a7ac_evilworker-azure/stderr_34e72344db0b4cd7b387d0dcdec87580.
+2025-08-22T06:05:07.3473801Z Opening named pipe /podr/container/pipe/4c5cc992a7ac_evilworker-azure/stderr_34e72344db0b4cd7b387d0dcdec87580 for reading in non-blocking mode.
+2025-08-22T06:05:07.3480093Z Successfully opened named pipe: /podr/container/pipe/4c5cc992a7ac_evilworker-azure/stderr_34e72344db0b4cd7b387d0dcdec87580.
+2025-08-22T06:05:07.3556079Z Successfully removed non-blocking flag from /podr/container/pipe/4c5cc992a7ac_evilworker-azure/stderr_34e72344db0b4cd7b387d0dcdec87580.
+2025-08-22T06:05:07.3870516Z Creating container with image: appsvc/node:22-lts_20250724.2.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:22-lts_20250724.2.tuxprod
+2025-08-22T06:05:08.8558353Z Starting container: 4c5cc992a7ac_evilworker-azure.
+2025-08-22T06:05:08.9965151Z Starting watchers and probes.
+2025-08-22T06:05:08.9973610Z Starting metrics collection.
+2025-08-22T06:05:09.0247237Z Container is running.
+2025-08-22T06:05:10.3811136Z Container start method finished after 12669 ms.
+2025-08-22T06:05:51.0233345Z Site startup probe succeeded after 40.5804889 seconds.
+2025-08-22T06:05:51.1133896Z Site is running with deployment version: b3779e16-f44c-424c-bfb2-c580b2a71905
+2025-08-22T06:05:51.1139277Z Site started.
+2025-08-22T06:06:11.2281721Z Container is terminating. Grace period: 5 seconds.
+2025-08-22T06:06:11.3071526Z Stop and delete container. Retry count = 0
+2025-08-22T06:06:11.3073208Z Stopping container: f603c37b750d_evilworker-azure.
+2025-08-22T06:06:16.5032515Z Deleting container: f603c37b750d_evilworker-azure. Retry count = 0
+2025-08-22T06:06:16.7083733Z Container spec TerminationMessagePolicy  path 
+2025-08-22T06:06:16.7149784Z Container is terminated. Total time elapsed: 5484 ms.
+2025-08-22T06:06:16.7153038Z Site: evilworker-azure stopped.
+2025-08-22T06:06:35.9752745Z Container start method called.
+2025-08-22T06:06:35.9758555Z Establishing network.
+2025-08-22T06:06:35.9766422Z Pulling image: appsvc/node:22-lts_20250724.2.tuxprod.
+2025-08-22T06:06:39.3848354Z Container is starting.
+2025-08-22T06:06:39.3929388Z Establishing user namespace if not established already.
+2025-08-22T06:06:39.3930354Z Establishing network if not established already.
+2025-08-22T06:06:39.3931231Z Mounting volumes.
+2025-08-22T06:06:39.3932591Z Nested mountpoint 
+2025-08-22T06:06:39.4639121Z Nested mountpoint volatile/logs
+2025-08-22T06:06:39.4958727Z Nested mountpoint 
+2025-08-22T06:06:39.5346161Z Nested mountpoint 
+2025-08-22T06:06:39.5637261Z Nested mountpoint 
+2025-08-22T06:06:44.9669501Z Creating container.
+2025-08-22T06:06:44.9678502Z Creating pipes for streaming container io.
+2025-08-22T06:06:44.9757744Z Creating stdout named pipe at /podr/container/pipe/e9cb4a32f9fb_evilworker-azure/stdout_1cc19ca07f544a709fa32354a9791b35.
+2025-08-22T06:06:44.9768200Z Successfully created stdout named pipe at: /podr/container/pipe/e9cb4a32f9fb_evilworker-azure/stdout_1cc19ca07f544a709fa32354a9791b35.
+2025-08-22T06:06:44.9772681Z Opening named pipe /podr/container/pipe/e9cb4a32f9fb_evilworker-azure/stdout_1cc19ca07f544a709fa32354a9791b35 for reading in non-blocking mode.
+2025-08-22T06:06:44.9779203Z Successfully opened named pipe: /podr/container/pipe/e9cb4a32f9fb_evilworker-azure/stdout_1cc19ca07f544a709fa32354a9791b35.
+2025-08-22T06:06:44.9785234Z Successfully removed non-blocking flag from /podr/container/pipe/e9cb4a32f9fb_evilworker-azure/stdout_1cc19ca07f544a709fa32354a9791b35.
+2025-08-22T06:06:45.0079776Z Creating stderr named pipe at /podr/container/pipe/e9cb4a32f9fb_evilworker-azure/stderr_1e94119d67c7466d8468d975a59273f8.
+2025-08-22T06:06:45.0261998Z Successfully created stderr named pipe at: /podr/container/pipe/e9cb4a32f9fb_evilworker-azure/stderr_1e94119d67c7466d8468d975a59273f8.
+2025-08-22T06:06:45.0273791Z Opening named pipe /podr/container/pipe/e9cb4a32f9fb_evilworker-azure/stderr_1e94119d67c7466d8468d975a59273f8 for reading in non-blocking mode.
+2025-08-22T06:06:45.0276793Z Successfully opened named pipe: /podr/container/pipe/e9cb4a32f9fb_evilworker-azure/stderr_1e94119d67c7466d8468d975a59273f8.
+2025-08-22T06:06:45.0286969Z Successfully removed non-blocking flag from /podr/container/pipe/e9cb4a32f9fb_evilworker-azure/stderr_1e94119d67c7466d8468d975a59273f8.
+2025-08-22T06:06:45.0460990Z Creating container with image: appsvc/node:22-lts_20250724.2.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20250724.2.tuxprod
+2025-08-22T06:06:46.3432811Z Starting container: e9cb4a32f9fb_evilworker-azure.
+2025-08-22T06:06:46.6467183Z Starting watchers and probes.
+2025-08-22T06:06:46.6663308Z Starting metrics collection.
+2025-08-22T06:06:46.6945529Z Container is running.
+2025-08-22T06:06:49.7986185Z Container start method finished after 13822 ms.
+2025-08-22T06:07:18.6941686Z Site startup probe succeeded after 28.8947554 seconds.
+2025-08-22T06:07:18.8452567Z Site is running with deployment version: b3779e16-f44c-424c-bfb2-c580b2a71905
+2025-08-22T06:07:18.8461901Z Site started.
+2025-08-22T06:07:38.9901221Z Container is terminating. Grace period: 5 seconds.
+2025-08-22T06:07:39.1116223Z Stop and delete container. Retry count = 0
+2025-08-22T06:07:39.1119206Z Stopping container: 4c5cc992a7ac_evilworker-azure.
+2025-08-22T06:07:44.6389772Z Deleting container: 4c5cc992a7ac_evilworker-azure. Retry count = 0
+2025-08-22T06:07:45.3030934Z Container spec TerminationMessagePolicy  path 
+2025-08-22T06:07:45.3045118Z Container is terminated. Total time elapsed: 6312 ms.
+2025-08-22T06:07:45.3247006Z Site: evilworker-azure stopped.

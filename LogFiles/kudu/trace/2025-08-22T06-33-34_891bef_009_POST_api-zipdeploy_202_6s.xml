@@ -1,0 +1,18 @@
+<step title="Incoming Request" date="2025-08-22T06:33:34.721" instance="891bef" url="/api/zipdeploy?isAsync=true" method="POST" type="request" pid="825,1,22" Accept="*/*" Host="evilworker-azure.scm.azurewebsites.net" User-Agent="AZURECLI/2.75.0 (HOMEBREW)" Accept-Encoding="gzip, deflate" Authorization="Bas..." Cache-Control="no-cache" Content-Type="application/octet-stream" Cookie="ARRAffinity=891bef7a020cfef4abc555877a9504eadcc1ed0d42d9cf876e4316b95d3237df; ARRAffinitySameSite=891bef7a020cfef4abc555877a9504eadcc1ed0d42d9cf876e4316b95d3237df" Content-Length="115802" x-ms-client-request-id="dd3686fa-7f21-11f0-8005-ce6f0ac0b274" x-ms-artifact-checksum="d84be1a4801e93528061148db7b29d48a043161d876ae2ee6203bc4226c90e0f" X-ARR-LOG-ID="dd3686fa-7f21-11f0-8005-ce6f0ac0b274" CLIENT-IP="102.216.154.29:63910" X-SITE-DEPLOYMENT-ID="evilworker-azure" WAS-DEFAULT-HOSTNAME="evilworker-azure.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/api/zipdeploy?isAsync=true" X-Client-IP="102.216.154.29" X-Client-Port="63910" >
+  <step title="Cleanup Xml Logs" date="2025-08-22T06:33:34.752" /><!-- duration: 21ms -->
+  <step title="ZipPushDeploy" date="2025-08-22T06:33:35.705" >
+    <step title="ZipDeploy. Extract zip." date="2025-08-22T06:33:35.885" /><!-- duration: 13ms -->
+    <step title="None repository commit" date="2025-08-22T06:33:36.089" >
+      <step title="Commit id: d8265a1d-35ce-47ff-bd72-aa4324014d00" date="2025-08-22T06:33:36.118" Message="N/A" AuthorName="N/A" AuthorEmail="N/A" /><!-- duration: 29ms -->
+    </step><!-- duration: 99ms -->
+    <step title="Starting PushDeployAsync" date="2025-08-22T06:33:36.237" /><!-- duration: 20ms -->
+    <step title="Writing artifact to /tmp/zipdeploy/c0ab2e11-8b53-4609-8fe9-891e963c270a.zip" date="2025-08-22T06:33:36.681" >
+      <step title="Writing multipart request body to /tmp/zipdeploy/c0ab2e11-8b53-4609-8fe9-891e963c270a.zip" date="2025-08-22T06:33:36.762" /><!-- duration: 41ms -->
+    </step><!-- duration: 1848ms -->
+    <step title="Start deployment in the background" date="2025-08-22T06:33:38.596" >
+      <step title="Acquiring Deployment Lock" date="2025-08-22T06:33:38.892" /><!-- duration: 284ms -->
+      <step title="Acquired Deployment Lock" date="2025-08-22T06:33:39.649" /><!-- duration: 70ms -->
+    </step><!-- duration: 2188ms -->
+  </step><!-- duration: 5212ms -->
+  <step title="Outgoing response" date="2025-08-22T06:33:41.045" type="response" statusCode="202" statusText="Accepted" /><!-- duration: 32ms -->
+</step><!-- duration: 6384ms -->

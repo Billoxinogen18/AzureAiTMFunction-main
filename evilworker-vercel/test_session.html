@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EvilWorker Session Test</title>
+</head>
+<body>
+    <h1>EvilWorker Session Test</h1>
+    <p>This page tests the session logging functionality.</p>
+    
+    <script>
+        // Test session creation
+        fetch('/api/proxy', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                type: 'test',
+                data: { test: 'session_logging' },
+                url: window.location.href
+            })
+        }).then(response => response.json())
+        .then(data => console.log('Test response:', data))
+        .catch(error => console.error('Test error:', error));
+    </script>
+</body>
+</html>

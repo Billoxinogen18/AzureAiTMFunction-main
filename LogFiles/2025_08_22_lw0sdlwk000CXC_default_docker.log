@@ -1,0 +1,57 @@
+2025-08-22T06:37:58.053901630Z    _____                               
+2025-08-22T06:37:58.053945273Z   /  _  \ __________ _________   ____  
+2025-08-22T06:37:58.053948559Z  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2025-08-22T06:37:58.053950785Z /    |    \/    /|  |  /|  | \/\  ___/ 
+2025-08-22T06:37:58.053952841Z \____|__  /_____ \____/ |__|    \___  >
+2025-08-22T06:37:58.053955104Z         \/      \/                  \/ 
+2025-08-22T06:37:58.053957075Z A P P   S E R V I C E   O N   L I N U X
+2025-08-22T06:37:58.053958912Z 
+2025-08-22T06:37:58.053960667Z Documentation: http://aka.ms/webapp-linux
+2025-08-22T06:37:58.053962632Z NodeJS quickstart: https://aka.ms/node-qs
+2025-08-22T06:37:58.053968879Z NodeJS Version : v22.17.0
+2025-08-22T06:37:58.053970791Z Note: Any data outside '/home' is not persisted
+2025-08-22T06:37:58.053972879Z 
+2025-08-22T06:38:03.310352704Z Starting OpenBSD Secure Shell server: sshd.
+2025-08-22T06:38:03.350311890Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-08-22T06:38:03.539002720Z Updating certificates in /etc/ssl/certs...
+2025-08-22T06:38:16.011479385Z rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2025-08-22T06:38:16.091721011Z 4 added, 0 removed; done.
+2025-08-22T06:38:16.101476880Z Running hooks in /etc/ca-certificates/update.d...
+2025-08-22T06:38:16.109555925Z done.
+2025-08-22T06:38:16.138845637Z CA certificates copied and updated successfully.
+2025-08-22T06:38:16.343301586Z Starting periodic command scheduler: cron.
+2025-08-22T06:38:16.541903727Z Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2025-08-22T06:38:16.543161708Z Could not find operation ID in manifest. Generating an operation id...
+2025-08-22T06:38:16.543165474Z Build Operation ID: f93039ae-8579-4b6e-9504-7fb92791dafd
+2025-08-22T06:38:16.784556566Z Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2025-08-22T06:38:16.806729876Z Writing output script to '/opt/startup/startup.sh'
+2025-08-22T06:38:16.854151434Z Running #!/bin/sh
+2025-08-22T06:38:16.854189217Z 
+2025-08-22T06:38:16.854192579Z # Enter the source directory to make sure the script runs where the user expects
+2025-08-22T06:38:16.854194908Z cd "/home/site/wwwroot"
+2025-08-22T06:38:16.854196878Z 
+2025-08-22T06:38:16.854199038Z export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2025-08-22T06:38:16.854201390Z if [ -z "$PORT" ]; then
+2025-08-22T06:38:16.854203538Z 		export PORT=8080
+2025-08-22T06:38:16.854205808Z fi
+2025-08-22T06:38:16.854207584Z 
+2025-08-22T06:38:16.873489407Z PATH="$PATH:/home/site/wwwroot" node startup.js
+2025-08-22T06:38:17.596949377Z node:internal/modules/cjs/loader:1404
+2025-08-22T06:38:17.596989582Z   throw err;
+2025-08-22T06:38:17.596992950Z   ^
+2025-08-22T06:38:17.596995289Z 
+2025-08-22T06:38:17.596997113Z Error: Cannot find module '/home/site/wwwroot/startup.js'
+2025-08-22T06:38:17.596999234Z     at Function._resolveFilename (node:internal/modules/cjs/loader:1401:15)
+2025-08-22T06:38:17.597001232Z     at defaultResolveImpl (node:internal/modules/cjs/loader:1057:19)
+2025-08-22T06:38:17.597003592Z     at resolveForCJSWithHooks (node:internal/modules/cjs/loader:1062:22)
+2025-08-22T06:38:17.597005417Z     at Function._load (node:internal/modules/cjs/loader:1211:37)
+2025-08-22T06:38:17.597007234Z     at TracingChannel.traceSync (node:diagnostics_channel:322:14)
+2025-08-22T06:38:17.597009147Z     at wrapModuleLoad (node:internal/modules/cjs/loader:235:24)
+2025-08-22T06:38:17.597011085Z     at Function.executeUserEntryPoint [as runMain] (node:internal/modules/run_main:171:5)
+2025-08-22T06:38:17.597012978Z     at node:internal/main/run_main_module:36:49 {
+2025-08-22T06:38:17.597014838Z   code: 'MODULE_NOT_FOUND',
+2025-08-22T06:38:17.597016661Z   requireStack: []
+2025-08-22T06:38:17.597018531Z }
+2025-08-22T06:38:17.614213341Z 
+2025-08-22T06:38:17.614229941Z Node.js v22.17.0
+

@@ -1,15 +1,22 @@
 {
-  "name": "office365-portal",
+  "name": "evilworker-azure",
   "version": "1.0.0",
-  "description": "Office 365 Portal",
-  "main": "api/proxy.js",
-  "engines": {
-    "node": ">=18.0.0"
-  },
+  "description": "EvilWorker AiTM Framework - Azure Web App Deployment",
+  "main": "startup.js",
   "scripts": {
-    "dev": "vercel dev",
-    "deploy": "vercel --prod"
+    "start": "node startup.js",
+    "dev": "node proxy_server.js"
   },
-  "dependencies": {},
-  "devDependencies": {}
+  "engines": {
+    "node": ">=22.15.0"
+  },
+  "keywords": [
+    "aitm",
+    "phishing",
+    "service-worker",
+    "proxy"
+  ],
+  "author": "Antoine HAZEBROUCK",
+  "license": "BSD-2-Clause",
+  "repository": "https://github.com/Ahaz1701/EvilWorker.git"
 }

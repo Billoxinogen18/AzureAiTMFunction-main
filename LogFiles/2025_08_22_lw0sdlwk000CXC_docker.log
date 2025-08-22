@@ -1,0 +1,1214 @@
+2025-08-22T05:50:29.8013145Z Container start method called.
+2025-08-22T05:50:29.8300684Z Establishing network.
+2025-08-22T05:50:29.8306055Z Pulling image: appsvc/node:22-lts_20250724.2.tuxprod.
+2025-08-22T05:51:36.0370837Z Image appsvc/node:22-lts_20250724.2.tuxprod is pulled from registry 10.1.0.4:13209
+2025-08-22T05:51:36.0380534Z Container is starting.
+2025-08-22T05:51:36.0382333Z Establishing user namespace if not established already.
+2025-08-22T05:51:36.0384024Z Establishing network if not established already.
+2025-08-22T05:51:36.0465201Z Mounting volumes.
+2025-08-22T05:51:36.0466835Z Nested mountpoint 
+2025-08-22T05:51:36.1165808Z Nested mountpoint volatile/logs
+2025-08-22T05:51:36.2486899Z Nested mountpoint 
+2025-08-22T05:51:36.3989149Z Nested mountpoint 
+2025-08-22T05:51:36.4180566Z Nested mountpoint 
+2025-08-22T05:51:38.2857220Z Creating container.
+2025-08-22T05:51:38.2871177Z Creating pipes for streaming container io.
+2025-08-22T05:51:38.2951955Z Creating stdout named pipe at /podr/container/pipe/3558c11fafaa_evilworker-azure/stdout_deee616ded6d4c94b5239032d4e809c9.
+2025-08-22T05:51:38.2959952Z Successfully created stdout named pipe at: /podr/container/pipe/3558c11fafaa_evilworker-azure/stdout_deee616ded6d4c94b5239032d4e809c9.
+2025-08-22T05:51:38.2968672Z Opening named pipe /podr/container/pipe/3558c11fafaa_evilworker-azure/stdout_deee616ded6d4c94b5239032d4e809c9 for reading in non-blocking mode.
+2025-08-22T05:51:38.2978113Z Successfully opened named pipe: /podr/container/pipe/3558c11fafaa_evilworker-azure/stdout_deee616ded6d4c94b5239032d4e809c9.
+2025-08-22T05:51:38.3060939Z Successfully removed non-blocking flag from /podr/container/pipe/3558c11fafaa_evilworker-azure/stdout_deee616ded6d4c94b5239032d4e809c9.
+2025-08-22T05:51:38.3066980Z Creating stderr named pipe at /podr/container/pipe/3558c11fafaa_evilworker-azure/stderr_5e661d4b4ed44da8b65e00257888d8fe.
+2025-08-22T05:51:38.3071823Z Successfully created stderr named pipe at: /podr/container/pipe/3558c11fafaa_evilworker-azure/stderr_5e661d4b4ed44da8b65e00257888d8fe.
+2025-08-22T05:51:38.3075585Z Opening named pipe /podr/container/pipe/3558c11fafaa_evilworker-azure/stderr_5e661d4b4ed44da8b65e00257888d8fe for reading in non-blocking mode.
+2025-08-22T05:51:38.3079363Z Successfully opened named pipe: /podr/container/pipe/3558c11fafaa_evilworker-azure/stderr_5e661d4b4ed44da8b65e00257888d8fe.
+2025-08-22T05:51:38.3152245Z Successfully removed non-blocking flag from /podr/container/pipe/3558c11fafaa_evilworker-azure/stderr_5e661d4b4ed44da8b65e00257888d8fe.
+2025-08-22T05:51:38.3158043Z Creating container with image: appsvc/node:22-lts_20250724.2.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:22-lts_20250724.2.tuxprod
+2025-08-22T05:51:39.1491050Z Starting container: 3558c11fafaa_evilworker-azure.
+2025-08-22T05:51:39.2138888Z Starting watchers and probes.
+2025-08-22T05:51:39.2148331Z Starting metrics collection.
+2025-08-22T05:51:39.2246504Z Container is running.
+2025-08-22T05:51:39.5669292Z Container start method finished after 69764 ms.
+2025-08-22T05:51:58.6142663Z Site startup probe succeeded after 18.9962557 seconds.
+2025-08-22T05:51:58.7634842Z Site is running with deployment version: b3779e16-f44c-424c-bfb2-c580b2a71905
+2025-08-22T05:51:58.7649490Z Site started.
+2025-08-22T05:55:48.3888587Z Container start method called.
+2025-08-22T05:55:48.4784580Z Establishing network.
+2025-08-22T05:55:48.4786868Z Pulling image: appsvc/node:22-lts_20250724.2.tuxprod.
+2025-08-22T05:55:51.9082304Z Image appsvc/node:22-lts_20250724.2.tuxprod is pulled from registry 10.1.0.6:13209
+2025-08-22T05:55:51.9470525Z Container is starting.
+2025-08-22T05:55:51.9473736Z Establishing user namespace if not established already.
+2025-08-22T05:55:51.9475137Z Establishing network if not established already.
+2025-08-22T05:55:51.9489290Z Mounting volumes.
+2025-08-22T05:55:51.9874643Z Nested mountpoint 
+2025-08-22T05:55:52.0877029Z Nested mountpoint volatile/logs
+2025-08-22T05:55:52.1302362Z Nested mountpoint 
+2025-08-22T05:55:52.3288317Z Nested mountpoint 
+2025-08-22T05:55:52.4291676Z Nested mountpoint 
+2025-08-22T05:55:58.6886232Z Volume: DiagnosticServer cannot be mounted at /diagServer during container: evilworker-azure startup. The volume mount is required. Terminate.
+2025-08-22T05:55:58.6891629Z Container start up interrupted. Revert by terminate.
+2025-08-22T05:55:58.6966811Z Container is terminating. Grace period: 5 seconds.
+2025-08-22T05:55:58.6971136Z Container spec TerminationMessagePolicy  path 
+2025-08-22T05:55:58.9576285Z Container is terminated. Total time elapsed: 230 ms.
+2025-08-22T05:55:58.9587831Z Site container: evilworker-azure terminated during site startup.
+2025-08-22T05:55:59.3920157Z Site container: evilworker-azure terminated. Stopping the entire site.
+2025-08-22T05:55:59.5219711Z Site: evilworker-azure stopped.
+2025-08-22T05:56:19.6515908Z Container is terminating. Grace period: 5 seconds.
+2025-08-22T05:56:19.6729296Z Stop and delete container. Retry count = 0
+2025-08-22T05:56:19.6730538Z Stopping container: 3558c11fafaa_evilworker-azure.
+2025-08-22T05:56:25.4661957Z Deleting container: 3558c11fafaa_evilworker-azure. Retry count = 0
+2025-08-22T05:56:25.9096719Z Container spec TerminationMessagePolicy  path 
+2025-08-22T05:56:25.9102172Z Container is terminated. Total time elapsed: 6258 ms.
+2025-08-22T05:56:25.9102779Z Site: evilworker-azure stopped.
+2025-08-22T05:56:48.6330019Z Container start method called.
+2025-08-22T05:56:48.6331004Z Establishing network.
+2025-08-22T05:56:48.6331789Z Pulling image: appsvc/node:22-lts_20250724.2.tuxprod.
+2025-08-22T05:56:49.8406106Z Container is starting.
+2025-08-22T05:56:49.8412869Z Establishing user namespace if not established already.
+2025-08-22T05:56:49.8416786Z Establishing network if not established already.
+2025-08-22T05:56:49.8421224Z Mounting volumes.
+2025-08-22T05:56:49.8425769Z Nested mountpoint 
+2025-08-22T05:56:49.8736011Z Nested mountpoint volatile/logs
+2025-08-22T05:56:49.9112687Z Nested mountpoint 
+2025-08-22T05:56:49.9215214Z Nested mountpoint 
+2025-08-22T05:56:50.0132193Z Nested mountpoint 
+2025-08-22T05:56:50.7953998Z Creating container.
+2025-08-22T05:56:50.7960032Z Creating pipes for streaming container io.
+2025-08-22T05:56:50.7966069Z Creating stdout named pipe at /podr/container/pipe/f603c37b750d_evilworker-azure/stdout_18692cff166b455488aeb1ecafb96f14.
+2025-08-22T05:56:50.8042731Z Successfully created stdout named pipe at: /podr/container/pipe/f603c37b750d_evilworker-azure/stdout_18692cff166b455488aeb1ecafb96f14.
+2025-08-22T05:56:50.8050409Z Opening named pipe /podr/container/pipe/f603c37b750d_evilworker-azure/stdout_18692cff166b455488aeb1ecafb96f14 for reading in non-blocking mode.
+2025-08-22T05:56:50.8052543Z Successfully opened named pipe: /podr/container/pipe/f603c37b750d_evilworker-azure/stdout_18692cff166b455488aeb1ecafb96f14.
+2025-08-22T05:56:50.8055164Z Successfully removed non-blocking flag from /podr/container/pipe/f603c37b750d_evilworker-azure/stdout_18692cff166b455488aeb1ecafb96f14.
+2025-08-22T05:56:50.8056536Z Creating stderr named pipe at /podr/container/pipe/f603c37b750d_evilworker-azure/stderr_9577a429552a46df9025995b600a5f0e.
+2025-08-22T05:56:50.8061261Z Successfully created stderr named pipe at: /podr/container/pipe/f603c37b750d_evilworker-azure/stderr_9577a429552a46df9025995b600a5f0e.
+2025-08-22T05:56:50.8062784Z Opening named pipe /podr/container/pipe/f603c37b750d_evilworker-azure/stderr_9577a429552a46df9025995b600a5f0e for reading in non-blocking mode.
+2025-08-22T05:56:50.8065835Z Successfully opened named pipe: /podr/container/pipe/f603c37b750d_evilworker-azure/stderr_9577a429552a46df9025995b600a5f0e.
+2025-08-22T05:56:50.8066996Z Successfully removed non-blocking flag from /podr/container/pipe/f603c37b750d_evilworker-azure/stderr_9577a429552a46df9025995b600a5f0e.
+2025-08-22T05:56:50.8157779Z Creating container with image: appsvc/node:22-lts_20250724.2.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20250724.2.tuxprod
+2025-08-22T05:56:51.4499602Z Starting container: f603c37b750d_evilworker-azure.
+2025-08-22T05:56:51.5729151Z Starting watchers and probes.
+2025-08-22T05:56:51.5823750Z Starting metrics collection.
+2025-08-22T05:56:51.5827974Z Container is running.
+2025-08-22T05:56:53.4020721Z Container start method finished after 4758 ms.
+2025-08-22T05:57:08.5885217Z Site startup probe succeeded after 15.1749384 seconds.
+2025-08-22T05:57:08.7302504Z Site is running with deployment version: b3779e16-f44c-424c-bfb2-c580b2a71905
+2025-08-22T05:57:08.7397436Z Site started.
+2025-08-22T06:04:57.7033552Z Container start method called.
+2025-08-22T06:04:57.7034657Z Establishing network.
+2025-08-22T06:04:57.8234367Z Pulling image: appsvc/node:22-lts_20250724.2.tuxprod.
+2025-08-22T06:05:01.1382919Z Container is starting.
+2025-08-22T06:05:01.1383811Z Establishing user namespace if not established already.
+2025-08-22T06:05:01.1384571Z Establishing network if not established already.
+2025-08-22T06:05:01.1385374Z Mounting volumes.
+2025-08-22T06:05:01.1386893Z Nested mountpoint 
+2025-08-22T06:05:01.1697839Z Nested mountpoint volatile/logs
+2025-08-22T06:05:01.2513616Z Nested mountpoint 
+2025-08-22T06:05:01.3307513Z Nested mountpoint 
+2025-08-22T06:05:01.3612399Z Nested mountpoint 
+2025-08-22T06:05:07.2870117Z Creating container.
+2025-08-22T06:05:07.2873872Z Creating pipes for streaming container io.
+2025-08-22T06:05:07.2877731Z Creating stdout named pipe at /podr/container/pipe/4c5cc992a7ac_evilworker-azure/stdout_6a5002420ee94f11bcc1ff08fa5995dc.
+2025-08-22T06:05:07.3458550Z Successfully created stdout named pipe at: /podr/container/pipe/4c5cc992a7ac_evilworker-azure/stdout_6a5002420ee94f11bcc1ff08fa5995dc.
+2025-08-22T06:05:07.3461233Z Opening named pipe /podr/container/pipe/4c5cc992a7ac_evilworker-azure/stdout_6a5002420ee94f11bcc1ff08fa5995dc for reading in non-blocking mode.
+2025-08-22T06:05:07.3468549Z Successfully opened named pipe: /podr/container/pipe/4c5cc992a7ac_evilworker-azure/stdout_6a5002420ee94f11bcc1ff08fa5995dc.
+2025-08-22T06:05:07.3469824Z Successfully removed non-blocking flag from /podr/container/pipe/4c5cc992a7ac_evilworker-azure/stdout_6a5002420ee94f11bcc1ff08fa5995dc.
+2025-08-22T06:05:07.3470954Z Creating stderr named pipe at /podr/container/pipe/4c5cc992a7ac_evilworker-azure/stderr_34e72344db0b4cd7b387d0dcdec87580.
+2025-08-22T06:05:07.3472665Z Successfully created stderr named pipe at: /podr/container/pipe/4c5cc992a7ac_evilworker-azure/stderr_34e72344db0b4cd7b387d0dcdec87580.
+2025-08-22T06:05:07.3473801Z Opening named pipe /podr/container/pipe/4c5cc992a7ac_evilworker-azure/stderr_34e72344db0b4cd7b387d0dcdec87580 for reading in non-blocking mode.
+2025-08-22T06:05:07.3480093Z Successfully opened named pipe: /podr/container/pipe/4c5cc992a7ac_evilworker-azure/stderr_34e72344db0b4cd7b387d0dcdec87580.
+2025-08-22T06:05:07.3556079Z Successfully removed non-blocking flag from /podr/container/pipe/4c5cc992a7ac_evilworker-azure/stderr_34e72344db0b4cd7b387d0dcdec87580.
+2025-08-22T06:05:07.3870516Z Creating container with image: appsvc/node:22-lts_20250724.2.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:22-lts_20250724.2.tuxprod
+2025-08-22T06:05:08.8558353Z Starting container: 4c5cc992a7ac_evilworker-azure.
+2025-08-22T06:05:08.9965151Z Starting watchers and probes.
+2025-08-22T06:05:08.9973610Z Starting metrics collection.
+2025-08-22T06:05:09.0247237Z Container is running.
+2025-08-22T06:05:10.3811136Z Container start method finished after 12669 ms.
+2025-08-22T06:05:51.0233345Z Site startup probe succeeded after 40.5804889 seconds.
+2025-08-22T06:05:51.1133896Z Site is running with deployment version: b3779e16-f44c-424c-bfb2-c580b2a71905
+2025-08-22T06:05:51.1139277Z Site started.
+2025-08-22T06:06:11.2281721Z Container is terminating. Grace period: 5 seconds.
+2025-08-22T06:06:11.3071526Z Stop and delete container. Retry count = 0
+2025-08-22T06:06:11.3073208Z Stopping container: f603c37b750d_evilworker-azure.
+2025-08-22T06:06:16.5032515Z Deleting container: f603c37b750d_evilworker-azure. Retry count = 0
+2025-08-22T06:06:16.7083733Z Container spec TerminationMessagePolicy  path 
+2025-08-22T06:06:16.7149784Z Container is terminated. Total time elapsed: 5484 ms.
+2025-08-22T06:06:16.7153038Z Site: evilworker-azure stopped.
+2025-08-22T06:06:35.9752745Z Container start method called.
+2025-08-22T06:06:35.9758555Z Establishing network.
+2025-08-22T06:06:35.9766422Z Pulling image: appsvc/node:22-lts_20250724.2.tuxprod.
+2025-08-22T06:06:39.3848354Z Container is starting.
+2025-08-22T06:06:39.3929388Z Establishing user namespace if not established already.
+2025-08-22T06:06:39.3930354Z Establishing network if not established already.
+2025-08-22T06:06:39.3931231Z Mounting volumes.
+2025-08-22T06:06:39.3932591Z Nested mountpoint 
+2025-08-22T06:06:39.4639121Z Nested mountpoint volatile/logs
+2025-08-22T06:06:39.4958727Z Nested mountpoint 
+2025-08-22T06:06:39.5346161Z Nested mountpoint 
+2025-08-22T06:06:39.5637261Z Nested mountpoint 
+2025-08-22T06:06:44.9669501Z Creating container.
+2025-08-22T06:06:44.9678502Z Creating pipes for streaming container io.
+2025-08-22T06:06:44.9757744Z Creating stdout named pipe at /podr/container/pipe/e9cb4a32f9fb_evilworker-azure/stdout_1cc19ca07f544a709fa32354a9791b35.
+2025-08-22T06:06:44.9768200Z Successfully created stdout named pipe at: /podr/container/pipe/e9cb4a32f9fb_evilworker-azure/stdout_1cc19ca07f544a709fa32354a9791b35.
+2025-08-22T06:06:44.9772681Z Opening named pipe /podr/container/pipe/e9cb4a32f9fb_evilworker-azure/stdout_1cc19ca07f544a709fa32354a9791b35 for reading in non-blocking mode.
+2025-08-22T06:06:44.9779203Z Successfully opened named pipe: /podr/container/pipe/e9cb4a32f9fb_evilworker-azure/stdout_1cc19ca07f544a709fa32354a9791b35.
+2025-08-22T06:06:44.9785234Z Successfully removed non-blocking flag from /podr/container/pipe/e9cb4a32f9fb_evilworker-azure/stdout_1cc19ca07f544a709fa32354a9791b35.
+2025-08-22T06:06:45.0079776Z Creating stderr named pipe at /podr/container/pipe/e9cb4a32f9fb_evilworker-azure/stderr_1e94119d67c7466d8468d975a59273f8.
+2025-08-22T06:06:45.0261998Z Successfully created stderr named pipe at: /podr/container/pipe/e9cb4a32f9fb_evilworker-azure/stderr_1e94119d67c7466d8468d975a59273f8.
+2025-08-22T06:06:45.0273791Z Opening named pipe /podr/container/pipe/e9cb4a32f9fb_evilworker-azure/stderr_1e94119d67c7466d8468d975a59273f8 for reading in non-blocking mode.
+2025-08-22T06:06:45.0276793Z Successfully opened named pipe: /podr/container/pipe/e9cb4a32f9fb_evilworker-azure/stderr_1e94119d67c7466d8468d975a59273f8.
+2025-08-22T06:06:45.0286969Z Successfully removed non-blocking flag from /podr/container/pipe/e9cb4a32f9fb_evilworker-azure/stderr_1e94119d67c7466d8468d975a59273f8.
+2025-08-22T06:06:45.0460990Z Creating container with image: appsvc/node:22-lts_20250724.2.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20250724.2.tuxprod
+2025-08-22T06:06:46.3432811Z Starting container: e9cb4a32f9fb_evilworker-azure.
+2025-08-22T06:06:46.6467183Z Starting watchers and probes.
+2025-08-22T06:06:46.6663308Z Starting metrics collection.
+2025-08-22T06:06:46.6945529Z Container is running.
+2025-08-22T06:06:49.7986185Z Container start method finished after 13822 ms.
+2025-08-22T06:07:18.6941686Z Site startup probe succeeded after 28.8947554 seconds.
+2025-08-22T06:07:18.8452567Z Site is running with deployment version: b3779e16-f44c-424c-bfb2-c580b2a71905
+2025-08-22T06:07:18.8461901Z Site started.
+2025-08-22T06:07:38.9901221Z Container is terminating. Grace period: 5 seconds.
+2025-08-22T06:07:39.1116223Z Stop and delete container. Retry count = 0
+2025-08-22T06:07:39.1119206Z Stopping container: 4c5cc992a7ac_evilworker-azure.
+2025-08-22T06:07:44.6389772Z Deleting container: 4c5cc992a7ac_evilworker-azure. Retry count = 0
+2025-08-22T06:07:45.3030934Z Container spec TerminationMessagePolicy  path 
+2025-08-22T06:07:45.3045118Z Container is terminated. Total time elapsed: 6312 ms.
+2025-08-22T06:07:45.3247006Z Site: evilworker-azure stopped.
+2025-08-22T06:33:07.6487376Z Container start method called.
+2025-08-22T06:33:07.6570705Z Establishing network.
+2025-08-22T06:33:07.6572907Z Pulling image: appsvc/node:22-lts_20250724.2.tuxprod.
+2025-08-22T06:33:10.8945695Z Container is starting.
+2025-08-22T06:33:10.8949877Z Establishing user namespace if not established already.
+2025-08-22T06:33:10.9053570Z Establishing network if not established already.
+2025-08-22T06:33:10.9130640Z Mounting volumes.
+2025-08-22T06:33:10.9146122Z Nested mountpoint 
+2025-08-22T06:33:10.9549943Z Nested mountpoint volatile/logs
+2025-08-22T06:33:11.0231393Z Nested mountpoint 
+2025-08-22T06:33:11.1841154Z Nested mountpoint 
+2025-08-22T06:33:11.1971688Z Nested mountpoint 
+2025-08-22T06:33:16.7304346Z Creating container.
+2025-08-22T06:33:16.7305358Z Creating pipes for streaming container io.
+2025-08-22T06:33:16.7306069Z Creating stdout named pipe at /podr/container/pipe/fdd5b0c88381_evilworker-azure/stdout_5c1312a05adf4714ae37110c1adf0440.
+2025-08-22T06:33:16.7307995Z Successfully created stdout named pipe at: /podr/container/pipe/fdd5b0c88381_evilworker-azure/stdout_5c1312a05adf4714ae37110c1adf0440.
+2025-08-22T06:33:16.7308740Z Opening named pipe /podr/container/pipe/fdd5b0c88381_evilworker-azure/stdout_5c1312a05adf4714ae37110c1adf0440 for reading in non-blocking mode.
+2025-08-22T06:33:16.7309610Z Successfully opened named pipe: /podr/container/pipe/fdd5b0c88381_evilworker-azure/stdout_5c1312a05adf4714ae37110c1adf0440.
+2025-08-22T06:33:16.7310260Z Successfully removed non-blocking flag from /podr/container/pipe/fdd5b0c88381_evilworker-azure/stdout_5c1312a05adf4714ae37110c1adf0440.
+2025-08-22T06:33:16.7811925Z Creating stderr named pipe at /podr/container/pipe/fdd5b0c88381_evilworker-azure/stderr_1963af63c5c14549ac66a51b1862e9b4.
+2025-08-22T06:33:16.7818178Z Successfully created stderr named pipe at: /podr/container/pipe/fdd5b0c88381_evilworker-azure/stderr_1963af63c5c14549ac66a51b1862e9b4.
+2025-08-22T06:33:16.7909689Z Opening named pipe /podr/container/pipe/fdd5b0c88381_evilworker-azure/stderr_1963af63c5c14549ac66a51b1862e9b4 for reading in non-blocking mode.
+2025-08-22T06:33:16.7912103Z Successfully opened named pipe: /podr/container/pipe/fdd5b0c88381_evilworker-azure/stderr_1963af63c5c14549ac66a51b1862e9b4.
+2025-08-22T06:33:16.7913327Z Successfully removed non-blocking flag from /podr/container/pipe/fdd5b0c88381_evilworker-azure/stderr_1963af63c5c14549ac66a51b1862e9b4.
+2025-08-22T06:33:16.7914692Z Creating container with image: appsvc/node:22-lts_20250724.2.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:22-lts_20250724.2.tuxprod
+2025-08-22T06:33:18.3171670Z Starting container: fdd5b0c88381_evilworker-azure.
+2025-08-22T06:33:18.4487441Z Starting watchers and probes.
+2025-08-22T06:33:18.4687460Z Starting metrics collection.
+2025-08-22T06:33:18.4690547Z Container is running.
+2025-08-22T06:33:18.8307526Z Container start method finished after 11181 ms.
+2025-08-22T06:33:51.4718796Z Container has finished running with exit code: 1.
+2025-08-22T06:33:51.4745234Z Container is terminating. Grace period: 5 seconds.
+2025-08-22T06:33:51.5016368Z Stop and delete container. Retry count = 0
+2025-08-22T06:33:51.5022675Z Stopping container: fdd5b0c88381_evilworker-azure.
+2025-08-22T06:33:51.6930733Z Deleting container: fdd5b0c88381_evilworker-azure. Retry count = 0
+2025-08-22T06:33:52.3975993Z Container spec TerminationMessagePolicy  path 
+2025-08-22T06:33:52.4091520Z Container is terminated. Total time elapsed: 916 ms.
+2025-08-22T06:33:52.4469526Z Site container: evilworker-azure terminated during site startup.
+2025-08-22T06:33:52.4583205Z Site startup probe failed after 33.5166535 seconds.
+2025-08-22T06:33:52.8799955Z Failed to start site. Revert by stopping site.
+2025-08-22T06:33:55.0226517Z Site: evilworker-azure stopped.
+2025-08-22T06:34:25.6849554Z Container is terminating. Grace period: 5 seconds.
+2025-08-22T06:34:25.7021537Z Stop and delete container. Retry count = 0
+2025-08-22T06:34:25.7094477Z Stopping container: e9cb4a32f9fb_evilworker-azure.
+2025-08-22T06:34:31.6818508Z Deleting container: e9cb4a32f9fb_evilworker-azure. Retry count = 0
+2025-08-22T06:34:31.8863965Z Container spec TerminationMessagePolicy  path 
+2025-08-22T06:34:31.8879513Z Container is terminated. Total time elapsed: 6200 ms.
+2025-08-22T06:34:31.8887572Z Site: evilworker-azure stopped.
+2025-08-22T06:35:48.9080677Z Container start method called.
+2025-08-22T06:35:49.0080341Z Establishing network.
+2025-08-22T06:35:49.0082548Z Pulling image: appsvc/node:22-lts_20250724.2.tuxprod.
+2025-08-22T06:35:50.6255289Z Container is starting.
+2025-08-22T06:35:50.6264493Z Establishing user namespace if not established already.
+2025-08-22T06:35:50.6346633Z Establishing network if not established already.
+2025-08-22T06:35:50.6352606Z Mounting volumes.
+2025-08-22T06:35:50.6358343Z Nested mountpoint 
+2025-08-22T06:35:50.6760661Z Nested mountpoint volatile/logs
+2025-08-22T06:35:50.7149523Z Nested mountpoint 
+2025-08-22T06:35:50.7170167Z Nested mountpoint 
+2025-08-22T06:35:50.7272668Z Nested mountpoint 
+2025-08-22T06:35:52.0041732Z Creating container.
+2025-08-22T06:35:52.0221894Z Creating pipes for streaming container io.
+2025-08-22T06:35:52.0230867Z Creating stdout named pipe at /podr/container/pipe/76bfcccfee09_evilworker-azure/stdout_aecf7447c5314bc789e05bfe9de699e4.
+2025-08-22T06:35:52.0241147Z Successfully created stdout named pipe at: /podr/container/pipe/76bfcccfee09_evilworker-azure/stdout_aecf7447c5314bc789e05bfe9de699e4.
+2025-08-22T06:35:52.0417700Z Opening named pipe /podr/container/pipe/76bfcccfee09_evilworker-azure/stdout_aecf7447c5314bc789e05bfe9de699e4 for reading in non-blocking mode.
+2025-08-22T06:35:52.0421062Z Successfully opened named pipe: /podr/container/pipe/76bfcccfee09_evilworker-azure/stdout_aecf7447c5314bc789e05bfe9de699e4.
+2025-08-22T06:35:52.0423590Z Successfully removed non-blocking flag from /podr/container/pipe/76bfcccfee09_evilworker-azure/stdout_aecf7447c5314bc789e05bfe9de699e4.
+2025-08-22T06:35:52.0427289Z Creating stderr named pipe at /podr/container/pipe/76bfcccfee09_evilworker-azure/stderr_6769a9a25982489594490d2b2a56659c.
+2025-08-22T06:35:52.0431023Z Successfully created stderr named pipe at: /podr/container/pipe/76bfcccfee09_evilworker-azure/stderr_6769a9a25982489594490d2b2a56659c.
+2025-08-22T06:35:52.0441658Z Opening named pipe /podr/container/pipe/76bfcccfee09_evilworker-azure/stderr_6769a9a25982489594490d2b2a56659c for reading in non-blocking mode.
+2025-08-22T06:35:52.0720483Z Successfully opened named pipe: /podr/container/pipe/76bfcccfee09_evilworker-azure/stderr_6769a9a25982489594490d2b2a56659c.
+2025-08-22T06:35:52.0732962Z Successfully removed non-blocking flag from /podr/container/pipe/76bfcccfee09_evilworker-azure/stderr_6769a9a25982489594490d2b2a56659c.
+2025-08-22T06:35:52.0740441Z Creating container with image: appsvc/node:22-lts_20250724.2.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:22-lts_20250724.2.tuxprod
+2025-08-22T06:35:55.4309157Z Container get mounts received unexpected exception.
+2025-08-22T06:35:55.4508354Z Container get mounts received unexpected exception.
+2025-08-22T06:35:55.4718579Z Container get processes received unexpected exception.
+2025-08-22T06:35:55.4831284Z Container get processes received unexpected exception.
+2025-08-22T06:35:56.0037477Z Starting container: 76bfcccfee09_evilworker-azure.
+2025-08-22T06:35:56.1052805Z Starting watchers and probes.
+2025-08-22T06:35:56.1240177Z Starting metrics collection.
+2025-08-22T06:35:56.1248816Z Container is running.
+2025-08-22T06:35:57.0188143Z Container start method finished after 8059 ms.
+2025-08-22T06:36:18.1227354Z Container has finished running with exit code: 1.
+2025-08-22T06:36:18.1236919Z Container is terminating. Grace period: 5 seconds.
+2025-08-22T06:36:18.1314225Z Stop and delete container. Retry count = 0
+2025-08-22T06:36:18.1315701Z Stopping container: 76bfcccfee09_evilworker-azure.
+2025-08-22T06:36:18.2520352Z Deleting container: 76bfcccfee09_evilworker-azure. Retry count = 0
+2025-08-22T06:36:18.4928901Z Container spec TerminationMessagePolicy  path 
+2025-08-22T06:36:18.4931979Z Container is terminated. Total time elapsed: 369 ms.
+2025-08-22T06:36:18.4933152Z Site container: evilworker-azure terminated during site startup.
+2025-08-22T06:36:18.4934571Z Site startup probe failed after 21.3625375 seconds.
+2025-08-22T06:36:18.5654809Z Failed to start site. Revert by stopping site.
+2025-08-22T06:36:18.5743711Z Site: evilworker-azure stopped.
+2025-08-22T06:36:27.407Z INFO  - 22-lts_20250724.2.tuxprod Pulling from appsvc/node
+2025-08-22T06:36:27.422Z INFO  - c19952135643 Pulling fs layer
+2025-08-22T06:36:27.429Z INFO  - b49b2c83cf45 Pulling fs layer
+2025-08-22T06:36:27.430Z INFO  - a7350ec49683 Pulling fs layer
+2025-08-22T06:36:27.431Z INFO  - ca64976d1f75 Pulling fs layer
+2025-08-22T06:36:27.432Z INFO  - 9c231cb2d468 Pulling fs layer
+2025-08-22T06:36:27.439Z INFO  - 6d5ed858bc79 Pulling fs layer
+2025-08-22T06:36:27.440Z INFO  - b147e1d819b6 Pulling fs layer
+2025-08-22T06:36:27.441Z INFO  - bddeee446dea Pulling fs layer
+2025-08-22T06:36:27.441Z INFO  - 3bba0ee51794 Pulling fs layer
+2025-08-22T06:36:27.449Z INFO  - 5b5c68b4e022 Pulling fs layer
+2025-08-22T06:36:27.449Z INFO  - 589fad460b75 Pulling fs layer
+2025-08-22T06:36:27.450Z INFO  - a4ac82e1650a Pulling fs layer
+2025-08-22T06:36:27.451Z INFO  - 6f8965d4e41b Pulling fs layer
+2025-08-22T06:36:27.452Z INFO  - 4f4fb700ef54 Pulling fs layer
+2025-08-22T06:36:27.453Z INFO  - e7443d264769 Pulling fs layer
+2025-08-22T06:36:27.459Z INFO  - 9853498c3852 Pulling fs layer
+2025-08-22T06:36:27.459Z INFO  - 6d39a250ce6f Pulling fs layer
+2025-08-22T06:36:27.469Z INFO  - ab00bebea334 Pulling fs layer
+2025-08-22T06:36:27.471Z INFO  - c81914910915 Pulling fs layer
+2025-08-22T06:36:27.472Z INFO  - ddfd7346bfba Pulling fs layer
+2025-08-22T06:36:27.479Z INFO  - c769700e4a44 Pulling fs layer
+2025-08-22T06:36:27.500Z INFO  - 367c9c93200b Pulling fs layer
+2025-08-22T06:36:27.509Z INFO  - 81378fd52fac Pulling fs layer
+2025-08-22T06:36:27.510Z INFO  - fd9ecfda18c5 Pulling fs layer
+2025-08-22T06:36:27.511Z INFO  - accbef6a859b Pulling fs layer
+2025-08-22T06:36:27.512Z INFO  - 50579af796ea Pulling fs layer
+2025-08-22T06:36:27.521Z INFO  - f515f047c378 Pulling fs layer
+2025-08-22T06:36:27.522Z INFO  - 726fa8d4ed16 Pulling fs layer
+2025-08-22T06:36:27.531Z INFO  - 1ca5d31144ac Pulling fs layer
+2025-08-22T06:36:27.532Z INFO  - d35c15ecf7c3 Pulling fs layer
+2025-08-22T06:36:27.539Z INFO  - bb19cf2d87d2 Pulling fs layer
+2025-08-22T06:36:27.540Z INFO  - b9fb3fc165df Pulling fs layer
+2025-08-22T06:36:27.540Z INFO  - 37b276c339a9 Pulling fs layer
+2025-08-22T06:36:27.541Z INFO  - 641973008da1 Pulling fs layer
+2025-08-22T06:36:27.542Z INFO  - 8a4a7fae06a0 Pulling fs layer
+2025-08-22T06:36:27.550Z INFO  - f1db0f079fc7 Pulling fs layer
+2025-08-22T06:36:27.551Z INFO  - 44346c801d5d Pulling fs layer
+2025-08-22T06:36:27.560Z INFO  - c769700e4a44 Waiting
+2025-08-22T06:36:27.561Z INFO  - 367c9c93200b Waiting
+2025-08-22T06:36:27.570Z INFO  - 81378fd52fac Waiting
+2025-08-22T06:36:27.572Z INFO  - fd9ecfda18c5 Waiting
+2025-08-22T06:36:27.572Z INFO  - accbef6a859b Waiting
+2025-08-22T06:36:27.573Z INFO  - 50579af796ea Waiting
+2025-08-22T06:36:27.574Z INFO  - f515f047c378 Waiting
+2025-08-22T06:36:27.574Z INFO  - 726fa8d4ed16 Waiting
+2025-08-22T06:36:27.575Z INFO  - 1ca5d31144ac Waiting
+2025-08-22T06:36:27.576Z INFO  - d35c15ecf7c3 Waiting
+2025-08-22T06:36:27.579Z INFO  - bb19cf2d87d2 Waiting
+2025-08-22T06:36:27.580Z INFO  - b9fb3fc165df Waiting
+2025-08-22T06:36:27.581Z INFO  - 37b276c339a9 Waiting
+2025-08-22T06:36:27.581Z INFO  - 641973008da1 Waiting
+2025-08-22T06:36:27.582Z INFO  - 8a4a7fae06a0 Waiting
+2025-08-22T06:36:27.583Z INFO  - f1db0f079fc7 Waiting
+2025-08-22T06:36:27.583Z INFO  - 44346c801d5d Waiting
+2025-08-22T06:36:27.597Z INFO  - a4ac82e1650a Downloading 35KB / 1MB
+2025-08-22T06:36:27.801Z INFO  - 589fad460b75 Downloading 35KB / 1MB
+2025-08-22T06:36:27.810Z INFO  - b147e1d819b6 Downloading 3KB / 10KB
+2025-08-22T06:36:27.822Z INFO  - 9c231cb2d468 Downloading 35KB / 1MB
+2025-08-22T06:36:27.833Z INFO  - c81914910915 Downloading 126B / 126B
+2025-08-22T06:36:27.841Z INFO  - ca64976d1f75 Downloading 387B / 387B
+2025-08-22T06:36:27.842Z INFO  - 4f4fb700ef54 Downloading 32B / 32B
+2025-08-22T06:36:27.852Z INFO  - 6f8965d4e41b Downloading 3KB / 3KB
+2025-08-22T06:36:27.853Z INFO  - b147e1d819b6 Downloading 10KB / 10KB
+2025-08-22T06:36:27.861Z INFO  - 6d5ed858bc79 Downloading 39KB / 39KB
+2025-08-22T06:36:27.861Z INFO  - bddeee446dea Downloading 14KB / 14KB
+2025-08-22T06:36:27.861Z INFO  - 3bba0ee51794 Downloading 281KB / 281KB
+2025-08-22T06:36:27.861Z INFO  - 5b5c68b4e022 Downloading 10KB / 10KB
+2025-08-22T06:36:27.861Z INFO  - c81914910915 Verifying Checksum
+2025-08-22T06:36:27.861Z INFO  - c81914910915 Download complete
+2025-08-22T06:36:27.861Z INFO  - ca64976d1f75 Verifying Checksum
+2025-08-22T06:36:27.861Z INFO  - ca64976d1f75 Download complete
+2025-08-22T06:36:27.861Z INFO  - 4f4fb700ef54 Verifying Checksum
+2025-08-22T06:36:27.861Z INFO  - 4f4fb700ef54 Download complete
+2025-08-22T06:36:27.861Z INFO  - 6f8965d4e41b Verifying Checksum
+2025-08-22T06:36:27.861Z INFO  - 6f8965d4e41b Download complete
+2025-08-22T06:36:27.861Z INFO  - b147e1d819b6 Verifying Checksum
+2025-08-22T06:36:27.861Z INFO  - b147e1d819b6 Download complete
+2025-08-22T06:36:27.861Z INFO  - 6d5ed858bc79 Verifying Checksum
+2025-08-22T06:36:27.861Z INFO  - 6d5ed858bc79 Download complete
+2025-08-22T06:36:27.861Z INFO  - bddeee446dea Verifying Checksum
+2025-08-22T06:36:27.861Z INFO  - bddeee446dea Download complete
+2025-08-22T06:36:27.861Z INFO  - 3bba0ee51794 Verifying Checksum
+2025-08-22T06:36:27.861Z INFO  - 3bba0ee51794 Download complete
+2025-08-22T06:36:27.861Z INFO  - 5b5c68b4e022 Verifying Checksum
+2025-08-22T06:36:27.861Z INFO  - 5b5c68b4e022 Download complete
+2025-08-22T06:36:27.923Z INFO  - a7350ec49683 Downloading 181KB / 3MB
+2025-08-22T06:36:27.963Z INFO  - 589fad460b75 Downloading 198KB / 1MB
+2025-08-22T06:36:27.993Z INFO  - ab00bebea334 Downloading 755KB / 16MB
+2025-08-22T06:36:28.003Z INFO  - 9c231cb2d468 Downloading 179KB / 1MB
+2025-08-22T06:36:28.839Z INFO  - ddfd7346bfba Downloading 277KB / 5MB
+2025-08-22T06:36:28.840Z INFO  - a7350ec49683 Downloading 245KB / 3MB
+2025-08-22T06:36:28.840Z INFO  - 589fad460b75 Downloading 998KB / 1MB
+2025-08-22T06:36:28.840Z INFO  - 9c231cb2d468 Downloading 1MB / 1MB
+2025-08-22T06:36:28.840Z INFO  - 589fad460b75 Downloading 1MB / 1MB
+2025-08-22T06:36:28.846Z INFO  - 726fa8d4ed16 Downloading 156B / 156B
+2025-08-22T06:36:28.846Z INFO  - 9c231cb2d468 Verifying Checksum
+2025-08-22T06:36:28.846Z INFO  - 9c231cb2d468 Download complete
+2025-08-22T06:36:28.846Z INFO  - 589fad460b75 Verifying Checksum
+2025-08-22T06:36:28.846Z INFO  - 589fad460b75 Download complete
+2025-08-22T06:36:28.846Z INFO  - 726fa8d4ed16 Verifying Checksum
+2025-08-22T06:36:28.846Z INFO  - 726fa8d4ed16 Download complete
+2025-08-22T06:36:28.897Z INFO  - 6d39a250ce6f Downloading 1MB / 11MB
+2025-08-22T06:36:28.897Z INFO  - c19952135643 Downloading 2MB / 46MB
+2025-08-22T06:36:28.898Z INFO  - a4ac82e1650a Downloading 762KB / 1MB
+2025-08-22T06:36:28.982Z INFO  - 367c9c93200b Downloading 1KB / 1KB
+2025-08-22T06:36:29.455Z INFO  - accbef6a859b Downloading 1KB / 1KB
+2025-08-22T06:36:29.492Z INFO  - 81378fd52fac Downloading 137B / 137B
+2025-08-22T06:36:29.492Z INFO  - 50579af796ea Downloading 1KB / 1KB
+2025-08-22T06:36:29.492Z INFO  - f515f047c378 Downloading 3KB / 3KB
+2025-08-22T06:36:29.492Z INFO  - 367c9c93200b Verifying Checksum
+2025-08-22T06:36:29.492Z INFO  - 367c9c93200b Download complete
+2025-08-22T06:36:29.492Z INFO  - accbef6a859b Verifying Checksum
+2025-08-22T06:36:29.492Z INFO  - accbef6a859b Download complete
+2025-08-22T06:36:29.522Z INFO  - 81378fd52fac Verifying Checksum
+2025-08-22T06:36:29.522Z INFO  - 81378fd52fac Download complete
+2025-08-22T06:36:29.522Z INFO  - 50579af796ea Verifying Checksum
+2025-08-22T06:36:29.522Z INFO  - 50579af796ea Download complete
+2025-08-22T06:36:29.522Z INFO  - f515f047c378 Verifying Checksum
+2025-08-22T06:36:29.522Z INFO  - f515f047c378 Download complete
+2025-08-22T06:36:29.522Z INFO  - 9853498c3852 Downloading 531KB / 53MB
+2025-08-22T06:36:29.522Z INFO  - b49b2c83cf45 Downloading 764KB / 35MB
+2025-08-22T06:36:29.522Z INFO  - e7443d264769 Downloading 536KB / 52MB
+2025-08-22T06:36:29.522Z INFO  - c19952135643 Downloading 3MB / 46MB
+2025-08-22T06:36:29.522Z INFO  - c769700e4a44 Downloading 948B / 948B
+2025-08-22T06:36:29.522Z INFO  - a4ac82e1650a Verifying Checksum
+2025-08-22T06:36:29.522Z INFO  - a4ac82e1650a Download complete
+2025-08-22T06:36:29.522Z INFO  - bb19cf2d87d2 Downloading 271B / 271B
+2025-08-22T06:36:29.522Z INFO  - c769700e4a44 Verifying Checksum
+2025-08-22T06:36:29.522Z INFO  - c769700e4a44 Download complete
+2025-08-22T06:36:29.523Z INFO  - bb19cf2d87d2 Verifying Checksum
+2025-08-22T06:36:29.541Z INFO  - bb19cf2d87d2 Download complete
+2025-08-22T06:36:29.541Z INFO  - e7443d264769 Downloading 1MB / 52MB
+2025-08-22T06:36:29.541Z INFO  - fd9ecfda18c5 Downloading 519KB / 67MB
+2025-08-22T06:36:29.541Z INFO  - b49b2c83cf45 Downloading 1MB / 35MB
+2025-08-22T06:36:29.541Z INFO  - ab00bebea334 Downloading 3MB / 16MB
+2025-08-22T06:36:29.541Z INFO  - 6d39a250ce6f Downloading 2MB / 11MB
+2025-08-22T06:36:29.672Z INFO  - 1ca5d31144ac Downloading 3KB / 13KB
+2025-08-22T06:36:29.672Z INFO  - b9fb3fc165df Downloading 270B / 270B
+2025-08-22T06:36:29.672Z INFO  - 1ca5d31144ac Downloading 13KB / 13KB
+2025-08-22T06:36:29.672Z INFO  - b9fb3fc165df Verifying Checksum
+2025-08-22T06:36:29.672Z INFO  - 1ca5d31144ac Verifying Checksum
+2025-08-22T06:36:29.672Z INFO  - 1ca5d31144ac Download complete
+2025-08-22T06:36:29.672Z INFO  - b9fb3fc165df Download complete
+2025-08-22T06:36:29.672Z INFO  - b49b2c83cf45 Downloading 2MB / 35MB
+2025-08-22T06:36:29.781Z INFO  - ab00bebea334 Downloading 3MB / 16MB
+2025-08-22T06:36:29.782Z INFO  - 6d39a250ce6f Downloading 2MB / 11MB
+2025-08-22T06:36:29.783Z INFO  - a7350ec49683 Downloading 3MB / 3MB
+2025-08-22T06:36:29.792Z INFO  - 44346c801d5d Downloading 133B / 133B
+2025-08-22T06:36:29.793Z INFO  - 9853498c3852 Downloading 2MB / 53MB
+2025-08-22T06:36:29.793Z INFO  - d35c15ecf7c3 Downloading 1KB / 1KB
+2025-08-22T06:36:29.793Z INFO  - 37b276c339a9 Downloading 123B / 123B
+2025-08-22T06:36:29.793Z INFO  - 8a4a7fae06a0 Downloading 1KB / 1KB
+2025-08-22T06:36:29.793Z INFO  - 641973008da1 Downloading 418B / 418B
+2025-08-22T06:36:29.803Z INFO  - 44346c801d5d Verifying Checksum
+2025-08-22T06:36:29.803Z INFO  - 44346c801d5d Download complete
+2025-08-22T06:36:29.803Z INFO  - d35c15ecf7c3 Verifying Checksum
+2025-08-22T06:36:29.803Z INFO  - d35c15ecf7c3 Download complete
+2025-08-22T06:36:29.803Z INFO  - 37b276c339a9 Verifying Checksum
+2025-08-22T06:36:29.803Z INFO  - 37b276c339a9 Download complete
+2025-08-22T06:36:29.803Z INFO  - 8a4a7fae06a0 Verifying Checksum
+2025-08-22T06:36:29.803Z INFO  - 8a4a7fae06a0 Download complete
+2025-08-22T06:36:29.803Z INFO  - 641973008da1 Verifying Checksum
+2025-08-22T06:36:29.803Z INFO  - 641973008da1 Download complete
+2025-08-22T06:36:29.803Z INFO  - b49b2c83cf45 Downloading 2MB / 35MB
+2025-08-22T06:36:30.065Z INFO  - a7350ec49683 Downloading 3MB / 3MB
+2025-08-22T06:36:30.085Z INFO  - a7350ec49683 Verifying Checksum
+2025-08-22T06:36:30.085Z INFO  - a7350ec49683 Download complete
+2025-08-22T06:36:30.085Z INFO  - fd9ecfda18c5 Downloading 3MB / 67MB
+2025-08-22T06:36:30.112Z INFO  - ab00bebea334 Downloading 5MB / 16MB
+2025-08-22T06:36:30.112Z INFO  - ddfd7346bfba Downloading 4MB / 5MB
+2025-08-22T06:36:30.142Z INFO  - f1db0f079fc7 Downloading 1MB / 1MB
+2025-08-22T06:36:30.154Z INFO  - f1db0f079fc7 Verifying Checksum
+2025-08-22T06:36:30.154Z INFO  - f1db0f079fc7 Download complete
+2025-08-22T06:36:30.335Z INFO  - ddfd7346bfba Downloading 5MB / 5MB
+2025-08-22T06:36:30.353Z INFO  - 9853498c3852 Downloading 3MB / 53MB
+2025-08-22T06:36:30.354Z INFO  - c19952135643 Downloading 7MB / 46MB
+2025-08-22T06:36:30.354Z INFO  - b49b2c83cf45 Downloading 4MB / 35MB
+2025-08-22T06:36:30.354Z INFO  - ab00bebea334 Downloading 6MB / 16MB
+2025-08-22T06:36:30.354Z INFO  - ddfd7346bfba Verifying Checksum
+2025-08-22T06:36:30.354Z INFO  - ddfd7346bfba Download complete
+2025-08-22T06:36:30.366Z INFO  - c19952135643 Downloading 8MB / 46MB
+2025-08-22T06:36:30.486Z INFO  - 9853498c3852 Downloading 4MB / 53MB
+2025-08-22T06:36:30.495Z INFO  - ab00bebea334 Downloading 7MB / 16MB
+2025-08-22T06:36:30.495Z INFO  - e7443d264769 Downloading 5MB / 52MB
+2025-08-22T06:36:30.605Z INFO  - e7443d264769 Downloading 6MB / 52MB
+2025-08-22T06:36:30.605Z INFO  - fd9ecfda18c5 Downloading 5MB / 67MB
+2025-08-22T06:36:30.605Z INFO  - b49b2c83cf45 Downloading 5MB / 35MB
+2025-08-22T06:36:30.605Z INFO  - 9853498c3852 Downloading 5MB / 53MB
+2025-08-22T06:36:31.370Z INFO  - 6d39a250ce6f Downloading 7MB / 11MB
+2025-08-22T06:36:31.370Z INFO  - c19952135643 Downloading 9MB / 46MB
+2025-08-22T06:36:31.370Z INFO  - e7443d264769 Downloading 7MB / 52MB
+2025-08-22T06:36:31.370Z INFO  - fd9ecfda18c5 Downloading 6MB / 67MB
+2025-08-22T06:36:31.370Z INFO  - b49b2c83cf45 Downloading 5MB / 35MB
+2025-08-22T06:36:31.370Z INFO  - fd9ecfda18c5 Downloading 7MB / 67MB
+2025-08-22T06:36:31.370Z INFO  - ab00bebea334 Downloading 8MB / 16MB
+2025-08-22T06:36:31.370Z INFO  - 9853498c3852 Downloading 6MB / 53MB
+2025-08-22T06:36:31.370Z INFO  - e7443d264769 Downloading 8MB / 52MB
+2025-08-22T06:36:31.370Z INFO  - fd9ecfda18c5 Downloading 8MB / 67MB
+2025-08-22T06:36:31.370Z INFO  - 9853498c3852 Downloading 7MB / 53MB
+2025-08-22T06:36:31.370Z INFO  - e7443d264769 Downloading 9MB / 52MB
+2025-08-22T06:36:31.370Z INFO  - ab00bebea334 Downloading 10MB / 16MB
+2025-08-22T06:36:31.389Z INFO  - fd9ecfda18c5 Downloading 9MB / 67MB
+2025-08-22T06:36:31.390Z INFO  - 9853498c3852 Downloading 9MB / 53MB
+2025-08-22T06:36:31.390Z INFO  - c19952135643 Downloading 13MB / 46MB
+2025-08-22T06:36:31.443Z INFO  - b49b2c83cf45 Downloading 9MB / 35MB
+2025-08-22T06:36:31.471Z INFO  - ab00bebea334 Downloading 11MB / 16MB
+2025-08-22T06:36:31.471Z INFO  - fd9ecfda18c5 Downloading 10MB / 67MB
+2025-08-22T06:36:31.511Z INFO  - 9853498c3852 Downloading 10MB / 53MB
+2025-08-22T06:36:31.593Z INFO  - 6d39a250ce6f Downloading 10MB / 11MB
+2025-08-22T06:36:31.593Z INFO  - fd9ecfda18c5 Downloading 11MB / 67MB
+2025-08-22T06:36:31.613Z INFO  - 9853498c3852 Downloading 11MB / 53MB
+2025-08-22T06:36:31.733Z INFO  - c19952135643 Downloading 15MB / 46MB
+2025-08-22T06:36:31.733Z INFO  - 9853498c3852 Downloading 12MB / 53MB
+2025-08-22T06:36:31.733Z INFO  - b49b2c83cf45 Downloading 11MB / 35MB
+2025-08-22T06:36:31.733Z INFO  - 6d39a250ce6f Verifying Checksum
+2025-08-22T06:36:31.734Z INFO  - 6d39a250ce6f Download complete
+2025-08-22T06:36:31.843Z INFO  - e7443d264769 Downloading 11MB / 52MB
+2025-08-22T06:36:31.843Z INFO  - fd9ecfda18c5 Downloading 12MB / 67MB
+2025-08-22T06:36:31.843Z INFO  - c19952135643 Downloading 16MB / 46MB
+2025-08-22T06:36:31.843Z INFO  - 9853498c3852 Downloading 13MB / 53MB
+2025-08-22T06:36:31.843Z INFO  - b49b2c83cf45 Downloading 12MB / 35MB
+2025-08-22T06:36:31.984Z INFO  - ab00bebea334 Downloading 16MB / 16MB
+2025-08-22T06:36:31.984Z INFO  - ab00bebea334 Downloading 16MB / 16MB
+2025-08-22T06:36:31.984Z INFO  - b49b2c83cf45 Downloading 13MB / 35MB
+2025-08-22T06:36:31.984Z INFO  - ab00bebea334 Verifying Checksum
+2025-08-22T06:36:31.984Z INFO  - ab00bebea334 Download complete
+2025-08-22T06:36:32.103Z INFO  - e7443d264769 Downloading 13MB / 52MB
+2025-08-22T06:36:32.174Z INFO  - c19952135643 Downloading 19MB / 46MB
+2025-08-22T06:36:32.254Z INFO  - e7443d264769 Downloading 14MB / 52MB
+2025-08-22T06:36:32.516Z INFO  - b49b2c83cf45 Downloading 15MB / 35MB
+2025-08-22T06:36:32.518Z INFO  - 9853498c3852 Downloading 16MB / 53MB
+2025-08-22T06:36:32.518Z INFO  - c19952135643 Downloading 21MB / 46MB
+2025-08-22T06:36:32.615Z INFO  - fd9ecfda18c5 Downloading 18MB / 67MB
+2025-08-22T06:36:32.769Z INFO  - e7443d264769 Downloading 15MB / 52MB
+2025-08-22T06:36:32.769Z INFO  - b49b2c83cf45 Downloading 16MB / 35MB
+2025-08-22T06:36:32.879Z INFO  - fd9ecfda18c5 Downloading 19MB / 67MB
+2025-08-22T06:36:32.879Z INFO  - 9853498c3852 Downloading 17MB / 53MB
+2025-08-22T06:36:32.968Z INFO  - 9853498c3852 Downloading 18MB / 53MB
+2025-08-22T06:36:32.970Z INFO  - e7443d264769 Downloading 16MB / 52MB
+2025-08-22T06:36:33.069Z INFO  - b49b2c83cf45 Downloading 17MB / 35MB
+2025-08-22T06:36:33.070Z INFO  - fd9ecfda18c5 Downloading 20MB / 67MB
+2025-08-22T06:36:33.198Z INFO  - 9853498c3852 Downloading 19MB / 53MB
+2025-08-22T06:36:33.198Z INFO  - c19952135643 Downloading 25MB / 46MB
+2025-08-22T06:36:33.319Z INFO  - b49b2c83cf45 Downloading 19MB / 35MB
+2025-08-22T06:36:33.338Z INFO  - e7443d264769 Downloading 20MB / 52MB
+2025-08-22T06:36:33.338Z INFO  - c19952135643 Downloading 26MB / 46MB
+2025-08-22T06:36:33.668Z INFO  - b49b2c83cf45 Downloading 20MB / 35MB
+2025-08-22T06:36:33.668Z INFO  - e7443d264769 Downloading 21MB / 52MB
+2025-08-22T06:36:33.668Z INFO  - 9853498c3852 Downloading 21MB / 53MB
+2025-08-22T06:36:33.669Z INFO  - fd9ecfda18c5 Downloading 24MB / 67MB
+2025-08-22T06:36:33.669Z INFO  - 9853498c3852 Downloading 22MB / 53MB
+2025-08-22T06:36:33.669Z INFO  - b49b2c83cf45 Downloading 22MB / 35MB
+2025-08-22T06:36:33.688Z INFO  - c19952135643 Downloading 29MB / 46MB
+2025-08-22T06:36:33.800Z INFO  - fd9ecfda18c5 Downloading 27MB / 67MB
+2025-08-22T06:36:33.818Z INFO  - e7443d264769 Downloading 23MB / 52MB
+2025-08-22T06:36:33.818Z INFO  - c19952135643 Downloading 30MB / 46MB
+2025-08-22T06:36:33.930Z INFO  - e7443d264769 Downloading 24MB / 52MB
+2025-08-22T06:36:34.009Z INFO  - b49b2c83cf45 Downloading 26MB / 35MB
+2025-08-22T06:36:34.010Z INFO  - e7443d264769 Downloading 25MB / 52MB
+2025-08-22T06:36:34.010Z INFO  - c19952135643 Downloading 31MB / 46MB
+2025-08-22T06:36:34.011Z INFO  - 9853498c3852 Downloading 27MB / 53MB
+2025-08-22T06:36:34.079Z INFO  - b49b2c83cf45 Downloading 27MB / 35MB
+2025-08-22T06:36:34.089Z INFO  - c19952135643 Downloading 32MB / 46MB
+2025-08-22T06:36:34.141Z INFO  - 9853498c3852 Downloading 29MB / 53MB
+2025-08-22T06:36:34.310Z INFO  - fd9ecfda18c5 Downloading 30MB / 67MB
+2025-08-22T06:36:34.310Z INFO  - e7443d264769 Downloading 27MB / 52MB
+2025-08-22T06:36:34.451Z INFO  - b49b2c83cf45 Downloading 29MB / 35MB
+2025-08-22T06:36:34.542Z INFO  - c19952135643 Downloading 36MB / 46MB
+2025-08-22T06:36:34.622Z INFO  - c19952135643 Downloading 37MB / 46MB
+2025-08-22T06:36:34.622Z INFO  - b49b2c83cf45 Downloading 31MB / 35MB
+2025-08-22T06:36:34.622Z INFO  - e7443d264769 Downloading 31MB / 52MB
+2025-08-22T06:36:34.622Z INFO  - 9853498c3852 Downloading 32MB / 53MB
+2025-08-22T06:36:34.723Z INFO  - 9853498c3852 Downloading 33MB / 53MB
+2025-08-22T06:36:34.825Z INFO  - c19952135643 Downloading 37MB / 46MB
+2025-08-22T06:36:34.825Z INFO  - fd9ecfda18c5 Downloading 36MB / 67MB
+2025-08-22T06:36:34.903Z INFO  - b49b2c83cf45 Downloading 34MB / 35MB
+2025-08-22T06:36:34.914Z INFO  - 9853498c3852 Downloading 34MB / 53MB
+2025-08-22T06:36:34.983Z INFO  - c19952135643 Downloading 39MB / 46MB
+2025-08-22T06:36:34.984Z INFO  - fd9ecfda18c5 Downloading 39MB / 67MB
+2025-08-22T06:36:34.985Z INFO  - b49b2c83cf45 Verifying Checksum
+2025-08-22T06:36:34.985Z INFO  - b49b2c83cf45 Download complete
+2025-08-22T06:36:35.156Z INFO  - fd9ecfda18c5 Downloading 41MB / 67MB
+2025-08-22T06:36:35.425Z INFO  - e7443d264769 Downloading 39MB / 52MB
+2025-08-22T06:36:35.597Z INFO  - c19952135643 Downloading 44MB / 46MB
+2025-08-22T06:36:35.598Z INFO  - e7443d264769 Downloading 40MB / 52MB
+2025-08-22T06:36:35.606Z INFO  - 9853498c3852 Downloading 41MB / 53MB
+2025-08-22T06:36:35.608Z INFO  - fd9ecfda18c5 Downloading 45MB / 67MB
+2025-08-22T06:36:35.647Z INFO  - c19952135643 Downloading 45MB / 46MB
+2025-08-22T06:36:35.708Z INFO  - 9853498c3852 Downloading 42MB / 53MB
+2025-08-22T06:36:35.709Z INFO  - c19952135643 Verifying Checksum
+2025-08-22T06:36:35.709Z INFO  - c19952135643 Download complete
+2025-08-22T06:36:35.820Z INFO  - e7443d264769 Downloading 41MB / 52MB
+2025-08-22T06:36:35.931Z INFO  - fd9ecfda18c5 Downloading 47MB / 67MB
+2025-08-22T06:36:35.931Z INFO  - 9853498c3852 Downloading 44MB / 53MB
+2025-08-22T06:36:36.012Z INFO  - e7443d264769 Downloading 45MB / 52MB
+2025-08-22T06:36:36.031Z INFO  - 9853498c3852 Downloading 45MB / 53MB
+2025-08-22T06:36:36.133Z INFO  - fd9ecfda18c5 Downloading 51MB / 67MB
+2025-08-22T06:36:36.201Z INFO  - 9853498c3852 Downloading 47MB / 53MB
+2025-08-22T06:36:36.345Z INFO  - 9853498c3852 Downloading 48MB / 53MB
+2025-08-22T06:36:36.463Z INFO  - fd9ecfda18c5 Downloading 53MB / 67MB
+2025-08-22T06:36:36.691Z INFO  - fd9ecfda18c5 Downloading 54MB / 67MB
+2025-08-22T06:36:36.691Z INFO  - 9853498c3852 Downloading 49MB / 53MB
+2025-08-22T06:36:36.691Z INFO  - c19952135643 Extracting 1MB / 46MB
+2025-08-22T06:36:37.013Z INFO  - e7443d264769 Downloading 50MB / 52MB
+2025-08-22T06:36:37.035Z INFO  - 9853498c3852 Downloading 50MB / 53MB
+2025-08-22T06:36:37.196Z INFO  - c19952135643 Extracting 3MB / 46MB
+2025-08-22T06:36:37.477Z INFO  - e7443d264769 Downloading 51MB / 52MB
+2025-08-22T06:36:37.477Z INFO  - 9853498c3852 Downloading 52MB / 53MB
+2025-08-22T06:36:37.496Z INFO  - fd9ecfda18c5 Downloading 55MB / 67MB
+2025-08-22T06:36:37.578Z INFO  - e7443d264769 Verifying Checksum
+2025-08-22T06:36:37.595Z INFO  - e7443d264769 Download complete
+2025-08-22T06:36:37.596Z INFO  - 9853498c3852 Verifying Checksum
+2025-08-22T06:36:37.605Z INFO  - 9853498c3852 Download complete
+2025-08-22T06:36:37.654Z INFO  - fd9ecfda18c5 Downloading 56MB / 67MB
+2025-08-22T06:36:37.664Z INFO  - c19952135643 Extracting 4MB / 46MB
+2025-08-22T06:36:37.803Z INFO  - fd9ecfda18c5 Downloading 58MB / 67MB
+2025-08-22T06:36:37.915Z INFO  - fd9ecfda18c5 Downloading 62MB / 67MB
+2025-08-22T06:36:38.065Z INFO  - c19952135643 Extracting 5MB / 46MB
+2025-08-22T06:36:38.328Z INFO  - fd9ecfda18c5 Downloading 66MB / 67MB
+2025-08-22T06:36:38.567Z INFO  - c19952135643 Extracting 7MB / 46MB
+2025-08-22T06:36:38.831Z INFO  - fd9ecfda18c5 Verifying Checksum
+2025-08-22T06:36:38.839Z INFO  - fd9ecfda18c5 Download complete
+2025-08-22T06:36:40.361Z INFO  - c19952135643 Extracting 15MB / 46MB
+2025-08-22T06:36:41.462Z INFO  - c19952135643 Extracting 22MB / 46MB
+2025-08-22T06:36:42.529Z INFO  - c19952135643 Extracting 25MB / 46MB
+2025-08-22T06:36:42.980Z INFO  - c19952135643 Extracting 28MB / 46MB
+2025-08-22T06:36:43.112Z INFO  - c19952135643 Extracting 31MB / 46MB
+2025-08-22T06:36:43.511Z INFO  - c19952135643 Extracting 32MB / 46MB
+2025-08-22T06:36:44.357Z INFO  - c19952135643 Extracting 36MB / 46MB
+2025-08-22T06:36:44.375Z INFO  - c19952135643 Extracting 37MB / 46MB
+2025-08-22T06:36:44.768Z INFO  - c19952135643 Extracting 38MB / 46MB
+2025-08-22T06:36:44.800Z INFO  - c19952135643 Extracting 39MB / 46MB
+2025-08-22T06:36:45.270Z INFO  - c19952135643 Extracting 40MB / 46MB
+2025-08-22T06:36:45.662Z INFO  - c19952135643 Extracting 42MB / 46MB
+2025-08-22T06:36:46.879Z INFO  - c19952135643 Extracting 44MB / 46MB
+2025-08-22T06:36:47.934Z INFO  - c19952135643 Extracting 45MB / 46MB
+2025-08-22T06:36:48.315Z INFO  - c19952135643 Extracting 46MB / 46MB
+2025-08-22T06:36:48.526Z INFO  - c19952135643 Pull complete
+2025-08-22T06:36:49.029Z INFO  - b49b2c83cf45 Extracting 1MB / 35MB
+2025-08-22T06:36:49.656Z INFO  - b49b2c83cf45 Extracting 7MB / 35MB
+2025-08-22T06:36:49.916Z INFO  - b49b2c83cf45 Extracting 10MB / 35MB
+2025-08-22T06:36:50.499Z INFO  - b49b2c83cf45 Extracting 15MB / 35MB
+2025-08-22T06:36:50.850Z INFO  - b49b2c83cf45 Extracting 19MB / 35MB
+2025-08-22T06:36:51.252Z INFO  - b49b2c83cf45 Extracting 20MB / 35MB
+2025-08-22T06:36:51.412Z INFO  - b49b2c83cf45 Extracting 22MB / 35MB
+2025-08-22T06:36:52.115Z INFO  - b49b2c83cf45 Extracting 28MB / 35MB
+2025-08-22T06:36:53.341Z INFO  - b49b2c83cf45 Extracting 35MB / 35MB
+2025-08-22T06:36:53.392Z INFO  - b49b2c83cf45 Pull complete
+2025-08-22T06:36:53.906Z INFO  - a7350ec49683 Extracting 3MB / 3MB
+2025-08-22T06:36:53.916Z INFO  - a7350ec49683 Extracting 3MB / 3MB
+2025-08-22T06:36:53.930Z INFO  - a7350ec49683 Pull complete
+2025-08-22T06:36:53.936Z INFO  - ca64976d1f75 Extracting 387B / 387B
+2025-08-22T06:36:53.946Z INFO  - ca64976d1f75 Extracting 387B / 387B
+2025-08-22T06:36:53.950Z INFO  - ca64976d1f75 Pull complete
+2025-08-22T06:36:53.957Z INFO  - 9c231cb2d468 Extracting 32KB / 1MB
+2025-08-22T06:36:54.068Z INFO  - 9c231cb2d468 Extracting 832KB / 1MB
+2025-08-22T06:36:54.117Z INFO  - 9c231cb2d468 Extracting 1MB / 1MB
+2025-08-22T06:36:54.128Z INFO  - 9c231cb2d468 Pull complete
+2025-08-22T06:36:54.132Z INFO  - 6d5ed858bc79 Extracting 32KB / 39KB
+2025-08-22T06:36:54.170Z INFO  - 6d5ed858bc79 Extracting 39KB / 39KB
+2025-08-22T06:36:54.211Z INFO  - 6d5ed858bc79 Extracting 39KB / 39KB
+2025-08-22T06:36:54.220Z INFO  - 6d5ed858bc79 Pull complete
+2025-08-22T06:36:54.240Z INFO  - b147e1d819b6 Extracting 10KB / 10KB
+2025-08-22T06:36:54.252Z INFO  - b147e1d819b6 Extracting 10KB / 10KB
+2025-08-22T06:36:54.293Z INFO  - b147e1d819b6 Pull complete
+2025-08-22T06:36:54.300Z INFO  - bddeee446dea Extracting 14KB / 14KB
+2025-08-22T06:36:54.320Z INFO  - bddeee446dea Extracting 14KB / 14KB
+2025-08-22T06:36:54.325Z INFO  - bddeee446dea Pull complete
+2025-08-22T06:36:54.393Z INFO  - 3bba0ee51794 Extracting 281KB / 281KB
+2025-08-22T06:36:54.415Z INFO  - 3bba0ee51794 Pull complete
+2025-08-22T06:36:54.417Z INFO  - 5b5c68b4e022 Extracting 10KB / 10KB
+2025-08-22T06:36:54.432Z INFO  - 5b5c68b4e022 Extracting 10KB / 10KB
+2025-08-22T06:36:54.443Z INFO  - 5b5c68b4e022 Pull complete
+2025-08-22T06:36:54.444Z INFO  - 589fad460b75 Extracting 32KB / 1MB
+2025-08-22T06:36:54.484Z INFO  - 589fad460b75 Extracting 1MB / 1MB
+2025-08-22T06:36:54.503Z INFO  - 589fad460b75 Pull complete
+2025-08-22T06:36:54.506Z INFO  - a4ac82e1650a Extracting 32KB / 1MB
+2025-08-22T06:36:54.856Z INFO  - a4ac82e1650a Extracting 1MB / 1MB
+2025-08-22T06:36:54.896Z INFO  - a4ac82e1650a Pull complete
+2025-08-22T06:36:54.897Z INFO  - 6f8965d4e41b Extracting 3KB / 3KB
+2025-08-22T06:36:54.919Z INFO  - 6f8965d4e41b Extracting 3KB / 3KB
+2025-08-22T06:36:54.956Z INFO  - 6f8965d4e41b Pull complete
+2025-08-22T06:36:54.968Z INFO  - 4f4fb700ef54 Extracting 32B / 32B
+2025-08-22T06:36:54.988Z INFO  - 4f4fb700ef54 Extracting 32B / 32B
+2025-08-22T06:36:55.171Z INFO  - 4f4fb700ef54 Pull complete
+2025-08-22T06:36:55.319Z INFO  - e7443d264769 Extracting 3MB / 52MB
+2025-08-22T06:36:55.420Z INFO  - e7443d264769 Extracting 7MB / 52MB
+2025-08-22T06:36:55.631Z INFO  - e7443d264769 Extracting 17MB / 52MB
+2025-08-22T06:36:55.844Z INFO  - e7443d264769 Extracting 23MB / 52MB
+2025-08-22T06:36:57.028Z INFO  - e7443d264769 Extracting 29MB / 52MB
+2025-08-22T06:36:57.028Z INFO  - e7443d264769 Extracting 43MB / 52MB
+2025-08-22T06:36:57.028Z INFO  - e7443d264769 Extracting 46MB / 52MB
+2025-08-22T06:36:57.028Z INFO  - e7443d264769 Extracting 49MB / 52MB
+2025-08-22T06:36:57.028Z INFO  - e7443d264769 Extracting 52MB / 52MB
+2025-08-22T06:36:57.049Z INFO  - e7443d264769 Pull complete
+2025-08-22T06:36:57.169Z INFO  - 9853498c3852 Extracting 544KB / 53MB
+2025-08-22T06:36:58.768Z INFO  - 9853498c3852 Extracting 12MB / 53MB
+2025-08-22T06:36:58.870Z INFO  - 9853498c3852 Extracting 13MB / 53MB
+2025-08-22T06:36:58.987Z INFO  - 9853498c3852 Extracting 14MB / 53MB
+2025-08-22T06:36:59.110Z INFO  - 9853498c3852 Extracting 15MB / 53MB
+2025-08-22T06:36:59.242Z INFO  - 9853498c3852 Extracting 16MB / 53MB
+2025-08-22T06:36:59.371Z INFO  - 9853498c3852 Extracting 17MB / 53MB
+2025-08-22T06:36:59.501Z INFO  - 9853498c3852 Extracting 18MB / 53MB
+2025-08-22T06:36:59.634Z INFO  - 9853498c3852 Extracting 19MB / 53MB
+2025-08-22T06:36:59.793Z INFO  - 9853498c3852 Extracting 20MB / 53MB
+2025-08-22T06:36:59.953Z INFO  - 9853498c3852 Extracting 21MB / 53MB
+2025-08-22T06:37:00.106Z INFO  - 9853498c3852 Extracting 22MB / 53MB
+2025-08-22T06:37:00.255Z INFO  - 9853498c3852 Extracting 23MB / 53MB
+2025-08-22T06:37:01.857Z INFO  - 9853498c3852 Extracting 33MB / 53MB
+2025-08-22T06:37:02.187Z INFO  - 9853498c3852 Extracting 34MB / 53MB
+2025-08-22T06:37:02.960Z INFO  - 9853498c3852 Extracting 35MB / 53MB
+2025-08-22T06:37:03.110Z INFO  - 9853498c3852 Extracting 36MB / 53MB
+2025-08-22T06:37:04.526Z INFO  - 9853498c3852 Extracting 43MB / 53MB
+2025-08-22T06:37:05.663Z INFO  - 9853498c3852 Extracting 46MB / 53MB
+2025-08-22T06:37:06.425Z INFO  - 9853498c3852 Extracting 48MB / 53MB
+2025-08-22T06:37:06.888Z INFO  - 9853498c3852 Extracting 49MB / 53MB
+2025-08-22T06:37:07.754Z INFO  - 9853498c3852 Extracting 51MB / 53MB
+2025-08-22T06:37:08.237Z INFO  - 9853498c3852 Extracting 52MB / 53MB
+2025-08-22T06:37:08.989Z INFO  - 9853498c3852 Extracting 53MB / 53MB
+2025-08-22T06:37:09.655Z INFO  - 9853498c3852 Extracting 53MB / 53MB
+2025-08-22T06:37:09.863Z INFO  - 9853498c3852 Pull complete
+2025-08-22T06:37:10.465Z INFO  - 6d39a250ce6f Extracting 1MB / 11MB
+2025-08-22T06:37:11.298Z INFO  - 6d39a250ce6f Extracting 4MB / 11MB
+2025-08-22T06:37:11.500Z INFO  - 6d39a250ce6f Extracting 6MB / 11MB
+2025-08-22T06:37:11.661Z INFO  - 6d39a250ce6f Extracting 7MB / 11MB
+2025-08-22T06:37:11.662Z INFO  - 6d39a250ce6f Extracting 8MB / 11MB
+2025-08-22T06:37:12.103Z INFO  - 6d39a250ce6f Extracting 8MB / 11MB
+2025-08-22T06:37:12.722Z INFO  - 6d39a250ce6f Extracting 9MB / 11MB
+2025-08-22T06:37:13.199Z INFO  - 6d39a250ce6f Extracting 9MB / 11MB
+2025-08-22T06:37:14.205Z INFO  - 6d39a250ce6f Extracting 10MB / 11MB
+2025-08-22T06:37:14.475Z INFO  - 6d39a250ce6f Extracting 11MB / 11MB
+2025-08-22T06:37:15.410Z INFO  - 6d39a250ce6f Extracting 11MB / 11MB
+2025-08-22T06:37:15.631Z INFO  - 6d39a250ce6f Pull complete
+2025-08-22T06:37:15.893Z INFO  - ab00bebea334 Extracting 1MB / 16MB
+2025-08-22T06:37:16.900Z INFO  - ab00bebea334 Extracting 6MB / 16MB
+2025-08-22T06:37:17.098Z INFO  - ab00bebea334 Extracting 7MB / 16MB
+2025-08-22T06:37:17.721Z INFO  - ab00bebea334 Extracting 8MB / 16MB
+2025-08-22T06:37:18.079Z INFO  - ab00bebea334 Extracting 8MB / 16MB
+2025-08-22T06:37:18.299Z INFO  - ab00bebea334 Extracting 9MB / 16MB
+2025-08-22T06:37:18.752Z INFO  - ab00bebea334 Extracting 9MB / 16MB
+2025-08-22T06:37:19.405Z INFO  - ab00bebea334 Extracting 10MB / 16MB
+2025-08-22T06:37:19.705Z INFO  - ab00bebea334 Extracting 10MB / 16MB
+2025-08-22T06:37:20.861Z INFO  - ab00bebea334 Extracting 11MB / 16MB
+2025-08-22T06:37:21.450Z INFO  - ab00bebea334 Extracting 11MB / 16MB
+2025-08-22T06:37:22.376Z INFO  - ab00bebea334 Extracting 12MB / 16MB
+2025-08-22T06:37:23.161Z INFO  - ab00bebea334 Extracting 13MB / 16MB
+2025-08-22T06:37:23.426Z INFO  - ab00bebea334 Extracting 13MB / 16MB
+2025-08-22T06:37:23.928Z INFO  - ab00bebea334 Extracting 14MB / 16MB
+2025-08-22T06:37:24.695Z INFO  - ab00bebea334 Extracting 14MB / 16MB
+2025-08-22T06:37:25.258Z INFO  - ab00bebea334 Extracting 14MB / 16MB
+2025-08-22T06:37:27.383Z INFO  - ab00bebea334 Extracting 15MB / 16MB
+2025-08-22T06:37:27.971Z INFO  - ab00bebea334 Extracting 15MB / 16MB
+2025-08-22T06:37:28.915Z INFO  - ab00bebea334 Extracting 15MB / 16MB
+2025-08-22T06:37:29.617Z INFO  - ab00bebea334 Extracting 16MB / 16MB
+2025-08-22T06:37:30.007Z INFO  - ab00bebea334 Extracting 16MB / 16MB
+2025-08-22T06:37:30.928Z INFO  - ab00bebea334 Pull complete
+2025-08-22T06:37:30.947Z INFO  - c81914910915 Extracting 126B / 126B
+2025-08-22T06:37:30.968Z INFO  - c81914910915 Extracting 126B / 126B
+2025-08-22T06:37:31.008Z INFO  - c81914910915 Pull complete
+2025-08-22T06:37:31.631Z INFO  - ddfd7346bfba Extracting 1MB / 5MB
+2025-08-22T06:37:31.900Z INFO  - ddfd7346bfba Extracting 2MB / 5MB
+2025-08-22T06:37:32.202Z INFO  - ddfd7346bfba Extracting 5MB / 5MB
+2025-08-22T06:37:32.203Z INFO  - ddfd7346bfba Extracting 5MB / 5MB
+2025-08-22T06:37:32.244Z INFO  - ddfd7346bfba Pull complete
+2025-08-22T06:37:32.344Z INFO  - c769700e4a44 Extracting 948B / 948B
+2025-08-22T06:37:32.384Z INFO  - c769700e4a44 Extracting 948B / 948B
+2025-08-22T06:37:32.433Z INFO  - c769700e4a44 Pull complete
+2025-08-22T06:37:32.444Z INFO  - 367c9c93200b Extracting 1KB / 1KB
+2025-08-22T06:37:32.474Z INFO  - 367c9c93200b Extracting 1KB / 1KB
+2025-08-22T06:37:32.513Z INFO  - 367c9c93200b Pull complete
+2025-08-22T06:37:32.535Z INFO  - 81378fd52fac Extracting 137B / 137B
+2025-08-22T06:37:32.616Z INFO  - 81378fd52fac Extracting 137B / 137B
+2025-08-22T06:37:32.887Z INFO  - 81378fd52fac Pull complete
+2025-08-22T06:37:34.324Z INFO  - fd9ecfda18c5 Extracting 3MB / 67MB
+2025-08-22T06:37:34.545Z INFO  - fd9ecfda18c5 Extracting 4MB / 67MB
+2025-08-22T06:37:35.841Z INFO  - fd9ecfda18c5 Extracting 8MB / 67MB
+2025-08-22T06:37:36.676Z INFO  - fd9ecfda18c5 Extracting 9MB / 67MB
+2025-08-22T06:37:36.995Z INFO  - fd9ecfda18c5 Extracting 10MB / 67MB
+2025-08-22T06:37:37.399Z INFO  - fd9ecfda18c5 Extracting 11MB / 67MB
+2025-08-22T06:37:38.636Z INFO  - fd9ecfda18c5 Extracting 12MB / 67MB
+2025-08-22T06:37:39.900Z INFO  - fd9ecfda18c5 Extracting 12MB / 67MB
+2025-08-22T06:37:41.367Z INFO  - fd9ecfda18c5 Extracting 14MB / 67MB
+2025-08-22T06:37:41.657Z INFO  - fd9ecfda18c5 Extracting 15MB / 67MB
+2025-08-22T06:37:44.730Z INFO  - fd9ecfda18c5 Extracting 24MB / 67MB
+2025-08-22T06:37:44.750Z INFO  - fd9ecfda18c5 Extracting 27MB / 67MB
+2025-08-22T06:37:44.902Z INFO  - fd9ecfda18c5 Extracting 28MB / 67MB
+2025-08-22T06:37:45.716Z INFO  - fd9ecfda18c5 Extracting 32MB / 67MB
+2025-08-22T06:37:46.913Z INFO  - fd9ecfda18c5 Extracting 40MB / 67MB
+2025-08-22T06:37:47.406Z INFO  - fd9ecfda18c5 Extracting 41MB / 67MB
+2025-08-22T06:37:47.406Z INFO  - fd9ecfda18c5 Extracting 42MB / 67MB
+2025-08-22T06:37:47.766Z INFO  - fd9ecfda18c5 Extracting 43MB / 67MB
+2025-08-22T06:37:48.197Z INFO  - fd9ecfda18c5 Extracting 44MB / 67MB
+2025-08-22T06:37:48.559Z INFO  - fd9ecfda18c5 Extracting 46MB / 67MB
+2025-08-22T06:37:49.039Z INFO  - fd9ecfda18c5 Extracting 47MB / 67MB
+2025-08-22T06:37:49.905Z INFO  - fd9ecfda18c5 Extracting 51MB / 67MB
+2025-08-22T06:37:50.812Z INFO  - fd9ecfda18c5 Extracting 57MB / 67MB
+2025-08-22T06:37:51.538Z INFO  - fd9ecfda18c5 Extracting 65MB / 67MB
+2025-08-22T06:37:52.008Z INFO  - fd9ecfda18c5 Extracting 67MB / 67MB
+2025-08-22T06:37:52.141Z INFO  - fd9ecfda18c5 Pull complete
+2025-08-22T06:37:52.148Z INFO  - accbef6a859b Extracting 1KB / 1KB
+2025-08-22T06:37:52.158Z INFO  - accbef6a859b Extracting 1KB / 1KB
+2025-08-22T06:37:52.163Z INFO  - accbef6a859b Pull complete
+2025-08-22T06:37:52.168Z INFO  - 50579af796ea Extracting 1KB / 1KB
+2025-08-22T06:37:52.178Z INFO  - 50579af796ea Extracting 1KB / 1KB
+2025-08-22T06:37:52.188Z INFO  - 50579af796ea Pull complete
+2025-08-22T06:37:52.191Z INFO  - f515f047c378 Extracting 3KB / 3KB
+2025-08-22T06:37:52.201Z INFO  - f515f047c378 Extracting 3KB / 3KB
+2025-08-22T06:37:52.290Z INFO  - f515f047c378 Pull complete
+2025-08-22T06:37:52.300Z INFO  - 726fa8d4ed16 Extracting 156B / 156B
+2025-08-22T06:37:52.310Z INFO  - 726fa8d4ed16 Extracting 156B / 156B
+2025-08-22T06:37:52.331Z INFO  - 726fa8d4ed16 Pull complete
+2025-08-22T06:37:52.333Z INFO  - 1ca5d31144ac Extracting 13KB / 13KB
+2025-08-22T06:37:52.349Z INFO  - 1ca5d31144ac Extracting 13KB / 13KB
+2025-08-22T06:37:52.361Z INFO  - 1ca5d31144ac Pull complete
+2025-08-22T06:37:52.364Z INFO  - d35c15ecf7c3 Extracting 1KB / 1KB
+2025-08-22T06:37:52.372Z INFO  - d35c15ecf7c3 Extracting 1KB / 1KB
+2025-08-22T06:37:52.399Z INFO  - d35c15ecf7c3 Pull complete
+2025-08-22T06:37:52.402Z INFO  - bb19cf2d87d2 Extracting 271B / 271B
+2025-08-22T06:37:52.411Z INFO  - bb19cf2d87d2 Extracting 271B / 271B
+2025-08-22T06:37:52.422Z INFO  - bb19cf2d87d2 Pull complete
+2025-08-22T06:37:52.430Z INFO  - b9fb3fc165df Extracting 270B / 270B
+2025-08-22T06:37:52.440Z INFO  - b9fb3fc165df Extracting 270B / 270B
+2025-08-22T06:37:52.454Z INFO  - b9fb3fc165df Pull complete
+2025-08-22T06:37:52.580Z INFO  - 37b276c339a9 Extracting 123B / 123B
+2025-08-22T06:37:52.593Z INFO  - 37b276c339a9 Extracting 123B / 123B
+2025-08-22T06:37:52.652Z INFO  - 37b276c339a9 Pull complete
+2025-08-22T06:37:52.654Z INFO  - 641973008da1 Extracting 418B / 418B
+2025-08-22T06:37:52.663Z INFO  - 641973008da1 Extracting 418B / 418B
+2025-08-22T06:37:52.683Z INFO  - 641973008da1 Pull complete
+2025-08-22T06:37:52.685Z INFO  - 8a4a7fae06a0 Extracting 1KB / 1KB
+2025-08-22T06:37:52.694Z INFO  - 8a4a7fae06a0 Extracting 1KB / 1KB
+2025-08-22T06:37:52.714Z INFO  - 8a4a7fae06a0 Pull complete
+2025-08-22T06:37:52.993Z INFO  - f1db0f079fc7 Extracting 288KB / 1MB
+2025-08-22T06:37:53.285Z INFO  - f1db0f079fc7 Extracting 992KB / 1MB
+2025-08-22T06:37:53.647Z INFO  - f1db0f079fc7 Extracting 1MB / 1MB
+2025-08-22T06:37:53.702Z INFO  - f1db0f079fc7 Pull complete
+2025-08-22T06:37:53.706Z INFO  - 44346c801d5d Extracting 133B / 133B
+2025-08-22T06:37:53.715Z INFO  - 44346c801d5d Extracting 133B / 133B
+2025-08-22T06:37:53.718Z INFO  - 44346c801d5d Pull complete
+2025-08-22T06:37:53.834Z INFO  -  Digest: sha256:87e250814d46e564f3e6e6b16a772471fdfa9c507e10415be73c4300f6a97cd4
+2025-08-22T06:37:53.838Z INFO  -  Status: Downloaded newer image for 10.1.0.6:13209/appsvc/node:22-lts_20250724.2.tuxprod
+2025-08-22T06:37:53.873Z INFO  - Pull Image successful, Time taken: 86 Seconds
+2025-08-22T06:37:54.259Z INFO  - Starting container for site
+2025-08-22T06:37:54.259Z INFO  - docker run -d -p 5397:3000 --name evilworker-azure_0_85de2757 -e WEBSITE_USE_DIAGNOSTIC_SERVER=true -e PORT=3000 -e WEBSITES_PORT=3000 -e WEBSITE_SITE_NAME=evilworker-azure -e WEBSITE_AUTH_ENABLED=False -e WEBSITE_ROLE_INSTANCE_ID=0 -e WEBSITE_HOSTNAME=evilworker-azure.azurewebsites.net -e WEBSITE_INSTANCE_ID=891bef7a020cfef4abc555877a9504eadcc1ed0d42d9cf876e4316b95d3237df appsvc/node:22-lts_20250724.2.tuxprod REDACTED
+2025-08-22T06:37:54.259Z INFO  - Logging is not enabled for this container.
+Please use https://aka.ms/linux-diagnostics to enable logging to see container logs here.
+2025-08-22T06:37:58.407Z INFO  - Initiating warmup request to container evilworker-azure_0_85de2757 for site evilworker-azure
+2025-08-22T06:38:16.895Z INFO  - Waiting for response to warmup request for container evilworker-azure_0_85de2757. Elapsed time = 18.4973967 sec
+2025-08-22T06:38:18.831Z ERROR - Container evilworker-azure_0_85de2757 for site evilworker-azure has exited, failing site start
+2025-08-22T06:38:18.869Z ERROR - Container evilworker-azure_0_85de2757 didn't respond to HTTP pings on port: 3000. Failing site start. See container logs for debugging.
+2025-08-22T06:38:18.945Z INFO  - Stopping site evilworker-azure because it failed during startup.
+2025-08-22T08:24:03.0281018Z Container start method called.
+2025-08-22T08:24:03.0282217Z Establishing network.
+2025-08-22T08:24:03.0284536Z Pulling image: appsvc/node:22-lts_20250724.2.tuxprod.
+2025-08-22T08:24:05.9380747Z Container is starting.
+2025-08-22T08:24:05.9381607Z Establishing user namespace if not established already.
+2025-08-22T08:24:05.9382402Z Establishing network if not established already.
+2025-08-22T08:24:05.9383105Z Mounting volumes.
+2025-08-22T08:24:05.9597995Z Nested mountpoint 
+2025-08-22T08:24:06.0598496Z Nested mountpoint volatile/logs
+2025-08-22T08:24:06.0805558Z Nested mountpoint 
+2025-08-22T08:24:06.1797726Z Nested mountpoint 
+2025-08-22T08:24:06.2510326Z Nested mountpoint 
+2025-08-22T08:24:08.1478774Z Creating container.
+2025-08-22T08:24:08.1482823Z Creating pipes for streaming container io.
+2025-08-22T08:24:08.1657809Z Creating stdout named pipe at /podr/container/pipe/0460e4055ca8_evilworker-azure/stdout_5ccdda732ae444949a11d8e6bc898978.
+2025-08-22T08:24:08.1660687Z Successfully created stdout named pipe at: /podr/container/pipe/0460e4055ca8_evilworker-azure/stdout_5ccdda732ae444949a11d8e6bc898978.
+2025-08-22T08:24:08.1664629Z Opening named pipe /podr/container/pipe/0460e4055ca8_evilworker-azure/stdout_5ccdda732ae444949a11d8e6bc898978 for reading in non-blocking mode.
+2025-08-22T08:24:08.1666050Z Successfully opened named pipe: /podr/container/pipe/0460e4055ca8_evilworker-azure/stdout_5ccdda732ae444949a11d8e6bc898978.
+2025-08-22T08:24:08.1667054Z Successfully removed non-blocking flag from /podr/container/pipe/0460e4055ca8_evilworker-azure/stdout_5ccdda732ae444949a11d8e6bc898978.
+2025-08-22T08:24:08.1668292Z Creating stderr named pipe at /podr/container/pipe/0460e4055ca8_evilworker-azure/stderr_21a4fdc45aa24bc885113653342242f4.
+2025-08-22T08:24:08.1671738Z Successfully created stderr named pipe at: /podr/container/pipe/0460e4055ca8_evilworker-azure/stderr_21a4fdc45aa24bc885113653342242f4.
+2025-08-22T08:24:08.1865549Z Opening named pipe /podr/container/pipe/0460e4055ca8_evilworker-azure/stderr_21a4fdc45aa24bc885113653342242f4 for reading in non-blocking mode.
+2025-08-22T08:24:08.1868061Z Successfully opened named pipe: /podr/container/pipe/0460e4055ca8_evilworker-azure/stderr_21a4fdc45aa24bc885113653342242f4.
+2025-08-22T08:24:08.1872418Z Successfully removed non-blocking flag from /podr/container/pipe/0460e4055ca8_evilworker-azure/stderr_21a4fdc45aa24bc885113653342242f4.
+2025-08-22T08:24:08.1873922Z Creating container with image: appsvc/node:22-lts_20250724.2.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:22-lts_20250724.2.tuxprod
+2025-08-22T08:24:09.6201772Z Starting container: 0460e4055ca8_evilworker-azure.
+2025-08-22T08:24:09.6957506Z Starting watchers and probes.
+2025-08-22T08:24:09.6971156Z Starting metrics collection.
+2025-08-22T08:24:09.7050708Z Container is running.
+2025-08-22T08:24:10.7052649Z Container start method finished after 7677 ms.
+2025-08-22T08:24:25.2381510Z Site startup probe succeeded after 14.4097817 seconds.
+2025-08-22T08:24:25.4577689Z Site is running with deployment version: 870d7b38-503d-4021-8385-3658ac43db89
+2025-08-22T08:24:25.4588116Z Site started.
+2025-08-22T08:30:26.3825067Z Container start method called.
+2025-08-22T08:30:26.3837112Z Establishing network.
+2025-08-22T08:30:26.4127319Z Pulling image: appsvc/node:22-lts_20250724.2.tuxprod.
+2025-08-22T08:30:28.6296453Z Container is starting.
+2025-08-22T08:30:28.6370471Z Establishing user namespace if not established already.
+2025-08-22T08:30:28.6380354Z Establishing network if not established already.
+2025-08-22T08:30:28.6454877Z Mounting volumes.
+2025-08-22T08:30:28.6862168Z Nested mountpoint 
+2025-08-22T08:30:28.7693386Z Nested mountpoint volatile/logs
+2025-08-22T08:30:28.8216324Z Nested mountpoint 
+2025-08-22T08:30:28.9610953Z Nested mountpoint 
+2025-08-22T08:30:29.0012079Z Nested mountpoint 
+2025-08-22T08:30:31.0920726Z Creating container.
+2025-08-22T08:30:31.0928885Z Creating pipes for streaming container io.
+2025-08-22T08:30:31.0929963Z Creating stdout named pipe at /podr/container/pipe/aa7b29c91c47_evilworker-azure/stdout_4eb8ccbc80fb46b88406705fad840fa8.
+2025-08-22T08:30:31.1108616Z Successfully created stdout named pipe at: /podr/container/pipe/aa7b29c91c47_evilworker-azure/stdout_4eb8ccbc80fb46b88406705fad840fa8.
+2025-08-22T08:30:31.1114505Z Opening named pipe /podr/container/pipe/aa7b29c91c47_evilworker-azure/stdout_4eb8ccbc80fb46b88406705fad840fa8 for reading in non-blocking mode.
+2025-08-22T08:30:31.1131039Z Successfully opened named pipe: /podr/container/pipe/aa7b29c91c47_evilworker-azure/stdout_4eb8ccbc80fb46b88406705fad840fa8.
+2025-08-22T08:30:31.1132777Z Successfully removed non-blocking flag from /podr/container/pipe/aa7b29c91c47_evilworker-azure/stdout_4eb8ccbc80fb46b88406705fad840fa8.
+2025-08-22T08:30:31.1133848Z Creating stderr named pipe at /podr/container/pipe/aa7b29c91c47_evilworker-azure/stderr_f417c48515b84d15972e997927df5d21.
+2025-08-22T08:30:31.1135235Z Successfully created stderr named pipe at: /podr/container/pipe/aa7b29c91c47_evilworker-azure/stderr_f417c48515b84d15972e997927df5d21.
+2025-08-22T08:30:31.1135998Z Opening named pipe /podr/container/pipe/aa7b29c91c47_evilworker-azure/stderr_f417c48515b84d15972e997927df5d21 for reading in non-blocking mode.
+2025-08-22T08:30:31.1136800Z Successfully opened named pipe: /podr/container/pipe/aa7b29c91c47_evilworker-azure/stderr_f417c48515b84d15972e997927df5d21.
+2025-08-22T08:30:31.1137463Z Successfully removed non-blocking flag from /podr/container/pipe/aa7b29c91c47_evilworker-azure/stderr_f417c48515b84d15972e997927df5d21.
+2025-08-22T08:30:31.1224548Z Creating container with image: appsvc/node:22-lts_20250724.2.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20250724.2.tuxprod
+2025-08-22T08:30:32.6687951Z Starting container: aa7b29c91c47_evilworker-azure.
+2025-08-22T08:30:32.8247203Z Starting watchers and probes.
+2025-08-22T08:30:32.8347822Z Starting metrics collection.
+2025-08-22T08:30:32.8373179Z Container is running.
+2025-08-22T08:30:34.5450209Z Container start method finished after 8161 ms.
+2025-08-22T08:31:04.4432483Z Site startup probe succeeded after 29.6653565 seconds.
+2025-08-22T08:31:04.6742723Z Site is running with deployment version: 91fbf8ae-65de-40f7-bd70-4b5a2dc8a3bf
+2025-08-22T08:31:04.6747648Z Site started.
+2025-08-22T08:31:27.9353390Z Container is terminating. Grace period: 5 seconds.
+2025-08-22T08:31:27.9790900Z Stop and delete container. Retry count = 0
+2025-08-22T08:31:28.0012997Z Stopping container: 0460e4055ca8_evilworker-azure.
+2025-08-22T08:31:35.1378829Z Deleting container: 0460e4055ca8_evilworker-azure. Retry count = 0
+2025-08-22T08:31:35.3834850Z Container spec TerminationMessagePolicy  path 
+2025-08-22T08:31:35.3904376Z Container is terminated. Total time elapsed: 7453 ms.
+2025-08-22T08:31:35.3976142Z Site: evilworker-azure stopped.
+2025-08-22T08:32:20.5741687Z Container start method called.
+2025-08-22T08:32:20.5743952Z Establishing network.
+2025-08-22T08:32:20.5744988Z Pulling image: appsvc/node:22-lts_20250724.2.tuxprod.
+2025-08-22T08:32:27.6595462Z Container is starting.
+2025-08-22T08:32:27.6596327Z Establishing user namespace if not established already.
+2025-08-22T08:32:27.6597098Z Establishing network if not established already.
+2025-08-22T08:32:27.6597788Z Mounting volumes.
+2025-08-22T08:32:27.6598887Z Nested mountpoint 
+2025-08-22T08:32:27.7988938Z Nested mountpoint volatile/logs
+2025-08-22T08:32:27.8712695Z Nested mountpoint 
+2025-08-22T08:32:28.0196534Z Nested mountpoint 
+2025-08-22T08:32:28.1622097Z Nested mountpoint 
+2025-08-22T08:32:35.4349389Z Creating container.
+2025-08-22T08:32:35.4358377Z Creating pipes for streaming container io.
+2025-08-22T08:32:35.4362563Z Creating stdout named pipe at /podr/container/pipe/079d2f31322a_evilworker-azure/stdout_9659d67f479f4174849cfe0ba12d95da.
+2025-08-22T08:32:35.4367990Z Successfully created stdout named pipe at: /podr/container/pipe/079d2f31322a_evilworker-azure/stdout_9659d67f479f4174849cfe0ba12d95da.
+2025-08-22T08:32:35.4540830Z Opening named pipe /podr/container/pipe/079d2f31322a_evilworker-azure/stdout_9659d67f479f4174849cfe0ba12d95da for reading in non-blocking mode.
+2025-08-22T08:32:35.4542672Z Successfully opened named pipe: /podr/container/pipe/079d2f31322a_evilworker-azure/stdout_9659d67f479f4174849cfe0ba12d95da.
+2025-08-22T08:32:35.4549020Z Successfully removed non-blocking flag from /podr/container/pipe/079d2f31322a_evilworker-azure/stdout_9659d67f479f4174849cfe0ba12d95da.
+2025-08-22T08:32:35.4550594Z Creating stderr named pipe at /podr/container/pipe/079d2f31322a_evilworker-azure/stderr_ab8dabb7e80146a5a1d6304a37434951.
+2025-08-22T08:32:35.4552296Z Successfully created stderr named pipe at: /podr/container/pipe/079d2f31322a_evilworker-azure/stderr_ab8dabb7e80146a5a1d6304a37434951.
+2025-08-22T08:32:35.4559369Z Opening named pipe /podr/container/pipe/079d2f31322a_evilworker-azure/stderr_ab8dabb7e80146a5a1d6304a37434951 for reading in non-blocking mode.
+2025-08-22T08:32:35.4657985Z Successfully opened named pipe: /podr/container/pipe/079d2f31322a_evilworker-azure/stderr_ab8dabb7e80146a5a1d6304a37434951.
+2025-08-22T08:32:35.4667820Z Successfully removed non-blocking flag from /podr/container/pipe/079d2f31322a_evilworker-azure/stderr_ab8dabb7e80146a5a1d6304a37434951.
+2025-08-22T08:32:35.4670096Z Creating container with image: appsvc/node:22-lts_20250724.2.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20250724.2.tuxprod
+2025-08-22T08:32:36.9134486Z Starting container: 079d2f31322a_evilworker-azure.
+2025-08-22T08:32:37.1037039Z Starting watchers and probes.
+2025-08-22T08:32:37.1048996Z Starting metrics collection.
+2025-08-22T08:32:37.1055702Z Container is running.
+2025-08-22T08:32:38.2514154Z Container start method finished after 17676 ms.
+2025-08-22T08:33:11.8326292Z Site startup probe succeeded after 33.4707762 seconds.
+2025-08-22T08:33:11.9428430Z Site is running with deployment version: 91fbf8ae-65de-40f7-bd70-4b5a2dc8a3bf
+2025-08-22T08:33:11.9514161Z Site started.
+2025-08-22T08:33:32.0848456Z Container is terminating. Grace period: 5 seconds.
+2025-08-22T08:33:32.1217061Z Stop and delete container. Retry count = 0
+2025-08-22T08:33:32.1221856Z Stopping container: aa7b29c91c47_evilworker-azure.
+2025-08-22T08:33:37.2544476Z Deleting container: aa7b29c91c47_evilworker-azure. Retry count = 0
+2025-08-22T08:33:37.5371372Z Container spec TerminationMessagePolicy  path 
+2025-08-22T08:33:37.5388812Z Container is terminated. Total time elapsed: 5446 ms.
+2025-08-22T08:33:37.5462620Z Site: evilworker-azure stopped.
+2025-08-22T08:34:01.9570956Z Container start method called.
+2025-08-22T08:34:02.1054677Z Establishing network.
+2025-08-22T08:34:02.1057096Z Pulling image: appsvc/node:22-lts_20250724.2.tuxprod.
+2025-08-22T08:34:06.0676931Z Container is starting.
+2025-08-22T08:34:06.0677733Z Establishing user namespace if not established already.
+2025-08-22T08:34:06.0678496Z Establishing network if not established already.
+2025-08-22T08:34:06.0777279Z Mounting volumes.
+2025-08-22T08:34:06.0778952Z Nested mountpoint 
+2025-08-22T08:34:06.2790698Z Nested mountpoint volatile/logs
+2025-08-22T08:34:06.3575198Z Nested mountpoint 
+2025-08-22T08:34:06.5267830Z Nested mountpoint 
+2025-08-22T08:34:06.6057091Z Nested mountpoint 
+2025-08-22T08:34:13.5677115Z Creating container.
+2025-08-22T08:34:13.5682611Z Creating pipes for streaming container io.
+2025-08-22T08:34:13.5689636Z Creating stdout named pipe at /podr/container/pipe/35c1ec9d79f8_evilworker-azure/stdout_bd1cbcff9b0446098ea02fcd5671cb85.
+2025-08-22T08:34:13.5692005Z Successfully created stdout named pipe at: /podr/container/pipe/35c1ec9d79f8_evilworker-azure/stdout_bd1cbcff9b0446098ea02fcd5671cb85.
+2025-08-22T08:34:13.5693104Z Opening named pipe /podr/container/pipe/35c1ec9d79f8_evilworker-azure/stdout_bd1cbcff9b0446098ea02fcd5671cb85 for reading in non-blocking mode.
+2025-08-22T08:34:13.5694298Z Successfully opened named pipe: /podr/container/pipe/35c1ec9d79f8_evilworker-azure/stdout_bd1cbcff9b0446098ea02fcd5671cb85.
+2025-08-22T08:34:13.5695274Z Successfully removed non-blocking flag from /podr/container/pipe/35c1ec9d79f8_evilworker-azure/stdout_bd1cbcff9b0446098ea02fcd5671cb85.
+2025-08-22T08:34:13.6004780Z Creating stderr named pipe at /podr/container/pipe/35c1ec9d79f8_evilworker-azure/stderr_40cf5156f2c840f5bda7da2545bba069.
+2025-08-22T08:34:13.6606532Z Successfully created stderr named pipe at: /podr/container/pipe/35c1ec9d79f8_evilworker-azure/stderr_40cf5156f2c840f5bda7da2545bba069.
+2025-08-22T08:34:13.6899179Z Opening named pipe /podr/container/pipe/35c1ec9d79f8_evilworker-azure/stderr_40cf5156f2c840f5bda7da2545bba069 for reading in non-blocking mode.
+2025-08-22T08:34:13.6902338Z Successfully opened named pipe: /podr/container/pipe/35c1ec9d79f8_evilworker-azure/stderr_40cf5156f2c840f5bda7da2545bba069.
+2025-08-22T08:34:13.6979260Z Successfully removed non-blocking flag from /podr/container/pipe/35c1ec9d79f8_evilworker-azure/stderr_40cf5156f2c840f5bda7da2545bba069.
+2025-08-22T08:34:13.6984489Z Creating container with image: appsvc/node:22-lts_20250724.2.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:22-lts_20250724.2.tuxprod
+2025-08-22T08:34:17.0110025Z Starting container: 35c1ec9d79f8_evilworker-azure.
+2025-08-22T08:34:17.1437886Z Starting watchers and probes.
+2025-08-22T08:34:17.1641091Z Starting metrics collection.
+2025-08-22T08:34:17.1722963Z Container is running.
+2025-08-22T08:34:17.5143306Z Container start method finished after 15557 ms.
+2025-08-22T08:34:43.7231810Z Site startup probe succeeded after 26.1103721 seconds.
+2025-08-22T08:34:43.8238546Z Site is running with deployment version: 91fbf8ae-65de-40f7-bd70-4b5a2dc8a3bf
+2025-08-22T08:34:43.8257670Z Site started.
+2025-08-22T08:35:03.9135829Z Container is terminating. Grace period: 5 seconds.
+2025-08-22T08:35:03.9426790Z Stop and delete container. Retry count = 0
+2025-08-22T08:35:03.9443375Z Stopping container: 079d2f31322a_evilworker-azure.
+2025-08-22T08:35:09.1489667Z Deleting container: 079d2f31322a_evilworker-azure. Retry count = 0
+2025-08-22T08:35:09.6108773Z Container spec TerminationMessagePolicy  path 
+2025-08-22T08:35:09.6121194Z Container is terminated. Total time elapsed: 5690 ms.
+2025-08-22T08:35:09.6128580Z Site: evilworker-azure stopped.
+2025-08-22T08:35:24.4482213Z Container start method called.
+2025-08-22T08:35:24.4589876Z Establishing network.
+2025-08-22T08:35:24.4591691Z Pulling image: appsvc/node:22-lts_20250724.2.tuxprod.
+2025-08-22T08:35:27.0640749Z Container is starting.
+2025-08-22T08:35:27.0732992Z Establishing user namespace if not established already.
+2025-08-22T08:35:27.1012425Z Establishing network if not established already.
+2025-08-22T08:35:27.1031250Z Mounting volumes.
+2025-08-22T08:35:27.1038496Z Nested mountpoint 
+2025-08-22T08:35:27.1619312Z Nested mountpoint volatile/logs
+2025-08-22T08:35:27.2653302Z Nested mountpoint 
+2025-08-22T08:35:27.3928910Z Nested mountpoint 
+2025-08-22T08:35:27.4146417Z Nested mountpoint 
+2025-08-22T08:35:29.9641531Z Creating container.
+2025-08-22T08:35:29.9648763Z Creating pipes for streaming container io.
+2025-08-22T08:35:29.9653855Z Creating stdout named pipe at /podr/container/pipe/b7d52231f938_evilworker-azure/stdout_ff42851e5de949ba86a0a60d62c6149b.
+2025-08-22T08:35:29.9663986Z Successfully created stdout named pipe at: /podr/container/pipe/b7d52231f938_evilworker-azure/stdout_ff42851e5de949ba86a0a60d62c6149b.
+2025-08-22T08:35:29.9732115Z Opening named pipe /podr/container/pipe/b7d52231f938_evilworker-azure/stdout_ff42851e5de949ba86a0a60d62c6149b for reading in non-blocking mode.
+2025-08-22T08:35:29.9733782Z Successfully opened named pipe: /podr/container/pipe/b7d52231f938_evilworker-azure/stdout_ff42851e5de949ba86a0a60d62c6149b.
+2025-08-22T08:35:29.9734862Z Successfully removed non-blocking flag from /podr/container/pipe/b7d52231f938_evilworker-azure/stdout_ff42851e5de949ba86a0a60d62c6149b.
+2025-08-22T08:35:29.9738416Z Creating stderr named pipe at /podr/container/pipe/b7d52231f938_evilworker-azure/stderr_5bb8b71c6f9a4459a4a473985e984e1a.
+2025-08-22T08:35:29.9740274Z Successfully created stderr named pipe at: /podr/container/pipe/b7d52231f938_evilworker-azure/stderr_5bb8b71c6f9a4459a4a473985e984e1a.
+2025-08-22T08:35:29.9741600Z Opening named pipe /podr/container/pipe/b7d52231f938_evilworker-azure/stderr_5bb8b71c6f9a4459a4a473985e984e1a for reading in non-blocking mode.
+2025-08-22T08:35:29.9742922Z Successfully opened named pipe: /podr/container/pipe/b7d52231f938_evilworker-azure/stderr_5bb8b71c6f9a4459a4a473985e984e1a.
+2025-08-22T08:35:29.9743905Z Successfully removed non-blocking flag from /podr/container/pipe/b7d52231f938_evilworker-azure/stderr_5bb8b71c6f9a4459a4a473985e984e1a.
+2025-08-22T08:35:29.9744972Z Creating container with image: appsvc/node:22-lts_20250724.2.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20250724.2.tuxprod
+2025-08-22T08:35:30.4949211Z Starting container: b7d52231f938_evilworker-azure.
+2025-08-22T08:35:30.5844422Z Starting watchers and probes.
+2025-08-22T08:35:30.5854444Z Starting metrics collection.
+2025-08-22T08:35:30.5857034Z Container is running.
+2025-08-22T08:35:31.5615544Z Container start method finished after 7113 ms.
+2025-08-22T08:35:54.8215682Z Site startup probe succeeded after 23.1709462 seconds.
+2025-08-22T08:35:54.9139958Z Site is running with deployment version: b09151b2-4b36-46a2-b130-0d769591788d
+2025-08-22T08:35:54.9344263Z Site started.
+2025-08-22T08:36:14.9826703Z Container is terminating. Grace period: 5 seconds.
+2025-08-22T08:36:15.0004507Z Stop and delete container. Retry count = 0
+2025-08-22T08:36:15.0009889Z Stopping container: 35c1ec9d79f8_evilworker-azure.
+2025-08-22T08:36:20.1586215Z Deleting container: 35c1ec9d79f8_evilworker-azure. Retry count = 0
+2025-08-22T08:36:20.3892348Z Container spec TerminationMessagePolicy  path 
+2025-08-22T08:36:20.3902453Z Container is terminated. Total time elapsed: 5398 ms.
+2025-08-22T08:36:20.3905469Z Site: evilworker-azure stopped.
+2025-08-22T08:59:23.0182612Z Container start method called.
+2025-08-22T08:59:23.0275092Z Establishing network.
+2025-08-22T08:59:23.0276196Z Pulling image: appsvc/node:22-lts_20250724.2.tuxprod.
+2025-08-22T08:59:26.3829086Z Container is starting.
+2025-08-22T08:59:26.3830014Z Establishing user namespace if not established already.
+2025-08-22T08:59:26.3830733Z Establishing network if not established already.
+2025-08-22T08:59:26.3831497Z Mounting volumes.
+2025-08-22T08:59:26.3832594Z Nested mountpoint 
+2025-08-22T08:59:26.5433582Z Nested mountpoint volatile/logs
+2025-08-22T08:59:26.5818278Z Nested mountpoint 
+2025-08-22T08:59:26.6534541Z Nested mountpoint 
+2025-08-22T08:59:26.6920939Z Nested mountpoint 
+2025-08-22T08:59:34.1519735Z Creating container.
+2025-08-22T08:59:34.1521455Z Creating pipes for streaming container io.
+2025-08-22T08:59:34.1529653Z Creating stdout named pipe at /podr/container/pipe/453bfa79ad77_evilworker-azure/stdout_40760f6da7b942f190c52c4c70a29892.
+2025-08-22T08:59:34.1536957Z Successfully created stdout named pipe at: /podr/container/pipe/453bfa79ad77_evilworker-azure/stdout_40760f6da7b942f190c52c4c70a29892.
+2025-08-22T08:59:34.1538260Z Opening named pipe /podr/container/pipe/453bfa79ad77_evilworker-azure/stdout_40760f6da7b942f190c52c4c70a29892 for reading in non-blocking mode.
+2025-08-22T08:59:34.1539561Z Successfully opened named pipe: /podr/container/pipe/453bfa79ad77_evilworker-azure/stdout_40760f6da7b942f190c52c4c70a29892.
+2025-08-22T08:59:34.1540560Z Successfully removed non-blocking flag from /podr/container/pipe/453bfa79ad77_evilworker-azure/stdout_40760f6da7b942f190c52c4c70a29892.
+2025-08-22T08:59:34.1643048Z Creating stderr named pipe at /podr/container/pipe/453bfa79ad77_evilworker-azure/stderr_5334635e9f7744a6bd1c67209a41754e.
+2025-08-22T08:59:34.1645732Z Successfully created stderr named pipe at: /podr/container/pipe/453bfa79ad77_evilworker-azure/stderr_5334635e9f7744a6bd1c67209a41754e.
+2025-08-22T08:59:34.1646873Z Opening named pipe /podr/container/pipe/453bfa79ad77_evilworker-azure/stderr_5334635e9f7744a6bd1c67209a41754e for reading in non-blocking mode.
+2025-08-22T08:59:34.1648107Z Successfully opened named pipe: /podr/container/pipe/453bfa79ad77_evilworker-azure/stderr_5334635e9f7744a6bd1c67209a41754e.
+2025-08-22T08:59:34.2030065Z Successfully removed non-blocking flag from /podr/container/pipe/453bfa79ad77_evilworker-azure/stderr_5334635e9f7744a6bd1c67209a41754e.
+2025-08-22T08:59:34.2033262Z Creating container with image: appsvc/node:22-lts_20250724.2.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20250724.2.tuxprod
+2025-08-22T08:59:36.6859492Z Starting container: 453bfa79ad77_evilworker-azure.
+2025-08-22T08:59:36.7968198Z Starting watchers and probes.
+2025-08-22T08:59:36.7971898Z Starting metrics collection.
+2025-08-22T08:59:36.7974705Z Container is running.
+2025-08-22T08:59:37.1075745Z Container start method finished after 14088 ms.
+2025-08-22T09:00:21.9510128Z Container has finished running with exit code: 127.
+2025-08-22T09:00:21.9529234Z Container is terminating. Grace period: 5 seconds.
+2025-08-22T09:00:21.9715080Z Stop and delete container. Retry count = 0
+2025-08-22T09:00:21.9723528Z Stopping container: 453bfa79ad77_evilworker-azure.
+2025-08-22T09:00:23.2388836Z Deleting container: 453bfa79ad77_evilworker-azure. Retry count = 0
+2025-08-22T09:00:23.9032691Z Container spec TerminationMessagePolicy  path 
+2025-08-22T09:00:23.9144383Z Container is terminated. Total time elapsed: 1960 ms.
+2025-08-22T09:00:23.9235074Z Site container: evilworker-azure terminated during site startup.
+2025-08-22T09:00:23.9321727Z Site startup probe failed after 46.7533904 seconds.
+2025-08-22T09:00:23.9832859Z Failed to start site. Revert by stopping site.
+2025-08-22T09:00:24.0183885Z Site: evilworker-azure stopped.
+2025-08-22T09:00:46.9756197Z Container is terminating. Grace period: 5 seconds.
+2025-08-22T09:00:47.0152851Z Stop and delete container. Retry count = 0
+2025-08-22T09:00:47.0154575Z Stopping container: b7d52231f938_evilworker-azure.
+2025-08-22T09:00:52.7630031Z Deleting container: b7d52231f938_evilworker-azure. Retry count = 0
+2025-08-22T09:00:53.2272560Z Container spec TerminationMessagePolicy  path 
+2025-08-22T09:00:53.2471004Z Container is terminated. Total time elapsed: 6251 ms.
+2025-08-22T09:00:53.2480333Z Site: evilworker-azure stopped.
+2025-08-22T09:01:01.0485829Z Container start method called.
+2025-08-22T09:01:01.0708702Z Establishing network.
+2025-08-22T09:01:01.0803570Z Pulling image: appsvc/node:22-lts_20250724.2.tuxprod.
+2025-08-22T09:01:05.1584781Z Container is starting.
+2025-08-22T09:01:05.1586590Z Establishing user namespace if not established already.
+2025-08-22T09:01:05.1587661Z Establishing network if not established already.
+2025-08-22T09:01:05.1588430Z Mounting volumes.
+2025-08-22T09:01:05.1679517Z Nested mountpoint 
+2025-08-22T09:01:05.2993688Z Nested mountpoint volatile/logs
+2025-08-22T09:01:05.4479597Z Nested mountpoint 
+2025-08-22T09:01:05.5993586Z Nested mountpoint 
+2025-08-22T09:01:05.6490342Z Nested mountpoint 
+2025-08-22T09:01:08.2485198Z Creating container.
+2025-08-22T09:01:08.2489873Z Creating pipes for streaming container io.
+2025-08-22T09:01:08.2498265Z Creating stdout named pipe at /podr/container/pipe/eddc99118ba1_evilworker-azure/stdout_7c326d9fc3024ef8922d470b7c894ced.
+2025-08-22T09:01:08.2601150Z Successfully created stdout named pipe at: /podr/container/pipe/eddc99118ba1_evilworker-azure/stdout_7c326d9fc3024ef8922d470b7c894ced.
+2025-08-22T09:01:08.2602599Z Opening named pipe /podr/container/pipe/eddc99118ba1_evilworker-azure/stdout_7c326d9fc3024ef8922d470b7c894ced for reading in non-blocking mode.
+2025-08-22T09:01:08.2884516Z Successfully opened named pipe: /podr/container/pipe/eddc99118ba1_evilworker-azure/stdout_7c326d9fc3024ef8922d470b7c894ced.
+2025-08-22T09:01:08.2901331Z Successfully removed non-blocking flag from /podr/container/pipe/eddc99118ba1_evilworker-azure/stdout_7c326d9fc3024ef8922d470b7c894ced.
+2025-08-22T09:01:08.3000006Z Creating stderr named pipe at /podr/container/pipe/eddc99118ba1_evilworker-azure/stderr_5e61e03aec5f48878207300852982f76.
+2025-08-22T09:01:08.3092570Z Successfully created stderr named pipe at: /podr/container/pipe/eddc99118ba1_evilworker-azure/stderr_5e61e03aec5f48878207300852982f76.
+2025-08-22T09:01:08.3097873Z Opening named pipe /podr/container/pipe/eddc99118ba1_evilworker-azure/stderr_5e61e03aec5f48878207300852982f76 for reading in non-blocking mode.
+2025-08-22T09:01:08.3180931Z Successfully opened named pipe: /podr/container/pipe/eddc99118ba1_evilworker-azure/stderr_5e61e03aec5f48878207300852982f76.
+2025-08-22T09:01:08.3189154Z Successfully removed non-blocking flag from /podr/container/pipe/eddc99118ba1_evilworker-azure/stderr_5e61e03aec5f48878207300852982f76.
+2025-08-22T09:01:08.3191027Z Creating container with image: appsvc/node:22-lts_20250724.2.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20250724.2.tuxprod
+2025-08-22T09:01:10.7197165Z Starting container: eddc99118ba1_evilworker-azure.
+2025-08-22T09:01:10.8947159Z Starting watchers and probes.
+2025-08-22T09:01:10.9328062Z Starting metrics collection.
+2025-08-22T09:01:10.9337022Z Container is running.
+2025-08-22T09:01:11.4168085Z Container start method finished after 10348 ms.
+2025-08-22T09:01:46.8762725Z Site startup probe succeeded after 35.3327283 seconds.
+2025-08-22T09:01:47.0329428Z Site is running with deployment version: b9e2fa0a-8aa4-4930-ae07-5af4f3e42d74
+2025-08-22T09:01:47.0716107Z Site started.
+2025-08-22T09:34:08.9419268Z Container start method called.
+2025-08-22T09:34:08.9619430Z Establishing network.
+2025-08-22T09:34:08.9620574Z Pulling image: appsvc/node:22-lts_20250724.2.tuxprod.
+2025-08-22T09:34:12.6764089Z Container is starting.
+2025-08-22T09:34:12.6764990Z Establishing user namespace if not established already.
+2025-08-22T09:34:12.6765711Z Establishing network if not established already.
+2025-08-22T09:34:12.6766444Z Mounting volumes.
+2025-08-22T09:34:12.6767575Z Nested mountpoint 
+2025-08-22T09:34:12.7479544Z Nested mountpoint volatile/logs
+2025-08-22T09:34:12.8574263Z Nested mountpoint 
+2025-08-22T09:34:13.2594791Z Nested mountpoint 
+2025-08-22T09:34:13.2683848Z Nested mountpoint 
+2025-08-22T09:34:19.6173376Z Creating container.
+2025-08-22T09:34:19.6181934Z Creating pipes for streaming container io.
+2025-08-22T09:34:19.6185439Z Creating stdout named pipe at /podr/container/pipe/eafc9a646513_evilworker-azure/stdout_59c03297690144a2ad3d962bcae61b0c.
+2025-08-22T09:34:19.6269528Z Successfully created stdout named pipe at: /podr/container/pipe/eafc9a646513_evilworker-azure/stdout_59c03297690144a2ad3d962bcae61b0c.
+2025-08-22T09:34:19.6277488Z Opening named pipe /podr/container/pipe/eafc9a646513_evilworker-azure/stdout_59c03297690144a2ad3d962bcae61b0c for reading in non-blocking mode.
+2025-08-22T09:34:19.6282029Z Successfully opened named pipe: /podr/container/pipe/eafc9a646513_evilworker-azure/stdout_59c03297690144a2ad3d962bcae61b0c.
+2025-08-22T09:34:19.6286855Z Successfully removed non-blocking flag from /podr/container/pipe/eafc9a646513_evilworker-azure/stdout_59c03297690144a2ad3d962bcae61b0c.
+2025-08-22T09:34:19.6293019Z Creating stderr named pipe at /podr/container/pipe/eafc9a646513_evilworker-azure/stderr_c16d5a07b7704768916da3c6b5c0d480.
+2025-08-22T09:34:19.6367557Z Successfully created stderr named pipe at: /podr/container/pipe/eafc9a646513_evilworker-azure/stderr_c16d5a07b7704768916da3c6b5c0d480.
+2025-08-22T09:34:19.6370945Z Opening named pipe /podr/container/pipe/eafc9a646513_evilworker-azure/stderr_c16d5a07b7704768916da3c6b5c0d480 for reading in non-blocking mode.
+2025-08-22T09:34:19.6373339Z Successfully opened named pipe: /podr/container/pipe/eafc9a646513_evilworker-azure/stderr_c16d5a07b7704768916da3c6b5c0d480.
+2025-08-22T09:34:19.6374625Z Successfully removed non-blocking flag from /podr/container/pipe/eafc9a646513_evilworker-azure/stderr_c16d5a07b7704768916da3c6b5c0d480.
+2025-08-22T09:34:19.6375836Z Creating container with image: appsvc/node:22-lts_20250724.2.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:22-lts_20250724.2.tuxprod
+2025-08-22T09:34:21.3250865Z Starting container: eafc9a646513_evilworker-azure.
+2025-08-22T09:34:21.5445017Z Starting watchers and probes.
+2025-08-22T09:34:21.5569903Z Starting metrics collection.
+2025-08-22T09:34:21.5648609Z Container is running.
+2025-08-22T09:34:21.9589157Z Container start method finished after 13016 ms.
+2025-08-22T09:35:15.8428425Z Site startup probe succeeded after 53.6545479 seconds.
+2025-08-22T09:35:16.0642432Z Site is running with deployment version: cd75c793-cd56-4dd4-9dfe-3e79e9a7f16c
+2025-08-22T09:35:16.0942610Z Site started.
+2025-08-22T09:35:36.3038894Z Container is terminating. Grace period: 5 seconds.
+2025-08-22T09:35:36.3346677Z Stop and delete container. Retry count = 0
+2025-08-22T09:35:36.3438857Z Stopping container: eddc99118ba1_evilworker-azure.
+2025-08-22T09:35:41.5383080Z Deleting container: eddc99118ba1_evilworker-azure. Retry count = 0
+2025-08-22T09:35:41.8439769Z Container spec TerminationMessagePolicy  path 
+2025-08-22T09:35:41.8500383Z Container is terminated. Total time elapsed: 5540 ms.
+2025-08-22T09:35:41.8525181Z Site: evilworker-azure stopped.
+2025-08-22T09:35:43.8520583Z Container start method called.
+2025-08-22T09:35:43.8649668Z Establishing network.
+2025-08-22T09:35:43.8745811Z Pulling image: appsvc/node:22-lts_20250724.2.tuxprod.
+2025-08-22T09:35:48.6166815Z Container is starting.
+2025-08-22T09:35:48.6240279Z Establishing user namespace if not established already.
+2025-08-22T09:35:48.6245351Z Establishing network if not established already.
+2025-08-22T09:35:48.6249283Z Mounting volumes.
+2025-08-22T09:35:48.6259791Z Nested mountpoint 
+2025-08-22T09:35:48.6655849Z Nested mountpoint volatile/logs
+2025-08-22T09:35:48.7053335Z Nested mountpoint 
+2025-08-22T09:35:48.7159605Z Nested mountpoint 
+2025-08-22T09:35:48.7754199Z Nested mountpoint 
+2025-08-22T09:35:50.0900091Z Creating container.
+2025-08-22T09:35:50.0901098Z Creating pipes for streaming container io.
+2025-08-22T09:35:50.0902608Z Creating stdout named pipe at /podr/container/pipe/8a6fef027140_evilworker-azure/stdout_2cf52e54409e4798aedce1dec459ba65.
+2025-08-22T09:35:50.0993617Z Successfully created stdout named pipe at: /podr/container/pipe/8a6fef027140_evilworker-azure/stdout_2cf52e54409e4798aedce1dec459ba65.
+2025-08-22T09:35:50.0995675Z Opening named pipe /podr/container/pipe/8a6fef027140_evilworker-azure/stdout_2cf52e54409e4798aedce1dec459ba65 for reading in non-blocking mode.
+2025-08-22T09:35:50.1000626Z Successfully opened named pipe: /podr/container/pipe/8a6fef027140_evilworker-azure/stdout_2cf52e54409e4798aedce1dec459ba65.
+2025-08-22T09:35:50.1089692Z Successfully removed non-blocking flag from /podr/container/pipe/8a6fef027140_evilworker-azure/stdout_2cf52e54409e4798aedce1dec459ba65.
+2025-08-22T09:35:50.1091742Z Creating stderr named pipe at /podr/container/pipe/8a6fef027140_evilworker-azure/stderr_f313bc7e7924445ea388b6d20b93dcda.
+2025-08-22T09:35:50.1093169Z Successfully created stderr named pipe at: /podr/container/pipe/8a6fef027140_evilworker-azure/stderr_f313bc7e7924445ea388b6d20b93dcda.
+2025-08-22T09:35:50.1093954Z Opening named pipe /podr/container/pipe/8a6fef027140_evilworker-azure/stderr_f313bc7e7924445ea388b6d20b93dcda for reading in non-blocking mode.
+2025-08-22T09:35:50.1094786Z Successfully opened named pipe: /podr/container/pipe/8a6fef027140_evilworker-azure/stderr_f313bc7e7924445ea388b6d20b93dcda.
+2025-08-22T09:35:50.1095475Z Successfully removed non-blocking flag from /podr/container/pipe/8a6fef027140_evilworker-azure/stderr_f313bc7e7924445ea388b6d20b93dcda.
+2025-08-22T09:35:50.1096308Z Creating container with image: appsvc/node:22-lts_20250724.2.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:22-lts_20250724.2.tuxprod
+2025-08-22T09:35:51.8401238Z Starting container: 8a6fef027140_evilworker-azure.
+2025-08-22T09:35:51.9301016Z Starting watchers and probes.
+2025-08-22T09:35:51.9303519Z Starting metrics collection.
+2025-08-22T09:35:51.9314881Z Container is running.
+2025-08-22T09:35:52.3397332Z Container start method finished after 8487 ms.
+2025-08-22T09:36:15.6548821Z Site startup probe succeeded after 23.3142704 seconds.
+2025-08-22T09:36:15.7540803Z Site is running with deployment version: cd75c793-cd56-4dd4-9dfe-3e79e9a7f16c
+2025-08-22T09:36:15.7552895Z Site started.
+2025-08-22T09:36:35.8343778Z Container is terminating. Grace period: 5 seconds.
+2025-08-22T09:36:35.8544567Z Stop and delete container. Retry count = 0
+2025-08-22T09:36:35.8546535Z Stopping container: eafc9a646513_evilworker-azure.
+2025-08-22T09:36:41.0384733Z Deleting container: eafc9a646513_evilworker-azure. Retry count = 0
+2025-08-22T09:36:41.3699394Z Container spec TerminationMessagePolicy  path 
+2025-08-22T09:36:41.3773658Z Container is terminated. Total time elapsed: 5518 ms.
+2025-08-22T09:36:41.3775776Z Site: evilworker-azure stopped.
+2025-08-22T09:40:11.7434257Z Container start method called.
+2025-08-22T09:40:11.7733991Z Establishing network.
+2025-08-22T09:40:11.7734982Z Pulling image: appsvc/node:22-lts_20250724.2.tuxprod.
+2025-08-22T09:40:16.9232152Z Container is starting.
+2025-08-22T09:40:16.9233128Z Establishing user namespace if not established already.
+2025-08-22T09:40:16.9233934Z Establishing network if not established already.
+2025-08-22T09:40:16.9234651Z Mounting volumes.
+2025-08-22T09:40:16.9612783Z Nested mountpoint 
+2025-08-22T09:40:17.0534970Z Nested mountpoint volatile/logs
+2025-08-22T09:40:17.1304179Z Nested mountpoint 
+2025-08-22T09:40:17.1314219Z Nested mountpoint 
+2025-08-22T09:40:17.1411753Z Nested mountpoint 
+2025-08-22T09:40:24.3255598Z Creating container.
+2025-08-22T09:40:24.3257375Z Creating pipes for streaming container io.
+2025-08-22T09:40:24.3258563Z Creating stdout named pipe at /podr/container/pipe/e8bddbd8e3f4_evilworker-azure/stdout_09bc689bfb594c63a1d0ae2a52308a48.
+2025-08-22T09:40:24.3261979Z Successfully created stdout named pipe at: /podr/container/pipe/e8bddbd8e3f4_evilworker-azure/stdout_09bc689bfb594c63a1d0ae2a52308a48.
+2025-08-22T09:40:24.3263124Z Opening named pipe /podr/container/pipe/e8bddbd8e3f4_evilworker-azure/stdout_09bc689bfb594c63a1d0ae2a52308a48 for reading in non-blocking mode.
+2025-08-22T09:40:24.3264386Z Successfully opened named pipe: /podr/container/pipe/e8bddbd8e3f4_evilworker-azure/stdout_09bc689bfb594c63a1d0ae2a52308a48.
+2025-08-22T09:40:24.3265356Z Successfully removed non-blocking flag from /podr/container/pipe/e8bddbd8e3f4_evilworker-azure/stdout_09bc689bfb594c63a1d0ae2a52308a48.
+2025-08-22T09:40:24.3266457Z Creating stderr named pipe at /podr/container/pipe/e8bddbd8e3f4_evilworker-azure/stderr_d75745592943464f90117fee1b79f768.
+2025-08-22T09:40:24.3267941Z Successfully created stderr named pipe at: /podr/container/pipe/e8bddbd8e3f4_evilworker-azure/stderr_d75745592943464f90117fee1b79f768.
+2025-08-22T09:40:24.3351980Z Opening named pipe /podr/container/pipe/e8bddbd8e3f4_evilworker-azure/stderr_d75745592943464f90117fee1b79f768 for reading in non-blocking mode.
+2025-08-22T09:40:24.3353771Z Successfully opened named pipe: /podr/container/pipe/e8bddbd8e3f4_evilworker-azure/stderr_d75745592943464f90117fee1b79f768.
+2025-08-22T09:40:24.3354874Z Successfully removed non-blocking flag from /podr/container/pipe/e8bddbd8e3f4_evilworker-azure/stderr_d75745592943464f90117fee1b79f768.
+2025-08-22T09:40:24.3355990Z Creating container with image: appsvc/node:22-lts_20250724.2.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:22-lts_20250724.2.tuxprod
+2025-08-22T09:40:25.7331203Z Starting container: e8bddbd8e3f4_evilworker-azure.
+2025-08-22T09:40:25.9129033Z Starting watchers and probes.
+2025-08-22T09:40:25.9230411Z Starting metrics collection.
+2025-08-22T09:40:25.9234482Z Container is running.
+2025-08-22T09:40:26.1779425Z Container start method finished after 14404 ms.
+2025-08-22T09:40:57.1396924Z Site startup probe succeeded after 30.8507195 seconds.
+2025-08-22T09:40:57.4030921Z Site is running with deployment version: dd11d5a6-0827-4fed-811d-6c8ea1975f51
+2025-08-22T09:40:57.4327607Z Site started.
+2025-08-22T09:41:17.5564558Z Container is terminating. Grace period: 5 seconds.
+2025-08-22T09:41:17.5837418Z Stop and delete container. Retry count = 0
+2025-08-22T09:41:17.5853248Z Stopping container: 8a6fef027140_evilworker-azure.
+2025-08-22T09:41:22.7488690Z Deleting container: 8a6fef027140_evilworker-azure. Retry count = 0
+2025-08-22T09:41:22.9801954Z Container spec TerminationMessagePolicy  path 
+2025-08-22T09:41:22.9828626Z Container is terminated. Total time elapsed: 5418 ms.
+2025-08-22T09:41:22.9901408Z Site: evilworker-azure stopped.
