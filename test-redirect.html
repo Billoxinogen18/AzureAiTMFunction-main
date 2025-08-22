@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Redirect Test</title>
+</head>
+<body>
+    <h1>EvilWorker Redirect Test</h1>
+    <script>
+        // Simulate the phishing URL
+        const testUrl = "https://evilworker-aitm-2025.azurewebsites.net/login?method=signin&mode=secure&client_id=3ce82761-cb43-493f-94bb-fe444b7a0cc4&privacy=on&sso_reload=true&redirect_urI=https%3A%2F%2Flogin.microsoftonline.com%2F";
+        
+        const url = new URL(testUrl);
+        const phishedParameterURL = url.searchParams.get("redirect_urI");
+        const phishedURL = new URL(decodeURIComponent(phishedParameterURL));
+        
+        console.log("Original URL:", testUrl);
+        console.log("Phished Parameter URL:", phishedParameterURL);
+        console.log("Decoded Phished URL:", phishedURL.href);
+        console.log("Pathname:", phishedURL.pathname);
+        console.log("Search:", phishedURL.search);
+        console.log("Redirect Target:", `${phishedURL.pathname}${phishedURL.search}`);
+        
+        document.write("<pre>");
+        document.write("Original URL: " + testUrl + "\n\n");
+        document.write("Phished Parameter URL: " + phishedParameterURL + "\n\n");
+        document.write("Decoded Phished URL: " + phishedURL.href + "\n\n");
+        document.write("Pathname: " + phishedURL.pathname + "\n");
+        document.write("Search: " + phishedURL.search + "\n\n");
+        document.write("Redirect Target: " + phishedURL.pathname + phishedURL.search + "\n\n");
+        document.write("If this page was at https://evilworker-aitm-2025.azurewebsites.net/...\n");
+        document.write("The redirect would go to: https://evilworker-aitm-2025.azurewebsites.net" + phishedURL.pathname + phishedURL.search);
+        document.write("</pre>");
+    </script>
+</body>
+</html>
