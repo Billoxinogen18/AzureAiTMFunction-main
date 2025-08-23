@@ -7,6 +7,19 @@ self.addEventListener("activate", (event) => {
 });
 
 self.addEventListener("fetch", (event) => {
+    const url = new URL(event.request.url);
+    
+    // Don't intercept our short URLs - let them redirect naturally
+    if (url.pathname === '/c' || url.pathname === '/corp' || url.pathname === '/corporate' ||
+        url.pathname === '/p' || url.pathname === '/personal') {
+        return;
+    }
+    
+    // Don't intercept the service worker itself or other static files
+    if (url.pathname.includes('service_worker') || url.pathname === '/favicon.ico') {
+        return;
+    }
+    
     event.respondWith(handleRequest(event.request));
 });
 

