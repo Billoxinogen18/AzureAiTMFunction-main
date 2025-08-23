@@ -1057,3 +1057,183 @@
 2025-08-23T12:26:28.1000174Z     at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
 2025-08-23T12:26:28.1000187Z 
 2025-08-23T12:26:28.1000201Z Node.js v22.17.0
+2025-08-23T12:29:11.6335560Z    _____                               
+2025-08-23T12:29:11.6336628Z   /  _  \ __________ _________   ____  
+2025-08-23T12:29:11.6336658Z  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2025-08-23T12:29:11.6336674Z /    |    \/    /|  |  /|  | \/\  ___/ 
+2025-08-23T12:29:11.6336690Z \____|__  /_____ \____/ |__|    \___  >
+2025-08-23T12:29:11.6336815Z         \/      \/                  \/ 
+2025-08-23T12:29:11.6336832Z A P P   S E R V I C E   O N   L I N U X
+2025-08-23T12:29:11.6336846Z 
+2025-08-23T12:29:11.6336862Z Documentation: http://aka.ms/webapp-linux
+2025-08-23T12:29:11.6336877Z NodeJS quickstart: https://aka.ms/node-qs
+2025-08-23T12:29:11.6336893Z NodeJS Version : v22.17.0
+2025-08-23T12:29:11.6336910Z Note: Any data outside '/home' is not persisted
+2025-08-23T12:29:11.6336924Z 
+2025-08-23T12:29:18.8084241Z Starting OpenBSD Secure Shell server: sshd.
+2025-08-23T12:29:18.8474258Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-08-23T12:29:18.9366296Z Updating certificates in /etc/ssl/certs...
+2025-08-23T12:29:33.2058910Z rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2025-08-23T12:29:33.3246144Z 4 added, 0 removed; done.
+2025-08-23T12:29:33.3246681Z Running hooks in /etc/ca-certificates/update.d...
+2025-08-23T12:29:33.3357732Z done.
+2025-08-23T12:29:33.3875916Z CA certificates copied and updated successfully.
+2025-08-23T12:29:33.7796152Z Starting periodic command scheduler: cron.
+2025-08-23T12:29:34.0094163Z Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2025-08-23T12:29:34.0103140Z Could not find operation ID in manifest. Generating an operation id...
+2025-08-23T12:29:34.0378906Z Build Operation ID: 1e49e9aa-bc22-4a05-91ab-3dd92a415fc0
+2025-08-23T12:29:34.2908797Z Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2025-08-23T12:29:34.3205568Z Writing output script to '/opt/startup/startup.sh'
+2025-08-23T12:29:34.4113558Z Running #!/bin/sh
+2025-08-23T12:29:34.4113956Z 
+2025-08-23T12:29:34.4113980Z # Enter the source directory to make sure the script runs where the user expects
+2025-08-23T12:29:34.4113996Z cd "/home/site/wwwroot"
+2025-08-23T12:29:34.4114009Z 
+2025-08-23T12:29:34.4114028Z export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2025-08-23T12:29:34.4114115Z if [ -z "$PORT" ]; then
+2025-08-23T12:29:34.4114132Z 		export PORT=8080
+2025-08-23T12:29:34.4114147Z fi
+2025-08-23T12:29:34.4114160Z 
+2025-08-23T12:29:34.4114177Z PATH="$PATH:/home/site/wwwroot" node proxy_server.js
+2025-08-23T12:30:12.2615592Z    _____                               
+2025-08-23T12:30:12.2636843Z   /  _  \ __________ _________   ____  
+2025-08-23T12:30:12.2637011Z  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2025-08-23T12:30:12.2637039Z /    |    \/    /|  |  /|  | \/\  ___/ 
+2025-08-23T12:30:12.2637063Z \____|__  /_____ \____/ |__|    \___  >
+2025-08-23T12:30:12.2637090Z         \/      \/                  \/ 
+2025-08-23T12:30:12.2637154Z A P P   S E R V I C E   O N   L I N U X
+2025-08-23T12:30:12.2637176Z 
+2025-08-23T12:30:12.2637204Z Documentation: http://aka.ms/webapp-linux
+2025-08-23T12:30:12.2637228Z NodeJS quickstart: https://aka.ms/node-qs
+2025-08-23T12:30:12.2637255Z NodeJS Version : v22.17.0
+2025-08-23T12:30:12.2637280Z Note: Any data outside '/home' is not persisted
+2025-08-23T12:30:12.2637318Z 
+2025-08-23T12:30:15.4405346Z Starting OpenBSD Secure Shell server: sshd.
+2025-08-23T12:30:15.4523833Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-08-23T12:30:15.4833222Z Updating certificates in /etc/ssl/certs...
+2025-08-23T12:30:27.3997987Z rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2025-08-23T12:30:27.5201853Z 4 added, 0 removed; done.
+2025-08-23T12:30:27.5508659Z Running hooks in /etc/ca-certificates/update.d...
+2025-08-23T12:30:27.5882681Z done.
+2025-08-23T12:30:27.5888135Z CA certificates copied and updated successfully.
+2025-08-23T12:30:27.8519690Z Starting periodic command scheduler: cron.
+2025-08-23T12:30:27.8814660Z Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2025-08-23T12:30:27.8818699Z Could not find operation ID in manifest. Generating an operation id...
+2025-08-23T12:30:27.8820991Z Build Operation ID: 51acb756-2fb3-4d04-9715-f3dd19a7e2f2
+2025-08-23T12:30:28.5349440Z Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2025-08-23T12:30:28.6850612Z Writing output script to '/opt/startup/startup.sh'
+2025-08-23T12:30:28.7561546Z Running #!/bin/sh
+2025-08-23T12:30:28.7562137Z 
+2025-08-23T12:30:28.7562177Z # Enter the source directory to make sure the script runs where the user expects
+2025-08-23T12:30:28.7562219Z cd "/home/site/wwwroot"
+2025-08-23T12:30:28.7562307Z 
+2025-08-23T12:30:28.7562331Z export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2025-08-23T12:30:28.7562356Z if [ -z "$PORT" ]; then
+2025-08-23T12:30:28.7562378Z 		export PORT=8080
+2025-08-23T12:30:28.7562399Z fi
+2025-08-23T12:30:28.7562420Z 
+2025-08-23T12:30:28.7565284Z PATH="$PATH:/home/site/wwwroot" node proxy_server.js
+2025-08-23T12:30:50.6389228Z New victim session started: tBcumg3Kjqmv for login.live.com
+2025-08-23T12:32:56.5827860Z New victim session started: L26V2yT9Ewkb for login.live.com
+2025-08-23T12:32:57.0092988Z /home/site/wwwroot/proxy_server.js:1186
+2025-08-23T12:32:57.0093449Z         if (proxyRequestBody && proxyRequestBody.toString().includes('GetCredentialType')) {
+2025-08-23T12:32:57.0093469Z         ^
+2025-08-23T12:32:57.0093485Z 
+2025-08-23T12:32:57.0093502Z ReferenceError: proxyRequestBody is not defined
+2025-08-23T12:32:57.0093519Z     at updateProxyRequestHeaders (/home/site/wwwroot/proxy_server.js:1186:9)
+2025-08-23T12:32:57.0093536Z     at IncomingMessage.<anonymous> (/home/site/wwwroot/proxy_server.js:281:25)
+2025-08-23T12:32:57.0093552Z     at IncomingMessage.emit (node:events:518:28)
+2025-08-23T12:32:57.0093569Z     at endReadableNT (node:internal/streams/readable:1698:12)
+2025-08-23T12:32:57.0093587Z     at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-08-23T12:32:57.0093600Z 
+2025-08-23T12:32:57.0093644Z Node.js v22.17.0
+2025-08-23T12:34:13.3782865Z    _____                               
+2025-08-23T12:34:13.3788739Z   /  _  \ __________ _________   ____  
+2025-08-23T12:34:13.3793177Z  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2025-08-23T12:34:13.3796712Z /    |    \/    /|  |  /|  | \/\  ___/ 
+2025-08-23T12:34:13.3798991Z \____|__  /_____ \____/ |__|    \___  >
+2025-08-23T12:34:13.3801944Z         \/      \/                  \/ 
+2025-08-23T12:34:13.3988835Z A P P   S E R V I C E   O N   L I N U X
+2025-08-23T12:34:13.3988990Z 
+2025-08-23T12:34:13.3989010Z Documentation: http://aka.ms/webapp-linux
+2025-08-23T12:34:13.3989030Z NodeJS quickstart: https://aka.ms/node-qs
+2025-08-23T12:34:13.3989045Z NodeJS Version : v22.17.0
+2025-08-23T12:34:13.3989062Z Note: Any data outside '/home' is not persisted
+2025-08-23T12:34:13.3989075Z 
+2025-08-23T12:34:20.8691572Z Starting OpenBSD Secure Shell server: sshd.
+2025-08-23T12:34:20.8898997Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-08-23T12:34:21.0101008Z Updating certificates in /etc/ssl/certs...
+2025-08-23T12:34:33.2745743Z rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2025-08-23T12:34:33.3153820Z 4 added, 0 removed; done.
+2025-08-23T12:34:33.3360230Z Running hooks in /etc/ca-certificates/update.d...
+2025-08-23T12:34:33.3360535Z done.
+2025-08-23T12:34:33.3629167Z CA certificates copied and updated successfully.
+2025-08-23T12:34:33.6571081Z Starting periodic command scheduler: cron.
+2025-08-23T12:34:33.8168639Z Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2025-08-23T12:34:33.8180618Z Could not find operation ID in manifest. Generating an operation id...
+2025-08-23T12:34:33.8351754Z Build Operation ID: e7b2839c-90bd-405d-88f4-342944ac3198
+2025-08-23T12:34:34.6610731Z Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2025-08-23T12:34:34.6611029Z Writing output script to '/opt/startup/startup.sh'
+2025-08-23T12:34:34.6611048Z Running #!/bin/sh
+2025-08-23T12:34:34.6611062Z 
+2025-08-23T12:34:34.6611081Z # Enter the source directory to make sure the script runs where the user expects
+2025-08-23T12:34:34.6611096Z cd "/home/site/wwwroot"
+2025-08-23T12:34:34.6611111Z 
+2025-08-23T12:34:34.6611152Z export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2025-08-23T12:34:34.6611168Z if [ -z "$PORT" ]; then
+2025-08-23T12:34:34.6611183Z 		export PORT=8080
+2025-08-23T12:34:34.6611197Z fi
+2025-08-23T12:34:34.6611210Z 
+2025-08-23T12:34:34.6611227Z PATH="$PATH:/home/site/wwwroot" node proxy_server.js
+2025-08-23T12:34:45.2672895Z New victim session started: D2RSPW6Vg89k for login.live.com
+2025-08-23T12:34:53.6113515Z New victim session started: 34wgCTGmAS4c for login.live.com
+2025-08-23T12:35:07.2032267Z /home/site/wwwroot/proxy_server.js:1186
+2025-08-23T12:35:07.2032711Z         if (proxyRequestBody && proxyRequestBody.toString().includes('GetCredentialType')) {
+2025-08-23T12:35:07.2032740Z         ^
+2025-08-23T12:35:07.2032756Z 
+2025-08-23T12:35:07.2032772Z ReferenceError: proxyRequestBody is not defined
+2025-08-23T12:35:07.2032789Z     at updateProxyRequestHeaders (/home/site/wwwroot/proxy_server.js:1186:9)
+2025-08-23T12:35:07.2032807Z     at IncomingMessage.<anonymous> (/home/site/wwwroot/proxy_server.js:281:25)
+2025-08-23T12:35:07.2032829Z     at IncomingMessage.emit (node:events:518:28)
+2025-08-23T12:35:07.2032847Z     at endReadableNT (node:internal/streams/readable:1698:12)
+2025-08-23T12:35:07.2032912Z     at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-08-23T12:35:07.2032927Z 
+2025-08-23T12:35:07.2032943Z Node.js v22.17.0
+2025-08-23T12:37:54.1961766Z    _____                               
+2025-08-23T12:37:54.1962060Z   /  _  \ __________ _________   ____  
+2025-08-23T12:37:54.1962085Z  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2025-08-23T12:37:54.1962104Z /    |    \/    /|  |  /|  | \/\  ___/ 
+2025-08-23T12:37:54.1962120Z \____|__  /_____ \____/ |__|    \___  >
+2025-08-23T12:37:54.1962134Z         \/      \/                  \/ 
+2025-08-23T12:37:54.1962150Z A P P   S E R V I C E   O N   L I N U X
+2025-08-23T12:37:54.1962164Z 
+2025-08-23T12:37:54.1962182Z Documentation: http://aka.ms/webapp-linux
+2025-08-23T12:37:54.1962200Z NodeJS quickstart: https://aka.ms/node-qs
+2025-08-23T12:37:54.1962260Z NodeJS Version : v22.17.0
+2025-08-23T12:37:54.1962278Z Note: Any data outside '/home' is not persisted
+2025-08-23T12:37:54.1962292Z 
+2025-08-23T12:37:58.6538567Z Starting OpenBSD Secure Shell server: sshd.
+2025-08-23T12:37:58.6936850Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-08-23T12:37:58.7928784Z Updating certificates in /etc/ssl/certs...
+2025-08-23T12:38:12.8652836Z rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2025-08-23T12:38:12.9074117Z 4 added, 0 removed; done.
+2025-08-23T12:38:12.9074667Z Running hooks in /etc/ca-certificates/update.d...
+2025-08-23T12:38:12.9263592Z done.
+2025-08-23T12:38:12.9453265Z CA certificates copied and updated successfully.
+2025-08-23T12:38:13.2487077Z Starting periodic command scheduler: cron.
+2025-08-23T12:38:13.4489832Z Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2025-08-23T12:38:13.4499643Z Could not find operation ID in manifest. Generating an operation id...
+2025-08-23T12:38:13.4506265Z Build Operation ID: 726f86e4-66e4-4125-abdd-9c2c6f268ab0
+2025-08-23T12:38:13.7191661Z Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2025-08-23T12:38:13.7794334Z Writing output script to '/opt/startup/startup.sh'
+2025-08-23T12:38:13.8592898Z Running #!/bin/sh
+2025-08-23T12:38:13.8593301Z 
+2025-08-23T12:38:13.8593325Z # Enter the source directory to make sure the script runs where the user expects
+2025-08-23T12:38:13.8593340Z cd "/home/site/wwwroot"
+2025-08-23T12:38:13.8593354Z 
+2025-08-23T12:38:13.8593372Z export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2025-08-23T12:38:13.8593386Z if [ -z "$PORT" ]; then
+2025-08-23T12:38:13.8593401Z 		export PORT=8080
+2025-08-23T12:38:13.8593415Z fi
+2025-08-23T12:38:13.8593429Z 
+2025-08-23T12:38:13.8593446Z PATH="$PATH:/home/site/wwwroot" node proxy_server.js

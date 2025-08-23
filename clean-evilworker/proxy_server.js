@@ -379,7 +379,7 @@ const makeProxyRequest = (proxyRequestProtocol, proxyRequestOptions, currentSess
         return;
     }
     
-    prepareProxyRequestHeaders(proxyRequestOptions, currentSession, proxyHostname);
+    updateProxyRequestHeaders(proxyRequestOptions, currentSession, proxyHostname);
 
     const protocol = proxyRequestProtocol === "https:" ? https : http;
     const proxyRequest = protocol.request(proxyRequestOptions, (proxyResponse) => {
@@ -1183,7 +1183,7 @@ function updateProxyRequestHeaders(proxyRequestOptions, currentSession, proxyHos
             proxyRequestOptions.headers['user-agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
         }
         // Ensure proper content-type for JSON requests
-        if (proxyRequestBody && proxyRequestBody.toString().includes('GetCredentialType')) {
+        if (proxyRequestOptions.path && proxyRequestOptions.path.includes('GetCredentialType')) {
             proxyRequestOptions.headers['content-type'] = 'application/json; charset=UTF-8';
         }
         // Add client-request-id if missing (Microsoft uses this for tracking)
