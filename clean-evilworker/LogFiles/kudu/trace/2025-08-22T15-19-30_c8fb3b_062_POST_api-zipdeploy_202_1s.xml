@@ -1,0 +1,14 @@
+<step title="Incoming Request" date="2025-08-22T15:19:30.760" instance="c8fb3b" url="/api/zipdeploy?isAsync=true" method="POST" type="request" pid="821,1,41" Accept="*/*" Host="evilworker-aitm-2025.scm.azurewebsites.net" User-Agent="AZURECLI/2.76.0 (DEB)" Accept-Encoding="gzip, deflate" Authorization="Bea..." Cache-Control="no-cache" Content-Type="application/octet-stream" Cookie="ARRAffinity=c8fb3b5a823bfbb2d788ddf199e5ecc35671bb8032d40fd8731abd02a1110dbd; ARRAffinitySameSite=c8fb3b5a823bfbb2d788ddf199e5ecc35671bb8032d40fd8731abd02a1110dbd" Content-Length="33710" x-ms-client-request-id="606f247a-7f6b-11f0-9c3a-822b383dbcd0" x-ms-artifact-checksum="e843c4459b37d784de83fd6952a28fd7a73d531db8503ca3636a269bb7573732" X-ARR-LOG-ID="606f247a-7f6b-11f0-9c3a-822b383dbcd0" CLIENT-IP="13.222.72.142:34711" X-SITE-DEPLOYMENT-ID="evilworker-aitm-2025" WAS-DEFAULT-HOSTNAME="evilworker-aitm-2025.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/api/zipdeploy?isAsync=true" X-Client-IP="13.222.72.142" X-Client-Port="34711" >
+  <step title="ZipPushDeploy" date="2025-08-22T15:19:30.794" >
+    <step title="ZipDeploy. Extract zip." date="2025-08-22T15:19:30.812" /><!-- duration: 11ms -->
+    <step title="Starting PushDeployAsync" date="2025-08-22T15:19:30.835" /><!-- duration: 3ms -->
+    <step title="Writing artifact to /tmp/zipdeploy/0da4bbf3-4247-4383-870a-146a1a275b9a.zip" date="2025-08-22T15:19:30.859" >
+      <step title="Writing multipart request body to /tmp/zipdeploy/0da4bbf3-4247-4383-870a-146a1a275b9a.zip" date="2025-08-22T15:19:30.863" /><!-- duration: 9ms -->
+    </step><!-- duration: 127ms -->
+    <step title="Start deployment in the background" date="2025-08-22T15:19:31.001" >
+      <step title="Acquiring Deployment Lock" date="2025-08-22T15:19:31.070" /><!-- duration: 14ms -->
+      <step title="Acquired Deployment Lock" date="2025-08-22T15:19:31.111" /><!-- duration: 11ms -->
+    </step><!-- duration: 282ms -->
+  </step><!-- duration: 498ms -->
+  <step title="Outgoing response" date="2025-08-22T15:19:31.313" type="response" statusCode="202" statusText="Accepted" /><!-- duration: 40ms -->
+</step><!-- duration: 622ms -->

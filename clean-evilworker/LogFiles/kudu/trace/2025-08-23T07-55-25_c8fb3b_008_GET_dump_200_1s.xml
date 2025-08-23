@@ -1,0 +1,4 @@
+<step title="Incoming Request" date="2025-08-23T07:55:25.753" instance="c8fb3b" url="/dump" method="GET" type="request" pid="821,1,3" Host="evilworker-aitm-2025.scm.azurewebsites.net" User-Agent="AZURECLI/2.76.0 (DEB)" Accept-Encoding="identity" Authorization="Bea..." x-ms-client-request-id="852f66fe-7ff6-11f0-b8f4-822b383dbcd0" X-ARR-LOG-ID="852f66fe-7ff6-11f0-b8f4-822b383dbcd0" CLIENT-IP="34.199.139.218:56939" X-SITE-DEPLOYMENT-ID="evilworker-aitm-2025" WAS-DEFAULT-HOSTNAME="evilworker-aitm-2025.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/dump" X-Client-IP="34.199.139.218" X-Client-Port="56939" >
+  <step title="Cleanup Xml Logs" date="2025-08-23T07:55:25.756" /><!-- duration: 8ms -->
+  <step title="Outgoing response" date="2025-08-23T07:55:26.704" type="response" statusCode="200" statusText="OK" /><!-- duration: 3ms -->
+</step><!-- duration: 956ms -->

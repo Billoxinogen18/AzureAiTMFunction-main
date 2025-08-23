@@ -1,0 +1,877 @@
+2025-08-23T07:50:10.3593500Z    _____                               
+2025-08-23T07:50:10.3595173Z   /  _  \ __________ _________   ____  
+2025-08-23T07:50:10.3595217Z  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2025-08-23T07:50:10.3595248Z /    |    \/    /|  |  /|  | \/\  ___/ 
+2025-08-23T07:50:10.3595269Z \____|__  /_____ \____/ |__|    \___  >
+2025-08-23T07:50:10.3595298Z         \/      \/                  \/ 
+2025-08-23T07:50:10.3595365Z A P P   S E R V I C E   O N   L I N U X
+2025-08-23T07:50:10.3595385Z 
+2025-08-23T07:50:10.3595413Z Documentation: http://aka.ms/webapp-linux
+2025-08-23T07:50:10.3595438Z NodeJS quickstart: https://aka.ms/node-qs
+2025-08-23T07:50:10.3595460Z NodeJS Version : v22.17.0
+2025-08-23T07:50:10.3595483Z Note: Any data outside '/home' is not persisted
+2025-08-23T07:50:10.3595520Z 
+2025-08-23T07:50:14.7521603Z Starting OpenBSD Secure Shell server: sshd.
+2025-08-23T07:50:14.7720393Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-08-23T07:50:14.8224491Z Updating certificates in /etc/ssl/certs...
+2025-08-23T07:50:26.3052789Z rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2025-08-23T07:50:26.3543164Z 4 added, 0 removed; done.
+2025-08-23T07:50:26.3548753Z Running hooks in /etc/ca-certificates/update.d...
+2025-08-23T07:50:26.3652321Z done.
+2025-08-23T07:50:26.3845265Z CA certificates copied and updated successfully.
+2025-08-23T07:50:26.7256148Z Starting periodic command scheduler: cron.
+2025-08-23T07:50:26.8243660Z Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2025-08-23T07:50:26.8257146Z Could not find operation ID in manifest. Generating an operation id...
+2025-08-23T07:50:26.8334985Z Build Operation ID: 3fed2eef-7df2-4edf-a4ef-a2cc557f5a7e
+2025-08-23T07:50:27.0978691Z Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2025-08-23T07:50:27.1479051Z Writing output script to '/opt/startup/startup.sh'
+2025-08-23T07:50:27.2476484Z Running #!/bin/sh
+2025-08-23T07:50:27.2477081Z 
+2025-08-23T07:50:27.2477116Z # Enter the source directory to make sure the script runs where the user expects
+2025-08-23T07:50:27.2477222Z cd "/home/site/wwwroot"
+2025-08-23T07:50:27.2477243Z 
+2025-08-23T07:50:27.2477267Z export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2025-08-23T07:50:27.2477290Z if [ -z "$PORT" ]; then
+2025-08-23T07:50:27.2477310Z 		export PORT=8080
+2025-08-23T07:50:27.2477331Z fi
+2025-08-23T07:50:27.2477351Z 
+2025-08-23T07:50:27.2779037Z PATH="$PATH:/home/site/wwwroot" node proxy_server.js
+2025-08-23T07:52:35.0843863Z /home/site/wwwroot/proxy_server.js:543
+2025-08-23T07:52:35.0844487Z                 if (proxyResponseContentType && proxyResponseContentType.includes("text/html")) {
+2025-08-23T07:52:35.0844509Z                 ^
+2025-08-23T07:52:35.0844525Z 
+2025-08-23T07:52:35.0844543Z ReferenceError: proxyResponseContentType is not defined
+2025-08-23T07:52:35.0844561Z     at IncomingMessage.<anonymous> (/home/site/wwwroot/proxy_server.js:543:17)
+2025-08-23T07:52:35.0844577Z     at IncomingMessage.emit (node:events:530:35)
+2025-08-23T07:52:35.0844595Z     at endReadableNT (node:internal/streams/readable:1698:12)
+2025-08-23T07:52:35.0844613Z     at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-08-23T07:52:35.0844628Z 
+2025-08-23T07:52:35.0844643Z Node.js v22.17.0
+2025-08-23T07:52:42.9768996Z    _____                               
+2025-08-23T07:52:42.9769419Z   /  _  \ __________ _________   ____  
+2025-08-23T07:52:42.9769441Z  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2025-08-23T07:52:42.9769462Z /    |    \/    /|  |  /|  | \/\  ___/ 
+2025-08-23T07:52:42.9769481Z \____|__  /_____ \____/ |__|    \___  >
+2025-08-23T07:52:42.9769497Z         \/      \/                  \/ 
+2025-08-23T07:52:42.9769513Z A P P   S E R V I C E   O N   L I N U X
+2025-08-23T07:52:42.9769527Z 
+2025-08-23T07:52:42.9769601Z Documentation: http://aka.ms/webapp-linux
+2025-08-23T07:52:42.9769617Z NodeJS quickstart: https://aka.ms/node-qs
+2025-08-23T07:52:42.9769632Z NodeJS Version : v22.17.0
+2025-08-23T07:52:42.9769649Z Note: Any data outside '/home' is not persisted
+2025-08-23T07:52:42.9769664Z 
+2025-08-23T07:52:49.8564867Z Starting OpenBSD Secure Shell server: sshd.
+2025-08-23T07:52:49.8686378Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-08-23T07:52:49.9080773Z Updating certificates in /etc/ssl/certs...
+2025-08-23T07:53:01.0669173Z rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2025-08-23T07:53:01.1153614Z 4 added, 0 removed; done.
+2025-08-23T07:53:01.1160052Z Running hooks in /etc/ca-certificates/update.d...
+2025-08-23T07:53:01.1424760Z done.
+2025-08-23T07:53:01.1884523Z CA certificates copied and updated successfully.
+2025-08-23T07:53:01.4265982Z Starting periodic command scheduler: cron.
+2025-08-23T07:53:01.4824088Z Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2025-08-23T07:53:01.4828295Z Could not find operation ID in manifest. Generating an operation id...
+2025-08-23T07:53:01.4831338Z Build Operation ID: c0438df7-f868-44e1-88cb-977aedc7fcd2
+2025-08-23T07:53:01.7001137Z Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2025-08-23T07:53:01.7355925Z Writing output script to '/opt/startup/startup.sh'
+2025-08-23T07:53:01.8375548Z Running #!/bin/sh
+2025-08-23T07:53:01.8376240Z 
+2025-08-23T07:53:01.8376270Z # Enter the source directory to make sure the script runs where the user expects
+2025-08-23T07:53:01.8376353Z cd "/home/site/wwwroot"
+2025-08-23T07:53:01.8376368Z 
+2025-08-23T07:53:01.8376385Z export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2025-08-23T07:53:01.8376399Z if [ -z "$PORT" ]; then
+2025-08-23T07:53:01.8376414Z 		export PORT=8080
+2025-08-23T07:53:01.8376429Z fi
+2025-08-23T07:53:01.8376442Z 
+2025-08-23T07:53:01.8376459Z PATH="$PATH:/home/site/wwwroot" node proxy_server.js
+2025-08-23T07:57:09.2869214Z    _____                               
+2025-08-23T07:57:09.3086019Z   /  _  \ __________ _________   ____  
+2025-08-23T07:57:09.3086333Z  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2025-08-23T07:57:09.3086356Z /    |    \/    /|  |  /|  | \/\  ___/ 
+2025-08-23T07:57:09.3086376Z \____|__  /_____ \____/ |__|    \___  >
+2025-08-23T07:57:09.3086413Z         \/      \/                  \/ 
+2025-08-23T07:57:09.3086440Z A P P   S E R V I C E   O N   L I N U X
+2025-08-23T07:57:09.3086457Z 
+2025-08-23T07:57:09.3086484Z Documentation: http://aka.ms/webapp-linux
+2025-08-23T07:57:09.3086522Z NodeJS quickstart: https://aka.ms/node-qs
+2025-08-23T07:57:09.3086542Z NodeJS Version : v22.17.0
+2025-08-23T07:57:09.3086563Z Note: Any data outside '/home' is not persisted
+2025-08-23T07:57:09.3086581Z 
+2025-08-23T07:57:11.7586877Z Starting OpenBSD Secure Shell server: sshd.
+2025-08-23T07:57:11.7771649Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-08-23T07:57:11.8297734Z Updating certificates in /etc/ssl/certs...
+2025-08-23T07:57:27.6165546Z rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2025-08-23T07:57:27.7069017Z 4 added, 0 removed; done.
+2025-08-23T07:57:27.7069651Z Running hooks in /etc/ca-certificates/update.d...
+2025-08-23T07:57:27.7258261Z done.
+2025-08-23T07:57:27.7660492Z CA certificates copied and updated successfully.
+2025-08-23T07:57:28.1711468Z Starting periodic command scheduler: cron.
+2025-08-23T07:57:28.5442242Z Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2025-08-23T07:57:28.5442865Z Could not find operation ID in manifest. Generating an operation id...
+2025-08-23T07:57:28.5442896Z Build Operation ID: 87660eca-48ad-45c8-98f7-2990598eb002
+2025-08-23T07:57:29.0225355Z Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2025-08-23T07:57:29.1192042Z Writing output script to '/opt/startup/startup.sh'
+2025-08-23T07:57:29.2831506Z Running #!/bin/sh
+2025-08-23T07:57:29.2832076Z 
+2025-08-23T07:57:29.2832113Z # Enter the source directory to make sure the script runs where the user expects
+2025-08-23T07:57:29.2832152Z cd "/home/site/wwwroot"
+2025-08-23T07:57:29.2894977Z 
+2025-08-23T07:57:29.2895031Z export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2025-08-23T07:57:29.2895063Z if [ -z "$PORT" ]; then
+2025-08-23T07:57:29.2895142Z 		export PORT=8080
+2025-08-23T07:57:29.2895163Z fi
+2025-08-23T07:57:29.2895183Z 
+2025-08-23T07:57:29.2895206Z PATH="$PATH:/home/site/wwwroot" node proxy_server.js
+2025-08-23T08:01:17.8149838Z ******************************
+2025-08-23T08:01:17.8150366Z Server response body decompression failed: TypeError
+2025-08-23T08:01:17.8150390Z Message: decompressedResponseBody.replace is not a function
+2025-08-23T08:01:17.8222940Z Stack trace: TypeError: decompressedResponseBody.replace is not a function
+2025-08-23T08:01:17.8223104Z     at IncomingMessage.<anonymous> (/home/site/wwwroot/proxy_server.js:623:71)
+2025-08-23T08:01:17.8223125Z     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-08-23T08:01:17.8223142Z Parameter 1: login.microsoftonline.com
+2025-08-23T08:01:17.8223156Z Parameter 2: /
+2025-08-23T08:01:17.8223171Z Parameter 3: 1f8b080000
+2025-08-23T08:01:17.8223186Z Parameter 4: gzip
+2025-08-23T08:01:17.8223223Z ******************************
+2025-08-23T08:01:18.7163524Z ******************************
+2025-08-23T08:01:18.7164072Z Server response body decompression failed: Error
+2025-08-23T08:01:18.7164101Z Message: unexpected end of file
+2025-08-23T08:01:18.7164118Z Stack trace: Error: unexpected end of file
+2025-08-23T08:01:18.7164137Z     at genericNodeError (node:internal/errors:983:15)
+2025-08-23T08:01:18.7164154Z     at wrappedFn (node:internal/errors:537:14)
+2025-08-23T08:01:18.7164171Z     at Zlib.zlibOnError [as onerror] (node:zlib:190:17)
+2025-08-23T08:01:18.7164186Z Parameter 1: www.office.com
+2025-08-23T08:01:18.7164201Z Parameter 2: /login
+2025-08-23T08:01:18.7164215Z Parameter 3: 
+2025-08-23T08:01:18.7164311Z Parameter 4: gzip
+2025-08-23T08:01:18.7164329Z ******************************
+2025-08-23T08:01:19.1604521Z ******************************
+2025-08-23T08:01:19.1684186Z Server response body decompression failed: TypeError
+2025-08-23T08:01:19.1689812Z Message: decompressedResponseBody.replace is not a function
+2025-08-23T08:01:19.1693830Z Stack trace: TypeError: decompressedResponseBody.replace is not a function
+2025-08-23T08:01:19.1693858Z     at IncomingMessage.<anonymous> (/home/site/wwwroot/proxy_server.js:623:71)
+2025-08-23T08:01:19.1693877Z     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-08-23T08:01:19.1693893Z Parameter 1: login.microsoftonline.com
+2025-08-23T08:01:19.1694023Z Parameter 2: /common/oauth2/v2.0/authorize?client_id=4765445b-32c6-49b0-83e6-1d93765276ca&redirect_uri=https%3A%2F%2Fwww.office.com%2Flandingv2&response_type=code%20id_token&scope=openid%20profile%20https%3A%2F%2Fwww.office.com%2Fv2%2FOfficeHome.All&response_mode=form_post&nonce=638915328786808222.NThjMmI2OTktZGNiZi00ZDkyLWFkOGYtNjM3OWNlNmU2NzBjODg3NjAzNmMtMzFlYS00MDQyLTljYjEtOTQyMDFhNjg5Yjlj&ui_locales=en-GB&mkt=en-GB&client-request-id=d10c8e90-58a5-49cb-b56b-3e9911c4246a&state=Nhcit7zBpRYC9K3bRqaYBn6vsyyn0UN4v61XXz43wa5Lc-mKdw03bLz_Mf1nXgWaBhIlH9Cw4gdlkd0aqwV1lHLUPc-2na-lOL1HSR6PX0a2hBKRoHnyoVTaKPGTtwqDsa7qJiY9isw0lZe93nwz4STb7BUlTg7SIq00SdoU-FOHrs2pw_DpyazqjjsDkUKVSZoVxT2s62waWkZ5-_9RsJVHdE5CkyGB3YKU-Ox1zvk7CBuOjrMLLk29UPjgeN5bgvzIaaLL8aYY6kLeBg8ABcKdT3fY7MvUKXenMHibTT0&x-client-SKU=ID_NET8_0&x-client-ver=8.5.0.0
+2025-08-23T08:01:19.1694041Z Parameter 3: 1f8b080000
+2025-08-23T08:01:19.1694056Z Parameter 4: gzip
+2025-08-23T08:01:19.1694071Z ******************************
+2025-08-23T08:01:28.0635604Z ******************************
+2025-08-23T08:01:28.0643856Z Server response status: 404
+2025-08-23T08:01:28.0669537Z Message: undefined
+2025-08-23T08:01:28.0686674Z Stack trace: undefined
+2025-08-23T08:01:28.0687086Z Parameter 1: login.microsoftonline.com
+2025-08-23T08:01:28.0687111Z Parameter 2: /favicon.ico
+2025-08-23T08:01:28.0687127Z ******************************
+2025-08-23T08:01:28.2042733Z ******************************
+2025-08-23T08:01:28.2051173Z Server response body decompression failed: TypeError
+2025-08-23T08:01:28.2058918Z Message: decompressedResponseBody.replace is not a function
+2025-08-23T08:01:28.2064819Z Stack trace: TypeError: decompressedResponseBody.replace is not a function
+2025-08-23T08:01:28.2065027Z     at IncomingMessage.<anonymous> (/home/site/wwwroot/proxy_server.js:623:71)
+2025-08-23T08:01:28.2065049Z     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-08-23T08:01:28.2164999Z Parameter 1: login.microsoftonline.com
+2025-08-23T08:01:28.2165353Z Parameter 2: /common/oauth2/v2.0/authorize?client_id=4765445b-32c6-49b0-83e6-1d93765276ca&redirect_uri=https%3A%2F%2Fwww.office.com%2Flandingv2&response_type=code%20id_token&scope=openid%20profile%20https%3A%2F%2Fwww.office.com%2Fv2%2FOfficeHome.All&response_mode=form_post&nonce=638915328786808222.NThjMmI2OTktZGNiZi00ZDkyLWFkOGYtNjM3OWNlNmU2NzBjODg3NjAzNmMtMzFlYS00MDQyLTljYjEtOTQyMDFhNjg5Yjlj&ui_locales=en-GB&mkt=en-GB&client-request-id=d10c8e90-58a5-49cb-b56b-3e9911c4246a&state=Nhcit7zBpRYC9K3bRqaYBn6vsyyn0UN4v61XXz43wa5Lc-mKdw03bLz_Mf1nXgWaBhIlH9Cw4gdlkd0aqwV1lHLUPc-2na-lOL1HSR6PX0a2hBKRoHnyoVTaKPGTtwqDsa7qJiY9isw0lZe93nwz4STb7BUlTg7SIq00SdoU-FOHrs2pw_DpyazqjjsDkUKVSZoVxT2s62waWkZ5-_9RsJVHdE5CkyGB3YKU-Ox1zvk7CBuOjrMLLk29UPjgeN5bgvzIaaLL8aYY6kLeBg8ABcKdT3fY7MvUKXenMHibTT0&x-client-SKU=ID_NET8_0&x-client-ver=8.5.0.0&sso_reload=true
+2025-08-23T08:01:28.2165376Z Parameter 3: 1f8b080000
+2025-08-23T08:01:28.2165392Z Parameter 4: gzip
+2025-08-23T08:01:28.2165408Z ******************************
+2025-08-23T08:01:33.3787710Z ******************************
+2025-08-23T08:01:33.3881313Z Server response body decompression failed: TypeError
+2025-08-23T08:01:33.3882047Z Message: decompressedResponseBody.replace is not a function
+2025-08-23T08:01:33.3882298Z Stack trace: TypeError: decompressedResponseBody.replace is not a function
+2025-08-23T08:01:33.3882318Z     at IncomingMessage.<anonymous> (/home/site/wwwroot/proxy_server.js:623:71)
+2025-08-23T08:01:33.3882337Z     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-08-23T08:01:33.3882352Z Parameter 1: login.live.com
+2025-08-23T08:01:33.3882366Z Parameter 2: /Me.htm?v=3
+2025-08-23T08:01:33.3882380Z Parameter 3: 1f8b080000
+2025-08-23T08:01:33.3882394Z Parameter 4: gzip
+2025-08-23T08:01:33.3882408Z ******************************
+2025-08-23T08:15:14.9124624Z ******************************
+2025-08-23T08:15:14.9365325Z Server response status: 401
+2025-08-23T08:15:14.9368161Z Message: undefined
+2025-08-23T08:15:14.9368197Z Stack trace: undefined
+2025-08-23T08:15:14.9368216Z Parameter 1: autologon.microsoftazuread-sso.com
+2025-08-23T08:15:14.9368237Z Parameter 2: /bendigohealth.org.au/winauth/ssoprobe?client-request-id=d10c8e90-58a5-49cb-b56b-3e9911c4246a&_=1755936914454
+2025-08-23T08:15:14.9368252Z ******************************
+2025-08-23T08:24:13.5454885Z    _____                               
+2025-08-23T08:24:13.5480851Z   /  _  \ __________ _________   ____  
+2025-08-23T08:24:13.5551277Z  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2025-08-23T08:24:13.5551386Z /    |    \/    /|  |  /|  | \/\  ___/ 
+2025-08-23T08:24:13.5551413Z \____|__  /_____ \____/ |__|    \___  >
+2025-08-23T08:24:13.5551436Z         \/      \/                  \/ 
+2025-08-23T08:24:13.5551517Z A P P   S E R V I C E   O N   L I N U X
+2025-08-23T08:24:13.5551540Z 
+2025-08-23T08:24:13.5551574Z Documentation: http://aka.ms/webapp-linux
+2025-08-23T08:24:13.5551597Z NodeJS quickstart: https://aka.ms/node-qs
+2025-08-23T08:24:13.5551621Z NodeJS Version : v22.17.0
+2025-08-23T08:24:13.5551647Z Note: Any data outside '/home' is not persisted
+2025-08-23T08:24:13.5551667Z 
+2025-08-23T08:24:18.4107797Z Starting OpenBSD Secure Shell server: sshd.
+2025-08-23T08:24:18.4309594Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-08-23T08:24:18.5398383Z Updating certificates in /etc/ssl/certs...
+2025-08-23T08:24:29.9486617Z rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2025-08-23T08:24:29.9888591Z 4 added, 0 removed; done.
+2025-08-23T08:24:29.9901378Z Running hooks in /etc/ca-certificates/update.d...
+2025-08-23T08:24:30.0078511Z done.
+2025-08-23T08:24:30.0491369Z CA certificates copied and updated successfully.
+2025-08-23T08:24:30.2423271Z Starting periodic command scheduler: cron.
+2025-08-23T08:24:30.3526351Z Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2025-08-23T08:24:30.3527021Z Could not find operation ID in manifest. Generating an operation id...
+2025-08-23T08:24:30.3527061Z Build Operation ID: 050d52e3-203a-4e39-b147-7b86bc07223b
+2025-08-23T08:24:30.6884877Z Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2025-08-23T08:24:30.7096187Z Writing output script to '/opt/startup/startup.sh'
+2025-08-23T08:24:30.7341179Z Running #!/bin/sh
+2025-08-23T08:24:30.7341786Z 
+2025-08-23T08:24:30.7341825Z # Enter the source directory to make sure the script runs where the user expects
+2025-08-23T08:24:30.7341859Z cd "/home/site/wwwroot"
+2025-08-23T08:24:30.7341953Z 
+2025-08-23T08:24:30.7341978Z export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2025-08-23T08:24:30.7342003Z if [ -z "$PORT" ]; then
+2025-08-23T08:24:30.7342024Z 		export PORT=8080
+2025-08-23T08:24:30.7342044Z fi
+2025-08-23T08:24:30.7342064Z 
+2025-08-23T08:24:30.7445359Z PATH="$PATH:/home/site/wwwroot" node proxy_server.js
+2025-08-23T08:25:34.6203784Z ******************************
+2025-08-23T08:25:34.6204241Z Server response body decompression failed: TypeError
+2025-08-23T08:25:34.6204264Z Message: decompressedResponseBody.replace is not a function
+2025-08-23T08:25:34.6271578Z Stack trace: TypeError: decompressedResponseBody.replace is not a function
+2025-08-23T08:25:34.6271890Z     at IncomingMessage.<anonymous> (/home/site/wwwroot/proxy_server.js:624:30)
+2025-08-23T08:25:34.6271914Z     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-08-23T08:25:34.6271935Z Parameter 1: login.microsoftonline.com
+2025-08-23T08:25:34.6271950Z Parameter 2: /
+2025-08-23T08:25:34.6271965Z Parameter 3: 1f8b080000
+2025-08-23T08:25:34.6271980Z Parameter 4: gzip
+2025-08-23T08:25:34.6275455Z ******************************
+2025-08-23T08:25:35.0550000Z ******************************
+2025-08-23T08:25:35.0575315Z Server response body decompression failed: Error
+2025-08-23T08:25:35.0575495Z Message: unexpected end of file
+2025-08-23T08:25:35.0575519Z Stack trace: Error: unexpected end of file
+2025-08-23T08:25:35.0575538Z     at genericNodeError (node:internal/errors:983:15)
+2025-08-23T08:25:35.0575559Z     at wrappedFn (node:internal/errors:537:14)
+2025-08-23T08:25:35.0575576Z     at Zlib.zlibOnError [as onerror] (node:zlib:190:17)
+2025-08-23T08:25:35.0575592Z Parameter 1: www.office.com
+2025-08-23T08:25:35.0575608Z Parameter 2: /login
+2025-08-23T08:25:35.0575622Z Parameter 3: 
+2025-08-23T08:25:35.0575837Z Parameter 4: gzip
+2025-08-23T08:25:35.0575857Z ******************************
+2025-08-23T08:25:35.4200290Z ******************************
+2025-08-23T08:25:35.4200748Z Server response body decompression failed: TypeError
+2025-08-23T08:25:35.4200773Z Message: decompressedResponseBody.replace is not a function
+2025-08-23T08:25:35.4200795Z Stack trace: TypeError: decompressedResponseBody.replace is not a function
+2025-08-23T08:25:35.4200814Z     at IncomingMessage.<anonymous> (/home/site/wwwroot/proxy_server.js:624:30)
+2025-08-23T08:25:35.4200832Z     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-08-23T08:25:35.4200848Z Parameter 1: login.microsoftonline.com
+2025-08-23T08:25:35.4201092Z Parameter 2: /common/oauth2/v2.0/authorize?client_id=4765445b-32c6-49b0-83e6-1d93765276ca&redirect_uri=https%3A%2F%2Fwww.office.com%2Flandingv2&response_type=code%20id_token&scope=openid%20profile%20https%3A%2F%2Fwww.office.com%2Fv2%2FOfficeHome.All&response_mode=form_post&nonce=638915343350359592.OWE3NzdmMjUtMjM3OS00ZTUwLWFiOTgtMDU0OTRlNmIyNWQ3OTE1Mjc0MTQtNzg1Zi00NTUyLWEzNWItYjczNGI5YTc5ZTU5&ui_locales=en-GB&mkt=en-GB&client-request-id=2cdbe855-0c97-43ae-830f-25d4e777d03c&state=tq1bHR1fHK-Kfu-_LgL7KUbxq50-59XUS_P1worRqxzyZhqmr2Lz7-YMo3t2uL4WMtX1o_9Nh2fUb1SF4gizCF-h4s0-uB3UWT631OPFFd3VQezCZVQq16uK7QsYM-TsNIg_hEciU9GWY_1Sen7oDz2VTCiBo8dZOxCas_QX7qqDlpntA7zF3D5MZVC3rHq6-bh-h0lP433lArAnJOvjZ5mDGBRpEjMmjaSJmXe7EeXZip0cs6VbXzoBo6AusxHAtZp-if3qouYi2nAbWI8SVRaUVwhZEciCaEUTwhHCaHA&x-client-SKU=ID_NET8_0&x-client-ver=8.5.0.0
+2025-08-23T08:25:35.4201111Z Parameter 3: 1f8b080000
+2025-08-23T08:25:35.4201126Z Parameter 4: gzip
+2025-08-23T08:25:35.4201141Z ******************************
+2025-08-23T08:25:38.7603719Z ******************************
+2025-08-23T08:25:38.7607787Z Server response body decompression failed: TypeError
+2025-08-23T08:25:38.7607883Z Message: decompressedResponseBody.replace is not a function
+2025-08-23T08:25:38.7608082Z Stack trace: TypeError: decompressedResponseBody.replace is not a function
+2025-08-23T08:25:38.7608106Z     at IncomingMessage.<anonymous> (/home/site/wwwroot/proxy_server.js:624:30)
+2025-08-23T08:25:38.7608125Z     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-08-23T08:25:38.7608141Z Parameter 1: login.microsoftonline.com
+2025-08-23T08:25:38.7608197Z Parameter 2: /common/oauth2/v2.0/authorize?client_id=4765445b-32c6-49b0-83e6-1d93765276ca&redirect_uri=https%3A%2F%2Fwww.office.com%2Flandingv2&response_type=code%20id_token&scope=openid%20profile%20https%3A%2F%2Fwww.office.com%2Fv2%2FOfficeHome.All&response_mode=form_post&nonce=638915343350359592.OWE3NzdmMjUtMjM3OS00ZTUwLWFiOTgtMDU0OTRlNmIyNWQ3OTE1Mjc0MTQtNzg1Zi00NTUyLWEzNWItYjczNGI5YTc5ZTU5&ui_locales=en-GB&mkt=en-GB&client-request-id=2cdbe855-0c97-43ae-830f-25d4e777d03c&state=tq1bHR1fHK-Kfu-_LgL7KUbxq50-59XUS_P1worRqxzyZhqmr2Lz7-YMo3t2uL4WMtX1o_9Nh2fUb1SF4gizCF-h4s0-uB3UWT631OPFFd3VQezCZVQq16uK7QsYM-TsNIg_hEciU9GWY_1Sen7oDz2VTCiBo8dZOxCas_QX7qqDlpntA7zF3D5MZVC3rHq6-bh-h0lP433lArAnJOvjZ5mDGBRpEjMmjaSJmXe7EeXZip0cs6VbXzoBo6AusxHAtZp-if3qouYi2nAbWI8SVRaUVwhZEciCaEUTwhHCaHA&x-client-SKU=ID_NET8_0&x-client-ver=8.5.0.0&sso_reload=true
+2025-08-23T08:25:38.7608212Z Parameter 3: 1f8b080000
+2025-08-23T08:25:38.7608228Z Parameter 4: gzip
+2025-08-23T08:25:38.7608244Z ******************************
+2025-08-23T08:25:39.7998867Z ******************************
+2025-08-23T08:25:39.8096901Z Server response body decompression failed: TypeError
+2025-08-23T08:25:39.8097120Z Message: decompressedResponseBody.replace is not a function
+2025-08-23T08:25:39.8097144Z Stack trace: TypeError: decompressedResponseBody.replace is not a function
+2025-08-23T08:25:39.8097168Z     at IncomingMessage.<anonymous> (/home/site/wwwroot/proxy_server.js:624:30)
+2025-08-23T08:25:39.8097188Z     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+2025-08-23T08:25:39.8097204Z Parameter 1: login.live.com
+2025-08-23T08:25:39.8097220Z Parameter 2: /Me.htm?v=3
+2025-08-23T08:25:39.8097235Z Parameter 3: 1f8b080000
+2025-08-23T08:25:39.8097250Z Parameter 4: gzip
+2025-08-23T08:25:39.8097269Z ******************************
+2025-08-23T08:26:02.5370768Z ******************************
+2025-08-23T08:26:02.5379830Z Server response status: 401
+2025-08-23T08:26:02.5384359Z Message: undefined
+2025-08-23T08:26:02.5387890Z Stack trace: undefined
+2025-08-23T08:26:02.5670787Z Parameter 1: autologon.microsoftazuread-sso.com
+2025-08-23T08:26:02.5671042Z Parameter 2: /bendigohealth.org.au/winauth/ssoprobe?client-request-id=2cdbe855-0c97-43ae-830f-25d4e777d03c&_=1755937562010
+2025-08-23T08:26:02.5671063Z ******************************
+2025-08-23T08:28:25.1525988Z    _____                               
+2025-08-23T08:28:25.1527601Z   /  _  \ __________ _________   ____  
+2025-08-23T08:28:25.1527652Z  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2025-08-23T08:28:25.1527677Z /    |    \/    /|  |  /|  | \/\  ___/ 
+2025-08-23T08:28:25.1527701Z \____|__  /_____ \____/ |__|    \___  >
+2025-08-23T08:28:25.1527787Z         \/      \/                  \/ 
+2025-08-23T08:28:25.1527811Z A P P   S E R V I C E   O N   L I N U X
+2025-08-23T08:28:25.1527833Z 
+2025-08-23T08:28:25.1527862Z Documentation: http://aka.ms/webapp-linux
+2025-08-23T08:28:25.1527888Z NodeJS quickstart: https://aka.ms/node-qs
+2025-08-23T08:28:25.1527911Z NodeJS Version : v22.17.0
+2025-08-23T08:28:25.1527935Z Note: Any data outside '/home' is not persisted
+2025-08-23T08:28:25.1527978Z 
+2025-08-23T08:28:27.3510538Z Starting OpenBSD Secure Shell server: sshd.
+2025-08-23T08:28:27.3722209Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-08-23T08:28:27.4456584Z Updating certificates in /etc/ssl/certs...
+2025-08-23T08:28:39.5654466Z rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2025-08-23T08:28:39.5957587Z 4 added, 0 removed; done.
+2025-08-23T08:28:39.5965000Z Running hooks in /etc/ca-certificates/update.d...
+2025-08-23T08:28:39.6140343Z done.
+2025-08-23T08:28:39.6342488Z CA certificates copied and updated successfully.
+2025-08-23T08:28:39.8869086Z Starting periodic command scheduler: cron.
+2025-08-23T08:28:39.9511762Z Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2025-08-23T08:28:39.9518685Z Could not find operation ID in manifest. Generating an operation id...
+2025-08-23T08:28:39.9794305Z Build Operation ID: 5908f0e3-2f57-4a7a-90cc-fa76fd203a16
+2025-08-23T08:28:40.3162925Z Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2025-08-23T08:28:40.4873709Z Writing output script to '/opt/startup/startup.sh'
+2025-08-23T08:28:40.5757795Z Running #!/bin/sh
+2025-08-23T08:28:40.5758863Z 
+2025-08-23T08:28:40.5758920Z # Enter the source directory to make sure the script runs where the user expects
+2025-08-23T08:28:40.5759007Z cd "/home/site/wwwroot"
+2025-08-23T08:28:40.5759030Z 
+2025-08-23T08:28:40.5759054Z export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2025-08-23T08:28:40.5759078Z if [ -z "$PORT" ]; then
+2025-08-23T08:28:40.5759099Z 		export PORT=8080
+2025-08-23T08:28:40.5759119Z fi
+2025-08-23T08:28:40.5759140Z 
+2025-08-23T08:28:40.6153084Z PATH="$PATH:/home/site/wwwroot" node proxy_server.js
+2025-08-23T09:05:14.2113476Z ******************************
+2025-08-23T09:05:14.2135352Z Server response status: 401
+2025-08-23T09:05:14.2135504Z Message: undefined
+2025-08-23T09:05:14.2135523Z Stack trace: undefined
+2025-08-23T09:05:14.2135541Z Parameter 1: autologon.microsoftazuread-sso.com
+2025-08-23T09:05:14.2135562Z Parameter 2: /bendigohealth.org.au/winauth/ssoprobe?client-request-id=4c849d0c-98f5-4858-bc9e-5cdbb093698d&_=1755939913644
+2025-08-23T09:05:14.2135578Z ******************************
+2025-08-23T09:06:16.4891195Z ******************************
+2025-08-23T09:06:16.4899174Z Server response status: 404
+2025-08-23T09:06:16.4902483Z Message: undefined
+2025-08-23T09:06:16.4903223Z Stack trace: undefined
+2025-08-23T09:06:16.4904809Z Parameter 1: m365.cloud.microsoft
+2025-08-23T09:06:16.4905998Z Parameter 2: /api/userstorage/ThemeMode/?workload=officehomereact&auth=2
+2025-08-23T09:06:16.4906422Z ******************************
+2025-08-23T09:06:18.8252906Z node:events:496
+2025-08-23T09:06:18.8253342Z       throw er; // Unhandled 'error' event
+2025-08-23T09:06:18.8253426Z       ^
+2025-08-23T09:06:18.8253442Z 
+2025-08-23T09:06:18.8253460Z Error: getaddrinfo ENOTFOUND versionless-v2
+2025-08-23T09:06:18.8253483Z     at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T09:06:18.8253499Z Emitted 'error' event on ClientRequest instance at:
+2025-08-23T09:06:18.8253515Z     at emitErrorEvent (node:_http_client:104:11)
+2025-08-23T09:06:18.8253531Z     at TLSSocket.socketErrorListener (node:_http_client:518:5)
+2025-08-23T09:06:18.8253547Z     at TLSSocket.emit (node:events:518:28)
+2025-08-23T09:06:18.8253564Z     at emitErrorNT (node:internal/streams/destroy:170:8)
+2025-08-23T09:06:18.8253580Z     at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+2025-08-23T09:06:18.8253599Z     at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+2025-08-23T09:06:18.8253629Z   errno: -3008,
+2025-08-23T09:06:18.8253645Z   code: 'ENOTFOUND',
+2025-08-23T09:06:18.8253660Z   syscall: 'getaddrinfo',
+2025-08-23T09:06:18.8253675Z   hostname: 'versionless-v2'
+2025-08-23T09:06:18.8266864Z }
+2025-08-23T09:06:18.8266907Z 
+2025-08-23T09:06:18.8266929Z Node.js v22.17.0
+2025-08-23T09:06:28.3713683Z    _____                               
+2025-08-23T09:06:28.3714019Z   /  _  \ __________ _________   ____  
+2025-08-23T09:06:28.3714046Z  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2025-08-23T09:06:28.3714064Z /    |    \/    /|  |  /|  | \/\  ___/ 
+2025-08-23T09:06:28.3714085Z \____|__  /_____ \____/ |__|    \___  >
+2025-08-23T09:06:28.3714107Z         \/      \/                  \/ 
+2025-08-23T09:06:28.3714127Z A P P   S E R V I C E   O N   L I N U X
+2025-08-23T09:06:28.3714143Z 
+2025-08-23T09:06:28.3714164Z Documentation: http://aka.ms/webapp-linux
+2025-08-23T09:06:28.3714182Z NodeJS quickstart: https://aka.ms/node-qs
+2025-08-23T09:06:28.3714203Z NodeJS Version : v22.17.0
+2025-08-23T09:06:28.3714292Z Note: Any data outside '/home' is not persisted
+2025-08-23T09:06:28.3714311Z 
+2025-08-23T09:06:33.4185627Z Starting OpenBSD Secure Shell server: sshd.
+2025-08-23T09:06:33.4393370Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-08-23T09:06:33.5073970Z Updating certificates in /etc/ssl/certs...
+2025-08-23T09:06:44.6378430Z rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2025-08-23T09:06:44.7166319Z 4 added, 0 removed; done.
+2025-08-23T09:06:44.7349551Z Running hooks in /etc/ca-certificates/update.d...
+2025-08-23T09:06:44.7555767Z done.
+2025-08-23T09:06:44.7853221Z CA certificates copied and updated successfully.
+2025-08-23T09:06:44.9238228Z Starting periodic command scheduler: cron.
+2025-08-23T09:06:45.0740345Z Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2025-08-23T09:06:45.0793223Z Could not find operation ID in manifest. Generating an operation id...
+2025-08-23T09:06:45.0805008Z Build Operation ID: 1364a9cc-6219-483c-af0b-52ac17e8d089
+2025-08-23T09:06:45.3089570Z Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2025-08-23T09:06:45.3677597Z Writing output script to '/opt/startup/startup.sh'
+2025-08-23T09:06:45.4179884Z Running #!/bin/sh
+2025-08-23T09:06:45.4180408Z 
+2025-08-23T09:06:45.4180436Z # Enter the source directory to make sure the script runs where the user expects
+2025-08-23T09:06:45.4180453Z cd "/home/site/wwwroot"
+2025-08-23T09:06:45.4180466Z 
+2025-08-23T09:06:45.4180487Z export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2025-08-23T09:06:45.4180503Z if [ -z "$PORT" ]; then
+2025-08-23T09:06:45.4180517Z 		export PORT=8080
+2025-08-23T09:06:45.4180597Z fi
+2025-08-23T09:06:45.4180611Z 
+2025-08-23T09:06:45.4180628Z PATH="$PATH:/home/site/wwwroot" node proxy_server.js
+2025-08-23T09:08:28.7110810Z ******************************
+2025-08-23T09:08:28.7111385Z Client request body retrieval failed: Error
+2025-08-23T09:08:28.7111408Z Message: aborted
+2025-08-23T09:08:28.7111427Z Stack trace: Error: aborted
+2025-08-23T09:08:28.7111442Z     at abortIncoming (node:_http_server:811:17)
+2025-08-23T09:08:28.7111458Z     at socketOnClose (node:_http_server:805:3)
+2025-08-23T09:08:28.7111474Z     at Socket.emit (node:events:530:35)
+2025-08-23T09:08:28.7111490Z     at TCP.<anonymous> (node:net:346:12)
+2025-08-23T09:08:28.7111505Z Parameter 1: POST
+2025-08-23T09:08:28.7111522Z Parameter 2: /lNv1pC9AWPUY4gbidyBO
+2025-08-23T09:08:28.7111538Z ******************************
+2025-08-23T09:12:51.9607703Z    _____                               
+2025-08-23T09:12:51.9690002Z   /  _  \ __________ _________   ____  
+2025-08-23T09:12:51.9690265Z  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2025-08-23T09:12:51.9690291Z /    |    \/    /|  |  /|  | \/\  ___/ 
+2025-08-23T09:12:51.9690315Z \____|__  /_____ \____/ |__|    \___  >
+2025-08-23T09:12:51.9690422Z         \/      \/                  \/ 
+2025-08-23T09:12:51.9690445Z A P P   S E R V I C E   O N   L I N U X
+2025-08-23T09:12:51.9690466Z 
+2025-08-23T09:12:51.9690497Z Documentation: http://aka.ms/webapp-linux
+2025-08-23T09:12:51.9690521Z NodeJS quickstart: https://aka.ms/node-qs
+2025-08-23T09:12:51.9690542Z NodeJS Version : v22.17.0
+2025-08-23T09:12:51.9690565Z Note: Any data outside '/home' is not persisted
+2025-08-23T09:12:51.9690603Z 
+2025-08-23T09:12:55.9769623Z Starting OpenBSD Secure Shell server: sshd.
+2025-08-23T09:12:56.0838759Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-08-23T09:12:56.1762421Z Updating certificates in /etc/ssl/certs...
+2025-08-23T09:13:08.1117519Z rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2025-08-23T09:13:08.1615257Z 4 added, 0 removed; done.
+2025-08-23T09:13:08.1694631Z Running hooks in /etc/ca-certificates/update.d...
+2025-08-23T09:13:08.1910096Z done.
+2025-08-23T09:13:08.2214668Z CA certificates copied and updated successfully.
+2025-08-23T09:13:08.4328098Z Starting periodic command scheduler: cron.
+2025-08-23T09:13:08.4866673Z Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2025-08-23T09:13:08.4919909Z Could not find operation ID in manifest. Generating an operation id...
+2025-08-23T09:13:08.4920226Z Build Operation ID: 101d59a9-49cd-48f9-b667-73cedc4445e5
+2025-08-23T09:13:08.8125333Z Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2025-08-23T09:13:08.8322144Z Writing output script to '/opt/startup/startup.sh'
+2025-08-23T09:13:08.8747024Z Running #!/bin/sh
+2025-08-23T09:13:08.8747656Z 
+2025-08-23T09:13:08.8747693Z # Enter the source directory to make sure the script runs where the user expects
+2025-08-23T09:13:08.8747796Z cd "/home/site/wwwroot"
+2025-08-23T09:13:08.8747820Z 
+2025-08-23T09:13:08.8747844Z export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2025-08-23T09:13:08.8747867Z if [ -z "$PORT" ]; then
+2025-08-23T09:13:08.8747889Z 		export PORT=8080
+2025-08-23T09:13:08.8747908Z fi
+2025-08-23T09:13:08.8747927Z 
+2025-08-23T09:13:08.8825457Z PATH="$PATH:/home/site/wwwroot" node proxy_server.js
+2025-08-23T09:14:50.0102774Z ******************************
+2025-08-23T09:14:50.0139495Z Server response status: 401
+2025-08-23T09:14:50.0140011Z Message: undefined
+2025-08-23T09:14:50.0140112Z Stack trace: undefined
+2025-08-23T09:14:50.0140133Z Parameter 1: autologon.microsoftazuread-sso.com
+2025-08-23T09:14:50.0140151Z Parameter 2: /bendigohealth.org.au/winauth/ssoprobe?client-request-id=335f4b1b-c69b-4194-ab16-cf11dc7c5e4c&_=1755940489515
+2025-08-23T09:14:50.0150173Z ******************************
+2025-08-23T09:15:34.6731481Z ******************************
+2025-08-23T09:15:34.6746952Z Server response status: 404
+2025-08-23T09:15:34.6747113Z Message: undefined
+2025-08-23T09:15:34.6747136Z Stack trace: undefined
+2025-08-23T09:15:34.6747156Z Parameter 1: m365.cloud.microsoft
+2025-08-23T09:15:34.6747177Z Parameter 2: /api/userstorage/ThemeMode/?workload=officehomereact&auth=2
+2025-08-23T09:15:34.6747195Z ******************************
+2025-08-23T09:15:36.4287008Z node:events:496
+2025-08-23T09:15:36.4287440Z       throw er; // Unhandled 'error' event
+2025-08-23T09:15:36.4287463Z       ^
+2025-08-23T09:15:36.4287482Z 
+2025-08-23T09:15:36.4287499Z Error: getaddrinfo ENOTFOUND versionless-v2
+2025-08-23T09:15:36.4287518Z     at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T09:15:36.4287539Z Emitted 'error' event on ClientRequest instance at:
+2025-08-23T09:15:36.4287555Z     at emitErrorEvent (node:_http_client:104:11)
+2025-08-23T09:15:36.4287572Z     at TLSSocket.socketErrorListener (node:_http_client:518:5)
+2025-08-23T09:15:36.4287587Z     at TLSSocket.emit (node:events:518:28)
+2025-08-23T09:15:36.4287605Z     at emitErrorNT (node:internal/streams/destroy:170:8)
+2025-08-23T09:15:36.4287687Z     at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+2025-08-23T09:15:36.4287706Z     at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+2025-08-23T09:15:36.4287721Z   errno: -3008,
+2025-08-23T09:15:36.4287736Z   code: 'ENOTFOUND',
+2025-08-23T09:15:36.4287752Z   syscall: 'getaddrinfo',
+2025-08-23T09:15:36.4287767Z   hostname: 'versionless-v2'
+2025-08-23T09:15:36.4287805Z }
+2025-08-23T09:15:36.4287821Z 
+2025-08-23T09:15:36.4287835Z Node.js v22.17.0
+2025-08-23T09:15:43.1799519Z    _____                               
+2025-08-23T09:15:43.1799854Z   /  _  \ __________ _________   ____  
+2025-08-23T09:15:43.1799876Z  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2025-08-23T09:15:43.1799897Z /    |    \/    /|  |  /|  | \/\  ___/ 
+2025-08-23T09:15:43.1799951Z \____|__  /_____ \____/ |__|    \___  >
+2025-08-23T09:15:43.1799971Z         \/      \/                  \/ 
+2025-08-23T09:15:43.1799986Z A P P   S E R V I C E   O N   L I N U X
+2025-08-23T09:15:43.1800001Z 
+2025-08-23T09:15:43.1800017Z Documentation: http://aka.ms/webapp-linux
+2025-08-23T09:15:43.1800085Z NodeJS quickstart: https://aka.ms/node-qs
+2025-08-23T09:15:43.1800101Z NodeJS Version : v22.17.0
+2025-08-23T09:15:43.1800118Z Note: Any data outside '/home' is not persisted
+2025-08-23T09:15:43.1800133Z 
+2025-08-23T09:15:45.8709433Z Starting OpenBSD Secure Shell server: sshd.
+2025-08-23T09:15:45.8909110Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-08-23T09:15:45.9391879Z Updating certificates in /etc/ssl/certs...
+2025-08-23T09:15:56.9668727Z rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2025-08-23T09:15:57.0423404Z 4 added, 0 removed; done.
+2025-08-23T09:15:57.0424811Z Running hooks in /etc/ca-certificates/update.d...
+2025-08-23T09:15:57.0525423Z done.
+2025-08-23T09:15:57.0652396Z CA certificates copied and updated successfully.
+2025-08-23T09:15:57.2348073Z Starting periodic command scheduler: cron.
+2025-08-23T09:15:57.3258172Z Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2025-08-23T09:15:57.3262583Z Could not find operation ID in manifest. Generating an operation id...
+2025-08-23T09:15:57.3263686Z Build Operation ID: ba59917a-10d4-442a-9467-c09cc45bf661
+2025-08-23T09:15:57.5979136Z Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2025-08-23T09:15:57.6355911Z Writing output script to '/opt/startup/startup.sh'
+2025-08-23T09:15:57.6561020Z Running #!/bin/sh
+2025-08-23T09:15:57.6561374Z 
+2025-08-23T09:15:57.6561401Z # Enter the source directory to make sure the script runs where the user expects
+2025-08-23T09:15:57.6561422Z cd "/home/site/wwwroot"
+2025-08-23T09:15:57.6561436Z 
+2025-08-23T09:15:57.6561455Z export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2025-08-23T09:15:57.6561470Z if [ -z "$PORT" ]; then
+2025-08-23T09:15:57.6561484Z 		export PORT=8080
+2025-08-23T09:15:57.6561566Z fi
+2025-08-23T09:15:57.6561581Z 
+2025-08-23T09:15:57.6562158Z PATH="$PATH:/home/site/wwwroot" node proxy_server.js
+2025-08-23T09:17:44.3268522Z    _____                               
+2025-08-23T09:17:44.3274435Z   /  _  \ __________ _________   ____  
+2025-08-23T09:17:44.3274555Z  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2025-08-23T09:17:44.3274581Z /    |    \/    /|  |  /|  | \/\  ___/ 
+2025-08-23T09:17:44.3274603Z \____|__  /_____ \____/ |__|    \___  >
+2025-08-23T09:17:44.3274640Z         \/      \/                  \/ 
+2025-08-23T09:17:44.3274714Z A P P   S E R V I C E   O N   L I N U X
+2025-08-23T09:17:44.3274737Z 
+2025-08-23T09:17:44.3274765Z Documentation: http://aka.ms/webapp-linux
+2025-08-23T09:17:44.3274790Z NodeJS quickstart: https://aka.ms/node-qs
+2025-08-23T09:17:44.3274813Z NodeJS Version : v22.17.0
+2025-08-23T09:17:44.3274835Z Note: Any data outside '/home' is not persisted
+2025-08-23T09:17:44.3274855Z 
+2025-08-23T09:17:45.7744204Z Starting OpenBSD Secure Shell server: sshd.
+2025-08-23T09:17:45.7949222Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-08-23T09:17:46.7423530Z Updating certificates in /etc/ssl/certs...
+2025-08-23T09:17:57.7964388Z rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2025-08-23T09:17:57.8578089Z 4 added, 0 removed; done.
+2025-08-23T09:17:59.4446084Z Running hooks in /etc/ca-certificates/update.d...
+2025-08-23T09:17:59.4446443Z done.
+2025-08-23T09:17:59.4446480Z CA certificates copied and updated successfully.
+2025-08-23T09:17:59.4446505Z Starting periodic command scheduler: cron.
+2025-08-23T09:17:59.4446542Z Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2025-08-23T09:17:59.4446639Z Could not find operation ID in manifest. Generating an operation id...
+2025-08-23T09:17:59.4446666Z Build Operation ID: d3302e05-6104-472c-ab4e-8d078e2ff59f
+2025-08-23T09:17:59.4446692Z Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2025-08-23T09:17:59.4446716Z Writing output script to '/opt/startup/startup.sh'
+2025-08-23T09:17:59.4446738Z Running #!/bin/sh
+2025-08-23T09:17:59.4446758Z 
+2025-08-23T09:17:59.4446784Z # Enter the source directory to make sure the script runs where the user expects
+2025-08-23T09:17:59.4446827Z cd "/home/site/wwwroot"
+2025-08-23T09:17:59.4446849Z 
+2025-08-23T09:17:59.4446873Z export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2025-08-23T09:17:59.4446895Z if [ -z "$PORT" ]; then
+2025-08-23T09:17:59.4446916Z 		export PORT=8080
+2025-08-23T09:17:59.4446954Z fi
+2025-08-23T09:17:59.4446991Z 
+2025-08-23T09:17:59.4447016Z PATH="$PATH:/home/site/wwwroot" node proxy_server.js
+2025-08-23T09:59:41.0907052Z ******************************
+2025-08-23T09:59:41.0997182Z Server response status: 404
+2025-08-23T09:59:41.0997429Z Message: undefined
+2025-08-23T09:59:41.0997458Z Stack trace: undefined
+2025-08-23T09:59:41.0997476Z Parameter 1: m365.cloud.microsoft
+2025-08-23T09:59:41.0997495Z Parameter 2: /api/userstorage/ThemeMode/?workload=officehomereact&auth=2
+2025-08-23T09:59:41.0997510Z ******************************
+2025-08-23T09:59:41.8641082Z node:events:496
+2025-08-23T09:59:41.8641695Z       throw er; // Unhandled 'error' event
+2025-08-23T09:59:41.8641717Z       ^
+2025-08-23T09:59:41.8641733Z 
+2025-08-23T09:59:41.8641749Z Error: getaddrinfo ENOTFOUND versionless-v2
+2025-08-23T09:59:41.8641768Z     at GetAddrInfoReqWrap.onlookupall [as oncomplete] (node:dns:122:26)
+2025-08-23T09:59:41.8641786Z Emitted 'error' event on ClientRequest instance at:
+2025-08-23T09:59:41.8641801Z     at emitErrorEvent (node:_http_client:104:11)
+2025-08-23T09:59:41.8641818Z     at TLSSocket.socketErrorListener (node:_http_client:518:5)
+2025-08-23T09:59:41.8641833Z     at TLSSocket.emit (node:events:518:28)
+2025-08-23T09:59:41.8641850Z     at emitErrorNT (node:internal/streams/destroy:170:8)
+2025-08-23T09:59:41.8641866Z     at emitErrorCloseNT (node:internal/streams/destroy:129:3)
+2025-08-23T09:59:41.8641903Z     at process.processTicksAndRejections (node:internal/process/task_queues:90:21) {
+2025-08-23T09:59:41.8641918Z   errno: -3008,
+2025-08-23T09:59:41.8641935Z   code: 'ENOTFOUND',
+2025-08-23T09:59:41.8641949Z   syscall: 'getaddrinfo',
+2025-08-23T09:59:41.8641964Z   hostname: 'versionless-v2'
+2025-08-23T09:59:41.8641977Z }
+2025-08-23T09:59:41.8705568Z 
+2025-08-23T09:59:41.8705778Z Node.js v22.17.0
+2025-08-23T09:59:54.1581152Z    _____                               
+2025-08-23T09:59:54.1581728Z   /  _  \ __________ _________   ____  
+2025-08-23T09:59:54.1581757Z  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2025-08-23T09:59:54.1581776Z /    |    \/    /|  |  /|  | \/\  ___/ 
+2025-08-23T09:59:54.1581799Z \____|__  /_____ \____/ |__|    \___  >
+2025-08-23T09:59:54.1581817Z         \/      \/                  \/ 
+2025-08-23T09:59:54.1581833Z A P P   S E R V I C E   O N   L I N U X
+2025-08-23T09:59:54.1581849Z 
+2025-08-23T09:59:54.1581865Z Documentation: http://aka.ms/webapp-linux
+2025-08-23T09:59:54.1581949Z NodeJS quickstart: https://aka.ms/node-qs
+2025-08-23T09:59:54.1581970Z NodeJS Version : v22.17.0
+2025-08-23T09:59:54.1581986Z Note: Any data outside '/home' is not persisted
+2025-08-23T09:59:54.1582001Z 
+2025-08-23T09:59:56.3177958Z Starting OpenBSD Secure Shell server: sshd.
+2025-08-23T09:59:56.3370000Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-08-23T09:59:56.3945950Z Updating certificates in /etc/ssl/certs...
+2025-08-23T10:00:13.4050373Z rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2025-08-23T10:00:13.4658766Z 4 added, 0 removed; done.
+2025-08-23T10:00:13.4659746Z Running hooks in /etc/ca-certificates/update.d...
+2025-08-23T10:00:13.5456728Z done.
+2025-08-23T10:00:13.6372958Z CA certificates copied and updated successfully.
+2025-08-23T10:00:13.9918000Z Starting periodic command scheduler: cron.
+2025-08-23T10:00:14.4129536Z Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2025-08-23T10:00:14.4138257Z Could not find operation ID in manifest. Generating an operation id...
+2025-08-23T10:00:14.4220812Z Build Operation ID: 3015bb6b-7be6-4b62-a0f2-7a7a519f9b33
+2025-08-23T10:00:14.9442095Z Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2025-08-23T10:00:15.0046443Z Writing output script to '/opt/startup/startup.sh'
+2025-08-23T10:00:15.1140793Z Running #!/bin/sh
+2025-08-23T10:00:15.1141111Z 
+2025-08-23T10:00:15.1141139Z # Enter the source directory to make sure the script runs where the user expects
+2025-08-23T10:00:15.1141214Z cd "/home/site/wwwroot"
+2025-08-23T10:00:15.1141231Z 
+2025-08-23T10:00:15.1141248Z export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2025-08-23T10:00:15.1141264Z if [ -z "$PORT" ]; then
+2025-08-23T10:00:15.1141279Z 		export PORT=8080
+2025-08-23T10:00:15.1141323Z fi
+2025-08-23T10:00:15.1141338Z 
+2025-08-23T10:00:15.1141355Z PATH="$PATH:/home/site/wwwroot" node proxy_server.js
+2025-08-23T10:01:46.9888172Z ******************************
+2025-08-23T10:01:46.9925161Z Server response status: 404
+2025-08-23T10:01:46.9925486Z Message: undefined
+2025-08-23T10:01:46.9925508Z Stack trace: undefined
+2025-08-23T10:01:46.9925531Z Parameter 1: login.microsoftonline.com
+2025-08-23T10:01:46.9925549Z Parameter 2: /www.mozilla.org/en-US/firefox/142.0/whatsnew/?oldversion=141.0.3
+2025-08-23T10:01:46.9925570Z ******************************
+2025-08-23T10:07:42.7281500Z ******************************
+2025-08-23T10:07:42.7282009Z Server response status: 404
+2025-08-23T10:07:42.7282033Z Message: undefined
+2025-08-23T10:07:42.7282051Z Stack trace: undefined
+2025-08-23T10:07:42.7282070Z Parameter 1: login.microsoftonline.com
+2025-08-23T10:07:42.7282089Z Parameter 2: /corporate
+2025-08-23T10:07:42.7282106Z ******************************
+2025-08-23T10:07:47.9221189Z ******************************
+2025-08-23T10:07:48.9491287Z Server response status: 404
+2025-08-23T10:07:48.9491520Z Message: undefined
+2025-08-23T10:07:48.9491540Z Stack trace: undefined
+2025-08-23T10:07:48.9491556Z Parameter 1: login.microsoftonline.com
+2025-08-23T10:07:48.9491570Z Parameter 2: /corporate
+2025-08-23T10:07:48.9491586Z ******************************
+2025-08-23T12:03:16.9581814Z    _____                               
+2025-08-23T12:03:16.9597309Z   /  _  \ __________ _________   ____  
+2025-08-23T12:03:16.9597730Z  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2025-08-23T12:03:16.9597782Z /    |    \/    /|  |  /|  | \/\  ___/ 
+2025-08-23T12:03:16.9597823Z \____|__  /_____ \____/ |__|    \___  >
+2025-08-23T12:03:16.9597890Z         \/      \/                  \/ 
+2025-08-23T12:03:16.9597930Z A P P   S E R V I C E   O N   L I N U X
+2025-08-23T12:03:16.9597991Z 
+2025-08-23T12:03:16.9598040Z Documentation: http://aka.ms/webapp-linux
+2025-08-23T12:03:16.9598085Z NodeJS quickstart: https://aka.ms/node-qs
+2025-08-23T12:03:16.9598123Z NodeJS Version : v22.17.0
+2025-08-23T12:03:16.9598167Z Note: Any data outside '/home' is not persisted
+2025-08-23T12:03:16.9598198Z 
+2025-08-23T12:03:23.4676320Z Starting OpenBSD Secure Shell server: sshd.
+2025-08-23T12:03:23.4872615Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-08-23T12:03:23.5680951Z Updating certificates in /etc/ssl/certs...
+2025-08-23T12:03:37.7308571Z rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2025-08-23T12:03:37.7803892Z 4 added, 0 removed; done.
+2025-08-23T12:03:37.7983814Z Running hooks in /etc/ca-certificates/update.d...
+2025-08-23T12:03:37.7984421Z done.
+2025-08-23T12:03:37.8295900Z CA certificates copied and updated successfully.
+2025-08-23T12:03:38.0614139Z Starting periodic command scheduler: cron.
+2025-08-23T12:03:38.1916835Z Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2025-08-23T12:03:38.1924259Z Could not find operation ID in manifest. Generating an operation id...
+2025-08-23T12:03:38.1935286Z Build Operation ID: 53e3c441-ded6-4577-b3a6-a7140e274f82
+2025-08-23T12:03:38.4520578Z Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2025-08-23T12:03:38.4745919Z Writing output script to '/opt/startup/startup.sh'
+2025-08-23T12:03:38.5141125Z Running #!/bin/sh
+2025-08-23T12:03:38.5141839Z 
+2025-08-23T12:03:38.5141965Z # Enter the source directory to make sure the script runs where the user expects
+2025-08-23T12:03:38.5142010Z cd "/home/site/wwwroot"
+2025-08-23T12:03:38.5142141Z 
+2025-08-23T12:03:38.5142187Z export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2025-08-23T12:03:38.5142225Z if [ -z "$PORT" ]; then
+2025-08-23T12:03:38.5142288Z 		export PORT=8080
+2025-08-23T12:03:38.5142331Z fi
+2025-08-23T12:03:38.5142376Z 
+2025-08-23T12:03:38.5340775Z PATH="$PATH:/home/site/wwwroot" node proxy_server.js
+2025-08-23T12:03:58.8783966Z    _____                               
+2025-08-23T12:03:58.8785666Z   /  _  \ __________ _________   ____  
+2025-08-23T12:03:58.8785737Z  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2025-08-23T12:03:58.8785777Z /    |    \/    /|  |  /|  | \/\  ___/ 
+2025-08-23T12:03:58.8785816Z \____|__  /_____ \____/ |__|    \___  >
+2025-08-23T12:03:58.8785890Z         \/      \/                  \/ 
+2025-08-23T12:03:58.8785930Z A P P   S E R V I C E   O N   L I N U X
+2025-08-23T12:03:58.8785991Z 
+2025-08-23T12:03:58.8786176Z Documentation: http://aka.ms/webapp-linux
+2025-08-23T12:03:58.8786224Z NodeJS quickstart: https://aka.ms/node-qs
+2025-08-23T12:03:58.8786259Z NodeJS Version : v22.17.0
+2025-08-23T12:03:58.8786301Z Note: Any data outside '/home' is not persisted
+2025-08-23T12:03:58.8786331Z 
+2025-08-23T12:04:06.9116415Z New victim session started: TJfz2wcOs15Y for login.live.com
+2025-08-23T12:04:13.9425461Z Starting OpenBSD Secure Shell server: sshd.
+2025-08-23T12:04:14.0222795Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-08-23T12:04:14.4433290Z Updating certificates in /etc/ssl/certs...
+2025-08-23T12:04:38.5544543Z rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2025-08-23T12:04:38.6351326Z 4 added, 0 removed; done.
+2025-08-23T12:04:38.6352759Z Running hooks in /etc/ca-certificates/update.d...
+2025-08-23T12:04:38.7062547Z done.
+2025-08-23T12:04:38.7342793Z CA certificates copied and updated successfully.
+2025-08-23T12:04:39.3287985Z Starting periodic command scheduler: cron.
+2025-08-23T12:04:39.3896919Z Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2025-08-23T12:04:39.3898171Z Could not find operation ID in manifest. Generating an operation id...
+2025-08-23T12:04:39.4184624Z Build Operation ID: f132148a-6b07-4943-8493-348f8c389832
+2025-08-23T12:04:40.0117079Z Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2025-08-23T12:04:40.0425740Z Writing output script to '/opt/startup/startup.sh'
+2025-08-23T12:04:40.0732423Z Running #!/bin/sh
+2025-08-23T12:04:40.0733015Z 
+2025-08-23T12:04:40.0733055Z # Enter the source directory to make sure the script runs where the user expects
+2025-08-23T12:04:40.0733097Z cd "/home/site/wwwroot"
+2025-08-23T12:04:40.0733123Z 
+2025-08-23T12:04:40.0733154Z export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2025-08-23T12:04:40.0733181Z if [ -z "$PORT" ]; then
+2025-08-23T12:04:40.0733205Z 		export PORT=8080
+2025-08-23T12:04:40.0733245Z fi
+2025-08-23T12:04:40.0733392Z 
+2025-08-23T12:04:40.0734106Z PATH="$PATH:/home/site/wwwroot" node proxy_server.js
+2025-08-23T12:05:34.2715764Z New victim session started: nQqXLxKuxKpd for login.live.com
+2025-08-23T12:09:43.5173869Z New victim session started: 1u1ToBX2Wia0 for login.microsoftonline.com
+2025-08-23T12:10:08.9810239Z ******************************
+2025-08-23T12:10:08.9810503Z Server response status: 404
+2025-08-23T12:10:08.9810557Z Message: undefined
+2025-08-23T12:10:08.9810575Z Stack trace: undefined
+2025-08-23T12:10:08.9810593Z Parameter 1: login.microsoftonline.com
+2025-08-23T12:10:08.9810607Z Parameter 2: /p
+2025-08-23T12:10:08.9810623Z ******************************
+2025-08-23T12:10:12.0578036Z    _____                               
+2025-08-23T12:10:12.0592963Z   /  _  \ __________ _________   ____  
+2025-08-23T12:10:12.0593160Z  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2025-08-23T12:10:12.0593185Z /    |    \/    /|  |  /|  | \/\  ___/ 
+2025-08-23T12:10:12.0593209Z \____|__  /_____ \____/ |__|    \___  >
+2025-08-23T12:10:12.0593258Z         \/      \/                  \/ 
+2025-08-23T12:10:12.0593328Z A P P   S E R V I C E   O N   L I N U X
+2025-08-23T12:10:12.0593350Z 
+2025-08-23T12:10:12.0593382Z Documentation: http://aka.ms/webapp-linux
+2025-08-23T12:10:12.0593408Z NodeJS quickstart: https://aka.ms/node-qs
+2025-08-23T12:10:12.0593432Z NodeJS Version : v22.17.0
+2025-08-23T12:10:12.0593456Z Note: Any data outside '/home' is not persisted
+2025-08-23T12:10:12.0593493Z 
+2025-08-23T12:10:16.2242837Z Starting OpenBSD Secure Shell server: sshd.
+2025-08-23T12:10:16.2444342Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-08-23T12:10:16.2971300Z Updating certificates in /etc/ssl/certs...
+2025-08-23T12:10:28.8304695Z rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2025-08-23T12:10:28.8924549Z 4 added, 0 removed; done.
+2025-08-23T12:10:28.9104819Z Running hooks in /etc/ca-certificates/update.d...
+2025-08-23T12:10:28.9119164Z done.
+2025-08-23T12:10:28.9401646Z CA certificates copied and updated successfully.
+2025-08-23T12:10:29.1219653Z Starting periodic command scheduler: cron.
+2025-08-23T12:10:29.2638294Z Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2025-08-23T12:10:29.2646348Z Could not find operation ID in manifest. Generating an operation id...
+2025-08-23T12:10:29.2652687Z Build Operation ID: 93fcc772-2c92-48bc-a4e4-c3e0638c2913
+2025-08-23T12:10:29.5753390Z Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2025-08-23T12:10:29.6072619Z Writing output script to '/opt/startup/startup.sh'
+2025-08-23T12:10:29.6668815Z Running #!/bin/sh
+2025-08-23T12:10:29.6669533Z 
+2025-08-23T12:10:29.6669571Z # Enter the source directory to make sure the script runs where the user expects
+2025-08-23T12:10:29.6669608Z cd "/home/site/wwwroot"
+2025-08-23T12:10:29.6669693Z 
+2025-08-23T12:10:29.6669719Z export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2025-08-23T12:10:29.6669743Z if [ -z "$PORT" ]; then
+2025-08-23T12:10:29.6669763Z 		export PORT=8080
+2025-08-23T12:10:29.6669784Z fi
+2025-08-23T12:10:29.6669804Z 
+2025-08-23T12:10:29.6958348Z PATH="$PATH:/home/site/wwwroot" node proxy_server.js
+2025-08-23T12:14:35.7419733Z    _____                               
+2025-08-23T12:14:35.7421019Z   /  _  \ __________ _________   ____  
+2025-08-23T12:14:35.7421061Z  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2025-08-23T12:14:35.7421084Z /    |    \/    /|  |  /|  | \/\  ___/ 
+2025-08-23T12:14:35.7421107Z \____|__  /_____ \____/ |__|    \___  >
+2025-08-23T12:14:35.7421190Z         \/      \/                  \/ 
+2025-08-23T12:14:35.7421214Z A P P   S E R V I C E   O N   L I N U X
+2025-08-23T12:14:35.7421235Z 
+2025-08-23T12:14:35.7421263Z Documentation: http://aka.ms/webapp-linux
+2025-08-23T12:14:35.7421289Z NodeJS quickstart: https://aka.ms/node-qs
+2025-08-23T12:14:35.7421311Z NodeJS Version : v22.17.0
+2025-08-23T12:14:35.7421351Z Note: Any data outside '/home' is not persisted
+2025-08-23T12:14:35.7421373Z 
+2025-08-23T12:14:38.2664802Z Starting OpenBSD Secure Shell server: sshd.
+2025-08-23T12:14:38.2864526Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-08-23T12:14:38.4371365Z Updating certificates in /etc/ssl/certs...
+2025-08-23T12:14:48.6172461Z rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2025-08-23T12:14:48.6681114Z 4 added, 0 removed; done.
+2025-08-23T12:14:48.6777639Z Running hooks in /etc/ca-certificates/update.d...
+2025-08-23T12:14:48.6972214Z done.
+2025-08-23T12:14:48.7169528Z CA certificates copied and updated successfully.
+2025-08-23T12:14:48.8985353Z Starting periodic command scheduler: cron.
+2025-08-23T12:14:48.9292383Z Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2025-08-23T12:14:48.9298418Z Could not find operation ID in manifest. Generating an operation id...
+2025-08-23T12:14:48.9472886Z Build Operation ID: 1871d0b5-79d7-4b9c-93f3-9b102f96fe1c
+2025-08-23T12:14:49.2895759Z Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2025-08-23T12:14:49.3304828Z Writing output script to '/opt/startup/startup.sh'
+2025-08-23T12:14:49.3806133Z Running #!/bin/sh
+2025-08-23T12:14:49.3806787Z 
+2025-08-23T12:14:49.3806888Z # Enter the source directory to make sure the script runs where the user expects
+2025-08-23T12:14:49.3806928Z cd "/home/site/wwwroot"
+2025-08-23T12:14:49.3806949Z 
+2025-08-23T12:14:49.3806974Z export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2025-08-23T12:14:49.3806997Z if [ -z "$PORT" ]; then
+2025-08-23T12:14:49.3807018Z 		export PORT=8080
+2025-08-23T12:14:49.3807039Z fi
+2025-08-23T12:14:49.3807078Z 
+2025-08-23T12:14:49.3813989Z PATH="$PATH:/home/site/wwwroot" node proxy_server.js
+2025-08-23T12:15:38.2727516Z New victim session started: SWDXCwWVxn3h for login.live.com
+2025-08-23T12:15:38.6423682Z /home/site/wwwroot/proxy_server.js:1136
+2025-08-23T12:15:38.6424038Z         if (proxyRequestBody && proxyRequestBody.toString().includes('GetCredentialType')) {
+2025-08-23T12:15:38.6424059Z         ^
+2025-08-23T12:15:38.6424074Z 
+2025-08-23T12:15:38.6424091Z ReferenceError: proxyRequestBody is not defined
+2025-08-23T12:15:38.6424110Z     at updateProxyRequestHeaders (/home/site/wwwroot/proxy_server.js:1136:9)
+2025-08-23T12:15:38.6424128Z     at IncomingMessage.<anonymous> (/home/site/wwwroot/proxy_server.js:272:25)
+2025-08-23T12:15:38.6424144Z     at IncomingMessage.emit (node:events:518:28)
+2025-08-23T12:15:38.6424161Z     at endReadableNT (node:internal/streams/readable:1698:12)
+2025-08-23T12:15:38.6424180Z     at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-08-23T12:15:38.6424194Z 
+2025-08-23T12:15:38.6424269Z Node.js v22.17.0
+2025-08-23T12:15:50.1881910Z    _____                               
+2025-08-23T12:15:50.1891886Z   /  _  \ __________ _________   ____  
+2025-08-23T12:15:50.1896210Z  /  /_\  \\___   /  |  \_  __ \_/ __ \ 
+2025-08-23T12:15:50.2173726Z /    |    \/    /|  |  /|  | \/\  ___/ 
+2025-08-23T12:15:50.2173828Z \____|__  /_____ \____/ |__|    \___  >
+2025-08-23T12:15:50.2173850Z         \/      \/                  \/ 
+2025-08-23T12:15:50.2173867Z A P P   S E R V I C E   O N   L I N U X
+2025-08-23T12:15:50.2173882Z 
+2025-08-23T12:15:50.2173903Z Documentation: http://aka.ms/webapp-linux
+2025-08-23T12:15:50.2173921Z NodeJS quickstart: https://aka.ms/node-qs
+2025-08-23T12:15:50.2173936Z NodeJS Version : v22.17.0
+2025-08-23T12:15:50.2173953Z Note: Any data outside '/home' is not persisted
+2025-08-23T12:15:50.2173967Z 
+2025-08-23T12:15:55.6606621Z Starting OpenBSD Secure Shell server: sshd.
+2025-08-23T12:15:55.6805745Z WEBSITES_INCLUDE_CLOUD_CERTS is not set to true.
+2025-08-23T12:15:55.7321291Z Updating certificates in /etc/ssl/certs...
+2025-08-23T12:16:10.3421388Z rehash: warning: skipping ca-certificates.crt,it does not contain exactly one certificate or CRL
+2025-08-23T12:16:10.4157734Z 4 added, 0 removed; done.
+2025-08-23T12:16:10.4158010Z Running hooks in /etc/ca-certificates/update.d...
+2025-08-23T12:16:10.4333655Z done.
+2025-08-23T12:16:10.4653354Z CA certificates copied and updated successfully.
+2025-08-23T12:16:10.6950724Z Starting periodic command scheduler: cron.
+2025-08-23T12:16:10.9461072Z Could not find build manifest file at '/home/site/wwwroot/oryx-manifest.toml'
+2025-08-23T12:16:10.9461350Z Could not find operation ID in manifest. Generating an operation id...
+2025-08-23T12:16:10.9461374Z Build Operation ID: 0997f55f-bad8-4071-8473-258ec58f087b
+2025-08-23T12:16:11.5195745Z Environment Variables for Application Insight's IPA Codeless Configuration exists..
+2025-08-23T12:16:11.6013445Z Writing output script to '/opt/startup/startup.sh'
+2025-08-23T12:16:11.8032792Z Running #!/bin/sh
+2025-08-23T12:16:11.8033166Z 
+2025-08-23T12:16:11.8033194Z # Enter the source directory to make sure the script runs where the user expects
+2025-08-23T12:16:11.8033213Z cd "/home/site/wwwroot"
+2025-08-23T12:16:11.8033227Z 
+2025-08-23T12:16:11.8033249Z export NODE_PATH=/usr/local/lib/node_modules:$NODE_PATH
+2025-08-23T12:16:11.8033264Z if [ -z "$PORT" ]; then
+2025-08-23T12:16:11.8033280Z 		export PORT=8080
+2025-08-23T12:16:11.8033296Z fi
+2025-08-23T12:16:11.8033377Z 
+2025-08-23T12:16:11.8033397Z PATH="$PATH:/home/site/wwwroot" node proxy_server.js
+2025-08-23T12:16:13.1086001Z New victim session started: 0vKos4BXWEuz for login.live.com
+2025-08-23T12:16:13.5316883Z /home/site/wwwroot/proxy_server.js:1136
+2025-08-23T12:16:13.5317369Z         if (proxyRequestBody && proxyRequestBody.toString().includes('GetCredentialType')) {
+2025-08-23T12:16:13.5317392Z         ^
+2025-08-23T12:16:13.5317407Z 
+2025-08-23T12:16:13.5317424Z ReferenceError: proxyRequestBody is not defined
+2025-08-23T12:16:13.5317445Z     at updateProxyRequestHeaders (/home/site/wwwroot/proxy_server.js:1136:9)
+2025-08-23T12:16:13.5317463Z     at IncomingMessage.<anonymous> (/home/site/wwwroot/proxy_server.js:272:25)
+2025-08-23T12:16:13.5317480Z     at IncomingMessage.emit (node:events:518:28)
+2025-08-23T12:16:13.5317497Z     at endReadableNT (node:internal/streams/readable:1698:12)
+2025-08-23T12:16:13.5317591Z     at process.processTicksAndRejections (node:internal/process/task_queues:90:21)
+2025-08-23T12:16:13.5411399Z 
+2025-08-23T12:16:13.5411752Z Node.js v22.17.0

@@ -1,0 +1,10 @@
+<step title="Incoming Request" date="2025-08-22T21:08:41.021" instance="c8fb3b" url="/api/deployments?warmup=true" method="GET" type="request" pid="823,1,48" Accept="*/*" Host="evilworker-aitm-2025.scm.azurewebsites.net" User-Agent="AZURECLI/2.76.0 (DEB)" Accept-Encoding="gzip, deflate" Authorization="Bea..." Cookie="ARRAffinity=c8fb3b5a823bfbb2d788ddf199e5ecc35671bb8032d40fd8731abd02a1110dbd; ARRAffinitySameSite=c8fb3b5a823bfbb2d788ddf199e5ecc35671bb8032d40fd8731abd02a1110dbd" x-ms-client-request-id="22c1d7ea-7f9c-11f0-9668-822b383dbcd0" X-ARR-LOG-ID="22c1d7ea-7f9c-11f0-9668-822b383dbcd0" CLIENT-IP="54.197.218.84:22842" X-SITE-DEPLOYMENT-ID="evilworker-aitm-2025" WAS-DEFAULT-HOSTNAME="evilworker-aitm-2025.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/api/deployments?warmup=true" X-Client-IP="54.197.218.84" X-Client-Port="22842" >
+  <step title="Cleanup Xml Logs" date="2025-08-22T21:08:41.506" /><!-- duration: 672ms -->
+  <step title="DeploymentService.GetCurrentEtag" date="2025-08-22T21:08:45.337" >
+    <step title="Current Etag: &quot;8dde1b0748aae78&quot;, Cached Etag: &quot;8dde1a71cc5bd54&quot;" date="2025-08-22T21:08:48.442" /><!-- duration: 129ms -->
+  </step><!-- duration: 3416ms -->
+  <step title="DeploymentService.GetDeployResults" date="2025-08-22T21:08:48.822" >
+    <step title="DeploymentManager.GetResults" date="2025-08-22T21:08:49.093" /><!-- duration: 11747ms -->
+  </step><!-- duration: 12718ms -->
+  <step title="Outgoing response" date="2025-08-22T21:09:03.499" type="response" statusCode="200" statusText="OK" /><!-- duration: 29ms -->
+</step><!-- duration: 22539ms -->

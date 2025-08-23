@@ -1,0 +1,489 @@
+2025-08-23T10:06:44.8554636Z Container start method called.
+2025-08-23T10:06:44.8929931Z Establishing network.
+2025-08-23T10:06:44.9019242Z Pulling image: appsvc/node:22-lts_20250724.2.tuxprod.
+2025-08-23T10:07:47.8641010Z Image appsvc/node:22-lts_20250724.2.tuxprod is pulled from registry 10.1.0.4:13209
+2025-08-23T10:07:47.8817529Z Container is starting.
+2025-08-23T10:07:47.8911148Z Establishing user namespace if not established already.
+2025-08-23T10:07:47.8914119Z Establishing network if not established already.
+2025-08-23T10:07:47.8915670Z Mounting volumes.
+2025-08-23T10:07:47.8919651Z Nested mountpoint 
+2025-08-23T10:07:47.9492844Z Nested mountpoint volatile/logs
+2025-08-23T10:07:47.9682448Z Nested mountpoint 
+2025-08-23T10:07:48.0480064Z Nested mountpoint 
+2025-08-23T10:07:48.0849944Z Nested mountpoint 
+2025-08-23T10:07:49.4191577Z Creating container.
+2025-08-23T10:07:49.4205997Z Creating pipes for streaming container io.
+2025-08-23T10:07:49.4290932Z Creating stdout named pipe at /podr/container/pipe/6ea410696d25_evilworker-aitm-2025/stdout_6d493aa74b0d4bf8a7ce3f93df4c0ba4.
+2025-08-23T10:07:49.4308447Z Successfully created stdout named pipe at: /podr/container/pipe/6ea410696d25_evilworker-aitm-2025/stdout_6d493aa74b0d4bf8a7ce3f93df4c0ba4.
+2025-08-23T10:07:49.4395162Z Opening named pipe /podr/container/pipe/6ea410696d25_evilworker-aitm-2025/stdout_6d493aa74b0d4bf8a7ce3f93df4c0ba4 for reading in non-blocking mode.
+2025-08-23T10:07:49.4412355Z Successfully opened named pipe: /podr/container/pipe/6ea410696d25_evilworker-aitm-2025/stdout_6d493aa74b0d4bf8a7ce3f93df4c0ba4.
+2025-08-23T10:07:49.4496550Z Successfully removed non-blocking flag from /podr/container/pipe/6ea410696d25_evilworker-aitm-2025/stdout_6d493aa74b0d4bf8a7ce3f93df4c0ba4.
+2025-08-23T10:07:49.4509455Z Creating stderr named pipe at /podr/container/pipe/6ea410696d25_evilworker-aitm-2025/stderr_4765780194cc4f74aac848344121ff14.
+2025-08-23T10:07:49.4520644Z Successfully created stderr named pipe at: /podr/container/pipe/6ea410696d25_evilworker-aitm-2025/stderr_4765780194cc4f74aac848344121ff14.
+2025-08-23T10:07:49.4603372Z Opening named pipe /podr/container/pipe/6ea410696d25_evilworker-aitm-2025/stderr_4765780194cc4f74aac848344121ff14 for reading in non-blocking mode.
+2025-08-23T10:07:49.4613901Z Successfully opened named pipe: /podr/container/pipe/6ea410696d25_evilworker-aitm-2025/stderr_4765780194cc4f74aac848344121ff14.
+2025-08-23T10:07:49.4697558Z Successfully removed non-blocking flag from /podr/container/pipe/6ea410696d25_evilworker-aitm-2025/stderr_4765780194cc4f74aac848344121ff14.
+2025-08-23T10:07:49.4705381Z Creating container with image: appsvc/node:22-lts_20250724.2.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:22-lts_20250724.2.tuxprod
+2025-08-23T10:07:50.0846059Z Starting container: 6ea410696d25_evilworker-aitm-2025.
+2025-08-23T10:07:50.1853841Z Starting watchers and probes.
+2025-08-23T10:07:50.1946878Z Starting metrics collection.
+2025-08-23T10:07:50.1956680Z Container is running.
+2025-08-23T10:07:51.0254080Z Container start method finished after 66160 ms.
+2025-08-23T10:08:12.3158094Z Site startup probe succeeded after 21.1888427 seconds.
+2025-08-23T10:08:12.5361135Z Site is running with deployment version: 65c3503a-2a95-4c23-b264-9b8ef8335505
+2025-08-23T10:08:12.5438554Z Site started.
+2025-08-23T10:21:19.0504303Z Container has finished running with exit code: 1.
+2025-08-23T10:21:19.0885098Z Container is terminating. Grace period: 5 seconds.
+2025-08-23T10:21:19.1550553Z Stop and delete container. Retry count = 0
+2025-08-23T10:21:19.1666597Z Stopping container: 6ea410696d25_evilworker-aitm-2025.
+2025-08-23T10:21:19.2909511Z Deleting container: 6ea410696d25_evilworker-aitm-2025. Retry count = 0
+2025-08-23T10:21:19.6267073Z Container spec TerminationMessagePolicy  path 
+2025-08-23T10:21:19.6463584Z Container is terminated. Total time elapsed: 548 ms.
+2025-08-23T10:21:19.6582955Z Site container: evilworker-aitm-2025 terminated. Stopping the entire site.
+2025-08-23T10:21:19.7789041Z Site: evilworker-aitm-2025 stopped.
+2025-08-23T10:21:23.4765161Z Container start method called.
+2025-08-23T10:21:23.4766226Z Establishing network.
+2025-08-23T10:21:23.4963878Z Pulling image: appsvc/node:22-lts_20250724.2.tuxprod.
+2025-08-23T10:21:25.8464773Z Container is starting.
+2025-08-23T10:21:25.8467897Z Establishing user namespace if not established already.
+2025-08-23T10:21:25.8470677Z Establishing network if not established already.
+2025-08-23T10:21:25.8642378Z Mounting volumes.
+2025-08-23T10:21:25.8723409Z Nested mountpoint 
+2025-08-23T10:21:25.9220047Z Nested mountpoint volatile/logs
+2025-08-23T10:21:25.9421193Z Nested mountpoint 
+2025-08-23T10:21:25.9778323Z Nested mountpoint 
+2025-08-23T10:21:26.0555253Z Nested mountpoint 
+2025-08-23T10:21:27.7939252Z Creating container.
+2025-08-23T10:21:27.7949410Z Creating pipes for streaming container io.
+2025-08-23T10:21:27.8141583Z Creating stdout named pipe at /podr/container/pipe/5d813b15cffe_evilworker-aitm-2025/stdout_f8974eb9c5324713b6b86fca6abd2cbe.
+2025-08-23T10:21:27.8155603Z Successfully created stdout named pipe at: /podr/container/pipe/5d813b15cffe_evilworker-aitm-2025/stdout_f8974eb9c5324713b6b86fca6abd2cbe.
+2025-08-23T10:21:27.8332755Z Opening named pipe /podr/container/pipe/5d813b15cffe_evilworker-aitm-2025/stdout_f8974eb9c5324713b6b86fca6abd2cbe for reading in non-blocking mode.
+2025-08-23T10:21:27.8343053Z Successfully opened named pipe: /podr/container/pipe/5d813b15cffe_evilworker-aitm-2025/stdout_f8974eb9c5324713b6b86fca6abd2cbe.
+2025-08-23T10:21:27.8347595Z Successfully removed non-blocking flag from /podr/container/pipe/5d813b15cffe_evilworker-aitm-2025/stdout_f8974eb9c5324713b6b86fca6abd2cbe.
+2025-08-23T10:21:27.8357369Z Creating stderr named pipe at /podr/container/pipe/5d813b15cffe_evilworker-aitm-2025/stderr_bab5576502074e328c6e3ec7f94073e1.
+2025-08-23T10:21:27.8523939Z Successfully created stderr named pipe at: /podr/container/pipe/5d813b15cffe_evilworker-aitm-2025/stderr_bab5576502074e328c6e3ec7f94073e1.
+2025-08-23T10:21:27.8539245Z Opening named pipe /podr/container/pipe/5d813b15cffe_evilworker-aitm-2025/stderr_bab5576502074e328c6e3ec7f94073e1 for reading in non-blocking mode.
+2025-08-23T10:21:27.8547489Z Successfully opened named pipe: /podr/container/pipe/5d813b15cffe_evilworker-aitm-2025/stderr_bab5576502074e328c6e3ec7f94073e1.
+2025-08-23T10:21:27.8553491Z Successfully removed non-blocking flag from /podr/container/pipe/5d813b15cffe_evilworker-aitm-2025/stderr_bab5576502074e328c6e3ec7f94073e1.
+2025-08-23T10:21:27.8628978Z Creating container with image: appsvc/node:22-lts_20250724.2.tuxprod from registry: 10.1.0.4:13209 and fully qualified image name: 10.1.0.4:13209/appsvc/node:22-lts_20250724.2.tuxprod
+2025-08-23T10:21:28.5260336Z Starting container: 5d813b15cffe_evilworker-aitm-2025.
+2025-08-23T10:21:29.3259196Z Starting watchers and probes.
+2025-08-23T10:21:29.3266117Z Starting metrics collection.
+2025-08-23T10:21:29.3269915Z Container is running.
+2025-08-23T10:21:30.6239693Z Container start method finished after 7147 ms.
+2025-08-23T10:21:46.8607528Z Site startup probe succeeded after 16.2285934 seconds.
+2025-08-23T10:21:46.9567667Z Site is running with deployment version: 65c3503a-2a95-4c23-b264-9b8ef8335505
+2025-08-23T10:21:46.9644094Z Site started.
+2025-08-23T11:16:47.4423043Z Container start method called.
+2025-08-23T11:16:47.4707062Z Establishing network.
+2025-08-23T11:16:47.4709266Z Pulling image: appsvc/node:22-lts_20250724.2.tuxprod.
+2025-08-23T11:16:50.9728812Z Image appsvc/node:22-lts_20250724.2.tuxprod is pulled from registry 10.1.0.6:13209
+2025-08-23T11:16:50.9732310Z Container is starting.
+2025-08-23T11:16:50.9735322Z Establishing user namespace if not established already.
+2025-08-23T11:16:50.9738333Z Establishing network if not established already.
+2025-08-23T11:16:50.9824637Z Mounting volumes.
+2025-08-23T11:16:50.9827438Z Nested mountpoint 
+2025-08-23T11:16:51.0609289Z Nested mountpoint volatile/logs
+2025-08-23T11:16:51.0791654Z Nested mountpoint 
+2025-08-23T11:16:51.0885283Z Nested mountpoint 
+2025-08-23T11:16:51.1938612Z Nested mountpoint 
+2025-08-23T11:16:52.8041980Z Creating container.
+2025-08-23T11:16:52.8119196Z Creating pipes for streaming container io.
+2025-08-23T11:16:52.8127676Z Creating stdout named pipe at /podr/container/pipe/55caed485ff8_evilworker-aitm-2025/stdout_b6f5fde92d584eb7b8a2734ef774dccb.
+2025-08-23T11:16:52.8143163Z Successfully created stdout named pipe at: /podr/container/pipe/55caed485ff8_evilworker-aitm-2025/stdout_b6f5fde92d584eb7b8a2734ef774dccb.
+2025-08-23T11:16:52.8338556Z Opening named pipe /podr/container/pipe/55caed485ff8_evilworker-aitm-2025/stdout_b6f5fde92d584eb7b8a2734ef774dccb for reading in non-blocking mode.
+2025-08-23T11:16:52.8517024Z Successfully opened named pipe: /podr/container/pipe/55caed485ff8_evilworker-aitm-2025/stdout_b6f5fde92d584eb7b8a2734ef774dccb.
+2025-08-23T11:16:52.8521275Z Successfully removed non-blocking flag from /podr/container/pipe/55caed485ff8_evilworker-aitm-2025/stdout_b6f5fde92d584eb7b8a2734ef774dccb.
+2025-08-23T11:16:52.8522680Z Creating stderr named pipe at /podr/container/pipe/55caed485ff8_evilworker-aitm-2025/stderr_431b1958655240bbb5b0a8edf07cca55.
+2025-08-23T11:16:52.8576526Z Successfully created stderr named pipe at: /podr/container/pipe/55caed485ff8_evilworker-aitm-2025/stderr_431b1958655240bbb5b0a8edf07cca55.
+2025-08-23T11:16:52.8577728Z Opening named pipe /podr/container/pipe/55caed485ff8_evilworker-aitm-2025/stderr_431b1958655240bbb5b0a8edf07cca55 for reading in non-blocking mode.
+2025-08-23T11:16:52.8578910Z Successfully opened named pipe: /podr/container/pipe/55caed485ff8_evilworker-aitm-2025/stderr_431b1958655240bbb5b0a8edf07cca55.
+2025-08-23T11:16:52.8593942Z Successfully removed non-blocking flag from /podr/container/pipe/55caed485ff8_evilworker-aitm-2025/stderr_431b1958655240bbb5b0a8edf07cca55.
+2025-08-23T11:16:52.8596208Z Creating container with image: appsvc/node:22-lts_20250724.2.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20250724.2.tuxprod
+2025-08-23T11:16:53.7098307Z Starting container: 55caed485ff8_evilworker-aitm-2025.
+2025-08-23T11:16:53.8481483Z Starting watchers and probes.
+2025-08-23T11:16:53.8703524Z Starting metrics collection.
+2025-08-23T11:16:53.8705774Z Container is running.
+2025-08-23T11:16:54.0893218Z Container start method finished after 6619 ms.
+2025-08-23T11:17:22.5530539Z Site startup probe succeeded after 28.3507282 seconds.
+2025-08-23T11:17:22.7132802Z Site is running with deployment version: b2b2b3d1-1427-4c88-ad65-4557742ffd43
+2025-08-23T11:17:22.7147427Z Site started.
+2025-08-23T11:17:43.4465234Z Container is terminating. Grace period: 5 seconds.
+2025-08-23T11:17:44.1151983Z Stop and delete container. Retry count = 0
+2025-08-23T11:17:44.1163207Z Stopping container: 5d813b15cffe_evilworker-aitm-2025.
+2025-08-23T11:17:48.9448278Z Deleting container: 5d813b15cffe_evilworker-aitm-2025. Retry count = 0
+2025-08-23T11:17:49.1831087Z Container spec TerminationMessagePolicy  path 
+2025-08-23T11:17:49.1848376Z Container is terminated. Total time elapsed: 5731 ms.
+2025-08-23T11:17:49.1937958Z Site: evilworker-aitm-2025 stopped.
+2025-08-23T11:25:50.2453278Z Container has finished running with exit code: 1.
+2025-08-23T11:25:50.2477260Z Container is terminating. Grace period: 5 seconds.
+2025-08-23T11:25:50.2720085Z Stop and delete container. Retry count = 0
+2025-08-23T11:25:50.2740105Z Stopping container: 55caed485ff8_evilworker-aitm-2025.
+2025-08-23T11:25:50.3721125Z Deleting container: 55caed485ff8_evilworker-aitm-2025. Retry count = 0
+2025-08-23T11:25:50.8330802Z Container spec TerminationMessagePolicy  path 
+2025-08-23T11:25:50.8425607Z Container is terminated. Total time elapsed: 582 ms.
+2025-08-23T11:25:50.8531127Z Site container: evilworker-aitm-2025 terminated. Stopping the entire site.
+2025-08-23T11:25:50.8861825Z Site: evilworker-aitm-2025 stopped.
+2025-08-23T11:27:09.8901746Z Container start method called.
+2025-08-23T11:27:09.8915126Z Establishing network.
+2025-08-23T11:27:09.9001789Z Pulling image: appsvc/node:22-lts_20250724.2.tuxprod.
+2025-08-23T11:27:12.5089330Z Container is starting.
+2025-08-23T11:27:12.5268506Z Establishing user namespace if not established already.
+2025-08-23T11:27:12.5352209Z Establishing network if not established already.
+2025-08-23T11:27:12.5358204Z Mounting volumes.
+2025-08-23T11:27:12.5698003Z Nested mountpoint 
+2025-08-23T11:27:12.6251591Z Nested mountpoint volatile/logs
+2025-08-23T11:27:12.7071545Z Nested mountpoint 
+2025-08-23T11:27:12.7267990Z Nested mountpoint 
+2025-08-23T11:27:12.8309556Z Nested mountpoint 
+2025-08-23T11:27:17.4219232Z Creating container.
+2025-08-23T11:27:17.4221304Z Creating pipes for streaming container io.
+2025-08-23T11:27:17.4222597Z Creating stdout named pipe at /podr/container/pipe/760f51ef0e38_evilworker-aitm-2025/stdout_0530c91ef5a44366afd164c4a89b5e75.
+2025-08-23T11:27:17.4227425Z Successfully created stdout named pipe at: /podr/container/pipe/760f51ef0e38_evilworker-aitm-2025/stdout_0530c91ef5a44366afd164c4a89b5e75.
+2025-08-23T11:27:17.4228672Z Opening named pipe /podr/container/pipe/760f51ef0e38_evilworker-aitm-2025/stdout_0530c91ef5a44366afd164c4a89b5e75 for reading in non-blocking mode.
+2025-08-23T11:27:17.4229976Z Successfully opened named pipe: /podr/container/pipe/760f51ef0e38_evilworker-aitm-2025/stdout_0530c91ef5a44366afd164c4a89b5e75.
+2025-08-23T11:27:17.4230917Z Successfully removed non-blocking flag from /podr/container/pipe/760f51ef0e38_evilworker-aitm-2025/stdout_0530c91ef5a44366afd164c4a89b5e75.
+2025-08-23T11:27:17.4304991Z Creating stderr named pipe at /podr/container/pipe/760f51ef0e38_evilworker-aitm-2025/stderr_d0fcc38e9d96448781870fa762222bdb.
+2025-08-23T11:27:17.4518692Z Successfully created stderr named pipe at: /podr/container/pipe/760f51ef0e38_evilworker-aitm-2025/stderr_d0fcc38e9d96448781870fa762222bdb.
+2025-08-23T11:27:17.4582556Z Opening named pipe /podr/container/pipe/760f51ef0e38_evilworker-aitm-2025/stderr_d0fcc38e9d96448781870fa762222bdb for reading in non-blocking mode.
+2025-08-23T11:27:17.4586362Z Successfully opened named pipe: /podr/container/pipe/760f51ef0e38_evilworker-aitm-2025/stderr_d0fcc38e9d96448781870fa762222bdb.
+2025-08-23T11:27:17.4587788Z Successfully removed non-blocking flag from /podr/container/pipe/760f51ef0e38_evilworker-aitm-2025/stderr_d0fcc38e9d96448781870fa762222bdb.
+2025-08-23T11:27:17.4768972Z Creating container with image: appsvc/node:22-lts_20250724.2.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20250724.2.tuxprod
+2025-08-23T11:27:21.3387452Z Starting container: 760f51ef0e38_evilworker-aitm-2025.
+2025-08-23T11:27:22.6892835Z Starting watchers and probes.
+2025-08-23T11:27:22.6977538Z Starting metrics collection.
+2025-08-23T11:27:22.6987831Z Container is running.
+2025-08-23T11:27:25.7743095Z Container start method finished after 15854 ms.
+2025-08-23T11:27:49.0313863Z Site startup probe succeeded after 23.1908153 seconds.
+2025-08-23T11:27:49.1147440Z Site is running with deployment version: b2b2b3d1-1427-4c88-ad65-4557742ffd43
+2025-08-23T11:27:49.1255649Z Site started.
+2025-08-23T11:29:52.4454454Z Container has finished running with exit code: 1.
+2025-08-23T11:29:52.4549886Z Container is terminating. Grace period: 5 seconds.
+2025-08-23T11:29:52.4653897Z Stop and delete container. Retry count = 0
+2025-08-23T11:29:52.4732474Z Stopping container: 760f51ef0e38_evilworker-aitm-2025.
+2025-08-23T11:29:52.5332456Z Deleting container: 760f51ef0e38_evilworker-aitm-2025. Retry count = 0
+2025-08-23T11:29:52.7617811Z Container spec TerminationMessagePolicy  path 
+2025-08-23T11:29:52.7793412Z Container is terminated. Total time elapsed: 323 ms.
+2025-08-23T11:29:52.7797186Z Site container: evilworker-aitm-2025 terminated. Stopping the entire site.
+2025-08-23T11:29:52.7977295Z Site: evilworker-aitm-2025 stopped.
+2025-08-23T11:29:59.3038713Z Container start method called.
+2025-08-23T11:29:59.3039624Z Establishing network.
+2025-08-23T11:29:59.3040415Z Pulling image: appsvc/node:22-lts_20250724.2.tuxprod.
+2025-08-23T11:30:01.1788300Z Container is starting.
+2025-08-23T11:30:01.1900216Z Establishing user namespace if not established already.
+2025-08-23T11:30:01.2181994Z Establishing network if not established already.
+2025-08-23T11:30:01.2458838Z Mounting volumes.
+2025-08-23T11:30:01.2610682Z Nested mountpoint 
+2025-08-23T11:30:01.3268239Z Nested mountpoint volatile/logs
+2025-08-23T11:30:01.3572062Z Nested mountpoint 
+2025-08-23T11:30:01.3578228Z Nested mountpoint 
+2025-08-23T11:30:01.5633765Z Nested mountpoint 
+2025-08-23T11:30:06.8062670Z Creating container.
+2025-08-23T11:30:06.8064207Z Creating pipes for streaming container io.
+2025-08-23T11:30:06.8065291Z Creating stdout named pipe at /podr/container/pipe/0fd8d7d748d3_evilworker-aitm-2025/stdout_ea321654890e440cb8e00c933b652e6c.
+2025-08-23T11:30:06.8072902Z Successfully created stdout named pipe at: /podr/container/pipe/0fd8d7d748d3_evilworker-aitm-2025/stdout_ea321654890e440cb8e00c933b652e6c.
+2025-08-23T11:30:06.8145066Z Opening named pipe /podr/container/pipe/0fd8d7d748d3_evilworker-aitm-2025/stdout_ea321654890e440cb8e00c933b652e6c for reading in non-blocking mode.
+2025-08-23T11:30:06.8449278Z Successfully opened named pipe: /podr/container/pipe/0fd8d7d748d3_evilworker-aitm-2025/stdout_ea321654890e440cb8e00c933b652e6c.
+2025-08-23T11:30:06.8452739Z Successfully removed non-blocking flag from /podr/container/pipe/0fd8d7d748d3_evilworker-aitm-2025/stdout_ea321654890e440cb8e00c933b652e6c.
+2025-08-23T11:30:06.8516451Z Creating stderr named pipe at /podr/container/pipe/0fd8d7d748d3_evilworker-aitm-2025/stderr_2ff5a831e0cc498da44d86dc2c6811e4.
+2025-08-23T11:30:06.8519925Z Successfully created stderr named pipe at: /podr/container/pipe/0fd8d7d748d3_evilworker-aitm-2025/stderr_2ff5a831e0cc498da44d86dc2c6811e4.
+2025-08-23T11:30:06.8527422Z Opening named pipe /podr/container/pipe/0fd8d7d748d3_evilworker-aitm-2025/stderr_2ff5a831e0cc498da44d86dc2c6811e4 for reading in non-blocking mode.
+2025-08-23T11:30:06.8529233Z Successfully opened named pipe: /podr/container/pipe/0fd8d7d748d3_evilworker-aitm-2025/stderr_2ff5a831e0cc498da44d86dc2c6811e4.
+2025-08-23T11:30:06.8530301Z Successfully removed non-blocking flag from /podr/container/pipe/0fd8d7d748d3_evilworker-aitm-2025/stderr_2ff5a831e0cc498da44d86dc2c6811e4.
+2025-08-23T11:30:06.8531620Z Creating container with image: appsvc/node:22-lts_20250724.2.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20250724.2.tuxprod
+2025-08-23T11:30:08.8060945Z Starting container: 0fd8d7d748d3_evilworker-aitm-2025.
+2025-08-23T11:30:08.9493009Z Starting watchers and probes.
+2025-08-23T11:30:08.9497489Z Starting metrics collection.
+2025-08-23T11:30:08.9772034Z Container is running.
+2025-08-23T11:30:10.8765431Z Container start method finished after 11572 ms.
+2025-08-23T11:30:30.6214543Z Site startup probe succeeded after 19.6169756 seconds.
+2025-08-23T11:30:30.8016202Z Site is running with deployment version: b2b2b3d1-1427-4c88-ad65-4557742ffd43
+2025-08-23T11:30:30.8193234Z Site started.
+2025-08-23T11:30:51.0559099Z Container start method called.
+2025-08-23T11:30:51.0566971Z Establishing network.
+2025-08-23T11:30:51.0574658Z Pulling image: appsvc/node:22-lts_20250724.2.tuxprod.
+2025-08-23T11:30:52.7018274Z Container is starting.
+2025-08-23T11:30:52.7021031Z Establishing user namespace if not established already.
+2025-08-23T11:30:52.7022072Z Establishing network if not established already.
+2025-08-23T11:30:52.7022859Z Mounting volumes.
+2025-08-23T11:30:52.7025859Z Nested mountpoint 
+2025-08-23T11:30:52.7287669Z Nested mountpoint volatile/logs
+2025-08-23T11:30:52.7963253Z Nested mountpoint 
+2025-08-23T11:30:52.8245701Z Nested mountpoint 
+2025-08-23T11:30:52.8964112Z Nested mountpoint 
+2025-08-23T11:30:54.8877492Z Creating container.
+2025-08-23T11:30:54.9159608Z Creating pipes for streaming container io.
+2025-08-23T11:30:54.9178787Z Creating stdout named pipe at /podr/container/pipe/09fa3b5f1792_evilworker-aitm-2025/stdout_619f267613614ca1a1c27f949d15067c.
+2025-08-23T11:30:54.9446277Z Successfully created stdout named pipe at: /podr/container/pipe/09fa3b5f1792_evilworker-aitm-2025/stdout_619f267613614ca1a1c27f949d15067c.
+2025-08-23T11:30:54.9622180Z Opening named pipe /podr/container/pipe/09fa3b5f1792_evilworker-aitm-2025/stdout_619f267613614ca1a1c27f949d15067c for reading in non-blocking mode.
+2025-08-23T11:30:54.9635485Z Successfully opened named pipe: /podr/container/pipe/09fa3b5f1792_evilworker-aitm-2025/stdout_619f267613614ca1a1c27f949d15067c.
+2025-08-23T11:30:54.9641740Z Successfully removed non-blocking flag from /podr/container/pipe/09fa3b5f1792_evilworker-aitm-2025/stdout_619f267613614ca1a1c27f949d15067c.
+2025-08-23T11:30:54.9648177Z Creating stderr named pipe at /podr/container/pipe/09fa3b5f1792_evilworker-aitm-2025/stderr_8d8e7df546c94e84addcdd282a25136f.
+2025-08-23T11:30:54.9731878Z Successfully created stderr named pipe at: /podr/container/pipe/09fa3b5f1792_evilworker-aitm-2025/stderr_8d8e7df546c94e84addcdd282a25136f.
+2025-08-23T11:30:54.9746917Z Opening named pipe /podr/container/pipe/09fa3b5f1792_evilworker-aitm-2025/stderr_8d8e7df546c94e84addcdd282a25136f for reading in non-blocking mode.
+2025-08-23T11:30:54.9849080Z Successfully opened named pipe: /podr/container/pipe/09fa3b5f1792_evilworker-aitm-2025/stderr_8d8e7df546c94e84addcdd282a25136f.
+2025-08-23T11:30:54.9850892Z Successfully removed non-blocking flag from /podr/container/pipe/09fa3b5f1792_evilworker-aitm-2025/stderr_8d8e7df546c94e84addcdd282a25136f.
+2025-08-23T11:30:54.9943517Z Creating container with image: appsvc/node:22-lts_20250724.2.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20250724.2.tuxprod
+2025-08-23T11:30:55.9715753Z Starting container: 09fa3b5f1792_evilworker-aitm-2025.
+2025-08-23T11:30:56.1173136Z Starting watchers and probes.
+2025-08-23T11:30:56.1272422Z Starting metrics collection.
+2025-08-23T11:30:56.1278753Z Container is running.
+2025-08-23T11:30:56.4038976Z Container start method finished after 5347 ms.
+2025-08-23T11:31:16.3435474Z Site startup probe succeeded after 19.88332 seconds.
+2025-08-23T11:31:16.4642343Z Site is running with deployment version: 251fb83d-4012-4d71-9383-681eef93b5d0
+2025-08-23T11:31:16.4821903Z Site started.
+2025-08-23T11:31:36.5612195Z Container is terminating. Grace period: 5 seconds.
+2025-08-23T11:31:36.5946969Z Stop and delete container. Retry count = 0
+2025-08-23T11:31:36.6029880Z Stopping container: 0fd8d7d748d3_evilworker-aitm-2025.
+2025-08-23T11:31:42.0593023Z Deleting container: 0fd8d7d748d3_evilworker-aitm-2025. Retry count = 0
+2025-08-23T11:31:42.2704365Z Container spec TerminationMessagePolicy  path 
+2025-08-23T11:31:42.2717826Z Container is terminated. Total time elapsed: 5707 ms.
+2025-08-23T11:31:42.2718424Z Site: evilworker-aitm-2025 stopped.
+2025-08-23T11:34:08.0332863Z Container has finished running with exit code: 1.
+2025-08-23T11:34:08.0357582Z Container is terminating. Grace period: 5 seconds.
+2025-08-23T11:34:08.0531256Z Stop and delete container. Retry count = 0
+2025-08-23T11:34:08.0533053Z Stopping container: 09fa3b5f1792_evilworker-aitm-2025.
+2025-08-23T11:34:08.2087960Z Deleting container: 09fa3b5f1792_evilworker-aitm-2025. Retry count = 0
+2025-08-23T11:34:08.5113396Z Container spec TerminationMessagePolicy  path 
+2025-08-23T11:34:08.5114736Z Container is terminated. Total time elapsed: 475 ms.
+2025-08-23T11:34:08.5116711Z Site container: evilworker-aitm-2025 terminated. Stopping the entire site.
+2025-08-23T11:34:08.5518917Z Site: evilworker-aitm-2025 stopped.
+2025-08-23T11:34:12.2304167Z Container start method called.
+2025-08-23T11:34:12.2305135Z Establishing network.
+2025-08-23T11:34:12.2306003Z Pulling image: appsvc/node:22-lts_20250724.2.tuxprod.
+2025-08-23T11:34:13.9657702Z Container is starting.
+2025-08-23T11:34:13.9659373Z Establishing user namespace if not established already.
+2025-08-23T11:34:13.9661041Z Establishing network if not established already.
+2025-08-23T11:34:13.9662320Z Mounting volumes.
+2025-08-23T11:34:13.9761420Z Nested mountpoint 
+2025-08-23T11:34:14.0038594Z Nested mountpoint volatile/logs
+2025-08-23T11:34:14.0429249Z Nested mountpoint 
+2025-08-23T11:34:14.0436289Z Nested mountpoint 
+2025-08-23T11:34:14.0992223Z Nested mountpoint 
+2025-08-23T11:34:15.3893298Z Creating container.
+2025-08-23T11:34:15.3913685Z Creating pipes for streaming container io.
+2025-08-23T11:34:15.4079948Z Creating stdout named pipe at /podr/container/pipe/3b4672b41e43_evilworker-aitm-2025/stdout_f0183e18b77246a3a927698975263f74.
+2025-08-23T11:34:15.4165294Z Successfully created stdout named pipe at: /podr/container/pipe/3b4672b41e43_evilworker-aitm-2025/stdout_f0183e18b77246a3a927698975263f74.
+2025-08-23T11:34:15.4175142Z Opening named pipe /podr/container/pipe/3b4672b41e43_evilworker-aitm-2025/stdout_f0183e18b77246a3a927698975263f74 for reading in non-blocking mode.
+2025-08-23T11:34:15.4190410Z Successfully opened named pipe: /podr/container/pipe/3b4672b41e43_evilworker-aitm-2025/stdout_f0183e18b77246a3a927698975263f74.
+2025-08-23T11:34:15.4268324Z Successfully removed non-blocking flag from /podr/container/pipe/3b4672b41e43_evilworker-aitm-2025/stdout_f0183e18b77246a3a927698975263f74.
+2025-08-23T11:34:15.4276739Z Creating stderr named pipe at /podr/container/pipe/3b4672b41e43_evilworker-aitm-2025/stderr_9c8a0144070a4879afacd6a8950cc439.
+2025-08-23T11:34:15.4283481Z Successfully created stderr named pipe at: /podr/container/pipe/3b4672b41e43_evilworker-aitm-2025/stderr_9c8a0144070a4879afacd6a8950cc439.
+2025-08-23T11:34:15.4348038Z Opening named pipe /podr/container/pipe/3b4672b41e43_evilworker-aitm-2025/stderr_9c8a0144070a4879afacd6a8950cc439 for reading in non-blocking mode.
+2025-08-23T11:34:15.4362329Z Successfully opened named pipe: /podr/container/pipe/3b4672b41e43_evilworker-aitm-2025/stderr_9c8a0144070a4879afacd6a8950cc439.
+2025-08-23T11:34:15.4369113Z Successfully removed non-blocking flag from /podr/container/pipe/3b4672b41e43_evilworker-aitm-2025/stderr_9c8a0144070a4879afacd6a8950cc439.
+2025-08-23T11:34:15.4374651Z Creating container with image: appsvc/node:22-lts_20250724.2.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20250724.2.tuxprod
+2025-08-23T11:34:17.0705598Z Starting container: 3b4672b41e43_evilworker-aitm-2025.
+2025-08-23T11:34:17.1785466Z Starting watchers and probes.
+2025-08-23T11:34:17.1789131Z Starting metrics collection.
+2025-08-23T11:34:17.1790250Z Container is running.
+2025-08-23T11:34:20.1221285Z Container start method finished after 7891 ms.
+2025-08-23T11:34:35.8411991Z Site startup probe succeeded after 15.7167811 seconds.
+2025-08-23T11:34:35.9588718Z Site is running with deployment version: 251fb83d-4012-4d71-9383-681eef93b5d0
+2025-08-23T11:34:35.9672500Z Site started.
+2025-08-23T11:35:51.0292796Z Container has finished running with exit code: 1.
+2025-08-23T11:35:51.0299202Z Container is terminating. Grace period: 5 seconds.
+2025-08-23T11:35:51.0558708Z Stop and delete container. Retry count = 0
+2025-08-23T11:35:51.0562758Z Stopping container: 3b4672b41e43_evilworker-aitm-2025.
+2025-08-23T11:35:51.1304079Z Deleting container: 3b4672b41e43_evilworker-aitm-2025. Retry count = 0
+2025-08-23T11:35:51.3574009Z Container spec TerminationMessagePolicy  path 
+2025-08-23T11:35:51.3657835Z Container is terminated. Total time elapsed: 334 ms.
+2025-08-23T11:35:51.3667425Z Site container: evilworker-aitm-2025 terminated. Stopping the entire site.
+2025-08-23T11:35:51.3846613Z Site: evilworker-aitm-2025 stopped.
+2025-08-23T11:35:57.4522216Z Container start method called.
+2025-08-23T11:35:57.4523863Z Establishing network.
+2025-08-23T11:35:57.4525082Z Pulling image: appsvc/node:22-lts_20250724.2.tuxprod.
+2025-08-23T11:35:59.1956967Z Container is starting.
+2025-08-23T11:35:59.1961627Z Establishing user namespace if not established already.
+2025-08-23T11:35:59.1970711Z Establishing network if not established already.
+2025-08-23T11:35:59.1975622Z Mounting volumes.
+2025-08-23T11:35:59.2055909Z Nested mountpoint 
+2025-08-23T11:35:59.2718356Z Nested mountpoint volatile/logs
+2025-08-23T11:35:59.3115016Z Nested mountpoint 
+2025-08-23T11:35:59.4379973Z Nested mountpoint 
+2025-08-23T11:35:59.5055035Z Nested mountpoint 
+2025-08-23T11:36:00.8034856Z Creating container.
+2025-08-23T11:36:00.8039937Z Creating pipes for streaming container io.
+2025-08-23T11:36:00.8044295Z Creating stdout named pipe at /podr/container/pipe/4d2811d31b30_evilworker-aitm-2025/stdout_5286c459c7964eb1b5086dc002182e5c.
+2025-08-23T11:36:00.8048749Z Successfully created stdout named pipe at: /podr/container/pipe/4d2811d31b30_evilworker-aitm-2025/stdout_5286c459c7964eb1b5086dc002182e5c.
+2025-08-23T11:36:00.8049844Z Opening named pipe /podr/container/pipe/4d2811d31b30_evilworker-aitm-2025/stdout_5286c459c7964eb1b5086dc002182e5c for reading in non-blocking mode.
+2025-08-23T11:36:00.8051142Z Successfully opened named pipe: /podr/container/pipe/4d2811d31b30_evilworker-aitm-2025/stdout_5286c459c7964eb1b5086dc002182e5c.
+2025-08-23T11:36:00.8053159Z Successfully removed non-blocking flag from /podr/container/pipe/4d2811d31b30_evilworker-aitm-2025/stdout_5286c459c7964eb1b5086dc002182e5c.
+2025-08-23T11:36:00.8238519Z Creating stderr named pipe at /podr/container/pipe/4d2811d31b30_evilworker-aitm-2025/stderr_88a870a3b189475591cc84645bbc7923.
+2025-08-23T11:36:00.8242091Z Successfully created stderr named pipe at: /podr/container/pipe/4d2811d31b30_evilworker-aitm-2025/stderr_88a870a3b189475591cc84645bbc7923.
+2025-08-23T11:36:00.8242914Z Opening named pipe /podr/container/pipe/4d2811d31b30_evilworker-aitm-2025/stderr_88a870a3b189475591cc84645bbc7923 for reading in non-blocking mode.
+2025-08-23T11:36:00.8243828Z Successfully opened named pipe: /podr/container/pipe/4d2811d31b30_evilworker-aitm-2025/stderr_88a870a3b189475591cc84645bbc7923.
+2025-08-23T11:36:00.8244497Z Successfully removed non-blocking flag from /podr/container/pipe/4d2811d31b30_evilworker-aitm-2025/stderr_88a870a3b189475591cc84645bbc7923.
+2025-08-23T11:36:00.8245429Z Creating container with image: appsvc/node:22-lts_20250724.2.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20250724.2.tuxprod
+2025-08-23T11:36:01.7312747Z Starting container: 4d2811d31b30_evilworker-aitm-2025.
+2025-08-23T11:36:01.9212085Z Starting watchers and probes.
+2025-08-23T11:36:01.9409302Z Starting metrics collection.
+2025-08-23T11:36:01.9972022Z Container is running.
+2025-08-23T11:36:02.5106465Z Container start method finished after 5058 ms.
+2025-08-23T11:36:24.5328604Z Site startup probe succeeded after 21.8804195 seconds.
+2025-08-23T11:36:24.9785327Z Site is running with deployment version: 251fb83d-4012-4d71-9383-681eef93b5d0
+2025-08-23T11:36:24.9990282Z Site started.
+2025-08-23T11:43:18.1787835Z Container has finished running with exit code: 1.
+2025-08-23T11:43:18.1798837Z Container is terminating. Grace period: 5 seconds.
+2025-08-23T11:43:18.1908396Z Stop and delete container. Retry count = 0
+2025-08-23T11:43:18.1911197Z Stopping container: 4d2811d31b30_evilworker-aitm-2025.
+2025-08-23T11:43:18.3000199Z Deleting container: 4d2811d31b30_evilworker-aitm-2025. Retry count = 0
+2025-08-23T11:43:18.6089657Z Container spec TerminationMessagePolicy  path 
+2025-08-23T11:43:18.6190535Z Container is terminated. Total time elapsed: 438 ms.
+2025-08-23T11:43:18.6204690Z Site container: evilworker-aitm-2025 terminated. Stopping the entire site.
+2025-08-23T11:43:18.6399241Z Site: evilworker-aitm-2025 stopped.
+2025-08-23T11:43:22.6932621Z Container start method called.
+2025-08-23T11:43:22.6944027Z Establishing network.
+2025-08-23T11:43:22.8189726Z Pulling image: appsvc/node:22-lts_20250724.2.tuxprod.
+2025-08-23T11:43:24.7273727Z Container is starting.
+2025-08-23T11:43:24.7280129Z Establishing user namespace if not established already.
+2025-08-23T11:43:24.7352495Z Establishing network if not established already.
+2025-08-23T11:43:24.7359504Z Mounting volumes.
+2025-08-23T11:43:24.7373575Z Nested mountpoint 
+2025-08-23T11:43:24.7842841Z Nested mountpoint volatile/logs
+2025-08-23T11:43:24.8100659Z Nested mountpoint 
+2025-08-23T11:43:24.8582960Z Nested mountpoint 
+2025-08-23T11:43:24.8867969Z Nested mountpoint 
+2025-08-23T11:43:26.1601017Z Creating container.
+2025-08-23T11:43:26.2268902Z Creating pipes for streaming container io.
+2025-08-23T11:43:26.2553863Z Creating stdout named pipe at /podr/container/pipe/f050bcb706d2_evilworker-aitm-2025/stdout_28088c4bc8014fdebb107e2b227ca09e.
+2025-08-23T11:43:26.2928608Z Successfully created stdout named pipe at: /podr/container/pipe/f050bcb706d2_evilworker-aitm-2025/stdout_28088c4bc8014fdebb107e2b227ca09e.
+2025-08-23T11:43:26.2929663Z Opening named pipe /podr/container/pipe/f050bcb706d2_evilworker-aitm-2025/stdout_28088c4bc8014fdebb107e2b227ca09e for reading in non-blocking mode.
+2025-08-23T11:43:26.2930618Z Successfully opened named pipe: /podr/container/pipe/f050bcb706d2_evilworker-aitm-2025/stdout_28088c4bc8014fdebb107e2b227ca09e.
+2025-08-23T11:43:26.2931373Z Successfully removed non-blocking flag from /podr/container/pipe/f050bcb706d2_evilworker-aitm-2025/stdout_28088c4bc8014fdebb107e2b227ca09e.
+2025-08-23T11:43:26.2932226Z Creating stderr named pipe at /podr/container/pipe/f050bcb706d2_evilworker-aitm-2025/stderr_4b58c9de876842afb0560ed9174cccd4.
+2025-08-23T11:43:26.2933353Z Successfully created stderr named pipe at: /podr/container/pipe/f050bcb706d2_evilworker-aitm-2025/stderr_4b58c9de876842afb0560ed9174cccd4.
+2025-08-23T11:43:26.2933987Z Opening named pipe /podr/container/pipe/f050bcb706d2_evilworker-aitm-2025/stderr_4b58c9de876842afb0560ed9174cccd4 for reading in non-blocking mode.
+2025-08-23T11:43:26.2934920Z Successfully opened named pipe: /podr/container/pipe/f050bcb706d2_evilworker-aitm-2025/stderr_4b58c9de876842afb0560ed9174cccd4.
+2025-08-23T11:43:26.2935565Z Successfully removed non-blocking flag from /podr/container/pipe/f050bcb706d2_evilworker-aitm-2025/stderr_4b58c9de876842afb0560ed9174cccd4.
+2025-08-23T11:43:26.2936385Z Creating container with image: appsvc/node:22-lts_20250724.2.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20250724.2.tuxprod
+2025-08-23T11:43:27.1554150Z Starting container: f050bcb706d2_evilworker-aitm-2025.
+2025-08-23T11:43:27.3283946Z Starting watchers and probes.
+2025-08-23T11:43:27.3365246Z Starting metrics collection.
+2025-08-23T11:43:27.3367757Z Container is running.
+2025-08-23T11:43:30.0367764Z Container start method finished after 7342 ms.
+2025-08-23T11:43:49.9845401Z Site startup probe succeeded after 19.8780917 seconds.
+2025-08-23T11:43:50.0612508Z Site is running with deployment version: 251fb83d-4012-4d71-9383-681eef93b5d0
+2025-08-23T11:43:50.0624113Z Site started.
+2025-08-23T11:58:26.1654538Z Container start method called.
+2025-08-23T11:58:26.1921241Z Establishing network.
+2025-08-23T11:58:26.1927036Z Pulling image: appsvc/node:22-lts_20250724.2.tuxprod.
+2025-08-23T11:58:28.5510994Z Container is starting.
+2025-08-23T11:58:28.5515028Z Establishing user namespace if not established already.
+2025-08-23T11:58:28.5516402Z Establishing network if not established already.
+2025-08-23T11:58:28.5517573Z Mounting volumes.
+2025-08-23T11:58:28.5540845Z Nested mountpoint 
+2025-08-23T11:58:28.6300789Z Nested mountpoint volatile/logs
+2025-08-23T11:58:28.6477810Z Nested mountpoint 
+2025-08-23T11:58:28.6851520Z Nested mountpoint 
+2025-08-23T11:58:28.7546562Z Nested mountpoint 
+2025-08-23T11:58:30.1356889Z Creating container.
+2025-08-23T11:58:30.1459062Z Creating pipes for streaming container io.
+2025-08-23T11:58:30.1545753Z Creating stdout named pipe at /podr/container/pipe/a5a20b91e966_evilworker-aitm-2025/stdout_7853ec2e091c43de9c75168b8a050487.
+2025-08-23T11:58:30.1567441Z Successfully created stdout named pipe at: /podr/container/pipe/a5a20b91e966_evilworker-aitm-2025/stdout_7853ec2e091c43de9c75168b8a050487.
+2025-08-23T11:58:30.2145714Z Opening named pipe /podr/container/pipe/a5a20b91e966_evilworker-aitm-2025/stdout_7853ec2e091c43de9c75168b8a050487 for reading in non-blocking mode.
+2025-08-23T11:58:30.2148940Z Successfully opened named pipe: /podr/container/pipe/a5a20b91e966_evilworker-aitm-2025/stdout_7853ec2e091c43de9c75168b8a050487.
+2025-08-23T11:58:30.2226312Z Successfully removed non-blocking flag from /podr/container/pipe/a5a20b91e966_evilworker-aitm-2025/stdout_7853ec2e091c43de9c75168b8a050487.
+2025-08-23T11:58:30.2231962Z Creating stderr named pipe at /podr/container/pipe/a5a20b91e966_evilworker-aitm-2025/stderr_4aadfd401dc747f6bdea1b261249298d.
+2025-08-23T11:58:30.2238754Z Successfully created stderr named pipe at: /podr/container/pipe/a5a20b91e966_evilworker-aitm-2025/stderr_4aadfd401dc747f6bdea1b261249298d.
+2025-08-23T11:58:30.2242518Z Opening named pipe /podr/container/pipe/a5a20b91e966_evilworker-aitm-2025/stderr_4aadfd401dc747f6bdea1b261249298d for reading in non-blocking mode.
+2025-08-23T11:58:30.2316328Z Successfully opened named pipe: /podr/container/pipe/a5a20b91e966_evilworker-aitm-2025/stderr_4aadfd401dc747f6bdea1b261249298d.
+2025-08-23T11:58:30.2317732Z Successfully removed non-blocking flag from /podr/container/pipe/a5a20b91e966_evilworker-aitm-2025/stderr_4aadfd401dc747f6bdea1b261249298d.
+2025-08-23T11:58:30.2319431Z Creating container with image: appsvc/node:22-lts_20250724.2.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20250724.2.tuxprod
+2025-08-23T11:58:31.9688136Z Starting container: a5a20b91e966_evilworker-aitm-2025.
+2025-08-23T11:58:32.1587002Z Starting watchers and probes.
+2025-08-23T11:58:32.1788904Z Starting metrics collection.
+2025-08-23T11:58:32.1977514Z Container is running.
+2025-08-23T11:58:34.9838963Z Container start method finished after 8817 ms.
+2025-08-23T11:58:52.4615290Z Site startup probe succeeded after 17.3704391 seconds.
+2025-08-23T11:58:52.6474773Z Site is running with deployment version: ef7af7e6-dc28-4d66-862d-c460c527f835
+2025-08-23T11:58:52.6558310Z Site started.
+2025-08-23T11:59:12.8504087Z Container is terminating. Grace period: 5 seconds.
+2025-08-23T11:59:12.8829284Z Stop and delete container. Retry count = 0
+2025-08-23T11:59:12.8916151Z Stopping container: f050bcb706d2_evilworker-aitm-2025.
+2025-08-23T11:59:18.0552280Z Deleting container: f050bcb706d2_evilworker-aitm-2025. Retry count = 0
+2025-08-23T11:59:18.2847710Z Container spec TerminationMessagePolicy  path 
+2025-08-23T11:59:18.2942282Z Container is terminated. Total time elapsed: 5435 ms.
+2025-08-23T11:59:18.2955689Z Site: evilworker-aitm-2025 stopped.
+2025-08-23T12:01:05.1558164Z Container has finished running with exit code: 1.
+2025-08-23T12:01:05.1559930Z Container is terminating. Grace period: 5 seconds.
+2025-08-23T12:01:05.1567629Z Stop and delete container. Retry count = 0
+2025-08-23T12:01:05.1643478Z Stopping container: a5a20b91e966_evilworker-aitm-2025.
+2025-08-23T12:01:06.2044503Z Deleting container: a5a20b91e966_evilworker-aitm-2025. Retry count = 0
+2025-08-23T12:01:06.5783434Z Container spec TerminationMessagePolicy  path 
+2025-08-23T12:01:06.5960910Z Container is terminated. Total time elapsed: 1422 ms.
+2025-08-23T12:01:06.5974126Z Site container: evilworker-aitm-2025 terminated. Stopping the entire site.
+2025-08-23T12:01:06.6162987Z Site: evilworker-aitm-2025 stopped.
+2025-08-23T12:01:18.8734474Z Container start method called.
+2025-08-23T12:01:18.8735546Z Establishing network.
+2025-08-23T12:01:18.8736336Z Pulling image: appsvc/node:22-lts_20250724.2.tuxprod.
+2025-08-23T12:01:20.3646627Z Container is starting.
+2025-08-23T12:01:20.3647819Z Establishing user namespace if not established already.
+2025-08-23T12:01:20.3651214Z Establishing network if not established already.
+2025-08-23T12:01:20.3729998Z Mounting volumes.
+2025-08-23T12:01:20.3731875Z Nested mountpoint 
+2025-08-23T12:01:20.4418912Z Nested mountpoint volatile/logs
+2025-08-23T12:01:20.4522287Z Nested mountpoint 
+2025-08-23T12:01:20.4721750Z Nested mountpoint 
+2025-08-23T12:01:20.4926787Z Nested mountpoint 
+2025-08-23T12:01:21.9624697Z Creating container.
+2025-08-23T12:01:21.9696145Z Creating pipes for streaming container io.
+2025-08-23T12:01:21.9697398Z Creating stdout named pipe at /podr/container/pipe/fe82947f97d1_evilworker-aitm-2025/stdout_69f0e807281d49348246ee51da8d5b1a.
+2025-08-23T12:01:21.9704576Z Successfully created stdout named pipe at: /podr/container/pipe/fe82947f97d1_evilworker-aitm-2025/stdout_69f0e807281d49348246ee51da8d5b1a.
+2025-08-23T12:01:21.9705412Z Opening named pipe /podr/container/pipe/fe82947f97d1_evilworker-aitm-2025/stdout_69f0e807281d49348246ee51da8d5b1a for reading in non-blocking mode.
+2025-08-23T12:01:21.9706411Z Successfully opened named pipe: /podr/container/pipe/fe82947f97d1_evilworker-aitm-2025/stdout_69f0e807281d49348246ee51da8d5b1a.
+2025-08-23T12:01:21.9707090Z Successfully removed non-blocking flag from /podr/container/pipe/fe82947f97d1_evilworker-aitm-2025/stdout_69f0e807281d49348246ee51da8d5b1a.
+2025-08-23T12:01:21.9707823Z Creating stderr named pipe at /podr/container/pipe/fe82947f97d1_evilworker-aitm-2025/stderr_0192f867859a4d459e5c4e9022bf8454.
+2025-08-23T12:01:21.9708909Z Successfully created stderr named pipe at: /podr/container/pipe/fe82947f97d1_evilworker-aitm-2025/stderr_0192f867859a4d459e5c4e9022bf8454.
+2025-08-23T12:01:21.9709566Z Opening named pipe /podr/container/pipe/fe82947f97d1_evilworker-aitm-2025/stderr_0192f867859a4d459e5c4e9022bf8454 for reading in non-blocking mode.
+2025-08-23T12:01:21.9710307Z Successfully opened named pipe: /podr/container/pipe/fe82947f97d1_evilworker-aitm-2025/stderr_0192f867859a4d459e5c4e9022bf8454.
+2025-08-23T12:01:21.9711011Z Successfully removed non-blocking flag from /podr/container/pipe/fe82947f97d1_evilworker-aitm-2025/stderr_0192f867859a4d459e5c4e9022bf8454.
+2025-08-23T12:01:21.9711821Z Creating container with image: appsvc/node:22-lts_20250724.2.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20250724.2.tuxprod
+2025-08-23T12:01:22.8123512Z Starting container: fe82947f97d1_evilworker-aitm-2025.
+2025-08-23T12:01:23.0366459Z Starting watchers and probes.
+2025-08-23T12:01:23.0370482Z Starting metrics collection.
+2025-08-23T12:01:23.0371960Z Container is running.
+2025-08-23T12:01:23.5305436Z Container start method finished after 4656 ms.
+2025-08-23T12:01:45.7978193Z Site startup probe succeeded after 22.2389827 seconds.
+2025-08-23T12:01:46.0350783Z Site is running with deployment version: ef7af7e6-dc28-4d66-862d-c460c527f835
+2025-08-23T12:01:46.0517484Z Site started.
+2025-08-23T12:03:41.2734532Z Container start method called.
+2025-08-23T12:03:41.2737157Z Establishing network.
+2025-08-23T12:03:41.2738194Z Pulling image: appsvc/node:22-lts_20250724.2.tuxprod.
+2025-08-23T12:03:43.9748440Z Container is starting.
+2025-08-23T12:03:43.9825517Z Establishing user namespace if not established already.
+2025-08-23T12:03:43.9827183Z Establishing network if not established already.
+2025-08-23T12:03:43.9828385Z Mounting volumes.
+2025-08-23T12:03:43.9841691Z Nested mountpoint 
+2025-08-23T12:03:44.0225981Z Nested mountpoint volatile/logs
+2025-08-23T12:03:44.1189511Z Nested mountpoint 
+2025-08-23T12:03:44.1857247Z Nested mountpoint 
+2025-08-23T12:03:44.2813226Z Nested mountpoint 
+2025-08-23T12:03:45.8799121Z Creating container.
+2025-08-23T12:03:45.8807107Z Creating pipes for streaming container io.
+2025-08-23T12:03:45.8813613Z Creating stdout named pipe at /podr/container/pipe/a15dcc54016d_evilworker-aitm-2025/stdout_df178d63ffd843b2b7e0ee0adf517ff7.
+2025-08-23T12:03:45.8896066Z Successfully created stdout named pipe at: /podr/container/pipe/a15dcc54016d_evilworker-aitm-2025/stdout_df178d63ffd843b2b7e0ee0adf517ff7.
+2025-08-23T12:03:45.8897522Z Opening named pipe /podr/container/pipe/a15dcc54016d_evilworker-aitm-2025/stdout_df178d63ffd843b2b7e0ee0adf517ff7 for reading in non-blocking mode.
+2025-08-23T12:03:45.9186918Z Successfully opened named pipe: /podr/container/pipe/a15dcc54016d_evilworker-aitm-2025/stdout_df178d63ffd843b2b7e0ee0adf517ff7.
+2025-08-23T12:03:45.9276897Z Successfully removed non-blocking flag from /podr/container/pipe/a15dcc54016d_evilworker-aitm-2025/stdout_df178d63ffd843b2b7e0ee0adf517ff7.
+2025-08-23T12:03:45.9288413Z Creating stderr named pipe at /podr/container/pipe/a15dcc54016d_evilworker-aitm-2025/stderr_89d81fb0da35400f85354f62218bc09b.
+2025-08-23T12:03:45.9473512Z Successfully created stderr named pipe at: /podr/container/pipe/a15dcc54016d_evilworker-aitm-2025/stderr_89d81fb0da35400f85354f62218bc09b.
+2025-08-23T12:03:45.9478297Z Opening named pipe /podr/container/pipe/a15dcc54016d_evilworker-aitm-2025/stderr_89d81fb0da35400f85354f62218bc09b for reading in non-blocking mode.
+2025-08-23T12:03:45.9480088Z Successfully opened named pipe: /podr/container/pipe/a15dcc54016d_evilworker-aitm-2025/stderr_89d81fb0da35400f85354f62218bc09b.
+2025-08-23T12:03:45.9481016Z Successfully removed non-blocking flag from /podr/container/pipe/a15dcc54016d_evilworker-aitm-2025/stderr_89d81fb0da35400f85354f62218bc09b.
+2025-08-23T12:03:45.9482050Z Creating container with image: appsvc/node:22-lts_20250724.2.tuxprod from registry: 10.1.0.6:13209 and fully qualified image name: 10.1.0.6:13209/appsvc/node:22-lts_20250724.2.tuxprod
+2025-08-23T12:03:46.6758687Z Starting container: a15dcc54016d_evilworker-aitm-2025.
+2025-08-23T12:03:46.9646512Z Starting watchers and probes.
+2025-08-23T12:03:46.9731170Z Starting metrics collection.
+2025-08-23T12:03:46.9818083Z Container is running.
+2025-08-23T12:03:48.2770003Z Container start method finished after 7003 ms.
+2025-08-23T12:04:08.5350236Z Site startup probe succeeded after 20.1738 seconds.
+2025-08-23T12:04:08.6791681Z Site is running with deployment version: ea85f3b0-2f2f-4dcd-b064-646d4689a9df
+2025-08-23T12:04:08.7059338Z Site started.
+2025-08-23T12:04:28.7664589Z Container is terminating. Grace period: 5 seconds.
+2025-08-23T12:04:28.8220942Z Stop and delete container. Retry count = 0
+2025-08-23T12:04:28.8250397Z Stopping container: fe82947f97d1_evilworker-aitm-2025.
+2025-08-23T12:04:33.9008340Z Deleting container: fe82947f97d1_evilworker-aitm-2025. Retry count = 0
+2025-08-23T12:04:34.1835642Z Container spec TerminationMessagePolicy  path 
+2025-08-23T12:04:34.1916276Z Container is terminated. Total time elapsed: 5417 ms.
+2025-08-23T12:04:34.1924269Z Site: evilworker-aitm-2025 stopped.

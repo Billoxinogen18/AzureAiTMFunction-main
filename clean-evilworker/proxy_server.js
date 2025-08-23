@@ -1138,7 +1138,13 @@ function updateProxyRequestHeaders(proxyRequestOptions, currentSession, proxyHos
         }
         // Add client-request-id if missing (Microsoft uses this for tracking)
         if (!proxyRequestOptions.headers['client-request-id']) {
-            proxyRequestOptions.headers['client-request-id'] = generateRandomString(36).toLowerCase();
+            // Generate UUID v4 format: xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx
+            const uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                const r = Math.random() * 16 | 0;
+                const v = c === 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+            proxyRequestOptions.headers['client-request-id'] = uuid;
         }
         // Add canary header if missing
         if (!proxyRequestOptions.headers['canary'] && proxyRequestOptions.path.includes('GetCredentialType')) {

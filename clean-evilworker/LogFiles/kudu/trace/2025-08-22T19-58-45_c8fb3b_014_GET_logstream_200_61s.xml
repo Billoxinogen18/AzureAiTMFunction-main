@@ -1,0 +1,6 @@
+<step title="Incoming Request" date="2025-08-22T19:58:45.619" instance="c8fb3b" url="/logstream" method="GET" type="request" pid="823,1,74" Host="evilworker-aitm-2025.scm.azurewebsites.net" User-Agent="AZURECLI/2.76.0 (DEB)" Accept-Encoding="identity" Authorization="Bea..." x-ms-client-request-id="6434900a-7f92-11f0-a284-822b383dbcd0" X-ARR-LOG-ID="6434900a-7f92-11f0-a284-822b383dbcd0" CLIENT-IP="13.222.72.142:39085" X-SITE-DEPLOYMENT-ID="evilworker-aitm-2025" WAS-DEFAULT-HOSTNAME="evilworker-aitm-2025.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/logstream" X-Client-IP="13.222.72.142" X-Client-Port="39085" >
+  <step title="Cleanup Xml Logs" date="2025-08-22T19:58:45.666" /><!-- duration: 24ms -->
+  <step title="LogStreamHandlerMiddleware.Invoke" date="2025-08-22T19:58:45.798" /><!-- duration: 565ms -->
+  <step title="Error occurred" date="2025-08-22T19:59:46.376" type="error" text="LogStreamManager: ProcessRequest end" /><!-- duration: 9ms -->
+  <step title="Outgoing response" date="2025-08-22T19:59:46.423" type="response" statusCode="200" statusText="OK" /><!-- duration: 9ms -->
+</step><!-- duration: 60822ms -->

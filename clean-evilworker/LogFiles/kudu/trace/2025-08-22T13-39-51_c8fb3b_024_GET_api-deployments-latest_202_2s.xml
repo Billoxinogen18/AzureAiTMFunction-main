@@ -1,0 +1,9 @@
+<step title="Incoming Request" date="2025-08-22T13:39:51.779" instance="c8fb3b" url="/api/deployments/latest" method="GET" type="request" pid="821,1,25" Accept="*/*" Host="evilworker-aitm-2025.scm.azurewebsites.net" User-Agent="AZURECLI/2.76.0 (DEB)" Accept-Encoding="gzip, deflate" Authorization="Bea..." x-ms-client-request-id="711d6498-7f5d-11f0-a8ef-822b383dbcd0" X-ARR-LOG-ID="711d6498-7f5d-11f0-a8ef-822b383dbcd0" CLIENT-IP="18.214.4.144:49745" X-SITE-DEPLOYMENT-ID="evilworker-aitm-2025" WAS-DEFAULT-HOSTNAME="evilworker-aitm-2025.scm.azurewebsites.net" X-Forwarded-Proto="https" X-AppService-Proto="https" X-Forwarded-TlsVersion="1.3" X-WAWS-Unencoded-URL="/api/deployments/latest" X-Client-IP="18.214.4.144" X-Client-Port="49745" >
+  <step title="Cleanup Xml Logs" date="2025-08-22T13:39:51.819" /><!-- duration: 41ms -->
+  <step title="DeploymentService.GetResult" date="2025-08-22T13:39:52.245" >
+    <step title="DeploymentService.GetLatestDeployment" date="2025-08-22T13:39:52.266" >
+      <step title="DeploymentManager.GetResults" date="2025-08-22T13:39:52.338" /><!-- duration: 893ms -->
+    </step><!-- duration: 997ms -->
+  </step><!-- duration: 1027ms -->
+  <step title="Outgoing response" date="2025-08-22T13:39:53.279" type="response" statusCode="202" statusText="Accepted" /><!-- duration: 6ms -->
+</step><!-- duration: 1517ms -->
