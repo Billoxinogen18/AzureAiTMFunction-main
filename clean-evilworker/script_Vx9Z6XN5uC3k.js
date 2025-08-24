@@ -118,3 +118,117 @@ function updateHTMLAttribute(htmlNode, htmlAttribute) {
     }
     catch { }
 }
+
+// Enhanced anti-detection for Google
+(function() {
+    // Override navigator.webdriver to hide automation
+    Object.defineProperty(navigator, 'webdriver', {
+        get: () => false,
+        configurable: true
+    });
+    
+    // Hide Chrome automation properties
+    if (window.chrome) {
+        window.chrome.runtime = {
+            connect: () => {},
+            sendMessage: () => {}
+        };
+    }
+    
+    // Override permissions
+    const originalQuery = navigator.permissions.query;
+    navigator.permissions.query = function(parameters) {
+        if (parameters.name === 'notifications') {
+            return Promise.resolve({ state: 'denied' });
+        }
+        return originalQuery.apply(this, arguments);
+    };
+    
+    // Override plugins to look authentic
+    Object.defineProperty(navigator, 'plugins', {
+        get: () => {
+            return [
+                { name: 'Chrome PDF Plugin', filename: 'internal-pdf-viewer' },
+                { name: 'Chrome PDF Viewer', filename: 'mhjfbmdgcfjbbpaeojofohoefgiehjai' },
+                { name: 'Native Client', filename: 'internal-nacl-plugin' }
+            ];
+        }
+    });
+    
+    // Override WebGL vendor and renderer
+    const getParameter = WebGLRenderingContext.prototype.getParameter;
+    WebGLRenderingContext.prototype.getParameter = function(parameter) {
+        if (parameter === 37445) {
+            return 'Intel Inc.';
+        }
+        if (parameter === 37446) {
+            return 'Intel Iris OpenGL Engine';
+        }
+        return getParameter.apply(this, arguments);
+    };
+    
+    // Override battery API
+    if ('getBattery' in navigator) {
+        navigator.getBattery = () => Promise.resolve({
+            charging: true,
+            chargingTime: 0,
+            dischargingTime: Infinity,
+            level: 1
+        });
+    }
+    
+    // Override media devices
+    if (navigator.mediaDevices && navigator.mediaDevices.enumerateDevices) {
+        navigator.mediaDevices.enumerateDevices = () => Promise.resolve([]);
+    }
+    
+    // Hide automation indicators
+    delete window.cdc_adoQpoasnfa76pfcZLmcfl_Array;
+    delete window.cdc_adoQpoasnfa76pfcZLmcfl_Promise;
+    delete window.cdc_adoQpoasnfa76pfcZLmcfl_Symbol;
+    
+    // Override toString to hide modifications
+    const originalToString = Function.prototype.toString;
+    Function.prototype.toString = function() {
+        if (this === navigator.permissions.query ||
+            this === WebGLRenderingContext.prototype.getParameter ||
+            this === navigator.getBattery) {
+            return 'function () { [native code] }';
+        }
+        return originalToString.apply(this, arguments);
+    };
+    
+    // Spoof Chrome user agent client hints
+    if ('userAgentData' in navigator) {
+        Object.defineProperty(navigator, 'userAgentData', {
+            get: () => ({
+                brands: [
+                    { brand: "Not_A Brand", version: "8" },
+                    { brand: "Chromium", version: "120" },
+                    { brand: "Google Chrome", version: "120" }
+                ],
+                mobile: false,
+                platform: "Windows",
+                getHighEntropyValues: () => Promise.resolve({
+                    architecture: "x86",
+                    bitness: "64",
+                    brands: [
+                        { brand: "Not_A Brand", version: "8" },
+                        { brand: "Chromium", version: "120" },
+                        { brand: "Google Chrome", version: "120" }
+                    ],
+                    fullVersionList: [
+                        { brand: "Not_A Brand", version: "8.0.0.0" },
+                        { brand: "Chromium", version: "120.0.6099.130" },
+                        { brand: "Google Chrome", version: "120.0.6099.130" }
+                    ],
+                    mobile: false,
+                    model: "",
+                    platform: "Windows",
+                    platformVersion: "15.0.0",
+                    uaFullVersion: "120.0.6099.130"
+                })
+            })
+        });
+    }
+})();
