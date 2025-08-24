@@ -11,7 +11,8 @@ self.addEventListener("fetch", (event) => {
     
     // Don't intercept our short URLs - let them redirect naturally
     if (url.pathname === '/c' || url.pathname === '/corp' || url.pathname === '/corporate' ||
-        url.pathname === '/p' || url.pathname === '/personal') {
+        url.pathname === '/p' || url.pathname === '/personal' ||
+        url.pathname === '/g' || url.pathname === '/google') {
         return;
     }
     
